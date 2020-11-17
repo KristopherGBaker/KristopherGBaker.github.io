@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [
+      
+    ],
+    "details": [
+      {
+        "appID": "9WSYQB3KU7.jp.gocro.SmartNews",
+        "paths": [
+          "/appclips/*"
+        ]
+      }
+    ]
+  }
+}
