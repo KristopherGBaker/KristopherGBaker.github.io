@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Kristopher Baker&apos;s Blog</title>
+    <title>Kristopher Baker</title>
     <link>http://localhost</link>
-    <description>Recent posts from Kristopher Baker&apos;s Blog</description>
+    <description>Recent posts from Kristopher Baker</description>
   <item>
     <title>Remote Dev Setup With Real Constraints</title>
     <link>http://localhost/posts/remote-dev-setup-with-real-constraints/</link>
