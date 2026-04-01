@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Kristopher Baker&apos;s Blog</title>
+    <link>http://localhost</link>
+    <description>Recent posts from Kristopher Baker&apos;s Blog</description>
+  <item>
+    <title>Remote Dev Setup With Real Constraints</title>
+    <link>http://localhost/posts/remote-dev-setup-with-real-constraints/</link>
+    <guid>http://localhost/posts/remote-dev-setup-with-real-constraints/</guid>
+    <pubDate>2026-04-01T12:00:00Z</pubDate>
+    <description></description>
+  </item>
+  </channel>
+</rss>

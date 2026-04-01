@@ -1,0 +1,17 @@
+{
+  "posts" : [
+    {
+      "body" : "<video autoplay muted loop playsinline <source src=\"claude train.mp4\" type=\"video\/mp4\" <img src=\"claude train.png\" alt=\"Claude Code running on a phone on a train\" <\/video I wanted to pull out my phone on a train in Japan, reconnect to a dev session running on my Mac at home, and keep working. That is not such a strange thing to want anymore. But getting it to actually work, reliably, from a phone, without blowing up my existing setup, turned out to be the interesting part. And then, right around the time I got it working, Claude Code shipped Remote Control and Dispatch. More on that later. Why Not Just Use Tailscale? If someone told me they wanted private remote access to their personal machine, I would probably tell them to use Tailscale and move on with their life. It is a great tool. For plenty of people it is the whole answer. But my situation was a little stranger than that. My Mac runs a work VPN, and I did not want to mix personal and company Tailscale accounts on the same machine. I did not want to expose my home network to inbound connections from the public internet. And because I planned to use this from my phone, often on mobile data between Wi Fi networks, I needed the",
+      "categories" : [
+
+      ],
+      "date" : "2026-04-01T12:00:00Z",
+      "slug" : "remote-dev-setup-with-real-constraints",
+      "summary" : "",
+      "tags" : [
+
+      ],
+      "title" : "Remote Dev Setup With Real Constraints"
+    }
+  ]
+}

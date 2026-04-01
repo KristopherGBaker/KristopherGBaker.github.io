@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remote Dev Setup With Real Constraints</title>
+    <meta name="description" content="Notes, ideas, and field observations from the journal.">
+  <script>
+  (function() {
+    var saved = localStorage.getItem("theme");
+    var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle("dark", dark);
+  })();
+
+  function toggleTheme() {
+    var isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/search.js"></script>
+<script defer src="/assets/js/prism.js"></script></head>
+  <body class="antialiased text-stone-800 dark:bg-stone-950 dark:text-stone-100">
+    <div class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(245,158,11,0.13),transparent_48%),radial-gradient(circle_at_80%_0%,rgba(28,25,23,0.08),transparent_35%),linear-gradient(to_bottom,#faf7f2,#f4efe7)] dark:bg-[radial-gradient(circle_at_20%_10%,rgba(245,158,11,0.08),transparent_42%),radial-gradient(circle_at_75%_0%,rgba(250,250,249,0.06),transparent_28%),linear-gradient(to_bottom,#111315,#0a0b0d)]"></div>
+    <main class="mx-auto max-w-3xl px-6 pb-20 pt-10 md:px-10 md:pt-14">
+      <div class="flex items-center justify-between gap-4">
+        <a href="/" class="inline-flex items-center gap-2 text-sm font-medium text-amber-800 hover:text-amber-900 dark:text-amber-300 dark:hover:text-amber-200">← Back to entries</a>
+        <button type="button" onclick="toggleTheme()" class="rounded-full border border-stone-400/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-stone-700 transition hover:border-amber-700/60 hover:text-amber-800 dark:border-stone-600 dark:text-stone-200 dark:hover:border-amber-300 dark:hover:text-amber-200">Toggle Theme</button>
+      </div>
+      <header class="mt-6 border-b border-stone-300/70 pb-6 dark:border-stone-700/70">
+        <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">2026-04-01T12:00:00Z</p>
+        <h1 class="mt-3 font-display text-4xl leading-tight text-stone-900 dark:text-stone-100 md:text-5xl">Remote Dev Setup With Real Constraints</h1>
+        <div class="mt-4 flex flex-wrap gap-2"></div>
+      </header>
+      
+      <article class="post-content mt-8 text-stone-800 dark:text-stone-200"><video autoplay muted loop playsinline>
+  <source src="claude-train.mp4" type="video/mp4">
+  <img src="claude-train.png" alt="Claude Code running on a phone on a train">
+</video>
+<p>I wanted to pull out my phone on a train in Japan, reconnect to a dev session running on my Mac at home, and keep working. That is not such a strange thing to want anymore. But getting it to actually work, reliably, from a phone, without blowing up my existing setup, turned out to be the interesting part.</p>
+<p>And then, right around the time I got it working, Claude Code shipped <a href="https://code.claude.com/docs/en/remote-control">Remote Control</a> and <a href="https://support.claude.com/en/articles/13947068-assign-tasks-to-claude-from-anywhere-in-cowork">Dispatch</a>. More on that later.</p>
+<h2>Why Not Just Use Tailscale?</h2>
+<p>If someone told me they wanted private remote access to their personal machine, I would probably tell them to use Tailscale and move on with their life. It is a great tool. For plenty of people it is the whole answer.</p>
+<p>But my situation was a little stranger than that. My Mac runs a work VPN, and I did not want to mix personal and company Tailscale accounts on the same machine. I did not want to expose my home network to inbound connections from the public internet. And because I planned to use this from my phone, often on mobile data between Wi-Fi networks, I needed the connection to survive the kind of interruptions that kill a normal SSH session.</p>
+<p>Any one of those constraints alone would be easy to work around. Stacked together, they started ruling out the cleaner-looking options. What remained was not the most elegant diagram. It was the version that actually fit.</p>
+<h2>The Shape of the Thing</h2>
+<p>The final setup is a chain, and each link exists for a specific reason:</p>
+<pre class="mermaid">flowchart LR
+    phone[Phone]
+    mosh[mosh]
+    vps[VPS]
+    reverse[reverse SSH]
+    mac[Mac]
+    tmux[tmux]
+    tools[Claude Code]
+
+    phone --&gt; mosh --&gt; vps --&gt; reverse --&gt; mac --&gt; tmux --&gt; tools</pre>
+<p>My phone connects to a small VPS using <code>mosh</code>, which handles the part that plain SSH is terrible at on mobile networks: changing IPs, switching between Wi-Fi and cellular, and recovering from drops without leaving you staring at a frozen cursor. The VPS is the only thing with a public address. My Mac reaches it through an outbound reverse SSH tunnel, which means the Mac never needs to accept inbound traffic from the internet at all. And <code>tmux</code> on the Mac turns the whole thing from a fragile connection into a persistent session I can detach from and come back to later.</p>
+<p>That last part surprised me. Once the session itself became durable, the phone stopped feeling like a limited access path. I was not reconnecting to a machine. I was stepping back into work that was already in progress.</p>
+<h2>Where It Actually Broke</h2>
+<p>Most of what I learned came from the failures, not the original plan.</p>
+<p>The reverse tunnel could go half-dead after sitting idle. Port 22 was still listening on the VPS. The connection looked fine. But the session behind it had quietly gone stale, so jumping to the Mac would just hang. What fixed it was not a single setting. It was treating liveness as a real concern on both sides. SSH keepalives from the Mac, <code>autossh</code> to rebuild the tunnel when it dropped, and a VPS-side script that checked whether <code>localhost:22</code> was actually responsive before attempting the jump.</p>
+<p>That jump script was its own lesson. The first version tried to SSH into the Mac every time I connected to the VPS. Fine when the tunnel was up. Completely useless when it was not, just a hanging shell with no feedback. The better version checked the port first, used a short connect timeout, and dropped me into a normal VPS shell as a fallback. Small change, but it turned an unreliable experience into one I could trust.</p>
+<p>Then there was <code>tmux</code>. A session created under one terminal environment did not always attach cleanly from another. In my case, <code>xterm-ghostty</code> on the Mac caused problems when the same session got reattached from a mobile client. Setting a more portable default terminal type fixed it, but it was a good reminder: persistent sessions are only as portable as the assumptions baked into them.</p>
+<p>None of these were dramatic. They were just the kind of half-solved problems that turn a clever setup into one you stop using after a week.</p>
+<h2>And Then the Tooling Caught Up</h2>
+<p>Right around the time I had this working reliably, Anthropic shipped two features that cover a lot of the same ground.</p>
+<p><a href="https://code.claude.com/docs/en/remote-control">Remote Control</a> lets you continue a local Claude Code session from your phone or any browser. It runs on your machine (your filesystem, your tools, your project config) with the phone just acting as a window into that session. No port forwarding, no VPS, no reverse tunnel.</p>
+<p><a href="https://support.claude.com/en/articles/13947068-assign-tasks-to-claude-from-anywhere-in-cowork">Dispatch</a> goes further. You message a task from your phone, and it spawns a session on your Mac to handle it. You do not even need to have a session running already.</p>
+<p>So did I waste my time? Honestly, I do not think so. Remote Control is limited to one connection per session and times out after about ten minutes of network loss, which is not ideal if you are on spotty mobile data on a rural train line. My setup survives longer outages because <code>mosh</code> and <code>autossh</code> were designed for exactly that. And the VPS gives me a general-purpose foothold that is useful beyond just Claude Code. It is a place to land when I need a shell, period.</p>
+<p>But if I were starting fresh today with a stable connection and only needed Claude Code access from my phone? I would try Remote Control first and probably never build any of this. That is worth being honest about.</p>
+<h2>The Lesson Worth Keeping</h2>
+<p>I keep running into this pattern, with infrastructure, with AI tooling, with the house we built last year. The first version of an idea usually looks clean because it has not met reality yet. What survives contact with real constraints looks a little stranger, but it is the version that holds up.</p>
+<p>What is also true is that sometimes the tools catch up and the constraints shift underneath you. The setup I built is still useful to me. But the reason to write about it is less &quot;here is what you should build&quot; and more &quot;here is what I learned by building it.&quot; The constraints shaped the system. Understanding why each piece existed made it easy to know which pieces I could drop once better options showed up.</p>
+<p>That is the part worth keeping, even after the tools change.</p></article>
+    </main>
+  </body>
+</html>
