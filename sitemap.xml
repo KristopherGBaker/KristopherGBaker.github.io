@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>http://localhost/</loc></url>
-  <url><loc>http://localhost/archive/</loc></url>
-  <url><loc>http://localhost/posts/remote-dev-setup-with-real-constraints/</loc></url>
+  <url><loc>https://krisbaker.com/</loc></url>
+  <url><loc>https://krisbaker.com/archive/</loc></url>
+  <url><loc>https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/</loc></url>
 </urlset>
