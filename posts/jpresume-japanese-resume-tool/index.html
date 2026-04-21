@@ -62,7 +62,15 @@
 <p>That is the part a tool can actually help with.</p>
 <h2>How It Works</h2>
 <p>The pipeline is boring on purpose. No magic. Just steps you can pause between:</p>
-<pre><code>parse → normalize → repair → validate → generate → render</code></pre>
+<pre class="mermaid">flowchart LR
+    parse[Parse]
+    normalize["Normalize (LLM)"]
+    repair[Repair]
+    validate[Validate]
+    generate["Generate (LLM)"]
+    render[Render]
+
+    parse --&gt; normalize --&gt; repair --&gt; validate --&gt; generate --&gt; render</pre>
 <p><strong>Parse</strong> is deterministic. It takes an input resume as markdown, DOCX, or PDF, extracts the text, and produces a rough structured version. Markdown goes through a markdown parser. DOCX and PDF go through a text preprocessing path, because those are not clean structured documents once the text is out of them. For scanned PDFs, Vision OCR kicks in as a fallback.</p>
 <p><strong>Normalize</strong> is where the LLM first shows up. It takes the parsed resume plus a <code>jpresume_config.yaml</code> (kanji name, furigana, address, education timeline, certifications, the ground-truth Japan-specific fields) and produces a normalized structure with real date integers, bullets classified as achievements or responsibilities, and skills grouped into categories. The LLM is told explicitly not to invent anything. If a date is ambiguous, it is expected to flag it with a low confidence rather than guess.</p>
 <p><strong>Repair</strong> is deterministic again. It sorts roles chronologically, reconciles overlapping dates, fixes <code>is_current</code> inconsistencies. <strong>Validate</strong> surfaces the remaining issues as warnings: overlapping roles, low-confidence entries, suspicious gaps, total years that look off.</p>
