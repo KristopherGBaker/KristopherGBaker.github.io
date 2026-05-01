@@ -9,6 +9,7 @@
     <meta property="og:description" content="JPResume: Turning a Western Resume Into a Japanese One">
     <meta property="og:url" content="https://krisbaker.com/posts/jpresume-japanese-resume-tool/">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="ja" href="/ja/posts/jpresume-japanese-resume-tool/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
@@ -41,7 +42,7 @@
     </a>
     <nav class="top-nav">
       <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
-      
+      <a href="/ja/posts/jpresume-japanese-resume-tool/" class="nav-link lang-switch" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JA</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
     </nav>
   </div>
@@ -52,7 +53,7 @@
   <p class="post-meta">
     <span>2026.04.20</span>
     
-     · <span>6 min read</span>
+     · <span>5 min read</span>
   </p>
   <h1 class="h1 post-title">JPResume: Turning a Western Resume Into a Japanese One</h1>
   
@@ -61,17 +62,18 @@
   <source src="/posts/jpresume-japanese-resume-tool/jpresume.mp4" type="video/mp4">
   <img src="/posts/jpresume-japanese-resume-tool/jpresume.png" alt="Man wondering how to write a Japanese resume">
 </video>
-<p>In the last couple of months, two different people asked me if I would share my Japanese-style resume. Not the English one. The 履歴書 and 職務経歴書. The formats a Japanese company actually asks for when you apply.</p>
-<p>Each time the answer was the same awkward &quot;let me get back to you on that.&quot; My English resume was in decent shape. My Japanese one was a set of half-finished notes, out of date the moment I touched the English version. Rewriting both by hand every job cycle, in a second language, was not going to happen.</p>
+<p>In the last couple of months, two different people asked if I could share my Japanese-style resume. Not my English one. The 履歴書 and 職務経歴書 — the formats Japanese companies actually ask for when you apply.</p>
+<p>Both times, my answer was the same awkward “let me get back to you on that.”</p>
+<p>My English resume was in decent shape. My Japanese one was a pile of half-finished notes, already out of date the moment I touched the English version. Rewriting both by hand every job cycle, in a second language, was not going to happen.</p>
 <p>So I built <a href="https://github.com/KristopherGBaker/JPResume">JPResume</a>, a small Swift CLI that turns a western-style resume into both Japanese formats and keeps them in sync.</p>
 <h2>Why a Japanese Resume Is a Different Problem</h2>
-<p>If you have only ever written a western resume, it is tempting to think the Japanese versions are just a translation job. They are not.</p>
-<p>A 履歴書 (rirekisho) is a grid form. Name, furigana, a photo slot, a specific layout for education and work history with year and month columns, licenses, a 志望動機 (motivation) box, and 本人希望記入欄 (your own preferences or requests). There are conventions about how to mark the current role, how to end the work history section (<code>「現在に至る」</code> in the final row), and whether to use western years or reiwa dates. Some companies care about these details. Some do not. None of it is obvious the first time you encounter it.</p>
-<p>A 職務経歴書 (shokumukeirekisho) is the free-form counterpart. This is where the actual career story lives. 職務要約 up top, then per-role detail, skill groupings, achievements, and a 自己PR (self-PR). The phrasing conventions are their own skill. A metric like &quot;drove a 29.8% increase in sign-ups&quot; reads fine in English and clunky in Japanese. Something like <code>新規会員登録数の29.8%増加に寄与</code> sits more naturally.</p>
-<p>Then there is the alignment problem. Your English resume and your Japanese resume both have to tell the same story, with the same dates, the same role titles, and the same emphasis. When one drifts, you notice in the worst possible moment, usually during a screening call.</p>
-<p>That is the part a tool can actually help with.</p>
+<p>If you have only written western resumes, it is tempting to treat the Japanese versions as a translation job. They are not.</p>
+<p>A 履歴書 (rirekisho) is a grid form: name, furigana, photo slot, education and work history with year/month columns, licenses, 志望動機, and 本人希望記入欄. There are conventions for marking your current role, ending the work history section with <code>「現在に至る」</code>, and choosing western years or Japanese era dates. Some companies care about these details. Some do not. None of it is obvious the first time.</p>
+<p>A 職務経歴書 (shokumukeirekisho) is the free-form counterpart. This is where the actual career story lives: 職務要約, role details, skills, achievements, and 自己PR. The phrasing conventions are their own skill. “Drove a 29.8% increase in sign-ups” reads naturally in English. In Japanese, something like <code>新規会員登録数の29.8%増加に寄与</code> fits better.</p>
+<p>Then there is the alignment problem. Your English and Japanese resumes need to tell the same story, with the same dates, titles, and emphasis. When they drift, you usually notice at the worst possible moment.</p>
+<p>That is the part a tool can help with.</p>
 <h2>How It Works</h2>
-<p>The pipeline is boring on purpose. No magic. Just steps you can pause between:</p>
+<p>The pipeline is boring on purpose: deterministic where possible, LLM-assisted where useful, and reviewable in between.</p>
 <pre class="mermaid">flowchart LR
     parse[Parse]
     normalize["Normalize (LLM)"]
@@ -81,25 +83,29 @@
     render[Render]
 
     parse --&gt; normalize --&gt; repair --&gt; validate --&gt; generate --&gt; render</pre>
-<p><strong>Parse</strong> is deterministic. It takes an input resume as markdown, DOCX, or PDF, extracts the text, and produces a rough structured version. Markdown goes through a markdown parser. DOCX and PDF go through a text preprocessing path, because those are not clean structured documents once the text is out of them. For scanned PDFs, Vision OCR kicks in as a fallback.</p>
-<p><strong>Normalize</strong> is where the LLM first shows up. It takes the parsed resume plus a <code>jpresume_config.yaml</code> (kanji name, furigana, address, education timeline, certifications, the ground-truth Japan-specific fields) and produces a normalized structure with real date integers, bullets classified as achievements or responsibilities, and skills grouped into categories. The LLM is told explicitly not to invent anything. If a date is ambiguous, it is expected to flag it with a low confidence rather than guess.</p>
-<p><strong>Repair</strong> is deterministic again. It sorts roles chronologically, reconciles overlapping dates, fixes <code>is_current</code> inconsistencies. <strong>Validate</strong> surfaces the remaining issues as warnings: overlapping roles, low-confidence entries, suspicious gaps, total years that look off.</p>
-<p><strong>Generate</strong> is where the rirekisho and shokumukeirekisho JSON gets produced. <strong>Render</strong> converts those to markdown and to native PDFs through CoreGraphics and Hiragino Sans, so the Japanese typography actually looks right rather than falling back to a system font that was never designed for it.</p>
-<p>If you have worked with AI-assisted tooling for a while, the shape will be familiar: deterministic where you can be, LLM where you must be, and a pause point in the middle where a human or an agent can look at the intermediate JSON before anything downstream commits to it.</p>
+<p><strong>Parse</strong> is deterministic. It accepts markdown, DOCX, or PDF and produces a rough structured version. Markdown goes through a parser. DOCX and PDF go through text preprocessing, because once text comes out of those formats, the structure is mostly gone. Scanned PDFs fall back to Vision OCR.</p>
+<p><strong>Normalize</strong> is where the LLM first appears. It combines the parsed resume with <code>jpresume_config.yaml</code> — kanji name, furigana, address, education, certifications, and other Japan-specific ground truth — and produces a normalized structure. Dates become real integers. Bullets are classified as achievements or responsibilities. Skills are grouped into categories. The model is explicitly told not to invent anything. Ambiguous dates should be flagged with low confidence, not guessed.</p>
+<p><strong>Repair</strong> is deterministic again. It sorts roles, reconciles overlapping dates, and fixes <code>is_current</code> inconsistencies. <strong>Validate</strong> surfaces what remains: overlaps, low-confidence entries, suspicious gaps, or total years that look off.</p>
+<p><strong>Generate</strong> produces the rirekisho and shokumukeirekisho JSON. <strong>Render</strong> turns those into markdown and native PDFs using CoreGraphics and Hiragino Sans, so the Japanese typography looks intentional instead of falling back to an awkward default.</p>
+<p>The shape is familiar if you have built AI-assisted tooling: keep control where you can, use the model where it helps, and put a human-readable artifact between stages.</p>
 <h2>The Workflow I Actually Use</h2>
-<p>The CLI can run end to end with <code>jpresume convert resume.md --provider claude-cli --format both</code>. That works. For most changes, though, I use the <a href="https://github.com/KristopherGBaker/JPResume/tree/main/skills/japanese-resume">agent skill</a> instead.</p>
-<p>Why? Because of a feature I leaned on hard while building this: external mode.</p>
-<p>In external mode, the LLM stages do not call a provider at all. They write a prompt bundle to disk and exit. The agent (Claude Code, Cursor, Codex, whichever you prefer) reads that bundle, produces the response JSON, writes it back, and then re-runs the stage with <code>--ingest</code>. The agent becomes the model. It sees every prompt. It sees every response. It can pause, ask me a question, fix a bad field, and re-ingest without re-running the whole pipeline.</p>
-<p>The practical effect is that the normalize step stops being a black box. When the agent normalizes a role, I see exactly how it interpreted the dates before anything downstream uses them. When something looks off, the fix is a JSON edit, not a re-prompt. After validate, the workflow pauses on purpose, the agent shows me the warnings, and nothing generates until I have looked at them.</p>
-<p>This is the part I would have gotten wrong if I had built it as a one-shot tool. For generating a first draft, a one-shot is fine. For a document you are actually going to send to a company, the review loop is the feature.</p>
+<p>The CLI can run end to end:</p>
+<pre><code class="language-bash">jpresume convert resume.md --provider claude-cli --format both</code></pre>
+<p>That works. But for most changes, I use the agent skill￼, because it supports the workflow I actually wanted: external mode.</p>
+<p>In external mode, the LLM stages do not call a provider directly. They write a prompt bundle to disk and exit. An agent — Claude Code, Cursor, Codex, whatever you prefer — reads the bundle, produces the response JSON, writes it back, and re-runs the stage with --ingest.</p>
+<p>The agent becomes the model.</p>
+<p>That sounds like an implementation detail, but it changes the experience. The agent sees every prompt and every response. It can pause, ask me a question, fix a bad field, and re-ingest without restarting the whole pipeline. When it normalizes a role, I can see exactly how it interpreted the dates before anything downstream depends on them. If something is wrong, the fix is a JSON edit, not a full re-prompt.</p>
+<p>This is the part I would have gotten wrong as a one-shot tool. For a first draft, one-shot generation is fine. For a document you might actually send to a company, the review loop is the feature.</p>
 <h2>The Honest Limits</h2>
-<p>Here is the part I want to be clear about: so far, JPResume has really only been tested on one resume. Mine.</p>
-<p>That resume has a specific shape. One country of origin. A career mostly in software engineering, mostly at companies with names Japanese recruiters will recognize. Dates that are relatively clean. A JLPT certification that maps neatly to the standard Japanese phrasing. None of the edge cases that come from career switches, international graduate programs, long intentional gaps, unusual role titles, or industries where the Japanese conventions are very different from tech.</p>
-<p>I would not be surprised if the first resume someone else feeds in uncovers something the normalizer does not handle well, or a phrasing pattern the generate stage does not produce gracefully. The pipeline is set up to make those kinds of fixes cheap (edit a JSON artifact, re-run one stage), but I have not actually seen them yet. My sample size is one.</p>
-<p>So if you try it and something looks wrong, or you can think of a shape of resume the tool should handle and does not, I would genuinely like to hear about it. Issues, pull requests, or a note in any form. The install instructions and an agent skill you can drop into your coding assistant are both in the <a href="https://github.com/KristopherGBaker/JPResume">README</a>.</p>
+<p>JPResume has really only been tested on one resume: mine.</p>
+<p>That resume has a specific shape. One country of origin. A software engineering career. Company names Japanese recruiters are likely to recognize. Relatively clean dates. A JLPT certification that maps neatly to standard phrasing. It does not cover every edge case: career switches, international graduate programs, long intentional gaps, unusual role titles, or industries where Japanese resume conventions differ from tech.</p>
+<p>I would not be surprised if the first outside resume exposes something the normalizer handles poorly, or a phrasing pattern the generator does not produce gracefully. The pipeline is designed to make those fixes cheap — edit an artifact, re-run one stage — but I have not seen those cases yet. My sample size is one.</p>
+<p>So if you try it and something looks wrong, or you know a resume shape it should handle better, I would genuinely like to hear about it. Issues, pull requests, or notes are welcome. The install instructions and agent skill are both in the README￼.</p>
 <h2>What I Would Keep Even If the Tool Changes</h2>
-<p>The part of this I expect to outlast the current implementation is the shape. Deterministic parsing, LLM normalization with a strict no-invention rule, a deliberate pause after validate, external mode so the agent can act as the model and review its own output. That pattern holds up whether the document is a Japanese resume, a regulatory filing, or a contract. Anywhere the stakes of a fabricated field are high and a fully automated one-shot is the wrong abstraction.</p>
-<p>For now, it converts a markdown resume into a 履歴書 and 職務経歴書 that I would actually hand to a company. Which, a couple of months ago, was the thing I could not do.</p></article>
+<p>The part I expect to outlast this implementation is the shape: deterministic parsing, strict no-invention normalization, a deliberate validation pause, and external mode so an agent can act as the model while still reviewing its own output.</p>
+<p>That pattern works beyond Japanese resumes. It fits any document where fabricated fields are expensive and a fully automated one-shot is the wrong abstraction: regulatory filings, contracts, internal reports, anything with structure and consequences.</p>
+<p>For now, JPResume turns a markdown resume into a 履歴書 and 職務経歴書 that I would actually hand to a company.</p>
+<p>A couple of months ago, that was the part I could not do.</p></article>
   <div class="post-footer">
     <a href="/posts/" class="read-link">More writing <span class="arrow" aria-hidden="true">→</span></a>
     <a href="mailto:hello@krisbaker.com" class="read-link">Reply by email <span class="arrow" aria-hidden="true">→</span></a>
@@ -124,7 +130,7 @@
     <script>
       (function(){
         try {
-          var configured = "en".split(",");
+          var configured = "en,ja".split(",");
           var defaultLang = "en";
           if (localStorage.getItem("lang")) return;
           var path = location.pathname;

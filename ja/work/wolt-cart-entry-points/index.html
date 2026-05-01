@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>カート・チェックアウト導線の改善でサブスク転換率を高める</title>
+    <meta name="description" content="Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。">
+    <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/">
+    <meta property="og:title" content="カート・チェックアウト導線の改善でサブスク転換率を高める">
+    <meta property="og:description" content="Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。">
+    <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-cart-entry-points/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/work/wolt-cart-entry-points/">
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark">K</span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · グロース · 東京</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/work/wolt-cart-entry-points/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container case-study page-shell">
+  <a href="/ja/work/" class="case-study-back">← 実績一覧へ</a>
+
+  <div class="case-study-brand">
+    <span class="brand-pill">
+      <span class="brand-pill-mark wolt"></span>
+      Wolt / DoorDash · シニアソフトウェアエンジニア · メンバーシップ成長 · 2025
+    </span>
+  </div>
+
+  <h1 class="h1 case-study-title">カート・チェックアウト導線の改善でサブスク転換率を高める</h1>
+  <p class="body-lg case-study-blurb">Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</p>
+
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/growth/" class="tag-chip">Growth</a><a href="/ja/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/ja/work/tags/a-b-testing/" class="tag-chip">A/B testing</a></div>
+
+  <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+    <div>
+      <p class="case-study-metric-value">Client DRI (iOS, Web, Android)</p>
+      <p class="case-study-metric-label">役割</p>
+    </div><div>
+      <p class="case-study-metric-value">2</p>
+      <p class="case-study-metric-label">分割した実験</p>
+    </div><div>
+      <p class="case-study-metric-value">本番展開済</p>
+      <p class="case-study-metric-label">ステータス</p>
+    </div>
+  </section>
+
+  
+
+  <article class="prose case-study-prose"><h2>背景</h2>
+<p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
+<h2>課題</h2>
+<p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
+<h2>アプローチ</h2>
+<p>クライアント側のDRIとしてiOS・Web・Androidを横断的に率い、プロダクト・デザイン・バックエンド・データサイエンスの整合を取りつつ、iOS実装をリードしました。</p>
+<p>早い段階で、私はこの作業を独立した2つの実験に分けることを推しました:</p>
+<ul>
+<li>まずカート導入口を出して検証する</li>
+<li>その後、エクスプレス登録を別の反復として続ける</li>
+</ul>
+<p>これにより、複雑な実装を待たずに段階的に効果を検証できるようになりました。</p>
+<p>エクスプレス登録では、いくつかのUX・技術的制約に取り組みました:</p>
+<ul>
+<li>ボトムシート内でのナビゲーションフロー（従来未対応）</li>
+<li>「エクスプレス」と通常登録の遷移を簡素化し、混乱を減らす</li>
+<li>支払い・バックエンドとの連携で、支払方法変更などのエッジケースをすり合わせる</li>
+</ul>
+<p>データサイエンスとも密に連携し、計装の検証や、誤解を招くA/Bテスト結果のデバッグまで踏み込みました。</p>
+<h2>成果</h2>
+<ul>
+<li>Wolt+登録と下流の注文ボリュームに有意な押し上げ</li>
+<li>両機能ともA/Bテストに合格し、本番100%展開済</li>
+<li>カート導入口は今もサブスク成長の中核サーフェス</li>
+</ul>
+<h2>役割</h2>
+<p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p></article>
+
+  
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/work/wolt-long-distance-delivery/" class="case-study-next-row">
+      <span class="case-study-next-title">Expanding subscription value with long-distance delivery</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

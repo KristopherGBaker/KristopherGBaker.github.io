@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>履歴書</title>
+    <meta name="description" content="履歴書">
+    <link rel="canonical" href="https://krisbaker.com/ja/resume/">
+    <meta property="og:title" content="履歴書">
+    <meta property="og:description" content="履歴書">
+    <meta property="og:url" content="https://krisbaker.com/ja/resume/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/resume/">
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark">K</span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · グロース · 東京</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/resume/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="resume-page page-shell">
+  <div class="no-print resume-toolbar">
+    <a href="/about/" class="resume-toolbar-back">← プロフィールへ</a>
+    <button type="button" onclick="window.print()" class="btn-ghost">印刷 / PDFで保存 →</button>
+  </div>
+
+  <header class="resume-header">
+    <h1>Kristopher Baker</h1>
+    <p class="resume-header-role">シニアソフトウェアエンジニア · iOSを中心に消費者向けプロダクトの開発に従事するエンジニア</p>
+    <div class="resume-header-meta">
+      <span>東京</span>
+      <span><a href="mailto:hello@krisbaker.com">hello@krisbaker.com</a></span>
+      <span><a href="https://github.com/KristopherGBaker">GitHub</a></span><span><a href="https://linkedin.com/in/kristophergbaker">LinkedIn</a></span>
+      <span>米国市民 · 日本永住権保有</span>
+    </div>
+  </header>
+
+  <section class="resume-section">
+    <h2 class="resume-label">概要</h2>
+    <p class="resume-summary">Webアプリケーション開発からキャリアを開始し、その後はiOSアプリ開発を中心に消費者向けプロダクトの開発に従事してまいりました。近年は日本国内の消費者向けサービスにおいて、サブスクリプション導線や継続利用施策の設計・実装を担当しております。Bodybuilding.com、スマートニュース株式会社、ウォルト・ジャパン株式会社などの大規模プロダクトにおいて、性能改善、開発基盤整備、サーバー連携を含む機能開発に従事してまいりました。現在は、部門横断での機能推進に加え、実験しやすい画面構成や計測基盤の整備に注力し、継続的な改善につなげております。</p>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">コア・コンピテンシー</h2>
+    <div class="resume-competencies"><div class="resume-competency-key">品質・改善</div><div class="resume-competency-val">Xcode Instruments、性能計測・最適化、A/Bテスト、ログ・メトリクス設計、データ分析に基づく改善</div><div class="resume-competency-key">プロダクト・グロース</div><div class="resume-competency-val">サブスクリプション施策設計、コンバージョン導線最適化、Swift Concurrency（async/await、Actors、Sendable）</div><div class="resume-competency-key">AI関連</div><div class="resume-competency-val">LLM連携開発（Anthropic、OpenAI、OpenRouter、Ollama）、RAG構成、リアルタイム音声処理（STT/TTS）、マルチモーダル機能開発</div><div class="resume-competency-key">設計・開発</div><div class="resume-competency-val">モジュラー設計、依存性注入、プロトコル指向設計、サーバー駆動型UI、イベント駆動設計、リアルタイム処理</div><div class="resume-competency-key">言語</div><div class="resume-competency-val">Swift、Objective-C、Python</div><div class="resume-competency-key">フレームワーク</div><div class="resume-competency-val">UIKit、SwiftUI、AppKit、AVFoundation</div></div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">職務経歴</h2>
+    <div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">ウォルト・ジャパン株式会社</div>
+          <p class="resume-job-role">シニアソフトウェアエンジニア</p>
+        </div>
+        <div class="resume-job-meta">2023年5月〜現在 · 東京</div>
+      </div>
+      <p class="role-description">サブスクリプションおよびグロース領域におけるiOS機能開発を担当。Cart Entry Point、Express Sign-Up、Long Distance Delivery などの主要施策において、iOS側の主担当として、要件整理から実装・検証・リリースまで一貫して推進。</p>
+      <ul class="resume-job-bullets"><li>iOS、Android、Web、バックエンド、データ関連チームと連携し、部門横断での開発を進行。</li><li>RFCの作成や、ログ・メトリクス整備、サーバー駆動型の画面構成に関する設計を担当。</li><li>新規会員登録数の29.8%増加に寄与。</li><li>年間27,000件規模の追加会員登録につながる改善を実施。</li><li>計測基盤と画面構成の見直しにより、実験の回転速度向上とリリース品質の改善に寄与。</li><li>共通UI部品とViewModelパターンの整理により、重複実装の削減と保守性向上を実現。</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">スマートニュース株式会社</div>
+          <p class="resume-job-role">シニアソフトウェアエンジニア（iOS）</p>
+        </div>
+        <div class="resume-job-meta">2019年4月〜2023年5月 · 東京</div>
+      </div>
+      <p class="role-description">iOSアプリにおけるフィード、オンボーディング、プッシュ通知、ナビゲーション、記事表示機能の開発を担当。機能ごとに設計、実装、テスト、リリース計画、リリース後の改善まで一貫して対応。</p>
+      <ul class="resume-job-bullets"><li>東京とサンフランシスコの関係部門と連携し、グローバルな開発体制の中で案件を推進。</li><li>Objective-CからSwiftへの移行を推進し、iOSコードベースの継続的な改善に寄与。</li><li>SwiftLintおよびSwiftFormatの導入により、コード品質と開発ルールの標準化を実施。</li><li>SwiftUIを用いたサーバー駆動型オンボーディングを実装し、A/Bテストを実施しやすい構成を整備。</li><li>技術面接を100件以上担当し、採用活動に貢献。</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">Bodybuilding.com</div>
+          <p class="resume-job-role">iOSソフトウェアエンジニア</p>
+        </div>
+        <div class="resume-job-meta">2013年3月〜2018年7月 · アイダホ州ボイシ</div>
+      </div>
+      <p class="role-description">iOSアプリの設計・開発・保守を担当し、複数の消費者向けアプリに携わる。Objective-CおよびSwiftによる機能開発を行い、継続的な改善とリリース対応を実施。</p>
+      <ul class="resume-job-bullets"><li>CI/CDやリリース自動化の整備を通じて、開発・運用体制の改善に従事。</li><li>描画処理のボトルネックを分析・改善し、60fpsでの安定したスクロール表示を実現。</li><li>Swiftの早期導入と複数回のメジャー移行対応を主導し、チーム内の開発基盤整備に寄与。</li><li>リリース自動化の導入により、開発効率と配信の安定性向上を実現。</li><li>チーム移行期に重要機能の提供を継続し、Company MVPを受賞。</li></ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">プロジェクト</h2>
+    <div class="resume-job">
+      <div class="resume-project-name">Aside — AI模擬面接コーチ（macOS）</div>
+      <p class="resume-project-meta">個人プロジェクト · 進行中</p>
+      <ul class="resume-project-bullets"><li>プロバイダ非依存のLLMオーケストレーション層（Anthropic、OpenAI、OpenRouter、Ollama）</li><li>多段階の会話フローを管理するアクター駆動の面接オーケストレーション</li><li>オンデバイス文字起こし（Parakeet）と低遅延TTS（Kokoro）によるリアルタイム音声パイプライン</li><li>ベクトル埋め込みとSQLiteを使ったRAGによる、過去のセッション履歴を踏まえた振る舞い</li><li>コンピテンシー単位のスコアリングと縦断的な進捗追跡を備えた構造化評価エンジン</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-project-name">JPResume — 欧米式から日本式への履歴書変換（Swift CLI）</div>
+      <p class="resume-project-meta">個人 · オープンソース · 2026年</p>
+      <ul class="resume-project-bullets"><li>決定的なステージとLLMステージを明確に分けたポーズポイント方式のパイプライン（Parse / Normalize / Validate / Repair / Generate / Render）</li><li>外部エージェントモード — LLMステージから外部エージェントに処理を委ね、応答を取り込み直せる</li><li>CoreGraphicsとヒラギノ角ゴによる日本語タイポグラフィに配慮したネイティブPDFレンダリング</li></ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">学歴</h2>
+    <p class="resume-education-school">イリノイ大学スプリングフィールド校</p>
+    <p class="resume-education-degree">理学士（コンピュータサイエンス）· 数学副専攻 · Summa Cum Laude（最優等）</p>
+  </section>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

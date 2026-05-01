@@ -9,6 +9,7 @@
     <meta property="og:description" content="Senior software engineer building consumer iOS apps and AI-enabled product surfaces from Tokyo.">
     <meta property="og:url" content="https://krisbaker.com/">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="ja" href="/ja/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
@@ -41,7 +42,7 @@
     </a>
     <nav class="top-nav">
       <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
-      
+      <a href="/ja/" class="nav-link lang-switch" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JA</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
     </nav>
   </div>
@@ -104,7 +105,7 @@
   <p class="post-list-meta">
     <span>2026.04.20</span>
     
-    <span class="post-list-meta-sep">·</span><span>6 min read</span>
+    <span class="post-list-meta-sep">·</span><span>5 min read</span>
   </p>
   <h3 class="post-list-title">JPResume: Turning a Western Resume Into a Japanese One</h3>
   
@@ -152,7 +153,7 @@
     <script>
       (function(){
         try {
-          var configured = "en".split(",");
+          var configured = "en,ja".split(",");
           var defaultLang = "en";
           if (localStorage.getItem("lang")) return;
           var path = location.pathname;

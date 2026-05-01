@@ -1,6 +1,19 @@
 {
   "posts" : [
     {
+      "body" : "<video autoplay muted loop playsinline <source src=\"claude train.mp4\" type=\"video\/mp4\" <img src=\"claude train.png\" alt=\"電車内でスマートフォンからClaude Codeを操作している様子\" <\/video 日本の電車の中でスマートフォンを取り出して、自宅のMacで動かしている開発セッションに再接続し、そのまま作業を続ける。今となっては、そこまで突飛な話ではありません。 ただ、それを「ちゃんと使える状態」にする——しかもスマホから、既存の環境を壊さずに、安定して動かす——となると、話は少し変わってきます。 そしてちょうど環境が安定してきた頃に、Claude Codeに Claude Code Remote Control と Claude Code Dispatch がリリースされました。この話は後半で触れます。 なぜTailscaleを使わなかったのか 個人のマシンに安全にリモートアクセスしたい、という相談を受けたら、おそらく私は「Tailscaleを使えばいい」と答えて終わりにすると思います。それくらい優秀なツールですし、多くのケースではそれで十分です。 ただ、自分の状況は少しだけややこしいものでした。 自宅のMacでは業務用VPNが常時動いており、個人用と会社用のTailscaleアカウントを同一マシンで混在させたくありませんでした。また、自宅ネットワークをインターネットからの直接接続にさらすのも避けたかった。さらに、スマホ（しかもWi Fiとモバイル回線を頻繁に切り替える環境）から使う前提だったので、通常のSSHセッションが切れてしまうような状況でも耐えられる必要がありました。 どれか一つだけなら簡単に解決できる制約です。ただ、それらが重なると、見た目がきれいな構成から順番に候補から外れていきます。最終的に残ったのは、最もエレガントな構成ではなく、実際の制約にちゃんとフィットする構成でした。 全体の構成 最終的な構成はシンプルな「連鎖」です。それぞれの要素には明確な役割があります。 mermaid flowchart LR phone[Phone] mosh[mosh] vps[VPS] reverse[reverse SSH] mac[Mac] tmux[tmux] tools[Claude Code] phone mosh vps reverse mac tmux tools スマートフォンからは mosh を使ってVPSに接続します。モバイル回線ではIPが変わったり、Wi Fiとセルラーが切り替わったり、接続が一時的に切れたりと、通常のSSHが苦手な状況が頻発しますが、moshはそこをうまく吸収してくれます。 VPSは唯一パブリ",
+      "categories" : [
+
+      ],
+      "date" : "2026-04-01T12:00:00Z",
+      "slug" : "remote-dev-setup-with-real-constraints",
+      "summary" : "",
+      "tags" : [
+
+      ],
+      "title" : "制約ありきで組んだリモート開発環境"
+    },
+    {
       "body" : "<video autoplay muted loop playsinline <source src=\"claude train.mp4\" type=\"video\/mp4\" <img src=\"claude train.png\" alt=\"Claude Code running on a phone on a train\" <\/video I wanted to pull out my phone on a train in Japan, reconnect to a dev session running on my Mac at home, and keep working. That is not such a strange thing to want anymore. But getting it to actually work, reliably, from a phone, without blowing up my existing setup, turned out to be the interesting part. And then, right around the time I got it working, Claude Code shipped Remote Control and Dispatch. More on that later. Why Not Just Use Tailscale? If someone told me they wanted private remote access to their personal machine, I would probably tell them to use Tailscale and move on with their life. It is a great tool. For plenty of people it is the whole answer. But my situation was a little stranger than that. My Mac runs a work VPN, and I did not want to mix personal and company Tailscale accounts on the same machine. I did not want to expose my home network to inbound connections from the public internet. And because I planned to use this from my phone, often on mobile data between Wi Fi networks, I needed the",
       "categories" : [
 
@@ -14,7 +27,20 @@
       "title" : "Remote Dev Setup With Real Constraints"
     },
     {
-      "body" : "<video autoplay muted loop playsinline <source src=\"jpresume.mp4\" type=\"video\/mp4\" <img src=\"jpresume.png\" alt=\"Man wondering how to write a Japanese resume\" <\/video In the last couple of months, two different people asked me if I would share my Japanese style resume. Not the English one. The 履歴書 and 職務経歴書. The formats a Japanese company actually asks for when you apply. Each time the answer was the same awkward \"let me get back to you on that.\" My English resume was in decent shape. My Japanese one was a set of half finished notes, out of date the moment I touched the English version. Rewriting both by hand every job cycle, in a second language, was not going to happen. So I built JPResume, a small Swift CLI that turns a western style resume into both Japanese formats and keeps them in sync. Why a Japanese Resume Is a Different Problem If you have only ever written a western resume, it is tempting to think the Japanese versions are just a translation job. They are not. A 履歴書 (rirekisho) is a grid form. Name, furigana, a photo slot, a specific layout for education and work history with year and month columns, licenses, a 志望動機 (motivation) box, and 本人希望記入欄 (your own preferences or r",
+      "body" : "<video autoplay muted loop playsinline <source src=\"jpresume.mp4\" type=\"video\/mp4\" <img src=\"jpresume.png\" alt=\"日本式の履歴書の書き方に悩んでいる様子\" <\/video ここ数ヶ月の間に、別々の人から同じことを聞かれました。日本式のレジュメを共有してもらえないか、と。 英語のレジュメではなく、履歴書と職務経歴書。日本の企業に応募する際に実際に求められるフォーマットです。 そのたびに、返事は同じでした。「ちょっと確認して後で返します」と。 英語のレジュメはそれなりに整っていました。一方、日本語の方は中途半端なメモの寄せ集めで、英語版を更新するたびにすぐ古くなる。毎回それを手で書き直すのは、しかも第二言語で、現実的ではありませんでした。 そこで作ったのが JPResume です。英文レジュメから履歴書と職務経歴書を生成し、両方を同期させるための小さなSwift CLIツールです。 日本式レジュメが単なる翻訳ではない理由 英文レジュメしか書いたことがないと、日本式のレジュメも単なる翻訳だと思いがちです。でも実際はそうではありません。 履歴書は、基本的に決まったフォーマットのグリッドです。氏名、フリガナ、写真欄、年・月単位で並ぶ学歴・職歴、資格、志望動機、本人希望記入欄。それぞれに細かい慣習があります。現職の書き方、職歴の締め方（「現在に至る」）、西暦か和暦か。 企業によって重視度は違いますが、初めて触れると分かりにくいポイントばかりです。 職務経歴書はその対になる自由形式のドキュメントです。職務要約から始まり、各職歴の詳細、スキル、実績、自己PR。こちらは書き方そのものにコツがあります。 例えば「29.8%のサインアップ増加を達成」という表現は英語では自然でも、日本語では少し浮きます。「新規会員登録数の29.8%増加に寄与」のような表現の方が馴染みます。 さらに厄介なのが整合性です。英語版と日本語版で、日付・役職・内容が一致している必要があります。ずれに気づくのは、大抵よくないタイミングです。 この整合性の問題は、ツールで解決できる部分でもあります。 仕組み 意図的にシンプルなパイプラインにしています。魔法はありません。 mermaid flowchart LR parse[Parse] normalize[\"Normalize (LLM)\"] repair[Repair] validate[Validate] generate[\"Generate (LLM)\"] render[Render] parse normalize repair validate generate render Parse は決定論的な処理です。markdown、DOCX、PD",
+      "categories" : [
+
+      ],
+      "date" : "2026-04-20T12:00:00Z",
+      "slug" : "jpresume-japanese-resume-tool",
+      "summary" : "",
+      "tags" : [
+
+      ],
+      "title" : "JPResume：英文レジュメを日本式に変換するツール"
+    },
+    {
+      "body" : "<video autoplay muted loop playsinline <source src=\"jpresume.mp4\" type=\"video\/mp4\" <img src=\"jpresume.png\" alt=\"Man wondering how to write a Japanese resume\" <\/video In the last couple of months, two different people asked if I could share my Japanese style resume. Not my English one. The 履歴書 and 職務経歴書 — the formats Japanese companies actually ask for when you apply. Both times, my answer was the same awkward “let me get back to you on that.” My English resume was in decent shape. My Japanese one was a pile of half finished notes, already out of date the moment I touched the English version. Rewriting both by hand every job cycle, in a second language, was not going to happen. So I built JPResume, a small Swift CLI that turns a western style resume into both Japanese formats and keeps them in sync. Why a Japanese Resume Is a Different Problem If you have only written western resumes, it is tempting to treat the Japanese versions as a translation job. They are not. A 履歴書 (rirekisho) is a grid form: name, furigana, photo slot, education and work history with year\/month columns, licenses, 志望動機, and 本人希望記入欄. There are conventions for marking your current role, ending the work history s",
       "categories" : [
 
       ],

@@ -9,6 +9,7 @@
     <meta property="og:description" content="Remote Dev Setup With Real Constraints">
     <meta property="og:url" content="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="ja" href="/ja/posts/remote-dev-setup-with-real-constraints/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
@@ -41,7 +42,7 @@
     </a>
     <nav class="top-nav">
       <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
-      
+      <a href="/ja/posts/remote-dev-setup-with-real-constraints/" class="nav-link lang-switch" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JA</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
     </nav>
   </div>
@@ -121,7 +122,7 @@
     <script>
       (function(){
         try {
-          var configured = "en".split(",");
+          var configured = "en,ja".split(",");
           var defaultLang = "en";
           if (localStorage.getItem("lang")) return;
           var path = location.pathname;

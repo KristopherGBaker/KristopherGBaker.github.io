@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>制約ありきで組んだリモート開発環境</title>
+    <meta name="description" content="制約ありきで組んだリモート開発環境">
+    <link rel="canonical" href="https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/">
+    <meta property="og:title" content="制約ありきで組んだリモート開発環境">
+    <meta property="og:description" content="制約ありきで組んだリモート開発環境">
+    <meta property="og:url" content="https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/posts/remote-dev-setup-with-real-constraints/">
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark">K</span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · グロース · 東京</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/posts/remote-dev-setup-with-real-constraints/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container post-page page-shell">
+  <a href="/ja/posts/" class="post-back">← 記事一覧へ</a>
+  <p class="post-meta">
+    <span>2026.04.01</span>
+    
+     · <span>1 分で読了</span>
+  </p>
+  <h1 class="h1 post-title">制約ありきで組んだリモート開発環境</h1>
+  
+  
+  <article class="prose"><video autoplay muted loop playsinline>
+  <source src="/posts/remote-dev-setup-with-real-constraints/claude-train.mp4" type="video/mp4">
+  <img src="/posts/remote-dev-setup-with-real-constraints/claude-train.png" alt="電車内でスマートフォンからClaude Codeを操作している様子">
+</video>
+<p>日本の電車の中でスマートフォンを取り出して、自宅のMacで動かしている開発セッションに再接続し、そのまま作業を続ける。今となっては、そこまで突飛な話ではありません。</p>
+<p>ただ、それを「ちゃんと使える状態」にする——しかもスマホから、既存の環境を壊さずに、安定して動かす——となると、話は少し変わってきます。</p>
+<p>そしてちょうど環境が安定してきた頃に、Claude Codeに <a href="chatgpt://generic-entity?number=0">Claude Code Remote Control</a> と <a href="chatgpt://generic-entity?number=1">Claude Code Dispatch</a> がリリースされました。この話は後半で触れます。</p>
+<h2>なぜTailscaleを使わなかったのか</h2>
+<p>個人のマシンに安全にリモートアクセスしたい、という相談を受けたら、おそらく私は「Tailscaleを使えばいい」と答えて終わりにすると思います。それくらい優秀なツールですし、多くのケースではそれで十分です。</p>
+<p>ただ、自分の状況は少しだけややこしいものでした。</p>
+<p>自宅のMacでは業務用VPNが常時動いており、個人用と会社用のTailscaleアカウントを同一マシンで混在させたくありませんでした。また、自宅ネットワークをインターネットからの直接接続にさらすのも避けたかった。さらに、スマホ（しかもWi-Fiとモバイル回線を頻繁に切り替える環境）から使う前提だったので、通常のSSHセッションが切れてしまうような状況でも耐えられる必要がありました。</p>
+<p>どれか一つだけなら簡単に解決できる制約です。ただ、それらが重なると、見た目がきれいな構成から順番に候補から外れていきます。最終的に残ったのは、最もエレガントな構成ではなく、実際の制約にちゃんとフィットする構成でした。</p>
+<h2>全体の構成</h2>
+<p>最終的な構成はシンプルな「連鎖」です。それぞれの要素には明確な役割があります。</p>
+<pre class="mermaid">flowchart LR
+    phone[Phone]
+    mosh[mosh]
+    vps[VPS]
+    reverse[reverse SSH]
+    mac[Mac]
+    tmux[tmux]
+    tools[Claude Code]
+
+    phone --&gt; mosh --&gt; vps --&gt; reverse --&gt; mac --&gt; tmux --&gt; tools</pre>
+<p>スマートフォンからは mosh を使ってVPSに接続します。モバイル回線ではIPが変わったり、Wi-Fiとセルラーが切り替わったり、接続が一時的に切れたりと、通常のSSHが苦手な状況が頻発しますが、moshはそこをうまく吸収してくれます。</p>
+<p>VPSは唯一パブリックに公開されているポイントです。自宅のMacからはアウトバウンドのリバースSSHトンネルでVPSに接続しているため、Mac側はインターネットからの着信を一切受ける必要がありません。</p>
+<p>そしてMac上の tmux によって、接続は単なる「一時的なセッション」ではなく、「いつでも戻ってこられる状態」に変わります。</p>
+<p>この点は意外でした。セッション自体が持続するようになると、スマホは「制限された入口」ではなくなります。どこかに再接続しているというより、進行中の作業にそのまま戻っている感覚に近くなります。</p>
+<h2>実際にハマったポイント</h2>
+<p>学びの大半は、最初の設計ではなく、うまくいかなかった部分から来ています。</p>
+<p>リバースSSHトンネルは、しばらく放置すると半死状態になることがありました。VPS上ではポート22は開いているように見える。でも実際にはセッションが裏で切れていて、Macに接続しようとするとハングする。</p>
+<p>これを解決したのは単一の設定ではなく、「生存確認」をちゃんと扱うことでした。Mac側からのSSH keepalive、接続が落ちたときに再構築する autossh、そしてVPS側で localhost:22 が実際に応答しているか確認してから接続するスクリプト。</p>
+<p>このジャンプ用スクリプトも学びの一つでした。最初はVPSに接続するたびにMacへSSHしようとしていたのですが、トンネルが落ちているとただハングするだけで何もできません。</p>
+<p>改善後は、ポートを事前にチェックし、短いタイムアウトを設定し、ダメならVPSのシェルにフォールバックするようにしました。小さな変更ですが、「たまに使える」状態から「安心して使える」状態への差はここにありました。</p>
+<p>tmux も同様です。ある環境で作ったセッションを別の環境から再接続すると、うまく表示されないことがありました。自分の場合はMac側の xterm-ghostty が原因で、モバイル側クライアントとの相性問題が出ていました。より汎用的なterminal設定に変更することで解決しましたが、「持続するセッション」はその前提条件に依存する、という当たり前のことを改めて実感しました。</p>
+<p>どれも大きな問題ではありません。ただ、この手の「半分だけ解決されている問題」が積み重なると、結局その環境は使われなくなります。</p>
+<h2>その頃、ツール側も進化していた</h2>
+<p>ちょうどこの構成が安定したタイミングで、同じ領域をカバーする機能が登場しました。</p>
+<p>Claude Code Remote Control は、ローカルで動いているClaude Codeのセッションをスマホやブラウザからそのまま操作できる機能です。ファイルシステムや開発環境はローカルのまま、スマホは単なる「窓」として機能します。ポートフォワーディングもVPSも不要です。</p>
+<p>Claude Code Dispatch はさらに一歩進んでいて、スマホからタスクを投げると、自宅のMac上で新しいセッションを立ち上げて処理してくれます。そもそも事前にセッションを立ち上げておく必要すらありません。</p>
+<p>では、この構成を作ったのは無駄だったのか。</p>
+<p>正直、そうは思っていません。</p>
+<p>Remote Controlは1セッション1接続に制限されており、ネットワーク断が10分ほど続くとタイムアウトします。地方の電車などで不安定な回線を使う場合には、やや心許ない。一方、自分の構成は mosh と autossh によって長時間の切断にも耐えられます。</p>
+<p>また、VPSという足場があることで、単にClaude Codeに限らず、「とりあえず入れるシェル」が手元にある状態になります。</p>
+<p>ただし、今ゼロから同じことをやるかと言われたら話は別です。安定した回線環境で、スマホからClaude Codeを触りたいだけなら、まずRemote Controlを試して、そのまま終わる可能性が高いと思います。</p>
+<h2>残った学び</h2>
+<p>インフラでも、AIツールでも、そして昨年建てた家でも、同じパターンを何度も見ています。</p>
+<p>最初の設計はきれいに見える。まだ現実とぶつかっていないからです。</p>
+<p>実際の制約に向き合った結果できあがるものは、少し歪んで見えることもある。でも、実際に使い続けられるのはそちらの方です。</p>
+<p>そしてもう一つ。ツールは進化し、前提条件は変わります。</p>
+<p>今回の構成は今でも役に立っていますが、この話で伝えたいのは「これを作るべき」ということではありません。「なぜこの構成になったのか」を理解していれば、新しい選択肢が出てきたときに、どこを捨てていいか判断できる、ということです。</p>
+<p>ツールが変わっても、その部分は残ります。</p></article>
+  <div class="post-footer">
+    <a href="/ja/posts/" class="read-link">もっと読む <span class="arrow" aria-hidden="true">→</span></a>
+    <a href="mailto:hello@krisbaker.com" class="read-link">メールで返信 <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
