@@ -9,6 +9,7 @@
     <meta property="og:description" content="The longer version.">
     <meta property="og:url" content="https://krisbaker.com/about/">
     <meta name="twitter:card" content="summary">
+    
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
@@ -26,8 +27,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
-<style>.case-study-prose { max-width: 880px; margin: 0 0 56px; }</style></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -41,6 +41,7 @@
     </a>
     <nav class="top-nav">
       <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
     </nav>
   </div>
@@ -94,5 +95,26 @@
   </div>
 </footer>
 
+    <script>
+      (function(){
+        try {
+          var configured = "en".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>
