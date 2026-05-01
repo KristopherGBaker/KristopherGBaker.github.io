@@ -1,1 +1,0 @@
-window.Prism = window.Prism || {};

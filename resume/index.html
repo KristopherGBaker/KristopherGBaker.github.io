@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Résumé</title>
+    <meta name="description" content="Résumé">
+    <link rel="canonical" href="https://krisbaker.com/resume/">
+    <meta property="og:title" content="Résumé">
+    <meta property="og:description" content="Résumé">
+    <meta property="og:url" content="https://krisbaker.com/resume/">
+    <meta name="twitter:card" content="summary">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/" class="top-brand">
+      <span class="top-brand-mark">K</span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · Growth · Tokyo</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="resume-page page-shell">
+  <div class="no-print resume-toolbar">
+    <a href="/about/" class="resume-toolbar-back">← About</a>
+    <button type="button" onclick="window.print()" class="btn-ghost">Print / Save as PDF →</button>
+  </div>
+
+  <header class="resume-header">
+    <h1>Kristopher Baker</h1>
+    <p class="resume-header-role">Senior Software Engineer · Product-focused engineer specializing in growth, consumer applications, and AI-enabled systems</p>
+    <div class="resume-header-meta">
+      <span>Tokyo, Japan</span>
+      <span><a href="mailto:hello@krisbaker.com">hello@krisbaker.com</a></span>
+      <span><a href="https://github.com/KristopherGBaker">GitHub</a></span><span><a href="https://linkedin.com/in/kristophergbaker">LinkedIn</a></span>
+      <span>US Citizen · Japan PR</span>
+    </div>
+  </header>
+
+  <section class="resume-section">
+    <h2 class="resume-label">Summary</h2>
+    <p class="resume-summary">Software engineer with 13+ years of experience building and scaling consumer products used by millions. Most recently focused on growth and retention in subscription-based applications, delivering measurable business impact through experimentation and cross-functional collaboration. Expanding into AI-enabled product experiences, including building a macOS application for real-time AI-driven interview simulation and feedback.</p>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">Core Competencies</h2>
+    <div class="resume-competencies"><div class="resume-competency-key">Product & Growth Engineering</div><div class="resume-competency-val">Subscription systems, conversion funnels, A/B testing, telemetry design, data-driven iteration</div><div class="resume-competency-key">AI-Enabled Product Development</div><div class="resume-competency-val">LLM integration (Anthropic, OpenAI, OpenRouter, Ollama), RAG systems, real-time speech pipelines (STT/TTS), applied multi-modal systems</div><div class="resume-competency-key">Architecture & Systems Design</div><div class="resume-competency-val">Modular architecture, protocol-oriented design, dependency injection, event-driven systems, backend-driven UI</div><div class="resume-competency-key">Concurrency & Performance</div><div class="resume-competency-val">Swift concurrency (async/await, Actors, Sendable), real-time processing, profiling, memory optimization</div><div class="resume-competency-key">Languages & Platforms</div><div class="resume-competency-val">Swift, Objective-C, Python; UIKit, SwiftUI, AppKit, AVFoundation</div></div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">Experience</h2>
+    <div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">Wolt / DoorDash</div>
+          <p class="resume-job-role">Senior Software Engineer</p>
+        </div>
+        <div class="resume-job-meta">May 2023 – Present · Tokyo, Japan</div>
+      </div>
+      <p class="role-description">Lead engineer for membership growth in a large-scale consumer application, owning features end-to-end from proposal through delivery and post-launch analysis.</p>
+      <ul class="resume-job-bullets"><li>Led implementation of subscription funnel improvements, contributing to +29.8% incremental membership sign-ups through experimentation and iteration.</li><li>Identified and addressed key friction points in checkout, implementing optimizations that contributed to +27,000 incremental subscribers annually.</li><li>Served as frontend DRI for major product launches including Cart Entry Point, Express Sign-Up, and Long Distance Delivery, coordinating across iOS, Android, Web, backend, and data teams distributed across Germany, Finland, and Japan.</li><li>Designed telemetry instrumentation and backend-driven UI systems enabling faster experimentation cycles and improved release confidence across the membership surface.</li><li>Refactored shared UI components and standardized ViewModel patterns across checkout and discovery flows, reducing duplication and improving long-term maintainability.</li><li>Authored technical design documents (RFCs) for cross-team architecture decisions and feature proposals.</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">SmartNews</div>
+          <p class="resume-job-role">Senior Software Engineer, iOS</p>
+        </div>
+        <div class="resume-job-meta">April 2019 – May 2023 · Tokyo, Japan</div>
+      </div>
+      <p class="role-description">Core iOS engineer on a consumer news application serving tens of millions of users globally, owning features across the full development lifecycle.</p>
+      <ul class="resume-job-bullets"><li>Built and shipped features across feed rendering, onboarding, push notifications, navigation, and article display in a large-scale, performance-sensitive codebase.</li><li>Owned feature delivery end-to-end: architecture design, implementation, testing, release planning, and post-launch iteration with metric-driven evaluation.</li><li>Led Objective-C to Swift migration initiatives and established SwiftLint and SwiftFormat standards, improving code consistency and long-term maintainability across the iOS team.</li><li>Implemented server-driven onboarding flows using SwiftUI, decoupling product iteration from release cycles and enabling rapid A/B testing of onboarding variants.</li><li>Collaborated with product, backend, and ML teams across Tokyo and San Francisco to ship globally distributed features on tight timelines.</li><li>Conducted 100+ technical interviews across engineering roles.</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-job-head">
+        <div>
+          <div class="resume-job-org">Bodybuilding.com</div>
+          <p class="resume-job-role">Software Engineer, iOS</p>
+        </div>
+        <div class="resume-job-meta">March 2013 – July 2018 · Boise, Idaho</div>
+      </div>
+      <p class="role-description">Developed native iOS applications across fitness tracking, social feed, and e-commerce products serving a large consumer user base.</p>
+      <ul class="resume-job-bullets"><li>Diagnosed and resolved critical feed rendering bottlenecks using Instruments profiling and multithreaded layout computation, achieving consistent 60fps scrolling performance.</li><li>Led early adoption of Swift and guided production applications through multiple major Swift language migrations, establishing patterns adopted across the team.</li><li>Implemented CI/CD pipelines and release automation, improving development velocity and deployment reliability.</li><li>Awarded Company MVP for delivering critical feed functionality during a team transition while maintaining release commitments.</li></ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">Projects</h2>
+    <div class="resume-job">
+      <div class="resume-project-name">Aside — AI Mock Interview Coach (macOS)</div>
+      <p class="resume-project-meta">Personal project · in progress</p>
+      <ul class="resume-project-bullets"><li>Provider-agnostic LLM orchestration layer (Anthropic, OpenAI, OpenRouter, Ollama)</li><li>Actor-based interview orchestration managing multi-phase conversation flow</li><li>Real-time speech pipeline with on-device transcription (Parakeet) and low-latency TTS (Kokoro)</li><li>RAG using vector embeddings + SQLite-backed storage to incorporate session history</li><li>Structured evaluation engine with competency scoring and longitudinal tracking</li></ul>
+    </div><div class="resume-job">
+      <div class="resume-project-name">JPResume — Western to Japanese résumé converter (Swift CLI)</div>
+      <p class="resume-project-meta">Personal · open source · 2026</p>
+      <ul class="resume-project-bullets"><li>Pause-point pipeline (Parse / Normalize / Validate / Repair / Generate / Render) with deterministic stages and LLM stages clearly separated</li><li>External agent mode — LLM stages can hand off to an external agent that supplies the response and re-ingests</li><li>Native PDF rendering via CoreGraphics with Hiragino Sans for proper Japanese typography</li></ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2 class="resume-label">Education</h2>
+    <p class="resume-education-school">University of Illinois Springfield</p>
+    <p class="resume-education-degree">Bachelor of Science, Computer Science · Minor in Mathematics · Summa Cum Laude</p>
+  </section>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

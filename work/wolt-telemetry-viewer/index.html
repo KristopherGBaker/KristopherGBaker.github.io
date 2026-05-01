@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Building a real-time telemetry viewer to improve product iteration speed</title>
+    <meta name="description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <link rel="canonical" href="https://krisbaker.com/work/wolt-telemetry-viewer/">
+    <meta property="og:title" content="Building a real-time telemetry viewer to improve product iteration speed">
+    <meta property="og:description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <meta property="og:url" content="https://krisbaker.com/work/wolt-telemetry-viewer/">
+    <meta name="twitter:card" content="summary">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/" class="top-brand">
+      <span class="top-brand-mark">K</span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · Growth · Tokyo</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container case-study page-shell">
+  <a href="/work/" class="case-study-back">← All work</a>
+
+  <div class="case-study-brand">
+    <span class="brand-pill">
+      <span class="brand-pill-mark wolt"></span>
+      Wolt / DoorDash · Sole developer · 2023
+    </span>
+  </div>
+
+  <h1 class="h1 case-study-title">Building a real-time telemetry viewer to improve product iteration speed</h1>
+  <p class="body-lg case-study-blurb">A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.</p>
+
+  <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/macos/" class="tag-chip">macOS</a><a href="/work/tags/internal-tooling/" class="tag-chip">Internal tooling</a><a href="/work/tags/telemetry/" class="tag-chip">Telemetry</a><a href="/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
+
+  <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+    <div>
+      <p class="case-study-metric-value">sole developer</p>
+      <p class="case-study-metric-label">role</p>
+    </div><div>
+      <p class="case-study-metric-value">iOS + macOS</p>
+      <p class="case-study-metric-label">platforms</p>
+    </div><div>
+      <p class="case-study-metric-value">cross-team</p>
+      <p class="case-study-metric-label">adoption</p>
+    </div>
+  </section>
+
+  
+
+  <article class="reading prose case-study-prose"><h2>Context</h2>
+<p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome, relying on a full-screen in-app viewer with no search or filtering.</p>
+<h2>The problem</h2>
+<p>This made it difficult for engineers to:</p>
+<ul>
+<li>validate new events</li>
+<li>debug issues</li>
+<li>confidently ship instrumented features</li>
+</ul>
+<h2>Approach</h2>
+<p>I designed and built a telemetry viewer that streams events from the app to a local desktop client.</p>
+<p>Key elements:</p>
+<ul>
+<li>local WebSocket-based streaming from the iOS app</li>
+<li>a desktop app with searchable, filterable event views</li>
+<li>full visibility into payloads sent to backend systems</li>
+</ul>
+<p>I introduced it gradually:</p>
+<ul>
+<li>first validating it with a small group of engineers</li>
+<li>then expanding usage through demos and internal sharing</li>
+</ul>
+<p>I also supported cross-platform adoption by helping an Android engineer implement a similar solution.</p>
+<h2>Outcome</h2>
+<ul>
+<li>Significantly improved speed and confidence when validating telemetry</li>
+<li>Adopted by multiple engineers across teams</li>
+<li>Enabled other initiatives (e.g. privacy-related telemetry work)</li>
+</ul>
+<h2>My role</h2>
+<p>Sole developer, from concept to adoption across teams.</p></article>
+
+  
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">Next</p>
+    <a href="/work/wolt-cart-entry-points/" class="case-study-next-row">
+      <span class="case-study-next-title">Improving subscription conversion through cart and checkout entry points</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

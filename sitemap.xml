@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://krisbaker.com/</loc></url>
-  <url><loc>https://krisbaker.com/archive/</loc></url>
+  <url><loc>https://krisbaker.com/posts/</loc></url>
   <url><loc>https://krisbaker.com/posts/jpresume-japanese-resume-tool/</loc></url>
   <url><loc>https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/</loc></url>
+  <url><loc>https://krisbaker.com/work/</loc></url>
+  <url><loc>https://krisbaker.com/work/wolt-cart-entry-points/</loc></url>
+  <url><loc>https://krisbaker.com/work/wolt-long-distance-delivery/</loc></url>
+  <url><loc>https://krisbaker.com/work/wolt-telemetry-viewer/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/a-b-testing/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/api-design/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/growth/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/internal-tooling/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/subscription/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/telemetry/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/websocket/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/ios/</loc></url>
+  <url><loc>https://krisbaker.com/work/tags/macos/</loc></url>
+  <url><loc>https://krisbaker.com/about/</loc></url>
+  <url><loc>https://krisbaker.com/resume/</loc></url>
+  <url><loc>https://krisbaker.com/</loc></url>
 </urlset>
