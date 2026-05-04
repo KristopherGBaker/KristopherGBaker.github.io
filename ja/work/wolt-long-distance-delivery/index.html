@@ -2,13 +2,13 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Expanding subscription value with long-distance delivery</title>
-    <meta name="description" content="iOS DRI for Long-Distance Delivery — extending Wolt+ value to users outside the free delivery radius with discounted pricing, kept consistent across discovery, venue, and checkout. Led API and product design discussions across teams.">
+    <title>長距離配達によるサブスクリプション価値の拡張</title>
+    <meta name="description" content="Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-long-distance-delivery/">
-    <meta property="og:title" content="Expanding subscription value with long-distance delivery">
-    <meta property="og:description" content="iOS DRI for Long-Distance Delivery — extending Wolt+ value to users outside the free delivery radius with discounted pricing, kept consistent across discovery, venue, and checkout. Led API and product design discussions across teams.">
+    <meta property="og:title" content="長距離配達によるサブスクリプション価値の拡張">
+    <meta property="og:description" content="Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-long-distance-delivery/">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-long-distance-delivery/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+</style></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -54,58 +63,61 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · Senior Software Engineer · Membership Growth · 2024
+      Wolt / DoorDash · シニアソフトウェアエンジニア · グロース · 2025
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Expanding subscription value with long-distance delivery</h1>
-  <p class="body-lg case-study-blurb">iOS DRI for Long-Distance Delivery — extending Wolt+ value to users outside the free delivery radius with discounted pricing, kept consistent across discovery, venue, and checkout. Led API and product design discussions across teams.</p>
+  <h1 class="h1 case-study-title">長距離配達によるサブスクリプション価値の拡張</h1>
+  <p class="body-lg case-study-blurb">Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。</p>
 
-  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/growth/" class="tag-chip">Growth</a><a href="/ja/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/ja/work/tags/api-design/" class="tag-chip">API design</a></div>
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags//" class="tag-chip">グロース</a><a href="/ja/work/tags//" class="tag-chip">サブスクリプション</a><a href="/ja/work/tags/api/" class="tag-chip">API設計</a></div>
 
   <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
     <div>
-      <p class="case-study-metric-value">iOS DRI</p>
-      <p class="case-study-metric-label">role</p>
+      <p class="case-study-metric-value">DRI</p>
+      <p class="case-study-metric-label">役割</p>
     </div><div>
       <p class="case-study-metric-value">3</p>
-      <p class="case-study-metric-label">surfaces</p>
+      <p class="case-study-metric-label">対象導線</p>
     </div><div>
-      <p class="case-study-metric-value">rolled out</p>
-      <p class="case-study-metric-label">status</p>
+      <p class="case-study-metric-value">全体リリース済み</p>
+      <p class="case-study-metric-label">ステータス</p>
     </div>
   </section>
 
-  
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-long-distance-delivery/cover.png" alt="長距離配達によるサブスクリプション価値の拡張"></figure>
 
-  <article class="prose case-study-prose"><h2>Context</h2>
-<p>Wolt+ offered free delivery within a defined radius, but users outside that range saw limited benefit — reducing the product's appeal in certain markets.</p>
-<h2>The problem</h2>
-<p>We needed to extend the value of Wolt+ to users just outside the free delivery range by introducing discounted delivery — while keeping the experience consistent across discovery, venue pages, and checkout.</p>
-<h2>Approach</h2>
-<p>As client DRI, I led the iOS implementation and contributed to the overall API and product design.</p>
-<p>Key areas I focused on:</p>
+  <article class="prose case-study-prose"><h2>背景</h2>
+<p>Wolt+ は一定の配達距離内で無料配達を提供していましたが、その範囲を少しでも外れるとユーザーにとっての価値は大きく下がっていました。特に一部のマーケットでは、これがサブスクリプションの魅力を弱める要因になっていました。</p>
+<h2>課題</h2>
+<p>無料配達圏の外にいるユーザーにも価値を提供する必要がありました。</p>
+<p>ただし単に割引を導入するだけではなく、Discovery・店舗ページ・チェックアウトといった複数の導線で、配達料金と特典の見え方を一貫させる必要がありました。</p>
+<h2>アプローチ</h2>
+<p>クライアント側のDRIとして、iOS実装をリードしつつ、APIおよびプロダクト設計にも関与しました。</p>
+<p>主に取り組んだポイントは以下です。</p>
 <ul>
-<li>aligning frontend and backend on how delivery pricing and eligibility should be represented across surfaces</li>
-<li>working with the Discovery team to ensure consistent behavior across all venue lists</li>
-<li>designing a reusable bottom sheet for explaining delivery pricing and savings</li>
+<li>配達料金および適用条件の表現方法について、フロントエンドとバックエンドの整合性を確保</li>
+<li>Discoveryチームと連携し、店舗一覧における挙動を統一</li>
+<li>配達料金と割引内容を説明する再利用可能なボトムシートの設計</li>
 </ul>
-<p>I also led discussions around API structure and naming, coordinating across teams to reach a solution that worked for both backend and client constraints.</p>
-<h2>Outcome</h2>
+<p>また、APIの構造や命名についても議論をリードし、バックエンドとクライアント双方の制約を踏まえた形での合意形成を進めました。</p>
+<h2>成果</h2>
 <ul>
-<li>Strong positive impact in A/B tests</li>
-<li>Increased perceived value of Wolt+ in markets outside the core delivery radius</li>
-<li>Feature successfully rolled out across multiple surfaces in the app</li>
+<li>A/Bテストで明確なポジティブな結果を確認</li>
+<li>無料配達圏外のユーザーにおけるWolt+の価値認識が向上</li>
+<li>アプリ内の複数導線にわたって機能を展開</li>
 </ul>
-<h2>My role</h2>
-<p>Client DRI, leading implementation, RFC contributions, and cross-team coordination.</p></article>
+<h2>担当</h2>
+<p>DRIとして、クライアント実装のリード、RFCへの貢献、およびチーム間の連携を担当。</p></article>
 
-  
+  <section class="case-study-shots">
+    <figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/venue-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/delivery-fee-sheet.png" alt=""></figure>
+  </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
     <a href="/ja/work/wolt-telemetry-viewer/" class="case-study-next-row">
-      <span class="case-study-next-title">Building a real-time telemetry viewer to improve product iteration speed</span>
+      <span class="case-study-next-title">プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</span>
       <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

@@ -28,7 +28,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+</style></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -53,20 +62,20 @@
   <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">主にモバイル向けにリリースしてきたもの。</h1>
   <p class="body-lg" style="max-width: 640px; margin: 0 0 56px;">重要だと思う順に並べた主な実績。</p>
   <div class="work-list-grid"><a href="/ja/work/wolt-cart-entry-points/" class="card work-card">
-  <div class="work-card-cover-empty"><span>NO COVER YET</span></div>
+  <div class="work-card-cover"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt=""></div>
   <div class="work-card-body">
-    <span class="brand-pill"><span class="brand-pill-mark wolt"></span>Wolt / DoorDash · 2025</span>
+    <span class="brand-pill"><span class="brand-pill-mark wolt"></span>Wolt / DoorDash · 2024</span>
     <h3 class="h-card">カート・チェックアウト導線の改善でサブスク転換率を高める</h3>
     <p>Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</p>
     <span class="read-link">ケーススタディを読む <span class="arrow" aria-hidden="true">→</span></span>
   </div>
 </a>
 <a href="/ja/work/wolt-long-distance-delivery/" class="card work-card">
-  <div class="work-card-cover-empty"><span>NO COVER YET</span></div>
+  <div class="work-card-cover"><img src="/assets/work/wolt-long-distance-delivery/cover.png" alt=""></div>
   <div class="work-card-body">
-    <span class="brand-pill"><span class="brand-pill-mark wolt"></span>Wolt / DoorDash · 2024</span>
-    <h3 class="h-card">Expanding subscription value with long-distance delivery</h3>
-    <p>iOS DRI for Long-Distance Delivery — extending Wolt+ value to users outside the free delivery radius with discounted pricing, kept consistent across discovery, venue, and checkout. Led API and product design discussions across teams.</p>
+    <span class="brand-pill"><span class="brand-pill-mark wolt"></span>Wolt / DoorDash · 2025</span>
+    <h3 class="h-card">長距離配達によるサブスクリプション価値の拡張</h3>
+    <p>Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。</p>
     <span class="read-link">ケーススタディを読む <span class="arrow" aria-hidden="true">→</span></span>
   </div>
 </a>
@@ -74,8 +83,8 @@
   <div class="work-card-cover-empty"><span>NO COVER YET</span></div>
   <div class="work-card-body">
     <span class="brand-pill"><span class="brand-pill-mark wolt"></span>Wolt / DoorDash · 2023</span>
-    <h3 class="h-card">Building a real-time telemetry viewer to improve product iteration speed</h3>
-    <p>A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.</p>
+    <h3 class="h-card">プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</h3>
+    <p>iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。</p>
     <span class="read-link">ケーススタディを読む <span class="arrow" aria-hidden="true">→</span></span>
   </div>
 </a>

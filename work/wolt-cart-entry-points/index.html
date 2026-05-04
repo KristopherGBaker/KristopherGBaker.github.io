@@ -8,7 +8,7 @@
     <meta property="og:title" content="Improving subscription conversion through cart and checkout entry points">
     <meta property="og:description" content="Client-side DRI for two flagship Wolt+ growth experiments — cart entry point and express signup. Drove cross-platform RFCs and pushed to split the work into independent rollouts, enabling faster iteration and clearer A/B validation.">
     <meta property="og:url" content="https://krisbaker.com/work/wolt-cart-entry-points/">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="ja" href="/ja/work/wolt-cart-entry-points/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+</style></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -54,7 +63,7 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · Senior Software Engineer · Membership Growth · 2025
+      Wolt / DoorDash · Senior Software Engineer · Membership Growth · 2024
     </span>
   </div>
 
@@ -65,24 +74,28 @@
 
   <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
     <div>
-      <p class="case-study-metric-value">Client-side DRI (iOS, Web, Android)</p>
+      <p class="case-study-metric-value">DRI</p>
       <p class="case-study-metric-label">role</p>
     </div><div>
       <p class="case-study-metric-value">2</p>
       <p class="case-study-metric-label">experiments split</p>
     </div><div>
-      <p class="case-study-metric-value">fully rolled out</p>
+      <p class="case-study-metric-value">fully released</p>
       <p class="case-study-metric-label">status</p>
     </div>
   </section>
 
-  
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="Improving subscription conversion through cart and checkout entry points"></figure>
 
   <article class="prose case-study-prose"><h2>Context</h2>
 <p>Wolt+ is Wolt’s subscription product, similar to Uber One or DashPass. A key growth lever is how and when users are prompted to subscribe during the ordering flow.</p>
 <h2>The problem</h2>
 <p>Subscription entry points were limited and required users to leave the order flow. We wanted to introduce new surfaces in cart and checkout, along with a faster “express” signup experience — but the initial plan bundled everything into a single release, increasing complexity and delaying validation.</p>
 <h2>Approach</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Cart entry point + express signup flow">
+</video>
 <p>I acted as <strong>client-side DRI across iOS, Web, and Android</strong>, driving RFCs and alignment with product, design, backend, and data science, while leading iOS implementation.</p>
 <p>Early on, I pushed to split the work into independent experiments:</p>
 <ul>
@@ -106,7 +119,9 @@
 <h2>My role</h2>
 <p><strong>Client-side DRI across iOS, Web, and Android — leading RFCs, stakeholder alignment, and experimentation strategy, with hands-on iOS implementation.</strong></p></article>
 
-  
+  <section class="case-study-shots">
+    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure>
+  </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>

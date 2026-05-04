@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Building a real-time telemetry viewer to improve product iteration speed</title>
-    <meta name="description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <title>プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</title>
+    <meta name="description" content="iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
-    <meta property="og:title" content="Building a real-time telemetry viewer to improve product iteration speed">
-    <meta property="og:description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <meta property="og:title" content="プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築">
+    <meta property="og:description" content="iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/work/wolt-telemetry-viewer/">
@@ -28,7 +28,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+</style></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -54,61 +63,61 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · Sole developer · 2023
+      Wolt / DoorDash · 単独開発 · 2023
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Building a real-time telemetry viewer to improve product iteration speed</h1>
-  <p class="body-lg case-study-blurb">A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.</p>
+  <h1 class="h1 case-study-title">プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</h1>
+  <p class="body-lg case-study-blurb">iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。</p>
 
-  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/macos/" class="tag-chip">macOS</a><a href="/ja/work/tags/internal-tooling/" class="tag-chip">Internal tooling</a><a href="/ja/work/tags/telemetry/" class="tag-chip">Telemetry</a><a href="/ja/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/macos/" class="tag-chip">macOS</a><a href="/ja/work/tags//" class="tag-chip">内製ツール</a><a href="/ja/work/tags//" class="tag-chip">テレメトリ</a><a href="/ja/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
 
   <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
     <div>
-      <p class="case-study-metric-value">sole developer</p>
-      <p class="case-study-metric-label">role</p>
+      <p class="case-study-metric-value">単独開発</p>
+      <p class="case-study-metric-label">役割</p>
     </div><div>
       <p class="case-study-metric-value">iOS + macOS</p>
-      <p class="case-study-metric-label">platforms</p>
+      <p class="case-study-metric-label">対応プラットフォーム</p>
     </div><div>
-      <p class="case-study-metric-value">cross-team</p>
-      <p class="case-study-metric-label">adoption</p>
+      <p class="case-study-metric-value">複数チームで利用</p>
+      <p class="case-study-metric-label">利用状況</p>
     </div>
   </section>
 
   
 
-  <article class="prose case-study-prose"><h2>Context</h2>
-<p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome, relying on a full-screen in-app viewer with no search or filtering.</p>
-<h2>The problem</h2>
-<p>This made it difficult for engineers to:</p>
+  <article class="prose case-study-prose"><h2>背景</h2>
+<p>Woltでは、開発中に分析イベント（テレメトリ）を確認する手段が限られており、アプリ内のフルスクリーンビューアに依存していました。検索やフィルタ機能がなく、確認作業には時間がかかっていました。</p>
+<h2>課題</h2>
+<p>この状況では、エンジニアが以下の作業を効率的に行うことが難しくなっていました。</p>
 <ul>
-<li>validate new events</li>
-<li>debug issues</li>
-<li>confidently ship instrumented features</li>
+<li>新しいイベントの検証</li>
+<li>不具合のデバッグ</li>
+<li>計測を伴う機能を安心してリリースすること</li>
 </ul>
-<h2>Approach</h2>
-<p>I designed and built a telemetry viewer that streams events from the app to a local desktop client.</p>
-<p>Key elements:</p>
+<h2>アプローチ</h2>
+<p>iOSアプリからイベントをローカルのデスクトップクライアントへストリーミングする、テレメトリビューアを設計・開発しました。</p>
+<p>主な構成要素は以下です。</p>
 <ul>
-<li>local WebSocket-based streaming from the iOS app</li>
-<li>a desktop app with searchable, filterable event views</li>
-<li>full visibility into payloads sent to backend systems</li>
+<li>iOSアプリからのWebSocketによるローカルストリーミング</li>
+<li>検索・フィルタが可能なデスクトップアプリのイベントビュー</li>
+<li>バックエンドへ送信されるペイロードの完全な可視化</li>
 </ul>
-<p>I introduced it gradually:</p>
+<p>導入は段階的に進めました。</p>
 <ul>
-<li>first validating it with a small group of engineers</li>
-<li>then expanding usage through demos and internal sharing</li>
+<li>まず少人数のエンジニアで検証</li>
+<li>デモや社内共有を通じて利用範囲を拡大</li>
 </ul>
-<p>I also supported cross-platform adoption by helping an Android engineer implement a similar solution.</p>
-<h2>Outcome</h2>
+<p>また、Androidエンジニアと連携し、同様の仕組みを他プラットフォームにも展開しました。</p>
+<h2>成果</h2>
 <ul>
-<li>Significantly improved speed and confidence when validating telemetry</li>
-<li>Adopted by multiple engineers across teams</li>
-<li>Enabled other initiatives (e.g. privacy-related telemetry work)</li>
+<li>テレメトリ検証にかかる時間と不確実性を大幅に削減</li>
+<li>複数チームのエンジニアに採用</li>
+<li>プライバシー関連のテレメトリ対応など、他の取り組みの基盤としても活用</li>
 </ul>
-<h2>My role</h2>
-<p>Sole developer, from concept to adoption across teams.</p></article>
+<h2>担当</h2>
+<p>コンセプト設計から実装、チームへの展開までを単独で担当。</p></article>
 
   
 

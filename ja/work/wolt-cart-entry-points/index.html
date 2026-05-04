@@ -8,7 +8,7 @@
     <meta property="og:title" content="カート・チェックアウト導線の改善でサブスク転換率を高める">
     <meta property="og:description" content="Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-cart-entry-points/">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-cart-entry-points/">
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)"></head>
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+</style></head>
   <body class="grain-bg">
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
@@ -54,7 +63,7 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · シニアソフトウェアエンジニア · メンバーシップ成長 · 2025
+      Wolt / DoorDash · シニアソフトウェアエンジニア · メンバーシップ成長 · 2024
     </span>
   </div>
 
@@ -65,7 +74,7 @@
 
   <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
     <div>
-      <p class="case-study-metric-value">Client DRI (iOS, Web, Android)</p>
+      <p class="case-study-metric-value">DRI</p>
       <p class="case-study-metric-label">役割</p>
     </div><div>
       <p class="case-study-metric-value">2</p>
@@ -76,13 +85,17 @@
     </div>
   </section>
 
-  
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="カート・チェックアウト導線の改善でサブスク転換率を高める"></figure>
 
   <article class="prose case-study-prose"><h2>背景</h2>
 <p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
 <h2>課題</h2>
 <p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
 <h2>アプローチ</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="カート導入口とエクスプレス登録のフロー">
+</video>
 <p>クライアント側のDRIとしてiOS・Web・Androidを横断的に率い、プロダクト・デザイン・バックエンド・データサイエンスの整合を取りつつ、iOS実装をリードしました。</p>
 <p>早い段階で、私はこの作業を独立した2つの実験に分けることを推しました:</p>
 <ul>
@@ -106,12 +119,14 @@
 <h2>役割</h2>
 <p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p></article>
 
-  
+  <section class="case-study-shots">
+    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure>
+  </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
     <a href="/ja/work/wolt-long-distance-delivery/" class="case-study-next-row">
-      <span class="case-study-next-title">Expanding subscription value with long-distance delivery</span>
+      <span class="case-study-next-title">長距離配達によるサブスクリプション価値の拡張</span>
       <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>
