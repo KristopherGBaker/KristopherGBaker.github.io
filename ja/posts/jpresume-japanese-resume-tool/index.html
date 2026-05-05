@@ -25,6 +25,7 @@
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
@@ -52,7 +53,7 @@
       </span>
     </a>
     <nav class="top-nav">
-      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       <a href="/posts/jpresume-japanese-resume-tool/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
     </nav>
@@ -64,11 +65,17 @@
   <p class="post-meta">
     <span>2026.04.20</span>
     
-     · <span>1 分で読了</span>
+     · <span>約6分</span>
   </p>
   <h1 class="h1 post-title">JPResume：英文レジュメを日本式に変換するツール</h1>
   
   
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#section">日本式レジュメが単なる翻訳ではない理由</a></li><li class="toc-item toc-level-2"><a href="#section-2">仕組み</a></li><li class="toc-item toc-level-2"><a href="#section-3">実際の使い方</a></li><li class="toc-item toc-level-2"><a href="#section-4">現時点での限界</a></li><li class="toc-item toc-level-2"><a href="#section-5">ツールが変わっても残るもの</a></li>
+  </ol>
+</nav>
+
   <article class="prose"><video autoplay muted loop playsinline>
   <source src="/posts/jpresume-japanese-resume-tool/jpresume.mp4" type="video/mp4">
   <img src="/posts/jpresume-japanese-resume-tool/jpresume.png" alt="日本式の履歴書の書き方に悩んでいる様子">
@@ -78,7 +85,7 @@
 <p>そのたびに、返事は同じでした。「ちょっと確認して後で返します」と。</p>
 <p>英語のレジュメはそれなりに整っていました。一方、日本語の方は中途半端なメモの寄せ集めで、英語版を更新するたびにすぐ古くなる。毎回それを手で書き直すのは、しかも第二言語で、現実的ではありませんでした。</p>
 <p>そこで作ったのが <a href="https://github.com/KristopherGBaker/JPResume">JPResume</a> です。英文レジュメから履歴書と職務経歴書を生成し、両方を同期させるための小さなSwift CLIツールです。</p>
-<h2>日本式レジュメが単なる翻訳ではない理由</h2>
+<h2 id="section">日本式レジュメが単なる翻訳ではない理由</h2>
 <p>英文レジュメしか書いたことがないと、日本式のレジュメも単なる翻訳だと思いがちです。でも実際はそうではありません。</p>
 <p>履歴書は、基本的に決まったフォーマットのグリッドです。氏名、フリガナ、写真欄、年・月単位で並ぶ学歴・職歴、資格、志望動機、本人希望記入欄。それぞれに細かい慣習があります。現職の書き方、職歴の締め方（「現在に至る」）、西暦か和暦か。</p>
 <p>企業によって重視度は違いますが、初めて触れると分かりにくいポイントばかりです。</p>
@@ -86,7 +93,7 @@
 <p>例えば「29.8%のサインアップ増加を達成」という表現は英語では自然でも、日本語では少し浮きます。「新規会員登録数の29.8%増加に寄与」のような表現の方が馴染みます。</p>
 <p>さらに厄介なのが整合性です。英語版と日本語版で、日付・役職・内容が一致している必要があります。ずれに気づくのは、大抵よくないタイミングです。</p>
 <p>この整合性の問題は、ツールで解決できる部分でもあります。</p>
-<h2>仕組み</h2>
+<h2 id="section-2">仕組み</h2>
 <p>意図的にシンプルなパイプラインにしています。魔法はありません。</p>
 <pre class="mermaid">flowchart LR
     parse[Parse]
@@ -103,7 +110,7 @@
 <p><strong>Repair</strong> は再び決定論的です。職歴の並び替え、重複期間の整理、is_current の整合性修正などを行います。<strong>Validate</strong> では、重複、低信頼データ、不自然な空白期間、年数のズレなどを警告として出します。</p>
 <p><strong>Generate</strong> で履歴書と職務経歴書のJSONを生成し、<strong>Render</strong> でMarkdownとPDFに変換します。PDFはCoreGraphicsとヒラギノを使って、日本語として自然に見える組版になるようにしています。</p>
 <p>構成としてはよくある形です。できるところは決定論的に、必要なところだけLLMを使い、その間に確認可能な中間状態を挟む。</p>
-<h2>実際の使い方</h2>
+<h2 id="section-3">実際の使い方</h2>
 <p>CLIは一発で実行できます。</p>
 <pre><code class="language-bash">jpresume convert resume.md --provider claude-cli --format both</code></pre>
 <p>ただ、普段は agent skill￼ を使っています。理由は external mode です。</p>
@@ -112,13 +119,13 @@
 <p>この違いは意外と大きいです。すべてのプロンプトとレスポンスが見える。途中で止めて確認できる。誤ったフィールドはJSONを直接修正して再取り込みできる。</p>
 <p>Normalizeの結果もブラックボックスではなくなります。どのように解釈されたかを確認してから次に進める。</p>
 <p>このツールをワンショットで作っていたら、この部分は見落としていたと思います。初稿を作るだけなら十分ですが、実際に提出するドキュメントではレビューのループが重要です。</p>
-<h2>現時点での限界</h2>
+<h2 id="section-4">現時点での限界</h2>
 <p>JPResumeは、現時点ではほぼ自分のレジュメでしか検証していません。</p>
 <p>ソフトウェアエンジニアとしての職歴、比較的きれいな日付、認知されやすい企業名、JLPTのように定型化された資格。かなり扱いやすいケースです。</p>
 <p>キャリアチェンジ、海外大学、長期ブランク、特殊な職種、日本の慣習と大きく異なる業界などはまだカバーできていません。</p>
 <p>別のレジュメを入れたときに、正規化や生成でうまく処理できない部分が出る可能性は高いと思っています。修正自体は簡単にできるように設計していますが、まだ実例は多くありません。</p>
 <p>もし試してみて気になる点があれば、IssueでもPRでも、何でも歓迎です。READMEにインストール方法とagent skillの説明を載せています。</p>
-<h2>ツールが変わっても残るもの</h2>
+<h2 id="section-5">ツールが変わっても残るもの</h2>
 <p>このツール自体よりも、残るのは構成の方だと思っています。</p>
 <p>決定論的なパース、情報を補完しない正規化、バリデーション後の意図的な停止、エージェントがモデルとして振る舞いながら結果をレビューできるexternal mode。</p>
 <p>このパターンは、日本式レジュメに限らず、契約書や申請書のように「間違った値が入ると困る」ドキュメント全般に応用できます。</p>
@@ -134,7 +141,7 @@
   <div class="container site-footer-grid">
     <div>
       <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
-      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
       <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">

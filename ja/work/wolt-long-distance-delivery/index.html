@@ -25,6 +25,7 @@
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
@@ -52,7 +53,7 @@
       </span>
     </a>
     <nav class="top-nav">
-      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       <a href="/work/wolt-long-distance-delivery/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
     </nav>
@@ -71,6 +72,7 @@
 
   <h1 class="h1 case-study-title">長距離配達によるサブスクリプション価値の拡張</h1>
   <p class="body-lg case-study-blurb">Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。</p>
+  <p class="case-study-meta">約2分</p>
 
   <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags//" class="tag-chip">グロース</a><a href="/ja/work/tags//" class="tag-chip">サブスクリプション</a><a href="/ja/work/tags/api/" class="tag-chip">API設計</a></div>
 
@@ -89,12 +91,19 @@
 
   <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-long-distance-delivery/cover.png" alt="長距離配達によるサブスクリプション価値の拡張"></figure>
 
-  <article class="prose case-study-prose"><h2>背景</h2>
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">担当</a></li>
+  </ol>
+</nav>
+
+
+  <article class="prose case-study-prose"><h2 id="section">背景</h2>
 <p>Wolt+ は一定の配達距離内で無料配達を提供していましたが、その範囲を少しでも外れるとユーザーにとっての価値は大きく下がっていました。特に一部のマーケットでは、これがサブスクリプションの魅力を弱める要因になっていました。</p>
-<h2>課題</h2>
+<h2 id="section-2">課題</h2>
 <p>無料配達圏の外にいるユーザーにも価値を提供する必要がありました。</p>
 <p>ただし単に割引を導入するだけではなく、Discovery・店舗ページ・チェックアウトといった複数の導線で、配達料金と特典の見え方を一貫させる必要がありました。</p>
-<h2>アプローチ</h2>
+<h2 id="section-3">アプローチ</h2>
 <p>クライアント側のDRIとして、iOS実装をリードしつつ、APIおよびプロダクト設計にも関与しました。</p>
 <p>主に取り組んだポイントは以下です。</p>
 <ul>
@@ -103,13 +112,13 @@
 <li>配達料金と割引内容を説明する再利用可能なボトムシートの設計</li>
 </ul>
 <p>また、APIの構造や命名についても議論をリードし、バックエンドとクライアント双方の制約を踏まえた形での合意形成を進めました。</p>
-<h2>成果</h2>
+<h2 id="section-4">成果</h2>
 <ul>
 <li>A/Bテストで明確なポジティブな結果を確認</li>
 <li>無料配達圏外のユーザーにおけるWolt+の価値認識が向上</li>
 <li>アプリ内の複数導線にわたって機能を展開</li>
 </ul>
-<h2>担当</h2>
+<h2 id="section-5">担当</h2>
 <p>DRIとして、クライアント実装のリード、RFCへの貢献、およびチーム間の連携を担当。</p></article>
 
   <section class="case-study-shots">
@@ -129,7 +138,7 @@
   <div class="container site-footer-grid">
     <div>
       <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
-      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
       <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">

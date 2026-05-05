@@ -25,6 +25,7 @@
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
@@ -71,6 +72,7 @@
 
   <h1 class="h1 case-study-title">Building a real-time telemetry viewer to improve product iteration speed</h1>
   <p class="body-lg case-study-blurb">A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.</p>
+  <p class="case-study-meta">1 min read</p>
 
   <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/macos/" class="tag-chip">macOS</a><a href="/work/tags/internal-tooling/" class="tag-chip">Internal tooling</a><a href="/work/tags/telemetry/" class="tag-chip">Telemetry</a><a href="/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
 
@@ -89,16 +91,23 @@
 
   
 
-  <article class="prose case-study-prose"><h2>Context</h2>
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#the-problem">The problem</a></li><li class="toc-item toc-level-2"><a href="#approach">Approach</a></li><li class="toc-item toc-level-2"><a href="#outcome">Outcome</a></li><li class="toc-item toc-level-2"><a href="#my-role">My role</a></li>
+  </ol>
+</nav>
+
+
+  <article class="prose case-study-prose"><h2 id="context">Context</h2>
 <p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome, relying on a full-screen in-app viewer with no search or filtering.</p>
-<h2>The problem</h2>
+<h2 id="the-problem">The problem</h2>
 <p>This made it difficult for engineers to:</p>
 <ul>
 <li>validate new events</li>
 <li>debug issues</li>
 <li>confidently ship instrumented features</li>
 </ul>
-<h2>Approach</h2>
+<h2 id="approach">Approach</h2>
 <p>I designed and built a telemetry viewer that streams events from the app to a local desktop client.</p>
 <p>Key elements:</p>
 <ul>
@@ -112,13 +121,13 @@
 <li>then expanding usage through demos and internal sharing</li>
 </ul>
 <p>I also supported cross-platform adoption by helping an Android engineer implement a similar solution.</p>
-<h2>Outcome</h2>
+<h2 id="outcome">Outcome</h2>
 <ul>
 <li>Significantly improved speed and confidence when validating telemetry</li>
 <li>Adopted by multiple engineers across teams</li>
 <li>Enabled other initiatives (e.g. privacy-related telemetry work)</li>
 </ul>
-<h2>My role</h2>
+<h2 id="my-role">My role</h2>
 <p>Sole developer, from concept to adoption across teams.</p></article>
 
   

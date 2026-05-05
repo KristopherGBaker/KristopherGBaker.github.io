@@ -25,6 +25,7 @@
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
@@ -52,7 +53,7 @@
       </span>
     </a>
     <nav class="top-nav">
-      <a href="/ja/work/" class="nav-link">実績</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">履歴書</a>
+      <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       <a href="/work/wolt-cart-entry-points/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
     </nav>
@@ -71,6 +72,7 @@
 
   <h1 class="h1 case-study-title">カート・チェックアウト導線の改善でサブスク転換率を高める</h1>
   <p class="body-lg case-study-blurb">Wolt+成長の中核実験2件 — カート導入口とエクスプレス登録 — のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</p>
+  <p class="case-study-meta">約2分</p>
 
   <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/growth/" class="tag-chip">Growth</a><a href="/ja/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/ja/work/tags/a-b-testing/" class="tag-chip">A/B testing</a></div>
 
@@ -89,11 +91,18 @@
 
   <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="カート・チェックアウト導線の改善でサブスク転換率を高める"></figure>
 
-  <article class="prose case-study-prose"><h2>背景</h2>
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">役割</a></li>
+  </ol>
+</nav>
+
+
+  <article class="prose case-study-prose"><h2 id="section">背景</h2>
 <p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
-<h2>課題</h2>
+<h2 id="section-2">課題</h2>
 <p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
-<h2>アプローチ</h2>
+<h2 id="section-3">アプローチ</h2>
 <video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
   <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
   <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="カート導入口とエクスプレス登録のフロー">
@@ -112,13 +121,13 @@
 <li>支払い・バックエンドとの連携で、支払方法変更などのエッジケースをすり合わせる</li>
 </ul>
 <p>データサイエンスとも密に連携し、計装の検証や、誤解を招くA/Bテスト結果のデバッグまで踏み込みました。</p>
-<h2>成果</h2>
+<h2 id="section-4">成果</h2>
 <ul>
 <li>Wolt+登録と下流の注文ボリュームに有意な押し上げ</li>
 <li>両機能ともA/Bテストに合格し、本番100%展開済</li>
 <li>カート導入口は今もサブスク成長の中核サーフェス</li>
 </ul>
-<h2>役割</h2>
+<h2 id="section-5">役割</h2>
 <p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p></article>
 
   <section class="case-study-shots">
@@ -138,7 +147,7 @@
   <div class="container site-footer-grid">
     <div>
       <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
-      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、お話できれば嬉しいです。</h2>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
       <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">
