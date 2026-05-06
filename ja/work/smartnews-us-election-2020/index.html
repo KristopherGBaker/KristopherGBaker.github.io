@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>固定期限の中で構築した、政治的バランスを考慮した選挙体験</title>
+    <meta name="description" content="SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。">
+    <link rel="canonical" href="https://krisbaker.com/ja/work/smartnews-us-election-2020/">
+    <meta property="og:title" content="固定期限の中で構築した、政治的バランスを考慮した選挙体験">
+    <meta property="og:description" content="SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。">
+    <meta property="og:url" content="https://krisbaker.com/ja/work/smartnews-us-election-2020/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="alternate" hreflang="en" href="/work/smartnews-us-election-2020/">
+    <link rel="alternate" hreflang="ja" href="/ja/work/smartnews-us-election-2020/">
+    <link rel="alternate" hreflang="x-default" href="/work/smartnews-us-election-2020/">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · グロース · 東京</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+      <span class="lang-switch-group"><a href="/work/smartnews-us-election-2020/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JA</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container case-study page-shell">
+  <a href="/ja/work/" class="case-study-back">← 実績一覧へ</a>
+
+  <div class="case-study-brand">
+    <span class="brand-pill">
+      <span class="brand-pill-mark smartnews"></span>
+      SmartNews · iOS Engineer · 2019
+    </span>
+  </div>
+
+  <h1 class="h1 case-study-title">固定期限の中で構築した、政治的バランスを考慮した選挙体験</h1>
+  <p class="body-lg case-study-blurb">SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。</p>
+  <p class="case-study-meta">約2分</p>
+
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/product/" class="tag-chip">Product</a><a href="/ja/work/tags/ux/" class="tag-chip">UX</a><a href="/ja/work/tags/localization/" class="tag-chip">Localization</a></div>
+
+  <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+    <div>
+      <p class="case-study-metric-value">選挙関連機能</p>
+      <p class="case-study-metric-label">対象範囲</p>
+    </div><div>
+      <p class="case-study-metric-value">選挙日に合わせた固定期限</p>
+      <p class="case-study-metric-label">制約</p>
+    </div><div>
+      <p class="case-study-metric-value">ウィジェット、SmartView、フィード</p>
+      <p class="case-study-metric-label">対応画面</p>
+    </div>
+  </section>
+
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/smartnews-us-election-2020/cover.jpg" alt="固定期限の中で構築した、政治的バランスを考慮した選挙体験"></figure>
+
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a><ol class="toc-sublist"><li class="toc-item toc-level-3"><a href="#section-4">政治的バランス体験</a></li><li class="toc-item toc-level-3"><a href="#section-5">候補者・選挙結果機能</a></li><li class="toc-item toc-level-3"><a href="#section-6">基盤・運用面</a></li></ol></li><li class="toc-item toc-level-2"><a href="#section-7">成果</a></li><li class="toc-item toc-level-2"><a href="#section-8">この事例で示せること</a></li>
+  </ol>
+</nav>
+
+
+  <article class="prose case-study-prose"><h2 id="section">背景</h2>
+<p>SmartNewsは、選挙報道において大きな役割を担っています。2020年の米国大統領選では、政治的な視点の偏りを抑え、異なる立場の記事を比較しながら読める体験を提供することが重要なテーマのひとつでした。</p>
+<p>また、選挙という性質上、リリース期限は完全に固定されており、すべてを選挙日までに間に合わせる必要がありました。</p>
+<h2 id="section-2">課題</h2>
+<p>求められていたのは、以下を満たす機能群でした。</p>
+<ul>
+<li>異なる政治的視点の記事を分かりやすく提示すること</li>
+<li>既存UIの流用ではなく、新しい体験を設計・実装すること</li>
+<li>リアルタイムの選挙結果表示に対応すること</li>
+<li>US版・JP版それぞれの挙動差異を正しく扱うこと</li>
+</ul>
+<h2 id="section-3">アプローチ</h2>
+<p>複数の選挙関連機能に横断的に関わりました。</p>
+<h3 id="section-4">政治的バランス体験</h3>
+<ul>
+<li>カスタムUISliderを用いた News Event View を実装
+<ul>
+<li>3段階 / 5段階の視点切り替えに対応</li>
+</ul>
+</li>
+<li>オンボーディング、ディープリンク、行動ログ計測を追加</li>
+<li>“News from all sides” への導線を複数サーフェスに展開</li>
+</ul>
+<h3 id="section-5">候補者・選挙結果機能</h3>
+<p>以下を実装：</p>
+<ul>
+<li>候補者ウィジェット・候補者リスト</li>
+<li>時間制御付きの選挙結果ウィジェット</li>
+</ul>
+<p>さらに：</p>
+<ul>
+<li>表示開始・終了時刻によるタイムスタンプ制御</li>
+<li>エディション別言語ルール
+<ul>
+<li>例：JP版ではシステム言語に関係なく日本語を表示</li>
+</ul>
+</li>
+</ul>
+<h3 id="section-6">基盤・運用面</h3>
+<ul>
+<li>フォールバックを含むAPI連携を実装</li>
+<li>クライアント条件による段階的ロールアウト制御</li>
+<li>主要インタラクションのTelemetry計測を整備</li>
+</ul>
+<h2 id="section-7">成果</h2>
+<ul>
+<li>固定期限の中で複数の選挙関連機能をリリース</li>
+<li>ユーザーが異なる政治的視点を比較しながら読める体験を実現</li>
+<li>時間制御・ローカライズ・データ可用性など複雑な要件を安定運用</li>
+</ul>
+<h2 id="section-8">この事例で示せること</h2>
+<ul>
+<li>動かせない期限の中での開発・リリース遂行力</li>
+<li>センシティブなプロダクト領域におけるUI設計・実装</li>
+<li>マルチエディション・多言語環境での仕様設計</li>
+<li>複数サーフェスにまたがる一貫した体験設計</li>
+</ul></article>
+
+  <section class="case-study-shots">
+    <figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/politics-channel.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/news-from-all-sides.png" alt=""></figure>
+  </section>
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/work/wolt-cart-entry-points/" class="case-study-next-row">
+      <span class="case-study-next-title">カート・チェックアウト導線の改善でサブスク転換率を高める</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
