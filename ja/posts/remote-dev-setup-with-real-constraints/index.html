@@ -60,7 +60,7 @@
   </div>
 </header>
 
-<main class="container post-page page-shell">
+<main class="container page-shell" style="padding-top: var(--page-padding-top);">
   <a href="/ja/posts/" class="post-back">← 記事一覧へ</a>
   <p class="post-meta">
     <span>2026.04.01</span>
@@ -69,14 +69,15 @@
   </p>
   <h1 class="h1 post-title">制約ありきで組んだリモート開発環境</h1>
   
-  
-  <nav class="toc" aria-label="Table of contents">
+  <div class="post-body">
+    
+    <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
     <li class="toc-item toc-level-2"><a href="#tailscale">なぜTailscaleを使わなかったのか</a></li><li class="toc-item toc-level-2"><a href="#section">全体の構成</a></li><li class="toc-item toc-level-2"><a href="#section-2">実際にハマったポイント</a></li><li class="toc-item toc-level-2"><a href="#section-3">その頃、ツール側も進化していた</a></li><li class="toc-item toc-level-2"><a href="#section-4">残った学び</a></li>
   </ol>
 </nav>
 
-  <article class="prose"><video autoplay muted loop playsinline>
+    <article class="prose"><video autoplay muted loop playsinline>
   <source src="/posts/remote-dev-setup-with-real-constraints/claude-train.mp4" type="video/mp4">
   <img src="/posts/remote-dev-setup-with-real-constraints/claude-train.png" alt="電車内でスマートフォンからClaude Codeを操作している様子">
 </video>
@@ -128,9 +129,10 @@
 <p>そしてもう一つ。ツールは進化し、前提条件は変わります。</p>
 <p>今回の構成は今でも役に立っていますが、この話で伝えたいのは「これを作るべき」ということではありません。「なぜこの構成になったのか」を理解していれば、新しい選択肢が出てきたときに、どこを捨てていいか判断できる、ということです。</p>
 <p>ツールが変わっても、その部分は残ります。</p></article>
-  <div class="post-footer">
-    <a href="/ja/posts/" class="read-link">もっと読む <span class="arrow" aria-hidden="true">→</span></a>
-    <a href="mailto:hello@krisbaker.com" class="read-link">メールで返信 <span class="arrow" aria-hidden="true">→</span></a>
+    <div class="post-footer">
+      <a href="/ja/posts/" class="read-link">もっと読む <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="mailto:hello@krisbaker.com" class="read-link">メールで返信 <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </main>
 

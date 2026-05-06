@@ -60,7 +60,7 @@
   </div>
 </header>
 
-<main class="container post-page page-shell">
+<main class="container page-shell" style="padding-top: var(--page-padding-top);">
   <a href="/posts/" class="post-back">← All entries</a>
   <p class="post-meta">
     <span>2026.04.01</span>
@@ -69,14 +69,15 @@
   </p>
   <h1 class="h1 post-title">Remote Dev Setup With Real Constraints</h1>
   
-  
-  <nav class="toc" aria-label="Table of contents">
+  <div class="post-body">
+    
+    <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
     <li class="toc-item toc-level-2"><a href="#why-not-just-use-tailscale">Why Not Just Use Tailscale?</a></li><li class="toc-item toc-level-2"><a href="#the-shape-of-the-thing">The Shape of the Thing</a></li><li class="toc-item toc-level-2"><a href="#where-it-actually-broke">Where It Actually Broke</a></li><li class="toc-item toc-level-2"><a href="#and-then-the-tooling-caught-up">And Then the Tooling Caught Up</a></li><li class="toc-item toc-level-2"><a href="#the-lesson-worth-keeping">The Lesson Worth Keeping</a></li>
   </ol>
 </nav>
 
-  <article class="prose"><video autoplay muted loop playsinline>
+    <article class="prose"><video autoplay muted loop playsinline>
   <source src="/posts/remote-dev-setup-with-real-constraints/claude-train.mp4" type="video/mp4">
   <img src="/posts/remote-dev-setup-with-real-constraints/claude-train.png" alt="Claude Code running on a phone on a train">
 </video>
@@ -116,9 +117,10 @@
 <p>I keep running into this pattern, with infrastructure, with AI tooling, with the house we built last year. The first version of an idea usually looks clean because it has not met reality yet. What survives contact with real constraints looks a little stranger, but it is the version that holds up.</p>
 <p>What is also true is that sometimes the tools catch up and the constraints shift underneath you. The setup I built is still useful to me. But the reason to write about it is less &quot;here is what you should build&quot; and more &quot;here is what I learned by building it.&quot; The constraints shaped the system. Understanding why each piece existed made it easy to know which pieces I could drop once better options showed up.</p>
 <p>That is the part worth keeping, even after the tools change.</p></article>
-  <div class="post-footer">
-    <a href="/posts/" class="read-link">More writing <span class="arrow" aria-hidden="true">→</span></a>
-    <a href="mailto:hello@krisbaker.com" class="read-link">Reply by email <span class="arrow" aria-hidden="true">→</span></a>
+    <div class="post-footer">
+      <a href="/posts/" class="read-link">More writing <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="mailto:hello@krisbaker.com" class="read-link">Reply by email <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </main>
 
