@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>フィーチャーフラグを用いた記事抽出システムの安全な再構築</title>
+    <meta name="description" content="第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。">
+    <link rel="canonical" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/">
+    <meta property="og:title" content="フィーチャーフラグを用いた記事抽出システムの安全な再構築">
+    <meta property="og:description" content="第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。">
+    <meta property="og:url" content="https://krisbaker.com/ja/work/smartnews-smartview-v2/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/work/smartnews-smartview-v2/">
+    <link rel="alternate" hreflang="ja" href="/ja/work/smartnews-smartview-v2/">
+    <link rel="alternate" hreflang="x-default" href="/work/smartnews-smartview-v2/">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+  window.addEventListener("DOMContentLoaded", function() {
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS · グロース · 東京</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+      <span class="lang-switch-group"><a href="/work/smartnews-smartview-v2/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JA</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container case-study page-shell">
+  <a href="/ja/work/" class="case-study-back">← 実績一覧へ</a>
+
+  <div class="case-study-brand">
+    <span class="brand-pill">
+      <span class="brand-pill-mark smartnews"></span>
+      SmartNews · iOS Engineer · 2022
+    </span>
+  </div>
+
+  <h1 class="h1 case-study-title">フィーチャーフラグを用いた記事抽出システムの安全な再構築</h1>
+  <p class="body-lg case-study-blurb">第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。</p>
+  <p class="case-study-meta">約2分</p>
+
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/swift/" class="tag-chip">Swift</a><a href="/ja/work/tags/architecture/" class="tag-chip">Architecture</a><a href="/ja/work/tags/feature-flags/" class="tag-chip">Feature Flags</a><a href="/ja/work/tags/rendering/" class="tag-chip">Rendering</a></div>
+
+  <section class="case-study-metrics" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+    <div>
+      <p class="case-study-metric-value">記事レンダリング基盤</p>
+      <p class="case-study-metric-label">対象範囲</p>
+    </div><div>
+      <p class="case-study-metric-value">v1/v2並行運用</p>
+      <p class="case-study-metric-label">ロールアウト</p>
+    </div><div>
+      <p class="case-study-metric-value">新規Swiftモジュール + 抽出エンジン</p>
+      <p class="case-study-metric-label">実装</p>
+    </div>
+  </section>
+
+  
+
+  <nav class="toc" aria-label="Table of contents">
+  <ol class="toc-list">
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">この事例で示せること</a></li>
+  </ol>
+</nav>
+
+
+  <article class="prose case-study-prose"><h2 id="section">背景</h2>
+<p>SmartNewsでは、SmartViewシステムを通じて数百万規模の記事をレンダリングしています。既存の抽出パイプラインは長年の運用の中で技術的負債が蓄積しており、媒体ごとの挙動の不整合も増えていました。</p>
+<p>しかし、レンダリング基盤を全面的に置き換えることは大きなリスクを伴います。わずかな不具合でも、記事の可読性やユーザー体験に直接影響してしまうためです。</p>
+<h2 id="section-2">課題</h2>
+<p>求められていたのは、以下を満たす新しい抽出基盤の導入でした。</p>
+<ul>
+<li>新しい記事抽出パイプラインの構築</li>
+<li>HTML解析・整形の信頼性向上</li>
+<li>バックエンド配信ルール（CSS・変換処理）との統合</li>
+<li>既存レンダリング体験を壊さない安全な移行</li>
+</ul>
+<p>重要なプロダクト基盤を止めることなく、段階的に刷新する必要がありました。</p>
+<h2 id="section-3">アプローチ</h2>
+<p>SmartHTMLExtractorV2 を既存システムと並行して動作する構成として実装しました。</p>
+<p>具体的には：</p>
+<ul>
+<li>SwiftSoupをラップした新規Swiftモジュール（SmartHTML）を作成し、安定した内部APIを提供</li>
+<li>新しい抽出パイプラインを実装
+<ul>
+<li>HTML解析とクリーンアップ</li>
+<li>バックエンド配信CSSルールとの統合</li>
+<li>内部モデルを用いた構造化フォーマット処理</li>
+</ul>
+</li>
+<li>クライアント条件分岐による制御を導入し、v1/v2を安全に共存可能に</li>
+</ul>
+<p>また、運用面のリスクを下げるために：</p>
+<ul>
+<li>クライアント条件判定失敗時のフォールバック処理（stage/prod URL切り替え）を追加</li>
+<li>エディション別プロキシ制御（US版 / JP版差異）に対応</li>
+<li>iOSバージョンごとの差異（JPEG / WebP画像選択など）も吸収</li>
+</ul>
+<h2 id="section-4">成果</h2>
+<ul>
+<li>コア体験に影響を与えることなく、並行レンダリングシステムを安全にリリース</li>
+<li>一括切り替えではなく、段階的な検証・ロールアウトを可能に</li>
+<li>将来的な改善を進めやすい、Swiftベースのレンダリング基盤を整備</li>
+</ul>
+<h2 id="section-5">この事例で示せること</h2>
+<ul>
+<li>高リスク・高影響システムにおける安全なロールアウト設計</li>
+<li>サードパーティライブラリを安定した内部抽象へラップする設計力</li>
+<li>大規模なObjective-C / Swift混在環境でのモジュール設計</li>
+<li>実装だけでなく、運用安全性やフォールバックまで含めた設計思考</li>
+</ul></article>
+
+  
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/work/wolt-cart-entry-points/" class="case-study-next-row">
+      <span class="case-study-next-title">カート・チェックアウト導線の改善でサブスク転換率を高める</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

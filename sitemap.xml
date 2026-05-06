@@ -43,6 +43,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/work/smartnews-smartview-v2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/work/tags/a-b-testing/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/a-b-testing/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/a-b-testing/"/>
@@ -52,6 +58,18 @@
     <loc>https://krisbaker.com/work/tags/api-design/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/api-design/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/api-design/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/work/tags/architecture/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/architecture/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/architecture/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/architecture/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/work/tags/feature-flags/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/feature-flags/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/feature-flags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/feature-flags/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/work/tags/growth/</loc>
@@ -65,10 +83,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/internal-tooling/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/work/tags/rendering/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/rendering/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/rendering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/rendering/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/work/tags/subscription/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/subscription/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/subscription/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/subscription/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/work/tags/swift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/swift/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/swift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/swift/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/work/tags/telemetry/</loc>
@@ -154,6 +184,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/work/smartnews-smartview-v2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/work/tags/a-b-testing/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/a-b-testing/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/a-b-testing/"/>
@@ -164,16 +200,40 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/api/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/work/tags/architecture/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/architecture/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/architecture/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/architecture/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/work/tags/feature-flags/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/feature-flags/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/feature-flags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/feature-flags/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/work/tags/growth/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/growth/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/growth/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/growth/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/work/tags/rendering/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/rendering/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/rendering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/rendering/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/work/tags/subscription/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/subscription/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/subscription/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/subscription/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/work/tags/swift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/tags/swift/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/tags/swift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/tags/swift/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/work/tags/websocket/</loc>
