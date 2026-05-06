@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="en" href="/posts/">
     <link rel="alternate" hreflang="ja" href="/ja/posts/">
     <link rel="alternate" hreflang="x-default" href="/posts/">
-    
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
@@ -46,7 +46,7 @@
     <header class="top-bar">
   <div class="container top-bar-row">
     <a href="/ja/" class="top-brand">
-      <span class="top-brand-mark">K</span>
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
         <span class="top-brand-sub">iOS · グロース · 東京</span>
@@ -54,16 +54,16 @@
     </a>
     <nav class="top-nav">
       <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
-      <a href="/posts/" class="nav-link lang-switch" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a>
+      <span class="lang-switch-group"><a href="/posts/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JA</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
     </nav>
   </div>
 </header>
 
-<main class="container writing-page page-shell">
+<main class="container page-shell" style="padding-top: var(--page-padding-top);">
   <p class="eyebrow" style="margin-bottom: 18px;">03 · 記事</p>
-  <h1 class="h1">現役エンジニアのメモ</h1>
-  <p class="body-lg writing-page-lead">プロダクトやツール、AIなど、試行錯誤の途中でいま気になっていることを書いています。</p>
+  <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">現役エンジニアのメモ</h1>
+  <p class="body-lg" style="max-width: 640px; margin: 0 0 56px;">プロダクトやツール、AIなど、試行錯誤の途中でいま気になっていることを書いています。</p>
   <div><a href="/ja/posts/jpresume-japanese-resume-tool/" class="post-list-item">
   <p class="post-list-meta">
     <span>2026.04.20</span>

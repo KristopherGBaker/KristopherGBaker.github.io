@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="en" href="/work/wolt-long-distance-delivery/">
     <link rel="alternate" hreflang="ja" href="/ja/work/wolt-long-distance-delivery/">
     <link rel="alternate" hreflang="x-default" href="/work/wolt-long-distance-delivery/">
-    
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
@@ -46,7 +46,7 @@
     <header class="top-bar">
   <div class="container top-bar-row">
     <a href="/" class="top-brand">
-      <span class="top-brand-mark">K</span>
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
         <span class="top-brand-sub">iOS · Growth · Tokyo</span>
@@ -54,7 +54,7 @@
     </a>
     <nav class="top-nav">
       <a href="/work/" class="nav-link">Work</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
-      <a href="/ja/work/wolt-long-distance-delivery/" class="nav-link lang-switch" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JA</a>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/work/wolt-long-distance-delivery/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JA</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
     </nav>
   </div>
