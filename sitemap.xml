@@ -25,6 +25,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/work/wolt-telemetry-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/work/wolt-cart-entry-points/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/"/>
@@ -35,12 +41,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-long-distance-delivery/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-long-distance-delivery/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-long-distance-delivery/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/work/wolt-telemetry-viewer/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/work/smartnews-smartview-v2/</loc>
@@ -190,6 +190,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/work/wolt-telemetry-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/work/wolt-cart-entry-points/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/"/>
@@ -200,12 +206,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-long-distance-delivery/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-long-distance-delivery/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-long-distance-delivery/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/work/wolt-telemetry-viewer/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/work/smartnews-smartview-v2/</loc>

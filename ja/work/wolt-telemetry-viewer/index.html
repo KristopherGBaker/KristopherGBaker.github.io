@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</title>
-    <meta name="description" content="iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。">
+    <title>プロダクト改善を速く、確信を持って進めるためのテレメトリツール</title>
+    <meta name="description" content="プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
-    <meta property="og:title" content="プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築">
-    <meta property="og:description" content="iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。">
+    <meta property="og:title" content="プロダクト改善を速く、確信を持って進めるためのテレメトリツール">
+    <meta property="og:description" content="プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-telemetry-viewer/">
@@ -53,7 +53,7 @@
       <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
-        <span class="top-brand-sub">iOS · グロース · 東京</span>
+        <span class="top-brand-sub">モバイル · ツール · AIワークフロー</span>
       </span>
     </a>
     <nav class="top-nav">
@@ -79,8 +79,8 @@
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築</h1>
-  <p class="body-lg case-study-blurb">iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたリアルタイム・テレメトリビューアを開発。従来のアプリ内フルスクリーンビューアを置き換え、計測（インストルメンテーション）作業のスピードと確実性を向上。</p>
+  <h1 class="h1 case-study-title">プロダクト改善を速く、確信を持って進めるためのテレメトリツール</h1>
+  <p class="body-lg case-study-blurb">プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。</p>
   <p class="case-study-meta">約2分</p>
 
   <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/macos/" class="tag-chip">macOS</a><a href="/ja/work/tags//" class="tag-chip">内製ツール</a><a href="/ja/work/tags//" class="tag-chip">テレメトリ</a><a href="/ja/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
@@ -98,7 +98,7 @@
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="プロダクト改善の速度を高めるリアルタイム・テレメトリビューアの構築"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="プロダクト改善を速く、確信を持って進めるためのテレメトリツール"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
@@ -108,21 +108,21 @@
 
 
   <article class="prose case-study-prose"><h2 id="section">背景</h2>
-<p>Woltでは、開発中に分析イベント（テレメトリ）を確認する手段が限られており、アプリ内のフルスクリーンビューアに依存していました。検索やフィルタ機能がなく、確認作業には時間がかかっていました。</p>
+<p>Woltでは、開発中に分析イベント（テレメトリ）を確認する手段が限られており、アプリ内のフルスクリーンビューアに依存していました。検索やフィルタ機能がなく、計測が正しいかどうかを確信するまでに時間がかかっていました。</p>
 <h2 id="section-2">課題</h2>
-<p>この状況では、エンジニアが以下の作業を効率的に行うことが難しくなっていました。</p>
+<p>この状況では、エンジニアやプロダクトチームが以下の作業を効率的に行うことが難しくなっていました。</p>
 <ul>
 <li>新しいイベントの検証</li>
 <li>不具合のデバッグ</li>
-<li>計測を伴う機能を安心してリリースすること</li>
+<li>計測を伴う機能を安心してリリースし、評価すること</li>
 </ul>
 <h2 id="section-3">アプローチ</h2>
-<p>iOSアプリからイベントをローカルのデスクトップクライアントへストリーミングする、テレメトリビューアを設計・開発しました。</p>
+<p>iOSアプリからイベントをローカルのデスクトップクライアントへストリーミングする、テレメトリビューアを設計・開発しました。目的は単に見やすいビューアを作ることではなく、プロダクトの意図、計測、リリース判断の間にあるループを短くすることでした。</p>
 <p>主な構成要素は以下です。</p>
 <ul>
 <li>iOSアプリからのWebSocketによるローカルストリーミング</li>
 <li>検索・フィルタが可能なデスクトップアプリのイベントビュー</li>
-<li>バックエンドへ送信されるペイロードの完全な可視化</li>
+<li>バックエンドへ送信されるペイロードを、人がすばやく確認できる形で完全に可視化</li>
 </ul>
 <p>導入は段階的に進めました。</p>
 <ul>
@@ -143,9 +143,9 @@
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/work/smartnews-smartview-v2/" class="case-study-next-row">
-      <span class="case-study-next-title">フィーチャーフラグを用いた記事抽出システムの安全な再構築</span>
-      <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
+    <a href="/ja/work/wolt-cart-entry-points/" class="case-study-next-row">
+      <span class="case-study-next-title">カート・チェックアウト導線の改善でサブスク転換率を高める</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>
 </main>

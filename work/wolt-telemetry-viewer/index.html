@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Building a real-time telemetry viewer to improve product iteration speed</title>
-    <meta name="description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <title>Building a telemetry tool for faster, more confident product iteration</title>
+    <meta name="description" content="A leverage system for product iteration: real-time app telemetry streamed to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app viewer and made instrumentation work faster and more trustworthy across teams.">
     <link rel="canonical" href="https://krisbaker.com/work/wolt-telemetry-viewer/">
-    <meta property="og:title" content="Building a real-time telemetry viewer to improve product iteration speed">
-    <meta property="og:description" content="A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.">
+    <meta property="og:title" content="Building a telemetry tool for faster, more confident product iteration">
+    <meta property="og:description" content="A leverage system for product iteration: real-time app telemetry streamed to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app viewer and made instrumentation work faster and more trustworthy across teams.">
     <meta property="og:url" content="https://krisbaker.com/work/wolt-telemetry-viewer/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-telemetry-viewer/">
@@ -53,7 +53,7 @@
       <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
-        <span class="top-brand-sub">iOS · Growth · Tokyo</span>
+        <span class="top-brand-sub">Mobile · Tooling · AI workflows</span>
       </span>
     </a>
     <nav class="top-nav">
@@ -79,9 +79,9 @@
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Building a real-time telemetry viewer to improve product iteration speed</h1>
-  <p class="body-lg case-study-blurb">A real-time telemetry viewer that streams events from the iOS app to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app fullscreen viewer and unlocked faster, more confident instrumentation work across teams.</p>
-  <p class="case-study-meta">1 min read</p>
+  <h1 class="h1 case-study-title">Building a telemetry tool for faster, more confident product iteration</h1>
+  <p class="body-lg case-study-blurb">A leverage system for product iteration: real-time app telemetry streamed to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app viewer and made instrumentation work faster and more trustworthy across teams.</p>
+  <p class="case-study-meta">2 min read</p>
 
   <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/macos/" class="tag-chip">macOS</a><a href="/work/tags/internal-tooling/" class="tag-chip">Internal tooling</a><a href="/work/tags/telemetry/" class="tag-chip">Telemetry</a><a href="/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
 
@@ -98,7 +98,7 @@
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="Building a real-time telemetry viewer to improve product iteration speed"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="Building a telemetry tool for faster, more confident product iteration"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
@@ -108,24 +108,24 @@
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome, relying on a full-screen in-app viewer with no search or filtering.</p>
+<p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome. Engineers relied on a full-screen in-app viewer with no search or filtering, which made instrumentation harder to trust.</p>
 <h2 id="the-problem">The problem</h2>
-<p>This made it difficult for engineers to:</p>
+<p>This made it difficult for engineers and product teams to:</p>
 <ul>
 <li>validate new events</li>
 <li>debug issues</li>
-<li>confidently ship instrumented features</li>
+<li>confidently ship and evaluate instrumented features</li>
 </ul>
 <h2 id="approach">Approach</h2>
 <video autoplay muted playsinline controls style="display: block; width: 880px; max-width: 100%; margin: 0 auto;">
   <source src="/work/wolt-telemetry-viewer/telemetry-viewer-demo.mp4" type="video/mp4">
 </video>
-<p>I designed and built a telemetry viewer that streams events from the app to a local desktop client.</p>
+<p>I designed and built a telemetry viewer that streams events from the app to a local desktop client. The goal was not just a nicer viewer. It was a small leverage system for shortening the loop between product intent, instrumentation, and release confidence.</p>
 <p>Key elements:</p>
 <ul>
 <li>local WebSocket-based streaming from the iOS app</li>
 <li>a desktop app with searchable, filterable event views</li>
-<li>full visibility into payloads sent to backend systems</li>
+<li>full visibility into payloads sent to backend systems, in a form humans could inspect quickly</li>
 </ul>
 <p>I introduced it gradually:</p>
 <ul>
@@ -137,7 +137,7 @@
 <ul>
 <li>Significantly improved speed and confidence when validating telemetry</li>
 <li>Adopted by multiple engineers across teams</li>
-<li>Enabled other initiatives (e.g. privacy-related telemetry work)</li>
+<li>Enabled other initiatives, including privacy-related telemetry work</li>
 </ul>
 <h2 id="my-role">My role</h2>
 <p>Self-driven initiative that I discovered a need for and developed from concept to adoption across teams.</p></article>
@@ -146,9 +146,9 @@
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
-    <a href="/work/smartnews-smartview-v2/" class="case-study-next-row">
-      <span class="case-study-next-title">Rebuilding article extraction safely behind feature flags</span>
-      <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
+    <a href="/work/wolt-cart-entry-points/" class="case-study-next-row">
+      <span class="case-study-next-title">Improving subscription conversion through cart and checkout entry points</span>
+      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>
 </main>
