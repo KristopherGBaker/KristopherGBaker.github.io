@@ -7,6 +7,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/posts/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/posts/jpresume-japanese-resume-tool/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/posts/jpresume-japanese-resume-tool/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/"/>
@@ -170,6 +176,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/posts/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/posts/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/posts/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</loc>

@@ -16,15 +16,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
 <script type="module">
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
   window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
     mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
 <script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
@@ -131,22 +139,22 @@
       <h2 class="h2">Recent writing</h2>
       <a href="/posts/" class="read-link">Archive <span class="arrow" aria-hidden="true">→</span></a>
     </div>
-    <div class="recent-list"><a href="/posts/jpresume-japanese-resume-tool/" class="post-list-item">
+    <div class="recent-list"><a href="/posts/shikisha-building-llm-workflows-in-swift/" class="post-list-item">
+  <p class="post-list-meta">
+    <span>2026.06.02</span>
+    
+    <span class="post-list-meta-sep">·</span><span>8 min read</span>
+  </p>
+  <h3 class="post-list-title">Shikisha: Building LLM Workflows in Swift</h3>
+  
+</a>
+<a href="/posts/jpresume-japanese-resume-tool/" class="post-list-item">
   <p class="post-list-meta">
     <span>2026.04.20</span>
     
     <span class="post-list-meta-sep">·</span><span>6 min read</span>
   </p>
   <h3 class="post-list-title">JPResume: Turning a Western Resume Into a Japanese One</h3>
-  
-</a>
-<a href="/posts/remote-dev-setup-with-real-constraints/" class="post-list-item">
-  <p class="post-list-meta">
-    <span>2026.04.01</span>
-    
-    <span class="post-list-meta-sep">·</span><span>6 min read</span>
-  </p>
-  <h3 class="post-list-title">Remote Dev Setup With Real Constraints</h3>
   
 </a>
 </div>

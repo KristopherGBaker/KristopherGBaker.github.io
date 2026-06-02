@@ -16,15 +16,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
 <script type="module">
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
   window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
     mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
   });
 </script>
 <script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
 <script defer src="/assets/js/code-copy.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
@@ -73,7 +81,16 @@
   <p class="eyebrow" style="margin-bottom: 18px;">03 · Writing</p>
   <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">Notes from a working engineer.</h1>
   <p class="body-lg" style="max-width: 640px; margin: 0 0 56px;">The messy middle: iOS, product systems, tooling, AI-assisted work, and whatever I’m currently trying to make useful.</p>
-  <div><a href="/posts/jpresume-japanese-resume-tool/" class="post-list-item">
+  <div><a href="/posts/shikisha-building-llm-workflows-in-swift/" class="post-list-item">
+  <p class="post-list-meta">
+    <span>2026.06.02</span>
+    
+    <span class="post-list-meta-sep">·</span><span>8 min read</span>
+  </p>
+  <h3 class="post-list-title">Shikisha: Building LLM Workflows in Swift</h3>
+  
+</a>
+<a href="/posts/jpresume-japanese-resume-tool/" class="post-list-item">
   <p class="post-list-meta">
     <span>2026.04.20</span>
     
