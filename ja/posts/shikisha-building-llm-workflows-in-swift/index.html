@@ -2,14 +2,15 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Shikisha: Building LLM Workflows in Swift</title>
-    <meta name="description" content="Shikisha: Building LLM Workflows in Swift">
+    <title>Shikisha：SwiftでLLMワークフローを作る</title>
+    <meta name="description" content="Shikisha：SwiftでLLMワークフローを作る">
     <link rel="canonical" href="https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/">
-    <meta property="og:title" content="Shikisha: Building LLM Workflows in Swift">
-    <meta property="og:description" content="Shikisha: Building LLM Workflows in Swift">
+    <meta property="og:title" content="Shikisha：SwiftでLLMワークフローを作る">
+    <meta property="og:description" content="Shikisha：SwiftでLLMワークフローを作る">
     <meta property="og:url" content="https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/posts/shikisha-building-llm-workflows-in-swift/">
+    <link rel="alternate" hreflang="ja" href="/ja/posts/shikisha-building-llm-workflows-in-swift/">
     <link rel="alternate" hreflang="x-default" href="/posts/shikisha-building-llm-workflows-in-swift/">
     <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
       (function(){
@@ -79,7 +80,7 @@
     </a>
     <nav class="top-nav">
       <div class="top-nav-links" id="primary-nav">
-        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
       <span class="lang-switch-group"><a href="/posts/shikisha-building-llm-workflows-in-swift/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
@@ -95,52 +96,52 @@
   <p class="post-meta">
     <span>2026.06.02</span>
     
-     · <span>約8分</span>
+     · <span>約11分</span>
   </p>
-  <h1 class="h1 post-title">Shikisha: Building LLM Workflows in Swift</h1>
+  <h1 class="h1 post-title">Shikisha：SwiftでLLMワークフローを作る</h1>
   
   <div class="post-body">
     
     <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#the-problem-was-the-glue">The Problem Was the Glue</a></li><li class="toc-item toc-level-2"><a href="#a-swift-shape-for-langchain-ideas">A Swift Shape for LangChain Ideas</a></li><li class="toc-item toc-level-2"><a href="#what-is-included-so-far">What Is Included So Far</a><ol class="toc-sublist"><li class="toc-item toc-level-3"><a href="#models-and-prompts">Models and Prompts</a></li><li class="toc-item toc-level-3"><a href="#retrieval-and-indexing">Retrieval and Indexing</a></li><li class="toc-item toc-level-3"><a href="#agents-and-workflows">Agents and Workflows</a></li><li class="toc-item toc-level-3"><a href="#observability-and-testing">Observability and Testing</a></li></ol></li><li class="toc-item toc-level-2"><a href="#the-documentation-is-part-of-the-project">The Documentation Is Part of the Project</a></li><li class="toc-item toc-level-2"><a href="#where-i-am-already-using-it">Where I Am Already Using It</a></li><li class="toc-item toc-level-2"><a href="#what-still-feels-early">What Still Feels Early</a></li><li class="toc-item toc-level-2"><a href="#what-changed">What Changed</a></li>
+    <li class="toc-item toc-level-2"><a href="#section">問題はグルーコードだった</a></li><li class="toc-item toc-level-2"><a href="#langchain-swift">LangChain のアイデアに、Swiftらしい形を</a></li><li class="toc-item toc-level-2"><a href="#section-2">いまのところ含まれているもの</a><ol class="toc-sublist"><li class="toc-item toc-level-3"><a href="#section-3">モデルとプロンプト</a></li><li class="toc-item toc-level-3"><a href="#section-4">リトリーバルとインデックス</a></li><li class="toc-item toc-level-3"><a href="#section-5">エージェントとワークフロー</a></li><li class="toc-item toc-level-3"><a href="#section-6">可観測性とテスト</a></li></ol></li><li class="toc-item toc-level-2"><a href="#section-7">ドキュメントもプロジェクトの一部</a></li><li class="toc-item toc-level-2"><a href="#section-8">すでに使っているところ</a></li><li class="toc-item toc-level-2"><a href="#section-9">まだ早いと感じるところ</a></li><li class="toc-item toc-level-2"><a href="#section-10">何が変わったか</a></li>
   </ol>
 </nav>
 
-    <article class="prose"><p>I have been building more AI-assisted tools in Swift lately, and I kept running into the same awkward edge.</p>
-<p>Calling an LLM from Swift is easy.</p>
-<p>Keeping the surrounding workflow understandable and maintainable is the hard part.</p>
-<p>The hard part starts once the feature becomes an actual system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
-<p>That is why I started building <a href="https://github.com/KristopherGBaker/Shikisha">Shikisha</a>, a Swift-native take on LangChain-style workflows for macOS and iOS. It is still early, currently <code>0.1.0</code>, but it has reached the point where I am using it in real projects instead of just sketching examples around it.</p>
-<h2 id="the-problem-was-the-glue">The Problem Was the Glue</h2>
-<p>Most LLM demos begin in a reasonable place: send a few messages, get text back, print the answer.</p>
-<p>That is enough for a toy chatbot. It is not enough for the kind of tools I have been building.</p>
-<p><a href="https://github.com/KristopherGBaker/JPResume">JPResume</a>, for example, turns a western resume into Japanese 履歴書 and 職務経歴書 formats. The model is useful there, but only in certain places. I still want deterministic parsing where possible. I want validation between stages. I want structured JSON back from the model, not a nice paragraph that looks plausible. I want to inspect intermediate artifacts before they become a PDF I might send to a company.</p>
-<p>Once a tool has those constraints, the model call becomes one step in a larger system.</p>
-<p>Before Shikisha, I could still build that system in Swift, but each project carried its own small pile of glue code:</p>
+    <article class="prose"><p>最近、SwiftでAI支援のツールをいくつも作るようになり、同じような問題に何度も突き当たっていました。</p>
+<p>SwiftからLLMを呼ぶこと自体は簡単です。</p>
+<p>難しいのは、その周りのワークフローを分かりやすく、保守しやすい形に保つことです。</p>
+<p>本当に難しくなるのは、その機能が実際のシステムになったときです。プロンプト、構造化出力、リトライ、ストリーミング、ツール、リトリーバル、メモリ、テスト、そしてAppleプラットフォームのアプリとして自然に振る舞うUI。</p>
+<p>そこで作り始めたのが <a href="https://github.com/KristopherGBaker/Shikisha">Shikisha</a> です。macOSとiOS向けに、LangChain風のワークフローをSwiftらしく構築するためのライブラリです。まだ早い段階で、現在は <code>0.1.0</code> ですが、まわりに例を書いて試すだけでなく、実際のプロジェクトで使う段階まで来ました。</p>
+<h2 id="section">問題はグルーコードだった</h2>
+<p>たいていのLLMのデモは、まっとうなところから始まります。いくつかメッセージを送り、テキストを受け取り、答えを表示する。</p>
+<p>おもちゃのチャットボットならそれで十分です。でも、私が作ってきた種類のツールには足りません。</p>
+<p>たとえば <a href="https://github.com/KristopherGBaker/JPResume">JPResume</a> は、英文レジュメを日本式の履歴書と職務経歴書に変換します。そこでモデルは役立ちますが、役立つのは特定の箇所だけです。可能なところでは決定論的なパースをしたい。ステージの間で検証したい。モデルからは、それらしく見える段落ではなく、構造化されたJSONを返してほしい。会社に送るかもしれないPDFになる前に、途中の生成物を確認したい。</p>
+<p>ツールにそうした制約があると、モデル呼び出しはより大きなシステムの中の一つのステップになります。</p>
+<p>Shikisha 以前も、そのシステムをSwiftで作ることはできましたが、プロジェクトごとに小さなグルーコードの山を抱えていました。</p>
 <ul>
-<li>one-off provider wrappers</li>
-<li>handwritten JSON parsing</li>
-<li>ad hoc retry logic</li>
-<li>duplicated streaming adapters</li>
-<li>separate mock implementations for tests</li>
+<li>使い捨てのプロバイダーラッパー</li>
+<li>手書きのJSONパース</li>
+<li>その場しのぎのリトライ処理</li>
+<li>重複したストリーミングのアダプター</li>
+<li>テスト用の個別のモック実装</li>
 </ul>
-<p>None of it was individually hard, but it made each new project feel like starting over.</p>
-<p>With a shared workflow shape, those pieces become composable parts instead of per-project scaffolding.</p>
-<p>I wanted the same basic vocabulary to work across small chains, RAG pipelines, tool-using agents, and app UI.</p>
-<h2 id="a-swift-shape-for-langchain-ideas">A Swift Shape for LangChain Ideas</h2>
-<p>Shikisha borrows ideas from LangChain, but the implementation is written for Swift rather than translated line by line.</p>
-<p>Most AI tooling ecosystems assume Python. That works well for experiments and backend services, but Apple-platform apps eventually need the workflow to coexist with SwiftUI, structured concurrency, app state, testing, sandboxing, and platform-native APIs.</p>
-<p>I also wanted workflows that could live directly inside Apple-platform apps instead of assuming a separate Python orchestration backend.</p>
-<p>That is the part I wanted in Swift.</p>
-<p>A way to make LLM workflows feel like normal typed application code instead of a separate scripting layer bolted onto the side.</p>
-<p>The core idea is one protocol:</p>
+<p>どれも単体では難しくありませんが、新しいプロジェクトのたびに、また一からやり直す感覚になっていました。</p>
+<p>共通のワークフローの形があれば、それらの部品は、プロジェクトごとの足場ではなく、組み合わせ可能なパーツになります。</p>
+<p>小さなチェーン、RAGパイプライン、ツールを使うエージェント、アプリのUI。これらすべてで、同じ基本的な語彙が使えるようにしたかったのです。</p>
+<h2 id="langchain-swift">LangChain のアイデアに、Swiftらしい形を</h2>
+<p>Shikisha は LangChain からアイデアを借りていますが、実装は単なる移植ではなく、Swiftに合わせて設計しています。</p>
+<p>AIツールのエコシステムの多くはPythonを前提としています。実験やバックエンドのサービスにはそれでうまくいきますが、iOS/macOSアプリでは、やがてワークフローが SwiftUI、Structured Concurrency、アプリの状態、テスト、サンドボックス、プラットフォーム固有のAPIと共存する必要が出てきます。</p>
+<p>また、別途Pythonのオーケストレーション用バックエンドを前提とするのではなく、Apple向けアプリの中に直接置けるワークフローがほしかったのです。</p>
+<p>それが、Swiftでほしかった部分です。</p>
+<p>LLMのワークフローを、横に後付けした別のスクリプト層ではなく、普通の型付きのアプリケーションコードのように感じさせる方法です。</p>
+<p>中心となるアイデアは、ひとつのプロトコルです。</p>
 <pre><code class="language-swift">public protocol Runnable&lt;Input, Output&gt;: Sendable {
     associatedtype Input: Sendable
     associatedtype Output: Sendable
     func invoke(_ input: Input) async throws -&gt; Output
 }</code></pre>
-<p>Prompt templates, chat models, output parsers, retrievers, and whole chains can all be <code>Runnable</code>. That means a simple prompt-model-parser pipeline can read top to bottom:</p>
+<p>プロンプトテンプレート、チャットモデル、出力パーサー、リトリーバー、そしてチェーン全体まで、すべてが <code>Runnable</code> になれます。つまり、単純な「プロンプト→モデル→パーサー」のパイプラインを、上から下へ読める形で書けます。</p>
 <pre><code class="language-swift">let chain = ChatPromptTemplate.fromTuples([
     .system("Answer concisely."),
     .human("{question}")
@@ -149,8 +150,8 @@
 .pipe(StringOutputParser())
 
 let answer = try await chain.invoke(["question": "What is Swift Concurrency?"])</code></pre>
-<p>The important part is not the operator. It is the contract.</p>
-<p>If a prompt produces messages, and a model accepts messages, the compiler can check that connection. If a parser expects an <code>AIMessage</code>, the model has to provide one. When a chain works, it can be invoked, batched, retried, wrapped with callbacks, or tested with a fake model in the same style as any smaller piece.</p>
+<p>大事なのは演算子ではありません。コントラクトです。</p>
+<p>プロンプトがメッセージを生成し、モデルがメッセージを受け取るなら、その接続をコンパイラが検査できます。パーサーが <code>AIMessage</code> を期待するなら、モデルはそれを返さなければなりません。チェーンが動けば、それを呼び出し、バッチ実行し、リトライし、コールバックで包み、あるいはフェイクのモデルでテストできます。どれも、より小さな部品とまったく同じやり方でできます。</p>
 <pre class="mermaid">flowchart LR
     prompt[Prompt template]
     model[Chat model]
@@ -169,51 +170,51 @@ let answer = try await chain.invoke(["question": "What is Swift Concurrency?"])<
     callbacks -.-&gt; model
     callbacks -.-&gt; tools
     callbacks -.-&gt; stateGraph</pre>
-<p>Shikisha also uses the Swift tools I would expect to reach for in 2026: structured concurrency, <code>Sendable</code> types, <code>AsyncSequence</code> streaming, <code>Codable</code> shapes for provider payloads, and Swift Package Manager as the normal installation path.</p>
-<h2 id="what-is-included-so-far">What Is Included So Far</h2>
-<p>The current release covers the pieces I keep needing.</p>
-<h3 id="models-and-prompts">Models and Prompts</h3>
+<p>Shikisha は、2026年に当然手に取るであろうSwiftの道具立ても使っています。Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、プロバイダーのペイロード用の Codable な形、そして通常のインストール経路としての Swift Package Manager です。</p>
+<h2 id="section-2">いまのところ含まれているもの</h2>
+<p>現在のリリースは、私が繰り返し必要としてきた部品をカバーしています。</p>
+<h3 id="section-3">モデルとプロンプト</h3>
 <ul>
-<li>chat model adapters for OpenAI, Anthropic, Google Gemini, and Ollama</li>
-<li>prompt templates</li>
-<li>output parsers, including structured output helpers</li>
+<li>OpenAI、Anthropic、Google Gemini、Ollama のチャットモデルアダプター</li>
+<li>プロンプトテンプレート</li>
+<li>構造化出力のヘルパーを含む出力パーサー</li>
 </ul>
-<h3 id="retrieval-and-indexing">Retrieval and Indexing</h3>
+<h3 id="section-4">リトリーバルとインデックス</h3>
 <ul>
-<li>document loaders, text splitters, embeddings, and vector stores</li>
-<li>retrievers for RAG, including vector, BM25, hybrid, MMR, multi-query, parent-document, time-weighted, self-querying, and contextual compression</li>
-<li>incremental indexing so changed documents do not always require re-embedding everything</li>
+<li>ドキュメントローダー、テキストスプリッター、埋め込み（エンベディング）、ベクトルストア</li>
+<li>RAG向けのリトリーバー（ベクトル、BM25、ハイブリッド、MMR、マルチクエリ、親ドキュメント、時間加重、セルフクエリ、文脈圧縮など）</li>
+<li>変更されたドキュメントのために毎回すべてを再エンベディングせずに済む、インクリメンタルなインデックス更新</li>
 </ul>
-<h3 id="agents-and-workflows">Agents and Workflows</h3>
+<h3 id="section-5">エージェントとワークフロー</h3>
 <ul>
-<li>memory for conversations</li>
-<li>typed tools and a tool-calling agent loop</li>
-<li><code>StateGraph</code> for cyclic or stateful workflows</li>
+<li>会話のためのメモリ</li>
+<li>型付きのツールと、ツール呼び出し型のエージェントループ</li>
+<li>循環的・状態を持つワークフローのための <code>StateGraph</code></li>
 </ul>
-<h3 id="observability-and-testing">Observability and Testing</h3>
+<h3 id="section-6">可観測性とテスト</h3>
 <ul>
-<li>callbacks for tracing, usage, cost tracking, and other side effects</li>
-<li><code>FakeChatModel</code> and local embeddings for offline examples and tests</li>
+<li>トレース、使用量、コスト追跡、その他の副作用のためのコールバック</li>
+<li>オフラインのサンプルやテストのための <code>FakeChatModel</code> とローカルの埋め込み</li>
 </ul>
-<p>That list sounds large, but the useful thing is that the pieces share a shape. A RAG chain and a basic one-question prompt are not separate worlds. They are different arrangements of the same few ideas.</p>
-<p>You can run the example suite without an API key:</p>
+<p>一覧にすると大きく見えますが、役に立つのは、これらの部品が同じ形を共有していることです。RAGのチェーンと、ひとつの質問をする基本的なプロンプトは、別世界ではありません。同じ少数のアイデアの、並べ方の違いにすぎません。</p>
+<p>APIキーなしで、サンプル一式を実行できます。</p>
 <pre><code class="language-bash">swift run ShikishaExamples
 swift run ShikishaExamples basicChain
 swift run ShikishaExamples ragPipeline</code></pre>
-<p>Tests and demos should not depend on a live provider whenever the behavior under test is the workflow itself.</p>
-<h2 id="the-documentation-is-part-of-the-project">The Documentation Is Part of the Project</h2>
-<p>I recently added full <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">DocC documentation and tutorials</a>, which changed how the project feels.</p>
-<p>The docs now include conceptual guides for Swift developers who are new to LLM app patterns, plus feature articles for chat models, prompts, output parsers, structured output, documents, embeddings, retrievers, memory, agents, graphs, indexing, observability, and resilience.</p>
-<p>The tutorials are more practical. They walk through building:</p>
+<p>テストやデモは、検証対象がワークフローそのものであるなら、稼働中のプロバイダーに依存すべきではありません。</p>
+<h2 id="section-7">ドキュメントもプロジェクトの一部</h2>
+<p>最近、本格的な <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">DocC のドキュメントとチュートリアル</a> を追加しました。これでプロジェクトの感触が変わりました。</p>
+<p>ドキュメントには、LLMアプリのパターンに不慣れなSwift開発者向けの概念ガイドに加えて、チャットモデル、プロンプト、出力パーサー、構造化出力、ドキュメント、埋め込み、リトリーバー、メモリ、エージェント、グラフ、インデックス、可観測性、回復力（レジリエンス）といった機能ごとの記事を用意しました。</p>
+<p>チュートリアルはより実践的です。次のものを作る手順を追っていきます。</p>
 <ul>
-<li>a streaming chatbot with memory</li>
-<li>a RAG app that answers from your own documents</li>
-<li>a tool-using agent</li>
-<li>a small coding agent with file tools</li>
-<li>a universal SwiftUI app around that agent</li>
+<li>メモリ付きのストリーミングチャットボット</li>
+<li>自分のドキュメントから答えるRAGアプリ</li>
+<li>ツールを使うエージェント</li>
+<li>ファイル操作ツールを備えた小さなコーディングエージェント</li>
+<li>そのエージェントを組み込んだユニバーサルなSwiftUIアプリ</li>
 </ul>
-<p>The coding-agent tutorial is a good example of why I wanted this framework in Swift. A surprising amount of an AI coding assistant is just a model, a few file tools, and a loop. The details still matter: sandbox paths, typed tool arguments, tool specs, memory, callbacks, and deciding when the model can act. But once those pieces have names, the workflow is easier to reason about.</p>
-<p>Even the agent loop stays small enough to read:</p>
+<p>コーディングエージェントのチュートリアルは、このフレームワークをSwiftでほしかった理由のよい例です。AIのコーディングアシスタントは、驚くほどの部分が、モデルと少しのファイル操作ツールとループだけでできています。もちろん細部は重要です。サンドボックスのパス、型付きのツール引数、ツールの仕様、メモリ、コールバック、そしてモデルがいつ動いてよいかの判断。ですが、それらの部品に名前がつけば、ワークフローは考えやすくなります。</p>
+<p>エージェントのループでさえ、読める程度に小さく収まります。</p>
 <pre><code class="language-swift">let agent = ToolCallingAgent(
     model: model,
     tools: [readFileTool, editFileTool],
@@ -224,33 +225,33 @@ let result = try await agent.run([
     SystemMessage(content: "You are a coding assistant working in this project."),
     HumanMessage(content: "Summarize the TODOs in this project.")
 ])</code></pre>
-<p>It also becomes easier to move from a command-line experiment into a SwiftUI app without rewriting the whole mental model in another language.</p>
-<h2 id="where-i-am-already-using-it">Where I Am Already Using It</h2>
-<p>JPResume is the first public project where Shikisha fits naturally.</p>
-<p>The resume pipeline needs model calls, structured output, validation, and reviewable intermediate files. Shikisha gives me a cleaner way to express those stages without every stage owning its own provider wrapper or parser convention. It does not remove the hard product decisions, like what the model should be allowed to infer, or how strict validation should be. It just gives the workflow a better foundation.</p>
-<p>I am also using Shikisha in another project that I will write about later. That project pushed on a different side of the library: agent behavior, tools, and app integration. I am not ready to describe it yet, but it has been useful as a second check that Shikisha is not only shaped around one resume tool.</p>
-<p>That is usually the moment when abstractions start proving themselves. Not when the first demo works, but when the same abstractions survive a second project with different pressure.</p>
-<h2 id="what-still-feels-early">What Still Feels Early</h2>
-<p>Shikisha is not a mature ecosystem. It is a young Swift package, and the API may still move as the real use cases sharpen.</p>
-<p>There are also places where the older approach is still fine. If all you need is one provider call behind one button, adding a framework might be more structure than the feature deserves. A small direct <code>URLSession</code> call can be the right answer.</p>
-<p>Shikisha starts to matter when the workflow becomes more than the call: when you need a repeatable chain, retrieval, structured output, tool execution, memory, tracing, retries, streaming, or tests that should run without hitting a provider.</p>
-<p>I am not trying to make every AI feature look elaborate. I am trying to make the elaborate ones less fragile.</p>
-<h2 id="what-changed">What Changed</h2>
-<p>The interesting part for me is not that Shikisha can call models.</p>
-<p>It is that the same abstractions now survive across:</p>
+<p>コマンドラインでの実験から SwiftUI アプリへ移るときも、頭の中のモデル全体を別の言語で書き直さずに済むようになります。</p>
+<h2 id="section-8">すでに使っているところ</h2>
+<p>JPResume は、Shikisha が自然に収まる最初の公開プロジェクトです。</p>
+<p>レジュメのパイプラインには、モデル呼び出し、構造化出力、検証、そして見直せる中間ファイルが必要です。Shikisha を使うと、各ステージがそれぞれ独自のプロバイダーラッパーやパーサーの流儀を持たなくても、それらのステージをより整理された形で表現できます。とはいえ、難しいプロダクトの判断、たとえばモデルにどこまで推測を許すか、検証をどれだけ厳しくするか、といったことは消えません。あくまで、ワークフローによりよい土台を与えてくれるだけです。</p>
+<p>もう一つ、あとで書く予定の別のプロジェクトでも Shikisha を使っています。そのプロジェクトは、ライブラリの別の側面を試すものでした。エージェントの振る舞い、ツール、アプリへの統合です。まだ説明できる段階ではありませんが、Shikisha が一つのレジュメツールだけに合わせた形になっていないか、という二つ目の確認として役立っています。</p>
+<p>抽象化が本当に機能しているか分かるのは、たいていその瞬間です。最初のデモが動いたときではなく、同じ抽象化が、異なる圧力のかかる二つ目のプロジェクトを生き延びたときです。</p>
+<h2 id="section-9">まだ早いと感じるところ</h2>
+<p>Shikisha は成熟したエコシステムではありません。まだ若いSwiftパッケージで、実際のユースケースがはっきりしてくるにつれて、APIはまだ動くかもしれません。</p>
+<p>従来のやり方のままで十分な場面もあります。ボタンひとつの裏でプロバイダーを一回呼ぶだけなら、フレームワークを足すのは、その機能に見合わないほどの構造かもしれません。小さな <code>URLSession</code> の直接呼び出しが正解、ということもあります。</p>
+<p>Shikisha が意味を持ち始めるのは、ワークフローが呼び出し以上のものになったときです。繰り返し使えるチェーン、リトリーバル、構造化出力、ツールの実行、メモリ、トレース、リトライ、ストリーミング、あるいはプロバイダーに当てずに走らせたいテストが必要になったときです。</p>
+<p>すべてのAI機能を凝って見せたいわけではありません。凝った機能を、より壊れにくくしたいのです。</p>
+<h2 id="section-10">何が変わったか</h2>
+<p>私にとって面白いのは、Shikisha がモデルを呼べることではありません。</p>
+<p>同じ抽象化が、いまや次のすべてを通して生き延びていることです。</p>
 <ul>
-<li>command-line experiments</li>
-<li>SwiftUI apps</li>
-<li>retrieval pipelines</li>
-<li>typed tool execution</li>
-<li>local testing</li>
+<li>コマンドラインでの実験</li>
+<li>SwiftUI アプリ</li>
+<li>リトリーバルのパイプライン</li>
+<li>型付きのツール実行</li>
+<li>ローカルでのテスト</li>
 </ul>
-<p>That is the point where a library starts becoming infrastructure instead of just a demo.</p>
-<p>The documentation is here:</p>
+<p>ライブラリが、単なるデモではなくインフラになり始めるのは、その地点です。</p>
+<p>ドキュメントはこちらです。</p>
 <p><a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a></p>
-<p>The repo is here:</p>
+<p>リポジトリはこちらです。</p>
 <p><a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
-<p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but it is already past the point of being just an experiment.</p></article>
+<p>Swiftでアプリを作っていて、Appleプラットフォームのツールチェーンから離れずにLLMワークフローを足すことに興味があったなら、Shikisha が私の現時点での答えです。まだ早い段階ですが、すでに単なる実験という段階は過ぎています。</p></article>
     <div class="post-footer">
       <a href="/ja/posts/" class="read-link">もっと読む <span class="arrow" aria-hidden="true">→</span></a>
       <a href="mailto:hello@krisbaker.com" class="read-link" data-umami-event="email">メールで返信 <span class="arrow" aria-hidden="true">→</span></a>

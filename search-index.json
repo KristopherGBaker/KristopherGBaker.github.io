@@ -53,6 +53,19 @@
       "title" : "JPResume: Turning a Western Resume Into a Japanese One"
     },
     {
+      "body" : "最近、SwiftでAI支援のツールをいくつも作るようになり、同じような問題に何度も突き当たっていました。 SwiftからLLMを呼ぶこと自体は簡単です。 難しいのは、その周りのワークフローを分かりやすく、保守しやすい形に保つことです。 本当に難しくなるのは、その機能が実際のシステムになったときです。プロンプト、構造化出力、リトライ、ストリーミング、ツール、リトリーバル、メモリ、テスト、そしてAppleプラットフォームのアプリとして自然に振る舞うUI。 そこで作り始めたのが Shikisha です。macOSとiOS向けに、LangChain風のワークフローをSwiftらしく構築するためのライブラリです。まだ早い段階で、現在は 0.1.0 ですが、まわりに例を書いて試すだけでなく、実際のプロジェクトで使う段階まで来ました。 問題はグルーコードだった たいていのLLMのデモは、まっとうなところから始まります。いくつかメッセージを送り、テキストを受け取り、答えを表示する。 おもちゃのチャットボットならそれで十分です。でも、私が作ってきた種類のツールには足りません。 たとえば JPResume は、英文レジュメを日本式の履歴書と職務経歴書に変換します。そこでモデルは役立ちますが、役立つのは特定の箇所だけです。可能なところでは決定論的なパースをしたい。ステージの間で検証したい。モデルからは、それらしく見える段落ではなく、構造化されたJSONを返してほしい。会社に送るかもしれないPDFになる前に、途中の生成物を確認したい。 ツールにそうした制約があると、モデル呼び出しはより大きなシステムの中の一つのステップになります。 Shikisha 以前も、そのシステムをSwiftで作ることはできましたが、プロジェクトごとに小さなグルーコードの山を抱えていました。 使い捨てのプロバイダーラッパー 手書きのJSONパース その場しのぎのリトライ処理 重複したストリーミングのアダプター テスト用の個別のモック実装 どれも単体では難しくありませんが、新しいプロジェクトのたびに、また一からやり直す感覚になっていました。 共通のワークフローの形があれば、それらの部品は、プロジェクトごとの足場ではなく、組み合わせ可能なパーツになります。 小さなチェーン、RAGパイプライン、ツールを使うエージェント、アプリのUI。これらすべてで、同じ基本的な語彙が使えるようにしたかったのです。 LangChain のアイデアに、Swiftらしい形を Shikisha は LangChain からアイデアを借りていますが、実装は単なる移植ではなく、Swiftに合わせて設計しています。 AIツールのエコシステムの多くはPythonを前提としています。実験やバックエンドのサービスにはそれでうまくいきますが、iOS\/m",
+      "categories" : [
+
+      ],
+      "date" : "2026-06-02T12:34:39Z",
+      "slug" : "shikisha-building-llm-workflows-in-swift",
+      "summary" : "",
+      "tags" : [
+
+      ],
+      "title" : "Shikisha：SwiftでLLMワークフローを作る"
+    },
+    {
       "body" : "I have been building more AI assisted tools in Swift lately, and I kept running into the same awkward edge. Calling an LLM from Swift is easy. Keeping the surrounding workflow understandable and maintainable is the hard part. The hard part starts once the feature becomes an actual system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple platform app. That is why I started building Shikisha, a Swift native take on LangChain style workflows for macOS and iOS. It is still early, currently 0.1.0 , but it has reached the point where I am using it in real projects instead of just sketching examples around it. The Problem Was the Glue Most LLM demos begin in a reasonable place: send a few messages, get text back, print the answer. That is enough for a toy chatbot. It is not enough for the kind of tools I have been building. JPResume, for example, turns a western resume into Japanese 履歴書 and 職務経歴書 formats. The model is useful there, but only in certain places. I still want deterministic parsing where possible. I want validation between stages. I want structured JSON back from the model, not a nice paragraph",
       "categories" : [
 

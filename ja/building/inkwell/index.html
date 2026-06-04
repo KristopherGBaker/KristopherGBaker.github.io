@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Inkwell</title>
+    <meta name="description" content="このサイトを動かしているSwift製の静的サイト生成ツール。ブログ用のジェネレーターが、コンテンツコレクション・多言語ルーティング・独自テーマを備えたポートフォリオエンジンへと育ったものです。">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/inkwell/">
+    <meta property="og:title" content="Inkwell">
+    <meta property="og:description" content="このサイトを動かしているSwift製の静的サイト生成ツール。ブログ用のジェネレーターが、コンテンツコレクション・多言語ルーティング・独自テーマを備えたポートフォリオエンジンへと育ったものです。">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/inkwell/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/inkwell/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/inkwell/">
+    <link rel="alternate" hreflang="x-default" href="/building/inkwell/">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOSを土台に · プロダクトシステム · AI支援ワークフロー</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><a href="/building/inkwell/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container building-detail page-shell">
+  <a href="/ja/building/" class="case-study-back">← 制作中へ</a>
+
+  <div class="building-detail-head is-active">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-detail-updated">updated today</span>
+    <a href="https://github.com/KristopherGBaker/inkwell" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <h1 class="h1 building-detail-title">Inkwell</h1>
+  <p class="body-lg building-detail-blurb">このサイトを動かしているSwift製の静的サイト生成ツール。ブログ用のジェネレーターが、コンテンツコレクション・多言語ルーティング・独自テーマを備えたポートフォリオエンジンへと育ったものです。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags//" class="tag-chip">静的サイト</a><a href="/ja/building/tags//" class="tag-chip">ツール</a><a href="/ja/building/tags//" class="tag-chip">オープンソース</a></div>
+
+  <article class="prose building-detail-prose"><p>Inkwellは個人ブログ用のジェネレーターとして始まり、気づけばポートフォリオ全体を動かせるところまで育ちました。このサイトもInkwellが生成しています。実績のケーススタディ、記事、<code>/ja/</code> 以下の多言語ルート、履歴書ページ、そしてこの制作中セクションも。</p>
+<p>自分のジェネレーターを触っていて気に入っているのは、すべての機能にすぐに正直なテストがあることです。変更でサイトが悪くなれば、次に開いたときにすぐ気づきます。</p>
+<p>いま読んでいるこのセクションが、その一番新しい例です。下のアップデートは、それを表示しているのと同じツールで書かれています。</p></article>
+
+  <section class="building-updates">
+    <div class="section-head">
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">3</span></h2>
+    </div>
+    <div class="update-timeline"><a href="/ja/building/inkwell/inkwell-building-section/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.04</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">制作中セクションを、それ自身で投稿</span>
+</a>
+<a href="/ja/building/inkwell/inkwell-bilingual-routes/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.01</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">/ja/ 以下の多言語対応</span>
+</a>
+<a href="/ja/building/inkwell/inkwell-collections-quiet-theme/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.04.30</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">コンテンツコレクションと quiet テーマ</span>
+</a>
+</div>
+  </section>
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/building/shikisha/" class="case-study-next-row">
+      <span class="case-study-next-title">Shikisha</span>
+      <span class="read-link">ケーススタディを読む <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

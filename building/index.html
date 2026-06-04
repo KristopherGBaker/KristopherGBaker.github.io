@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>What I'm building right now.</title>
+    <meta name="description" content="Personal projects and the systems behind them, posted as I go. Smaller than a blog post, closer to the work.">
+    <link rel="canonical" href="https://krisbaker.com/building/">
+    <meta property="og:title" content="What I'm building right now.">
+    <meta property="og:description" content="Personal projects and the systems behind them, posted as I go. Smaller than a blog post, closer to the work.">
+    <meta property="og:url" content="https://krisbaker.com/building/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/">
+    <link rel="alternate" hreflang="x-default" href="/building/">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS roots · Product systems · AI-assisted workflows</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container page-shell" style="padding-top: var(--page-padding-top);">
+  <p class="eyebrow" style="margin-bottom: 18px;">03 · Building</p>
+  <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">What I'm building right now.</h1>
+  <p class="body-lg" style="max-width: 640px; margin: 0 0 56px;">Personal projects and the systems behind them, posted as I go. Smaller than a blog post, closer to the work.</p>
+  <div class="building-grid"><div class="card building-card is-active">
+  <div class="building-card-head">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-card-updated">updated 2d ago</span>
+  </div>
+  <a href="/building/shikisha/" class="building-card-title-link"><h2 class="h-card building-card-title">Shikisha</h2></a>
+  <p class="building-card-summary">A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.</p>
+  <div class="building-card-tags"><span class="tag-chip">Swift</span><span class="tag-chip">LLM</span><span class="tag-chip">Tooling</span><span class="tag-chip">Open source</span></div>
+  <div class="update-timeline update-timeline-mini"><a href="/building/shikisha/shikisha-examples/" class="update-entry is-note">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.02</span>
+    <span class="update-entry-status">note</span>
+  </span>
+  <span class="update-entry-title">Example apps and tutorials</span>
+</a>
+<a href="/building/shikisha/shikisha-0-1-0/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.29</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Tagged 0.1.0</span>
+</a>
+<a href="/building/shikisha/shikisha-core/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.17</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">The core landed in one push</span>
+</a>
+</div>
+  <a href="/building/shikisha/" class="read-link building-card-cta">All updates (3) <span class="arrow" aria-hidden="true">→</span></a>
+</div>
+<div class="card building-card is-active">
+  <div class="building-card-head">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-card-updated">updated 6d ago</span>
+  </div>
+  <a href="/building/jpresume/" class="building-card-title-link"><h2 class="h-card building-card-title">JPResume</h2></a>
+  <p class="building-card-summary">A Swift CLI that turns a western resume into Japanese 履歴書 and 職務経歴書 formats and keeps the two in sync, with deterministic stages kept separate from the AI ones.</p>
+  <div class="building-card-tags"><span class="tag-chip">Swift</span><span class="tag-chip">CLI</span><span class="tag-chip">AI-assisted</span><span class="tag-chip">Japan</span></div>
+  <div class="update-timeline update-timeline-mini"><a href="/building/jpresume/jpresume-shikisha-transport/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.29</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">v0.6.0, quality loops and Shikisha transport</span>
+</a>
+<a href="/building/jpresume/jpresume-source-aware/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.04.20</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">v0.5.0, source-aware ingestion</span>
+</a>
+<a href="/building/jpresume/jpresume-pipeline/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.04.17</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">The pause-point pipeline, in the first releases</span>
+</a>
+</div>
+  <a href="/building/jpresume/" class="read-link building-card-cta">All updates (3) <span class="arrow" aria-hidden="true">→</span></a>
+</div>
+<div class="card building-card is-active">
+  <div class="building-card-head">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-card-updated">updated today</span>
+  </div>
+  <a href="/building/inkwell/" class="building-card-title-link"><h2 class="h-card building-card-title">Inkwell</h2></a>
+  <p class="building-card-summary">The Swift static publishing tool behind this site. A blog generator that grew into a portfolio engine, with content collections, bilingual routing, and its own bundled themes.</p>
+  <div class="building-card-tags"><span class="tag-chip">Swift</span><span class="tag-chip">Static site</span><span class="tag-chip">Tooling</span><span class="tag-chip">Open source</span></div>
+  <div class="update-timeline update-timeline-mini"><a href="/building/inkwell/inkwell-building-section/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.04</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">A Building section, posted from itself</span>
+</a>
+<a href="/building/inkwell/inkwell-bilingual-routes/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.01</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Bilingual routes under /ja/</span>
+</a>
+<a href="/building/inkwell/inkwell-collections-quiet-theme/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.04.30</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Content collections and the quiet theme</span>
+</a>
+</div>
+  <a href="/building/inkwell/" class="read-link building-card-cta">All updates (3) <span class="arrow" aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
