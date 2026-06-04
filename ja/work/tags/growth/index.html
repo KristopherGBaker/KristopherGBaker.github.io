@@ -9,7 +9,21 @@
     <meta property="og:description" content="Archive page for tags Growth.">
     <meta property="og:url" content="https://krisbaker.com/ja/work/tags/growth/">
     <meta name="twitter:card" content="summary">
-    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script>
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/components.css">
@@ -94,11 +108,11 @@
     <div>
       <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
       <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
-      <a href="mailto:hello@krisbaker.com" class="btn-primary">hello@krisbaker.com →</a>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">
       <p class="site-footer-meta-line">東京</p>
-      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link">LinkedIn</a></li></ul>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
       <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
     </div>
   </div>
