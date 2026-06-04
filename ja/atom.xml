@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Kristopher Baker</title>
-    <link>https://krisbaker.com/ja/</link>
-    <atom:link href="https://krisbaker.com/ja/rss.xml" rel="self" type="application/rss+xml"/>
-    <description>iOSに深く根ざしたシニアプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
-    <generator>Inkwell 0.13.0</generator>
-    <language>ja</language>
-    <lastBuildDate>Tue, 02 Jun 2026 12:34:39 +0000</lastBuildDate>
-    <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
-    <item>
-      <title>Shikisha：SwiftでLLMワークフローを作る</title>
-      <link>https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/</guid>
-      <pubDate>Tue, 02 Jun 2026 12:34:39 +0000</pubDate>
-      <content:encoded><![CDATA[<p>最近、SwiftでAI支援のツールをいくつも作るようになり、同じような問題に何度も突き当たっていました。</p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+  <title>Kristopher Baker</title>
+  <subtitle>iOSに深く根ざしたシニアプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</subtitle>
+  <link href="https://krisbaker.com/ja/" rel="alternate"/>
+  <link href="https://krisbaker.com/ja/atom.xml" rel="self" type="application/atom+xml"/>
+  <id>https://krisbaker.com/ja/</id>
+  <generator version="0.13.0">Inkwell</generator>
+  <updated>2026-06-02T12:34:39Z</updated>
+  <author>
+    <name>Kristopher Baker</name>
+    <email>hello@krisbaker.com</email>
+  </author>
+  <entry>
+    <title>Shikisha：SwiftでLLMワークフローを作る</title>
+    <link href="https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/</id>
+    <updated>2026-06-02T12:34:39Z</updated>
+    <published>2026-06-02T12:34:39Z</published>
+    <content type="html"><![CDATA[<p>最近、SwiftでAI支援のツールをいくつも作るようになり、同じような問題に何度も突き当たっていました。</p>
 <p>SwiftからLLMを呼ぶこと自体は簡単です。</p>
 <p>難しいのは、その周りのワークフローを分かりやすく、保守しやすい形に保つことです。</p>
 <p>本当に難しくなるのは、その機能が実際のシステムになったときです。プロンプト、構造化出力、リトライ、ストリーミング、ツール、リトリーバル、メモリ、テスト、そしてAppleプラットフォームのアプリとして自然に振る舞うUI。</p>
@@ -157,14 +160,15 @@ let result = try await agent.run([
 <p><a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a></p>
 <p>リポジトリはこちらです。</p>
 <p><a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
-<p>Swiftでアプリを作っていて、Appleプラットフォームのツールチェーンから離れずにLLMワークフローを足すことに興味があったなら、Shikisha が私の現時点での答えです。まだ早い段階ですが、すでに単なる実験という段階は過ぎています。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>JPResume：英文レジュメを日本式に変換するツール</title>
-      <link>https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</guid>
-      <pubDate>Mon, 20 Apr 2026 12:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<video autoplay muted loop playsinline>
+<p>Swiftでアプリを作っていて、Appleプラットフォームのツールチェーンから離れずにLLMワークフローを足すことに興味があったなら、Shikisha が私の現時点での答えです。まだ早い段階ですが、すでに単なる実験という段階は過ぎています。</p>]]></content>
+  </entry>
+  <entry>
+    <title>JPResume：英文レジュメを日本式に変換するツール</title>
+    <link href="https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</id>
+    <updated>2026-04-20T12:00:00Z</updated>
+    <published>2026-04-20T12:00:00Z</published>
+    <content type="html"><![CDATA[<video autoplay muted loop playsinline>
   <source src="https://krisbaker.com/posts/jpresume-japanese-resume-tool/jpresume.mp4" type="video/mp4">
   <img src="https://krisbaker.com/posts/jpresume-japanese-resume-tool/jpresume.png" alt="日本式の履歴書の書き方に悩んでいる様子">
 </video>
@@ -218,14 +222,15 @@ let result = try await agent.run([
 <p>決定論的なパース、情報を補完しない正規化、バリデーション後の意図的な停止、エージェントがモデルとして振る舞いながら結果をレビューできるexternal mode。</p>
 <p>このパターンは、日本式レジュメに限らず、契約書や申請書のように「間違った値が入ると困る」ドキュメント全般に応用できます。</p>
 <p>現時点では、markdownのレジュメから履歴書と職務経歴書を生成し、そのまま提出できる状態にするツールです。</p>
-<p>数ヶ月前は、それができませんでした。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>制約ありきで組んだリモート開発環境</title>
-      <link>https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/</guid>
-      <pubDate>Wed, 01 Apr 2026 12:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<video autoplay muted loop playsinline>
+<p>数ヶ月前は、それができませんでした。</p>]]></content>
+  </entry>
+  <entry>
+    <title>制約ありきで組んだリモート開発環境</title>
+    <link href="https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/</id>
+    <updated>2026-04-01T12:00:00Z</updated>
+    <published>2026-04-01T12:00:00Z</published>
+    <content type="html"><![CDATA[<video autoplay muted loop playsinline>
   <source src="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/claude-train.mp4" type="video/mp4">
   <img src="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/claude-train.png" alt="電車内でスマートフォンからClaude Codeを操作している様子">
 </video>
@@ -276,7 +281,6 @@ let result = try await agent.run([
 <p>実際の制約に向き合った結果できあがるものは、少し歪んで見えることもある。でも、実際に使い続けられるのはそちらの方です。</p>
 <p>そしてもう一つ。ツールは進化し、前提条件は変わります。</p>
 <p>今回の構成は今でも役に立っていますが、この話で伝えたいのは「これを作るべき」ということではありません。「なぜこの構成になったのか」を理解していれば、新しい選択肢が出てきたときに、どこを捨てていいか判断できる、ということです。</p>
-<p>ツールが変わっても、その部分は残ります。</p>]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+<p>ツールが変わっても、その部分は残ります。</p>]]></content>
+  </entry>
+</feed>

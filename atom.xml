@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Kristopher Baker</title>
-    <link>https://krisbaker.com/</link>
-    <atom:link href="https://krisbaker.com/rss.xml" rel="self" type="application/rss+xml"/>
-    <description>Senior product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
-    <generator>Inkwell 0.13.0</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 02 Jun 2026 12:34:39 +0000</lastBuildDate>
-    <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
-    <item>
-      <title>Shikisha: Building LLM Workflows in Swift</title>
-      <link>https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</link>
-      <guid isPermaLink="true">https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</guid>
-      <pubDate>Tue, 02 Jun 2026 12:34:39 +0000</pubDate>
-      <content:encoded><![CDATA[<p>I have been building more AI-assisted tools in Swift lately, and I kept running into the same awkward edge.</p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Kristopher Baker</title>
+  <subtitle>Senior product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</subtitle>
+  <link href="https://krisbaker.com/" rel="alternate"/>
+  <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <id>https://krisbaker.com/</id>
+  <generator version="0.13.0">Inkwell</generator>
+  <updated>2026-06-02T12:34:39Z</updated>
+  <author>
+    <name>Kristopher Baker</name>
+    <email>hello@krisbaker.com</email>
+  </author>
+  <entry>
+    <title>Shikisha: Building LLM Workflows in Swift</title>
+    <link href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/" rel="alternate"/>
+    <id>https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</id>
+    <updated>2026-06-02T12:34:39Z</updated>
+    <published>2026-06-02T12:34:39Z</published>
+    <content type="html"><![CDATA[<p>I have been building more AI-assisted tools in Swift lately, and I kept running into the same awkward edge.</p>
 <p>Calling an LLM from Swift is easy.</p>
 <p>Keeping the surrounding workflow understandable and maintainable is the hard part.</p>
 <p>The hard part starts once the feature becomes an actual system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
@@ -157,14 +160,15 @@ let result = try await agent.run([
 <p><a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a></p>
 <p>The repo is here:</p>
 <p><a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
-<p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but it is already past the point of being just an experiment.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>JPResume: Turning a Western Resume Into a Japanese One</title>
-      <link>https://krisbaker.com/posts/jpresume-japanese-resume-tool/</link>
-      <guid isPermaLink="true">https://krisbaker.com/posts/jpresume-japanese-resume-tool/</guid>
-      <pubDate>Mon, 20 Apr 2026 12:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<video autoplay muted loop playsinline>
+<p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but it is already past the point of being just an experiment.</p>]]></content>
+  </entry>
+  <entry>
+    <title>JPResume: Turning a Western Resume Into a Japanese One</title>
+    <link href="https://krisbaker.com/posts/jpresume-japanese-resume-tool/" rel="alternate"/>
+    <id>https://krisbaker.com/posts/jpresume-japanese-resume-tool/</id>
+    <updated>2026-04-20T12:00:00Z</updated>
+    <published>2026-04-20T12:00:00Z</published>
+    <content type="html"><![CDATA[<video autoplay muted loop playsinline>
   <source src="https://krisbaker.com/posts/jpresume-japanese-resume-tool/jpresume.mp4" type="video/mp4">
   <img src="https://krisbaker.com/posts/jpresume-japanese-resume-tool/jpresume.png" alt="Man wondering how to write a Japanese resume">
 </video>
@@ -211,14 +215,15 @@ let result = try await agent.run([
 <p>The part I expect to outlast this implementation is the shape: deterministic parsing, strict no-invention normalization, a deliberate validation pause, and external mode so an agent can act as the model while still reviewing its own output.</p>
 <p>That pattern works beyond Japanese resumes. It fits any document where fabricated fields are expensive and a fully automated one-shot is the wrong abstraction: regulatory filings, contracts, internal reports, anything with structure and consequences.</p>
 <p>For now, JPResume turns a markdown resume into a 履歴書 and 職務経歴書 that I would actually hand to a company.</p>
-<p>A couple of months ago, that was the part I could not do.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Remote Dev Setup With Real Constraints</title>
-      <link>https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/</link>
-      <guid isPermaLink="true">https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/</guid>
-      <pubDate>Wed, 01 Apr 2026 12:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<video autoplay muted loop playsinline>
+<p>A couple of months ago, that was the part I could not do.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Remote Dev Setup With Real Constraints</title>
+    <link href="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/" rel="alternate"/>
+    <id>https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/</id>
+    <updated>2026-04-01T12:00:00Z</updated>
+    <published>2026-04-01T12:00:00Z</published>
+    <content type="html"><![CDATA[<video autoplay muted loop playsinline>
   <source src="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/claude-train.mp4" type="video/mp4">
   <img src="https://krisbaker.com/posts/remote-dev-setup-with-real-constraints/claude-train.png" alt="Claude Code running on a phone on a train">
 </video>
@@ -257,7 +262,6 @@ let result = try await agent.run([
 <h2>The Lesson Worth Keeping</h2>
 <p>I keep running into this pattern, with infrastructure, with AI tooling, with the house we built last year. The first version of an idea usually looks clean because it has not met reality yet. What survives contact with real constraints looks a little stranger, but it is the version that holds up.</p>
 <p>What is also true is that sometimes the tools catch up and the constraints shift underneath you. The setup I built is still useful to me. But the reason to write about it is less &quot;here is what you should build&quot; and more &quot;here is what I learned by building it.&quot; The constraints shaped the system. Understanding why each piece existed made it easy to know which pieces I could drop once better options showed up.</p>
-<p>That is the part worth keeping, even after the tools change.</p>]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+<p>That is the part worth keeping, even after the tools change.</p>]]></content>
+  </entry>
+</feed>
