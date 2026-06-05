@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>制作中セクションを、それ自身で投稿</title>
-    <meta name="description" content="制作中セクションを、それ自身で投稿">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/inkwell/inkwell-building-section/">
-    <meta property="og:title" content="制作中セクションを、それ自身で投稿">
-    <meta property="og:description" content="制作中セクションを、それ自身で投稿">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/inkwell/inkwell-building-section/">
+    <title>クリックで拡大</title>
+    <meta name="description" content="クリックで拡大">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/">
+    <meta property="og:title" content="クリックで拡大">
+    <meta property="og:description" content="クリックで拡大">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/inkwell/inkwell-building-section/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/inkwell/inkwell-building-section/">
-    <link rel="alternate" hreflang="x-default" href="/building/inkwell/inkwell-building-section/">
+    <link rel="alternate" hreflang="en" href="/building/inkwell/inkwell-image-lightbox/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/inkwell/inkwell-image-lightbox/">
+    <link rel="alternate" hreflang="x-default" href="/building/inkwell/inkwell-image-lightbox/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -87,7 +87,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/inkwell/inkwell-building-section/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/inkwell/inkwell-image-lightbox/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -99,23 +99,19 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/inkwell/" class="post-back">← Inkwell</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.04</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.05</span>
      · <span>約1分</span>
   </p>
-  <h1 class="h1 post-title update-title">制作中セクションを、それ自身で投稿</h1>
+  <h1 class="h1 post-title update-title">クリックで拡大</h1>
   
   <div class="post-body">
-    <article class="prose"><p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>
-<p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>
-<p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p></article>
+    <article class="prose"><p>本文の画像は、これまで段組みの幅に収まったままでした。いまはどの画像も、クリックかタップでオーバーレイに原寸表示されます。Escキーか、画像の外側をクリックすると閉じます。</p>
+<p>Inkwell 0.14.0で入れました。quietテーマの小さなJavaScriptと、画像パイプライン側の小さな変更です。各画像が元のURLを覚えておくので、ライトボックスはリサイズ版ではなく本物のファイルを表示します。きっかけは、Domestiqueのスクリーンショットを大きく見たかったことでした。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/inkwell/inkwell-image-lightbox/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">クリックで拡大</span>
-      </a>
-      <a href="/ja/building/inkwell/inkwell-bilingual-routes/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/inkwell/inkwell-building-section/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">/ja/ 以下の多言語対応</span>
+        <span class="update-nav-title">制作中セクションを、それ自身で投稿</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/inkwell/" class="read-link">Inkwell <span class="arrow" aria-hidden="true">→</span></a></div>
