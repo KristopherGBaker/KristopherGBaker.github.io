@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-05T10:00:00Z</updated>
+  <updated>2026-06-05T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>A feed for every section</title>
+    <link href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/" rel="alternate"/>
+    <id>https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/</id>
+    <updated>2026-06-05T14:00:00Z</updated>
+    <published>2026-06-05T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>Until now the site had one feed, and it only carried blog posts. The work and the building updates, the most feed-shaped things here, had no way to subscribe.</p>
+<p>Inkwell 0.15.0 fixes that. A small <code>feeds</code> config block now gives each section its own feed, so you can follow just the writing, just the work, or just this building log at <code>/building/rss.xml</code>. The site root becomes a combined feed of everything, newest first. Child updates link back to their project, and work case studies that only carry a year still get a sensible date.</p>
+<p>The update you are reading is already in all three: this section's feed, the combined feed, and the home timeline.</p>]]></content>
+  </entry>
   <entry>
     <title>Click to enlarge</title>
     <link href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/" rel="alternate"/>

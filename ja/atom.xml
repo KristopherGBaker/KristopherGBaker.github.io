@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/ja/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-05T10:00:00Z</updated>
+  <updated>2026-06-05T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>セクションごとのフィード</title>
+    <link href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</id>
+    <updated>2026-06-05T14:00:00Z</updated>
+    <published>2026-06-05T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>これまでこのサイトのフィードは一つだけで、しかもブログ記事しか流れていませんでした。実績や制作中のアップデートという、いちばんフィード向きのものを購読する手段がなかったのです。</p>
+<p>Inkwell 0.15.0でそこを直しました。小さな <code>feeds</code> 設定ブロックで、セクションごとに専用フィードを出せるようになりました。記事だけ、実績だけ、あるいはこの制作ログだけ（<code>/building/rss.xml</code>）を追えます。サイトのルートは、すべてを新しい順にまとめたコンバインドフィードになります。子のアップデートはプロジェクトにリンクし、年だけを持つ実績のケーススタディにも妥当な日付が入ります。</p>
+<p>いま読んでいるこのアップデートも、すでに三か所に流れています。このセクションのフィード、コンバインドフィード、そしてホームのタイムラインです。</p>]]></content>
+  </entry>
   <entry>
     <title>クリックで拡大</title>
     <link href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/" rel="alternate"/>
@@ -466,48 +476,5 @@ let result = try await agent.run([
 </ul>
 <h2>担当</h2>
 <p>DRIとして、クライアント実装のリード、RFCへの貢献、およびチーム間の連携を担当。</p>]]></content>
-  </entry>
-  <entry>
-    <title>カート・チェックアウト導線の改善でサブスク転換率を高める</title>
-    <link href="https://krisbaker.com/ja/work/wolt-cart-entry-points/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/work/wolt-cart-entry-points/</id>
-    <updated>2024-01-01T00:00:00Z</updated>
-    <published>2024-01-01T00:00:00Z</published>
-    <category term="iOS"/>
-    <category term="Growth"/>
-    <category term="Subscription"/>
-    <category term="A/B testing"/>
-    <summary>Wolt+成長の中核実験2件（カート導入口とエクスプレス登録）のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</summary>
-    <content type="html"><![CDATA[<h2>背景</h2>
-<p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
-<h2>課題</h2>
-<p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
-<h2>アプローチ</h2>
-<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
-  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
-  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="カート導入口とエクスプレス登録のフロー">
-</video>
-<p>クライアント側のDRIとしてiOS・Web・Androidを横断的に率い、プロダクト・デザイン・バックエンド・データサイエンスの整合を取りつつ、iOS実装をリードしました。</p>
-<p>早い段階で、私はこの作業を独立した2つの実験に分けることを推しました:</p>
-<ul>
-<li>まずカート導入口を出して検証する</li>
-<li>その後、エクスプレス登録を別の反復として続ける</li>
-</ul>
-<p>これにより、複雑な実装を待たずに段階的に効果を検証できるようになりました。</p>
-<p>エクスプレス登録では、いくつかのUX・技術的制約に取り組みました:</p>
-<ul>
-<li>ボトムシート内でのナビゲーションフロー（従来未対応）</li>
-<li>「エクスプレス」と通常登録の遷移を簡素化し、混乱を減らす</li>
-<li>支払い・バックエンドとの連携で、支払方法変更などのエッジケースをすり合わせる</li>
-</ul>
-<p>データサイエンスとも密に連携し、計装の検証や、誤解を招くA/Bテスト結果のデバッグまで踏み込みました。</p>
-<h2>成果</h2>
-<ul>
-<li>Wolt+登録と下流の注文ボリュームに有意な押し上げ</li>
-<li>両機能ともA/Bテストに合格し、本番100%展開済</li>
-<li>カート導入口は今もサブスク成長の中核サーフェス</li>
-</ul>
-<h2>役割</h2>
-<p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p>]]></content>
   </entry>
 </feed>

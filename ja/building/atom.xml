@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-05T10:00:00Z</updated>
+  <updated>2026-06-05T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>セクションごとのフィード</title>
+    <link href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</id>
+    <updated>2026-06-05T14:00:00Z</updated>
+    <published>2026-06-05T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>これまでこのサイトのフィードは一つだけで、しかもブログ記事しか流れていませんでした。実績や制作中のアップデートという、いちばんフィード向きのものを購読する手段がなかったのです。</p>
+<p>Inkwell 0.15.0でそこを直しました。小さな <code>feeds</code> 設定ブロックで、セクションごとに専用フィードを出せるようになりました。記事だけ、実績だけ、あるいはこの制作ログだけ（<code>/building/rss.xml</code>）を追えます。サイトのルートは、すべてを新しい順にまとめたコンバインドフィードになります。子のアップデートはプロジェクトにリンクし、年だけを持つ実績のケーススタディにも妥当な日付が入ります。</p>
+<p>いま読んでいるこのアップデートも、すでに三か所に流れています。このセクションのフィード、コンバインドフィード、そしてホームのタイムラインです。</p>]]></content>
+  </entry>
   <entry>
     <title>クリックで拡大</title>
     <link href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/" rel="alternate"/>
