@@ -5,10 +5,27 @@
     <link>https://krisbaker.com/ja/</link>
     <atom:link href="https://krisbaker.com/ja/rss.xml" rel="self" type="application/rss+xml"/>
     <description>iOSに深く根ざしたシニアプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
-    <generator>Inkwell 0.14.0</generator>
+    <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 02 Jun 2026 12:34:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jun 2026 10:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>クリックで拡大</title>
+      <link>https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/</guid>
+      <pubDate>Fri, 05 Jun 2026 10:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>本文の画像は、これまで段組みの幅に収まったままでした。いまはどの画像も、クリックかタップでオーバーレイに原寸表示されます。Escキーか、画像の外側をクリックすると閉じます。</p>
+<p>Inkwell 0.14.0で入れました。quietテーマの小さなJavaScriptと、画像パイプライン側の小さな変更です。各画像が元のURLを覚えておくので、ライトボックスはリサイズ版ではなく本物のファイルを表示します。きっかけは、Domestiqueのスクリーンショットを大きく見たかったことでした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>制作中セクションを、それ自身で投稿</title>
+      <link>https://krisbaker.com/ja/building/inkwell/inkwell-building-section/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-building-section/</guid>
+      <pubDate>Thu, 04 Jun 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>
+<p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>
+<p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p>]]></content:encoded>
+    </item>
     <item>
       <title>Shikisha：SwiftでLLMワークフローを作る</title>
       <link>https://krisbaker.com/ja/posts/shikisha-building-llm-workflows-in-swift/</link>
@@ -160,6 +177,106 @@ let result = try await agent.run([
 <p>Swiftでアプリを作っていて、Appleプラットフォームのツールチェーンから離れずにLLMワークフローを足すことに興味があったなら、Shikisha が私の現時点での答えです。まだ早い段階ですが、すでに単なる実験という段階は過ぎています。</p>]]></content:encoded>
     </item>
     <item>
+      <title>サンプルアプリとチュートリアル</title>
+      <link>https://krisbaker.com/ja/building/shikisha/shikisha-examples/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/shikisha/shikisha-examples/</guid>
+      <pubDate>Tue, 02 Jun 2026 10:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>
+<p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>
+<p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>0.1.0 をタグ付け</title>
+      <link>https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</guid>
+      <pubDate>Fri, 29 May 2026 11:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>最初のタグ付きリリースです。0.1.0 は Swift 6.3 上で macOS 14以降・iOS 17以降を対象とし、Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、Codable のワイヤ形式で構成されています。</p>
+<p>同じ日に、JPResume がLLMのトランスポートを Shikisha に切り替えました。これが私の気にしていたテストでした。「デモが動くか」ではなく、「別の実際のツールがこれに依存したいと思うか」です。</p>
+<p>あえて「アクティブな開発中」と呼んでいます。1.0 までにAPIはまだ変わるかもしれませんし、表面が固まったふりをするより、そう言っておきたいのです。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>v0.6.0：品質ループと Shikisha への移行</title>
+      <link>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</guid>
+      <pubDate>Fri, 29 May 2026 08:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>v0.6.0 は、出力の品質と整理がテーマでした。生成ステージには自己批評のループ、正規化には検証フィードバックのループを入れ、専用の日本語制約チェッカーが、微妙に間違えやすい慣習を拾うようになりました。プロバイダーが対応している場合は、JSONの応答を期待するのではなく json_object として強制します。</p>
+<p>裏側では二つの整理を行いました。オーケストレーションをドメインに依存しない DocPipeline モジュールへ切り出し、LLMのトランスポートを Shikisha に切り替えたことです。</p>
+<p>満足しているのは二つ目です。JPResume はいまや、自作のワークフローライブラリの最初の実利用者になりました。まさに、Shikisha が支えるために作った依存関係です。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>二つの言語、二つの単位系</title>
+      <link>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</guid>
+      <pubDate>Mon, 25 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>
+<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>
+<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>
+<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>トレーナーの上のモンヴァントゥ</title>
+      <link>https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</guid>
+      <pubDate>Fri, 22 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>トレーナーはパワーターゲットを保持できます。次にほしかったのは地形でした。室内で実際の道を走り、勾配が抵抗を動かす。</p>
+<p>そこでDomestiqueにルートライブラリを足しました。GPXをインポートする、任意のアクティビティからルートを保存する、あるいは保存済みのStravaルートを取り込む。そして、フリーライドや構造化ワークアウトの最中にそれを再生し、標高プロファイルでトレーナーのシミュレート勾配を動かします。ドラッグできるチャートのハンドルとアンドゥ／リドゥを備えたトリムエディタがあり、乱れたGPSトラックからきれいな区間を切り出せます。ルートは端から端まで反転もできます。</p>
+<p>最初にバンドルしたルートはモンヴァントゥで、3つの古典的な登り口に合わせた3つのプリセットです。藤沢の予備の部屋からプロヴァンスの巨人を登り、実際の道で斜度が上がるまさにその地点で抵抗がせり上がってくる。室内のセットアップが屋外に一番近づいた瞬間でした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>専用のバックエンド</title>
+      <link>https://krisbaker.com/ja/building/domestique/domestique-backend/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-backend/</guid>
+      <pubDate>Thu, 21 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>しばらくの間、Domestiqueはシングルデバイスで満足していました。すべてはApplication Support下のファイルとSQLiteの中。二台目のマシンに同じ履歴がほしくなるまで、あるいはうっかり消してしまうかもしれないフォルダ以外のバックアップがほしくなるまでは、それで十分です。</p>
+<p>そこで、バックエンドを書きました。<code>domestiqued</code> という一つのGoバイナリに、<code>serve | migrate | athlete | token</code> のCLI、埋め込みマイグレーション付きのSQLiteストア、ベアラートークン認証、そしてバイナリから直接配信される管理コンソール。CGOなし、コンテナなし、マネージドクラウドなし。自分が管理する小さなマシンの上で動きます。</p>
+<p>Swift側では、SyncClientがワンクリックで差分をプッシュ／プルします。アクティビティとストリーム、ゴールとプランとアドヒアランス、さらにはワークアウトゲームの生涯スタッツやワークアウトごとの自己ベストまで。オートセーブはアプリが何かを変える場所すべてに配線してあり、まとめて束ねられるので、連続した編集も最大で数回のバックグラウンドプッシュに収まります。データモデルはマルチアスリート対応なので、いつか一緒に走る仲間と共有したくなっても、書き直しではなく小さな一歩で済みます。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>書くつもりのなかったワークアウトゲーム</title>
+      <link>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-workout-game/</guid>
+      <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>室内のインターバルは退屈です。これはどんなトレーナーにも共通する根っこの問題です。だから最初の一週間のどこかで、小さな実験を始めました。ワークアウトをSpriteKitの2D横スクロールのサイクリングゲームとして描き、ライダーの速度を実際のパワーで動かすのです。</p>
+<p>これは、いい意味で手に負えなくなりました。ライダーはトラックパッドのスワイプでホップし、コーナーでバンクし、登りではダンシングし、下りではタックします。昼夜のサイクル、天候、テーマ別の環境、視差で流れる鳥たち、そして追いかけるための自己ベストライドのゴースト。フィニッシュ画面は本物のテレメトリ表示です。NP、IF、TSS、ゾーン内時間、パワーカーブ、そしてセッションをまたいで蓄積されるキャリアスタッツの数々。</p>
+<p>これで素のターゲット数値より速くなるわけではありません。それでも、画面に丘があって破るべき自己ベストがあると、きついインターバルを最後までやり切れる回数が増えます。ここで意味があるのはその一点だけです。ピクセルアートとサウンドは後から、Asepriteのアセットパイプラインを通して入れました。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>骨組み全体を一気に</title>
+      <link>https://krisbaker.com/ja/building/domestique/domestique-foundation/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-foundation/</guid>
+      <pubDate>Mon, 18 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Domestiqueは、一本の長い一日から始まりました。ガーミンConnectにサインインし、アクティビティをローカルキャッシュに取り込み、意味のあるテレメトリを計算し、それをトレーナーを動かせる形に変える。この全経路をエンドツーエンドで配線したのです。</p>
+<p>その日の終わりには骨組みが立っていました。アナリティクス側は、強度フィルタ付きのアクティビティ一覧、MapKitのマップにルートを描く詳細画面、パワーと心拍のチャート、ミーンマックスのパワーカーブ、そして28日間の負荷と180日間のPMCチャートを並べたダッシュボード。トレーニング側は、ハイブリッドなプランエンジン（カレンダー上のアンカーとアダプティブな内側、Friel流のフェーズ進行に自動のリカバリー週）、組み込みワークアウトのライブラリ、そしてBLE経由でFTMSトレーナーにERGターゲットを送りながらライドを記録するランタイム。</p>
+<p>一番ほしかったのはループが閉じることでした。構造化ワークアウトをこなし、処方にどれだけ忠実だったかをアプリが採点し、それを翌日のおすすめに反映する。それ以降の作業は、すべてこの枠を埋めていくものでした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>コア一式を一気に実装</title>
+      <link>https://krisbaker.com/ja/building/shikisha/shikisha-core/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/shikisha/shikisha-core/</guid>
+      <pubDate>Sun, 17 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>パッケージの土台を作り、コア一式を一日で立ち上げました。メッセージとRunnable、OpenAI・Anthropic・Ollama・Google Gemini のプロバイダーアダプター、続いてプロンプト、出力パーサー、ドキュメントローダー、テキストスプリッター、ベクトルストア、リトリーバー、インクリメンタルなインデックス更新、メモリ、ツール呼び出し型のエージェントループ、そして循環的なワークフローのための StateGraph です。</p>
+<p>一度の作業にしては多く見えますし、実際に多かったのですが、その大部分は LangChain の形をSwiftに忠実に移植したものです。なので設計の仕事は、ゼロから考えることよりも、何を残すかを決めることでした。</p>
+<p>一番欲しかった部分は最初のコミットから入っていました。ストリーミング、ツール呼び出し、そして自己修復ラッパー付きのストリーミングJSONパーサーです。どれも、これまでのプロジェクトで毎回手書きで再実装していたものでした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>/ja/ 以下の多言語対応</title>
+      <link>https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</guid>
+      <pubDate>Fri, 01 May 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>i18n の基盤を追加しました。設定、コンテンツ、データ、ルーティングです。これにより、このサイトはルートで英語を、/ja/ 以下で日本語を配信します。同じ作業で、エイリアスのリダイレクト、hreflang タグ、トップバーの言語切り替えを入れ、少し後にローカライズしたフィードとサイトマップが続きました。</p>
+<p>落ち着いたルールは、すべてのページが両方の言語で存在するというものです。.ja.md ファイルがあればそのページは翻訳され、なければ英語にフォールバックします。だから、後から翻訳を追加してもリンクが壊れることはありません。</p>
+<p>自分のジェネレーターでやったおかげで、プラグインの前提にサイトを合わせるのではなく、URLの構成をシンプルに保てました。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>コンテンツコレクションと quiet テーマ</title>
+      <link>https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</guid>
+      <pubDate>Thu, 30 Apr 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>これが、Inkwell をブログ用のツールからポートフォリオも動かせるものへと変えた変更（v0.3.0）です。</p>
+<p>コンテンツはコレクションになりました。それぞれが、マークダウンの置き場所、ルート、並び順、公開するタクソノミーを宣言し、固定されたひとつのブログの形ではなく、コレクションごとのルーティングを持ちます。同じリリースで author、nav、home、そして任意のコレクションに使える content new コマンドを追加しました。</p>
+<p>quiet テーマも同時に出しました。Fraunces、Manrope、JetBrains Mono を使い、ポートフォリオとブログのレイアウトを備えています。このサイト全体が、いまもこの見た目で動いています。</p>]]></content:encoded>
+    </item>
+    <item>
       <title>JPResume：英文レジュメを日本式に変換するツール</title>
       <link>https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</link>
       <guid isPermaLink="true">https://krisbaker.com/ja/posts/jpresume-japanese-resume-tool/</guid>
@@ -221,6 +338,24 @@ let result = try await agent.run([
 <p>数ヶ月前は、それができませんでした。</p>]]></content:encoded>
     </item>
     <item>
+      <title>v0.5.0：既存レジュメを読み取る取り込み</title>
+      <link>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</guid>
+      <pubDate>Mon, 20 Apr 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>v0.5.0 をタグ付けし、入力解析を作り直して、ツールが本当の意味で「ソースを読み取る」ようにしました。既存の英文レジュメをテキストかPDFで読み込み、すべてを入力し直させるのではなく、それを信頼できる出典として扱います。</p>
+<p>これがブログで書いたバージョンです。JPResume の目的は、ゼロからレジュメを書き起こすことではありませんでした。すでに管理している英語版をもとに、日本語の履歴書と職務経歴書をそれと揃え続けることです。</p>
+<p>取り込みを正しく行うことが、ズレの問題を解消します。さもないと、応募の直前という最悪のタイミングで足をすくわれます。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>ポーズポイント方式のパイプライン（最初のリリース）</title>
+      <link>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</guid>
+      <pubDate>Fri, 17 Apr 2026 10:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>最初のタグ付きリリース（v0.3.0 から v0.4.3）で、実際の形が整いました。個別のステージを持つアーティファクトストアと外部ブリッジ、ステップごとのサブコマンド、そして言語処理の重いステップを外部のエージェントに渡し、その結果を取り込み直せるエージェントモードです。</p>
+<p>PDF対応も入出力の両方でこの時期に入りました。入力の解析は PDFKit で既存のレジュメを読み取り、画像だけのPDFには Vision の OCR を使います。出力は、適切な日本語組版で履歴書と職務経歴書を生成します。</p>
+<p>決定論的なステージとモデルのステージを早い段階で分けたことが、その後のすべてを扱いやすくしてくれました。どのポーズポイントでも処理を止めて、ドキュメントになる前のアーティファクトを確認できます。</p>]]></content:encoded>
+    </item>
+    <item>
       <title>制約ありきで組んだリモート開発環境</title>
       <link>https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/</link>
       <guid isPermaLink="true">https://krisbaker.com/ja/posts/remote-dev-setup-with-real-constraints/</guid>
@@ -277,6 +412,81 @@ let result = try await agent.run([
 <p>そしてもう一つ。ツールは進化し、前提条件は変わります。</p>
 <p>今回の構成は今でも役に立っていますが、この話で伝えたいのは「これを作るべき」ということではありません。「なぜこの構成になったのか」を理解していれば、新しい選択肢が出てきたときに、どこを捨てていいか判断できる、ということです。</p>
 <p>ツールが変わっても、その部分は残ります。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>長距離配達によるサブスクリプション価値の拡張</title>
+      <link>https://krisbaker.com/ja/work/wolt-long-distance-delivery/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/work/wolt-long-distance-delivery/</guid>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>グロース</category>
+      <category>サブスクリプション</category>
+      <category>API設計</category>
+      <description>Long-Distance Delivery の DRI。無料配達圏外のユーザーにも割引料金で価値を提供し、Discovery・店舗ページ・チェックアウトの各導線で一貫した体験を実現。API設計およびプロダクト設計の議論もリード。</description>
+      <content:encoded><![CDATA[<h2>背景</h2>
+<p>Wolt+ は一定の配達距離内で無料配達を提供していましたが、その範囲を少しでも外れるとユーザーにとっての価値は大きく下がっていました。特に一部のマーケットでは、これがサブスクリプションの魅力を弱める要因になっていました。</p>
+<h2>課題</h2>
+<p>無料配達圏の外にいるユーザーにも価値を提供する必要がありました。</p>
+<p>ただし単に割引を導入するだけではなく、Discovery・店舗ページ・チェックアウトといった複数の導線で、配達料金と特典の見え方を一貫させる必要がありました。</p>
+<h2>アプローチ</h2>
+<p>クライアント側のDRIとして、iOS実装をリードしつつ、APIおよびプロダクト設計にも関与しました。</p>
+<p>主に取り組んだポイントは以下です。</p>
+<ul>
+<li>配達料金および適用条件の表現方法について、フロントエンドとバックエンドの整合性を確保</li>
+<li>Discoveryチームと連携し、店舗一覧における挙動を統一</li>
+<li>配達料金と割引内容を説明する再利用可能なボトムシートの設計</li>
+</ul>
+<p>また、APIの構造や命名についても議論をリードし、バックエンドとクライアント双方の制約を踏まえた形での合意形成を進めました。</p>
+<h2>成果</h2>
+<ul>
+<li>A/Bテストで明確なポジティブな結果を確認</li>
+<li>無料配達圏外のユーザーにおけるWolt+の価値認識が向上</li>
+<li>アプリ内の複数導線にわたって機能を展開</li>
+</ul>
+<h2>担当</h2>
+<p>DRIとして、クライアント実装のリード、RFCへの貢献、およびチーム間の連携を担当。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>カート・チェックアウト導線の改善でサブスク転換率を高める</title>
+      <link>https://krisbaker.com/ja/work/wolt-cart-entry-points/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/work/wolt-cart-entry-points/</guid>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>Growth</category>
+      <category>Subscription</category>
+      <category>A/B testing</category>
+      <description>Wolt+成長の中核実験2件（カート導入口とエクスプレス登録）のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</description>
+      <content:encoded><![CDATA[<h2>背景</h2>
+<p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
+<h2>課題</h2>
+<p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
+<h2>アプローチ</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="カート導入口とエクスプレス登録のフロー">
+</video>
+<p>クライアント側のDRIとしてiOS・Web・Androidを横断的に率い、プロダクト・デザイン・バックエンド・データサイエンスの整合を取りつつ、iOS実装をリードしました。</p>
+<p>早い段階で、私はこの作業を独立した2つの実験に分けることを推しました:</p>
+<ul>
+<li>まずカート導入口を出して検証する</li>
+<li>その後、エクスプレス登録を別の反復として続ける</li>
+</ul>
+<p>これにより、複雑な実装を待たずに段階的に効果を検証できるようになりました。</p>
+<p>エクスプレス登録では、いくつかのUX・技術的制約に取り組みました:</p>
+<ul>
+<li>ボトムシート内でのナビゲーションフロー（従来未対応）</li>
+<li>「エクスプレス」と通常登録の遷移を簡素化し、混乱を減らす</li>
+<li>支払い・バックエンドとの連携で、支払方法変更などのエッジケースをすり合わせる</li>
+</ul>
+<p>データサイエンスとも密に連携し、計装の検証や、誤解を招くA/Bテスト結果のデバッグまで踏み込みました。</p>
+<h2>成果</h2>
+<ul>
+<li>Wolt+登録と下流の注文ボリュームに有意な押し上げ</li>
+<li>両機能ともA/Bテストに合格し、本番100%展開済</li>
+<li>カート導入口は今もサブスク成長の中核サーフェス</li>
+</ul>
+<h2>役割</h2>
+<p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

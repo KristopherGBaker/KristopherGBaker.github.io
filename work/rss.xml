@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kristopher Baker · Apps, systems, and tools I’ve shipped.</title>
+    <link>https://krisbaker.com/</link>
+    <atom:link href="https://krisbaker.com/work/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Senior product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
+    <generator>Inkwell 0.15.0</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Building a telemetry tool for faster, more confident product iteration</title>
+      <link>https://krisbaker.com/work/wolt-telemetry-viewer/</link>
+      <guid isPermaLink="true">https://krisbaker.com/work/wolt-telemetry-viewer/</guid>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>macOS</category>
+      <category>Internal tooling</category>
+      <category>Telemetry</category>
+      <category>WebSocket</category>
+      <description>A leverage system for product iteration: real-time app telemetry streamed to a local desktop client over WebSocket, with searchable, filterable views. Replaced a slow in-app viewer and made instrumentation work faster and more trustworthy across teams.</description>
+      <content:encoded><![CDATA[<h2>Context</h2>
+<p>At Wolt, verifying analytics (telemetry) events in development was slow and cumbersome. Engineers relied on a full-screen in-app viewer with no search or filtering, which made instrumentation harder to trust.</p>
+<h2>The problem</h2>
+<p>This made it difficult for engineers and product teams to:</p>
+<ul>
+<li>validate new events</li>
+<li>debug issues</li>
+<li>confidently ship and evaluate instrumented features</li>
+</ul>
+<h2>Approach</h2>
+<video autoplay muted playsinline controls style="display: block; width: 880px; max-width: 100%; margin: 0 auto;">
+  <source src="https://krisbaker.com/work/wolt-telemetry-viewer/telemetry-viewer-demo.mp4" type="video/mp4">
+</video>
+<p>I designed and built a telemetry viewer that streams events from the app to a local desktop client. The goal was not just a nicer viewer. It was a small leverage system for shortening the loop between product intent, instrumentation, and release confidence.</p>
+<p>Key elements:</p>
+<ul>
+<li>local WebSocket-based streaming from the iOS app</li>
+<li>a desktop app with searchable, filterable event views</li>
+<li>full visibility into payloads sent to backend systems, in a form humans could inspect quickly</li>
+</ul>
+<p>I introduced it gradually:</p>
+<ul>
+<li>first validating it with a small group of engineers</li>
+<li>then expanding usage through demos and internal sharing</li>
+</ul>
+<p>I also supported cross-platform adoption by helping an Android engineer implement a similar solution.</p>
+<h2>Outcome</h2>
+<ul>
+<li>Significantly improved speed and confidence when validating telemetry</li>
+<li>Adopted by multiple engineers across teams</li>
+<li>Enabled other initiatives, including privacy-related telemetry work</li>
+</ul>
+<h2>My role</h2>
+<p>Self-driven initiative that I discovered a need for and developed from concept to adoption across teams.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Expanding subscription value with long-distance delivery</title>
+      <link>https://krisbaker.com/work/wolt-long-distance-delivery/</link>
+      <guid isPermaLink="true">https://krisbaker.com/work/wolt-long-distance-delivery/</guid>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>Growth</category>
+      <category>Subscription</category>
+      <category>API design</category>
+      <description>DRI for Long-Distance Delivery, extending Wolt+ value to users outside the free delivery radius with discounted pricing kept consistent across discovery, venue, and checkout. Led API and product design discussions across teams.</description>
+      <content:encoded><![CDATA[<h2>Context</h2>
+<p>Wolt+ offered free delivery within a defined radius, but users outside that range saw limited benefit, reducing the product's appeal in certain markets.</p>
+<h2>The problem</h2>
+<p>We needed to extend the value of Wolt+ to users just outside the free delivery range by introducing discounted delivery, while keeping the experience consistent across discovery, venue pages, and checkout.</p>
+<h2>Approach</h2>
+<p>As client DRI, I led the iOS implementation and contributed to the overall API and product design.</p>
+<p>Key areas I focused on:</p>
+<ul>
+<li>aligning frontend and backend on how delivery pricing and eligibility should be represented across surfaces</li>
+<li>working with the Discovery team to ensure consistent behavior across all venue lists</li>
+<li>designing a reusable bottom sheet for explaining delivery pricing and savings</li>
+</ul>
+<p>I also led discussions around API structure and naming, coordinating across teams to reach a solution that worked for both backend and client constraints.</p>
+<h2>Outcome</h2>
+<ul>
+<li>Strong positive impact in A/B tests</li>
+<li>Increased perceived value of Wolt+ in markets outside the core delivery radius</li>
+<li>Feature successfully rolled out across multiple surfaces in the app</li>
+</ul>
+<h2>My role</h2>
+<p>DRI, leading client-side implementation, RFC contributions, and cross-team coordination.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Improving subscription conversion through cart and checkout entry points</title>
+      <link>https://krisbaker.com/work/wolt-cart-entry-points/</link>
+      <guid isPermaLink="true">https://krisbaker.com/work/wolt-cart-entry-points/</guid>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>Growth</category>
+      <category>Subscription</category>
+      <category>A/B testing</category>
+      <description>Client-side DRI for two flagship Wolt+ growth experiments: cart entry point and express signup. Drove cross-platform RFCs and pushed to split the work into independent rollouts, enabling faster iteration and clearer A/B validation.</description>
+      <content:encoded><![CDATA[<h2>Context</h2>
+<p>Wolt+ is Wolt’s subscription product, similar to Uber One or DashPass. A key growth lever is how and when users are prompted to subscribe during the ordering flow.</p>
+<h2>The problem</h2>
+<p>Subscription entry points were limited and required users to leave the order flow. We wanted to introduce new surfaces in cart and checkout, along with a faster “express” signup experience, but the initial plan bundled everything into a single release, increasing complexity and delaying validation.</p>
+<h2>Approach</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Cart entry point + express signup flow">
+</video>
+<p>I acted as <strong>client-side DRI across iOS, Web, and Android</strong>, driving RFCs and alignment with product, design, backend, and data science, while leading iOS implementation.</p>
+<p>Early on, I pushed to split the work into independent experiments:</p>
+<ul>
+<li>launch and validate the cart entry point first</li>
+<li>follow with express signup as a separate iteration</li>
+</ul>
+<p>This allowed us to ship sooner and learn faster instead of blocking on a more complex implementation.</p>
+<p>For express signup, I worked through several UX and technical constraints:</p>
+<ul>
+<li>enabling multi-step flows inside a bottom sheet (not previously supported)</li>
+<li>simplifying transitions between “express” and full signup to reduce confusion</li>
+<li>coordinating with payments and backend teams on edge cases</li>
+</ul>
+<p>I also worked closely with data science to validate instrumentation and debug misleading A/B test results, ensuring we were measuring the right signals.</p>
+<h2>Outcome</h2>
+<ul>
+<li>Significant lift in Wolt+ signups and downstream order volume</li>
+<li>Both features successfully A/B tested and fully rolled out</li>
+<li>Cart entry point remains a core subscription growth surface</li>
+</ul>
+<h2>My role</h2>
+<p><strong>Client-side DRI across iOS, Web, and Android, leading RFCs, stakeholder alignment, and experimentation strategy, with hands-on iOS implementation.</strong></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Rebuilding article extraction safely behind feature flags</title>
+      <link>https://krisbaker.com/work/smartnews-smartview-v2/</link>
+      <guid isPermaLink="true">https://krisbaker.com/work/smartnews-smartview-v2/</guid>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>Swift</category>
+      <category>Architecture</category>
+      <category>Feature Flags</category>
+      <category>Rendering</category>
+      <description>Led the iOS implementation of a second-generation article extraction system (SmartHTMLExtractorV2), shipping it in parallel with the existing renderer behind client-controlled feature flags to de-risk rollout of a critical content surface.</description>
+      <content:encoded><![CDATA[<h2>Context</h2>
+<p>SmartNews renders millions of articles through its SmartView system. The existing extraction pipeline had accumulated technical debt and inconsistencies across publishers.</p>
+<p>Replacing it outright was too risky. Any regression would directly impact content readability and user trust.</p>
+<h2>The problem</h2>
+<p>We needed to:</p>
+<ul>
+<li>introduce a new extraction pipeline</li>
+<li>improve HTML parsing and formatting reliability</li>
+<li>integrate with backend-driven rules (CSS, transformations)</li>
+<li>avoid breaking the existing rendering experience</li>
+</ul>
+<p>All without disrupting a core product surface.</p>
+<h2>Approach</h2>
+<p>I built SmartHTMLExtractorV2 as a parallel implementation:</p>
+<ul>
+<li>Created a new Swift module (SmartHTML) wrapping SwiftSoup with a stable internal API</li>
+<li>Implemented a new extractor pipeline with:
+<ul>
+<li>HTML parsing and cleanup</li>
+<li>CSS rule integration from backend services</li>
+<li>structured formatting via internal models</li>
+</ul>
+</li>
+<li>Introduced client-condition gating so v1 and v2 could coexist safely</li>
+</ul>
+<p>To reduce operational risk:</p>
+<ul>
+<li>Added fallback logic (stage/prod URLs if client conditions failed)</li>
+<li>Ensured edition-aware proxying (US vs JP behavior)</li>
+<li>Handled iOS-version-specific behavior (e.g. image format selection like JPEG vs WebP)</li>
+</ul>
+<h2>Outcome</h2>
+<ul>
+<li>Successfully shipped a parallel rendering system without regressions to the core experience</li>
+<li>Enabled incremental rollout and validation instead of a risky full switch</li>
+<li>Established a clean Swift-based foundation for future rendering improvements</li>
+</ul>
+<h2>What this demonstrates</h2>
+<ul>
+<li>Designing safe rollouts for high-risk, high-impact systems</li>
+<li>Wrapping third-party libraries into stable internal abstractions</li>
+<li>Building modular architecture inside a legacy mixed Obj-C/Swift codebase</li>
+<li>Thinking beyond implementation, including operational safety and fallback behavior</li>
+</ul>]]></content:encoded>
+    </item>
+    <item>
+      <title>Building politically balanced election experiences under a fixed deadline</title>
+      <link>https://krisbaker.com/work/smartnews-us-election-2020/</link>
+      <guid isPermaLink="true">https://krisbaker.com/work/smartnews-us-election-2020/</guid>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <category>iOS</category>
+      <category>Product</category>
+      <category>UX</category>
+      <category>Localization</category>
+      <description>Built key iOS features for SmartNews’ US Election 2020 coverage, including political balancing UI, candidate widgets, and election results surfaces with strict time-based and edition-aware behavior.</description>
+      <content:encoded><![CDATA[<h2>Context</h2>
+<p>SmartNews plays a major role in delivering election coverage. For the 2020 US election, the product included features aimed at presenting balanced perspectives across political content.</p>
+<p>The timeline was fixed. Everything had to be ready for election day.</p>
+<h2>The problem</h2>
+<p>We needed to:</p>
+<ul>
+<li>present content from multiple political perspectives clearly</li>
+<li>build new UI patterns (not just reuse existing ones)</li>
+<li>support real-time election results</li>
+<li>handle US/JP edition differences correctly</li>
+</ul>
+<h2>Approach</h2>
+<p>I worked across several election-related features:</p>
+<h3>Political balancing experience</h3>
+<ul>
+<li>Built a News Event view with a custom UISlider:
+<ul>
+<li>3- or 5-position support for perspective selection</li>
+</ul>
+</li>
+<li>Added onboarding, deep links, and action logging</li>
+<li>Enabled “News from all sides” entry points across surfaces</li>
+</ul>
+<h3>Candidate and results features</h3>
+<ul>
+<li>Implemented:
+<ul>
+<li>candidate widgets and lists</li>
+<li>election results widget with time-based visibility</li>
+</ul>
+</li>
+<li>Added:
+<ul>
+<li>timestamp gating (start/end times)</li>
+<li>edition-aware language rules (e.g. JP edition shows Japanese regardless of system locale)</li>
+</ul>
+</li>
+</ul>
+<h3>Infrastructure</h3>
+<ul>
+<li>Built API integrations with fallback behavior</li>
+<li>Used client conditions for controlled rollout</li>
+<li>Ensured telemetry coverage across interactions</li>
+</ul>
+<h2>Outcome</h2>
+<ul>
+<li>Delivered multiple election features on a fixed deadline</li>
+<li>Enabled users to explore balanced political perspectives</li>
+<li>Handled complex requirements around time, localization, and data availability</li>
+</ul>
+<h2>What this demonstrates</h2>
+<ul>
+<li>Shipping under non-negotiable deadlines</li>
+<li>Building custom UI for sensitive product areas</li>
+<li>Handling multi-edition, multi-locale product logic</li>
+<li>Delivering across multiple surfaces with consistent behavior</li>
+</ul>]]></content:encoded>
+    </item>
+  </channel>
+</rss>
