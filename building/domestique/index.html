@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Inkwell</title>
-    <meta name="description" content="The Swift static publishing tool behind this site. A blog generator that grew into a portfolio engine, with content collections, bilingual routing, and its own bundled themes.">
-    <link rel="canonical" href="https://krisbaker.com/building/inkwell/">
-    <meta property="og:title" content="Inkwell">
-    <meta property="og:description" content="The Swift static publishing tool behind this site. A blog generator that grew into a portfolio engine, with content collections, bilingual routing, and its own bundled themes.">
-    <meta property="og:url" content="https://krisbaker.com/building/inkwell/">
+    <title>Domestique</title>
+    <meta name="description" content="A native macOS app for the cycling data I actually care about, with nothing I don't. Pulls rides from Garmin and Strava, computes the metrics that matter, builds adaptive plans, and drives a smart trainer through the workouts. No social feed, no premium tier, no third-party cloud.">
+    <link rel="canonical" href="https://krisbaker.com/building/domestique/">
+    <meta property="og:title" content="Domestique">
+    <meta property="og:description" content="A native macOS app for the cycling data I actually care about, with nothing I don't. Pulls rides from Garmin and Strava, computes the metrics that matter, builds adaptive plans, and drives a smart trainer through the workouts. No social feed, no premium tier, no third-party cloud.">
+    <meta property="og:url" content="https://krisbaker.com/building/domestique/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/inkwell/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/inkwell/">
-    <link rel="alternate" hreflang="x-default" href="/building/inkwell/">
+    <link rel="alternate" hreflang="en" href="/building/domestique/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/">
+    <link rel="alternate" hreflang="x-default" href="/building/domestique/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -85,7 +85,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/inkwell/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/domestique/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -99,50 +99,77 @@
 
   <div class="building-detail-head is-active">
     <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated today</span>
-    <a href="https://github.com/KristopherGBaker/inkwell" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
+    <span class="building-detail-updated">updated 1w ago</span>
+    
   </div>
 
-  <h1 class="h1 building-detail-title">Inkwell</h1>
-  <p class="body-lg building-detail-blurb">The Swift static publishing tool behind this site. A blog generator that grew into a portfolio engine, with content collections, bilingual routing, and its own bundled themes.</p>
-  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/static-site/" class="tag-chip">Static site</a><a href="/building/tags/tooling/" class="tag-chip">Tooling</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
+  <h1 class="h1 building-detail-title">Domestique</h1>
+  <p class="body-lg building-detail-blurb">A native macOS app for the cycling data I actually care about, with nothing I don't. Pulls rides from Garmin and Strava, computes the metrics that matter, builds adaptive plans, and drives a smart trainer through the workouts. No social feed, no premium tier, no third-party cloud.</p>
+  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/cycling/" class="tag-chip">Cycling</a><a href="/building/tags/ble/" class="tag-chip">BLE</a><a href="/building/tags/go/" class="tag-chip">Go</a></div>
 
-  <article class="prose building-detail-prose"><p>Inkwell started as a personal blog generator and kept growing until it could drive a whole portfolio. It builds this site: the work case studies, the writing, the bilingual routes under <code>/ja/</code>, the résumé page, and now this Building section.</p>
-<p>The thing I like about working on my own generator is that every feature has an immediate, honest test. If a change makes the site worse, I notice the next time I open it.</p>
-<p>This section you are reading is the most recent example. The updates below are written with the same tool that renders them.</p></article>
+  <article class="prose building-detail-prose"><p>Domestique pulls my rides from Garmin Connect and Strava, computes the metrics that decide whether a training block is working (normalized power, IF, TSS, a mean-max power curve, Bannister CTL/ATL/TSB), turns that into an adaptive plan, and drives my smart trainer through the workouts. No social feed, no premium tier, no third-party cloud holding my history.</p>
+<p>The name is the idea. A domestique is the rider who does the unglamorous work so the leader can win. That is the job I wanted from my own data.</p>
+<p>I have been on a bike most of my life, mountain biking in Idaho and now road riding here in Japan, and I have used most of the big platforms. They are good at the feed and the badges. They are less good at being a quiet, honest tool that lives on my own machine and answers to me. So I built one. It is single-user by design, though the Go backend underneath is multi-athlete-ready for the day that changes.</p>
+<p><img src="/assets/building/domestique/dashboard.png" alt="Dashboard: a 28-day form readout with the Performance Manager chart and weekly intensity-stacked load bars." />
+<em>The dashboard. CTL, ATL, and TSB in one read, with weekly load colored by intensity.</em></p>
+<p><img src="/assets/building/domestique/activity-detail.png" alt="Activity detail for a Fujisawa road ride: hero readouts, a route map, a power and heart-rate chart, a mean-max power curve, elevation, and a time-in-zone row." />
+<em>An activity, broken down: route, power and heart rate, the mean-max curve, and time in zone.</em></p>
+<p><img src="/assets/building/domestique/today.png" alt="Today view: an adaptive Sweet Spot 3x10 recommendation with start and free-ride controls, above a goal-setup card." />
+<em>Today's prescription. The engine picks the session; one tap starts it on the trainer.</em></p>
+<p><img src="/assets/building/domestique/workout-game.png" alt="The workout game mid-ride: a 2D side-scrolling cyclist climbing a hill at dusk, with a live power and target HUD across the top." />
+<em>The same interval, rendered as a side-scroller. My power drives the rider up the hill.</em></p>
+<p><img src="/assets/building/domestique/routes.png" alt="Routes library listing saved rides including Shimanami Kaido and three Mont Ventoux ascents, with distance and elevation per route." />
+<em>The Routes library. Imported GPX, saved rides, and the Mont Ventoux presets.</em></p>
+<p><img src="/assets/building/domestique/route-detail.png" alt="Route detail for the Shimanami Kaido from Onomichi to Imabari: an elevation profile above a satellite map of the traced course." />
+<em>A route, ready to play back. The elevation profile drives the trainer's gradient.</em></p>
+<p>The updates below are the build log: the foundation wired end to end, a workout game I did not plan to write, a backend of its own, and the day Mont Ventoux showed up on the trainer.</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">3</span></h2>
+      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">5</span></h2>
     </div>
-    <div class="update-timeline"><a href="/building/inkwell/inkwell-building-section/" class="update-entry is-shipped">
+    <div class="update-timeline"><a href="/building/domestique/domestique-bilingual-units/" class="update-entry is-shipped">
   <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.04</span>
+    <span class="update-entry-date">2026.05.25</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">A Building section, posted from itself</span>
+  <span class="update-entry-title">Two languages, two unit systems</span>
 </a>
-<a href="/building/inkwell/inkwell-bilingual-routes/" class="update-entry is-shipped">
+<a href="/building/domestique/domestique-mont-ventoux/" class="update-entry is-shipped">
   <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.01</span>
+    <span class="update-entry-date">2026.05.22</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">Bilingual routes under /ja/</span>
+  <span class="update-entry-title">Mont Ventoux on the trainer</span>
 </a>
-<a href="/building/inkwell/inkwell-collections-quiet-theme/" class="update-entry is-shipped">
+<a href="/building/domestique/domestique-backend/" class="update-entry is-shipped">
   <span class="update-entry-meta">
-    <span class="update-entry-date">2026.04.30</span>
+    <span class="update-entry-date">2026.05.21</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">Content collections and the quiet theme</span>
+  <span class="update-entry-title">A backend of its own</span>
+</a>
+<a href="/building/domestique/domestique-workout-game/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.20</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">A workout game I did not plan to write</span>
+</a>
+<a href="/building/domestique/domestique-foundation/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.05.18</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">The whole skeleton in one pass</span>
 </a>
 </div>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
-    <a href="/building/domestique/" class="case-study-next-row">
-      <span class="case-study-next-title">Domestique</span>
+    <a href="/building/shikisha/" class="case-study-next-row">
+      <span class="case-study-next-title">Shikisha</span>
       <span class="read-link">Read case study <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

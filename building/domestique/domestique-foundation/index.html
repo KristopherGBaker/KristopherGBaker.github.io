@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tags: Swift</title>
-    <meta name="description" content="Archive page for tags Swift.">
-    <link rel="canonical" href="https://krisbaker.com/building/tags/swift/">
-    <meta property="og:title" content="Tags: Swift">
-    <meta property="og:description" content="Archive page for tags Swift.">
-    <meta property="og:url" content="https://krisbaker.com/building/tags/swift/">
+    <title>The whole skeleton in one pass</title>
+    <meta name="description" content="The whole skeleton in one pass">
+    <link rel="canonical" href="https://krisbaker.com/building/domestique/domestique-foundation/">
+    <meta property="og:title" content="The whole skeleton in one pass">
+    <meta property="og:description" content="The whole skeleton in one pass">
+    <meta property="og:url" content="https://krisbaker.com/building/domestique/domestique-foundation/">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/domestique/domestique-foundation/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/domestique-foundation/">
+    <link rel="alternate" hreflang="x-default" href="/building/domestique/domestique-foundation/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -82,7 +85,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/domestique/domestique-foundation/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -91,46 +94,27 @@
   </div>
 </header>
 
-<main class="container page-shell" style="padding-top: var(--page-padding-top);">
-  <p class="eyebrow" style="margin-bottom: 18px;">tags</p>
-  <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">Swift</h1>
-  <div><a href="/building/shikisha/" class="post-list-item">
-  <p class="post-list-meta">
-    <span></span>
-    <span class="post-list-meta-sep">·</span><span>Swift</span>
-    <span class="post-list-meta-sep">·</span><span>1 min read</span>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/domestique/" class="post-back">← Domestique</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.05.18</span>
+     · <span>1 min read</span>
   </p>
-  <h3 class="post-list-title">Shikisha</h3>
-  <p class="post-list-blurb">A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.</p>
-</a>
-<a href="/building/jpresume/" class="post-list-item">
-  <p class="post-list-meta">
-    <span></span>
-    <span class="post-list-meta-sep">·</span><span>Swift</span>
-    <span class="post-list-meta-sep">·</span><span>1 min read</span>
-  </p>
-  <h3 class="post-list-title">JPResume</h3>
-  <p class="post-list-blurb">A Swift CLI that turns a western resume into Japanese 履歴書 and 職務経歴書 formats and keeps the two in sync, with deterministic stages kept separate from the AI ones.</p>
-</a>
-<a href="/building/inkwell/" class="post-list-item">
-  <p class="post-list-meta">
-    <span></span>
-    <span class="post-list-meta-sep">·</span><span>Swift</span>
-    <span class="post-list-meta-sep">·</span><span>1 min read</span>
-  </p>
-  <h3 class="post-list-title">Inkwell</h3>
-  <p class="post-list-blurb">The Swift static publishing tool behind this site. A blog generator that grew into a portfolio engine, with content collections, bilingual routing, and its own bundled themes.</p>
-</a>
-<a href="/building/domestique/" class="post-list-item">
-  <p class="post-list-meta">
-    <span></span>
-    <span class="post-list-meta-sep">·</span><span>Swift</span>
-    <span class="post-list-meta-sep">·</span><span>3 min read</span>
-  </p>
-  <h3 class="post-list-title">Domestique</h3>
-  <p class="post-list-blurb">A native macOS app for the cycling data I actually care about, with nothing I don't. Pulls rides from Garmin and Strava, computes the metrics that matter, builds adaptive plans, and drives a smart trainer through the workouts. No social feed, no premium tier, no third-party cloud.</p>
-</a>
-</div>
+  <h1 class="h1 post-title update-title">The whole skeleton in one pass</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>Domestique started as one long day of wiring the full path end to end: sign in to Garmin Connect, pull activities into a local cache, compute the telemetry that matters, and turn it into something that can drive a trainer.</p>
+<p>By the end the skeleton was standing. On the analytics side: an activity list with intensity filters, a detail view with the route on a MapKit map, a power and heart-rate chart, a mean-max power curve, and a dashboard of 28-day load with a 180-day PMC chart. On the training side: a hybrid plan engine (calendar anchors plus an adaptive interior, Friel-style phases with auto-recovery weeks), a library of built-in workouts, and a runtime that pushes ERG targets to an FTMS trainer over BLE while it records the ride.</p>
+<p>The piece I wanted most was the loop closing: ride a structured workout, have the app score how closely I matched the prescription, and feed that back into what it recommends tomorrow. Everything since has been filling in that frame.</p></article>
+    <nav class="update-nav">
+      <a href="/building/domestique/domestique-workout-game/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">A workout game I did not plan to write</span>
+      </a>
+      <span></span>
+    </nav>
+    <div class="post-footer"><a href="/building/domestique/" class="read-link">Domestique <span class="arrow" aria-hidden="true">→</span></a></div>
+  </div>
 </main>
 
     <footer class="site-footer no-print">
