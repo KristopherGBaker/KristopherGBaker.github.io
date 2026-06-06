@@ -40,40 +40,21 @@
       <link>https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</link>
       <guid isPermaLink="true">https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/</guid>
       <pubDate>Tue, 02 Jun 2026 12:34:39 +0000</pubDate>
-      <content:encoded><![CDATA[<p>I have been building more AI-assisted tools in Swift lately, and I kept running into the same awkward edge.</p>
-<p>Calling an LLM from Swift is easy.</p>
-<p>Keeping the surrounding workflow understandable and maintainable is the hard part.</p>
-<p>The hard part starts once the feature becomes an actual system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
-<p>That is why I started building <a href="https://github.com/KristopherGBaker/Shikisha">Shikisha</a>, a Swift-native take on LangChain-style workflows for macOS and iOS. It is still early, currently <code>0.1.0</code>, but it has reached the point where I am using it in real projects instead of just sketching examples around it.</p>
+      <content:encoded><![CDATA[<p>I have been building more AI-assisted tools in Swift lately, and I kept hitting the same edge. Calling an LLM from Swift is easy. Keeping the workflow around that call understandable and maintainable is the hard part, and that part shows up the moment a feature becomes a real system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
+<p>That is why I started building <a href="https://github.com/KristopherGBaker/Shikisha">Shikisha</a>, a Swift-native take on LangChain-style workflows for macOS and iOS. It is still early, currently <code>0.1.0</code>, but it has reached the point where I reach for it in real projects instead of just sketching examples around it.</p>
 <h2>The Problem Was the Glue</h2>
-<p>Most LLM demos begin in a reasonable place: send a few messages, get text back, print the answer.</p>
-<p>That is enough for a toy chatbot. It is not enough for the kind of tools I have been building.</p>
-<p><a href="https://github.com/KristopherGBaker/JPResume">JPResume</a>, for example, turns a western resume into Japanese 履歴書 and 職務経歴書 formats. The model is useful there, but only in certain places. I still want deterministic parsing where possible. I want validation between stages. I want structured JSON back from the model, not a nice paragraph that looks plausible. I want to inspect intermediate artifacts before they become a PDF I might send to a company.</p>
-<p>Once a tool has those constraints, the model call becomes one step in a larger system.</p>
-<p>Before Shikisha, I could still build that system in Swift, but each project carried its own small pile of glue code:</p>
-<ul>
-<li>one-off provider wrappers</li>
-<li>handwritten JSON parsing</li>
-<li>ad hoc retry logic</li>
-<li>duplicated streaming adapters</li>
-<li>separate mock implementations for tests</li>
-</ul>
-<p>None of it was individually hard, but it made each new project feel like starting over.</p>
-<p>With a shared workflow shape, those pieces become composable parts instead of per-project scaffolding.</p>
-<p>I wanted the same basic vocabulary to work across small chains, RAG pipelines, tool-using agents, and app UI.</p>
+<p>Most LLM demos start in a reasonable place: send a few messages, get text back, print the answer. That is enough for a toy chatbot. It is not enough for the tools I have been building.</p>
+<p><a href="https://github.com/KristopherGBaker/JPResume">JPResume</a>, for example, turns a western resume into Japanese 履歴書 and 職務経歴書 formats. The model is useful there, but only in places. I want deterministic parsing where possible, validation between stages, structured JSON instead of a plausible-looking paragraph, and a way to inspect intermediate artifacts before they become a PDF I might send to a company. Once a tool has those constraints, the model call is just one step in a larger system.</p>
+<p>I could always build that system in Swift, but each project carried its own pile of glue: one-off provider wrappers, handwritten JSON parsing, ad hoc retries, duplicated streaming adapters, separate mocks for tests. None of it was hard, but every new project felt like starting over. I wanted one vocabulary that works across small chains, RAG pipelines, tool-using agents, and app UI, so those pieces become composable parts instead of per-project scaffolding.</p>
 <h2>A Swift Shape for LangChain Ideas</h2>
-<p>Shikisha borrows ideas from LangChain, but the implementation is written for Swift rather than translated line by line.</p>
-<p>Most AI tooling ecosystems assume Python. That works well for experiments and backend services, but Apple-platform apps eventually need the workflow to coexist with SwiftUI, structured concurrency, app state, testing, sandboxing, and platform-native APIs.</p>
-<p>I also wanted workflows that could live directly inside Apple-platform apps instead of assuming a separate Python orchestration backend.</p>
-<p>That is the part I wanted in Swift.</p>
-<p>A way to make LLM workflows feel like normal typed application code instead of a separate scripting layer bolted onto the side.</p>
+<p>Shikisha borrows ideas from LangChain, but it is written for Swift rather than translated line by line. Most AI tooling assumes Python, which is fine for experiments and backend services. Apple-platform apps eventually need the workflow to coexist with SwiftUI, structured concurrency, app state, testing, and sandboxing, and to live inside the app instead of behind a separate Python orchestration backend. I wanted LLM workflows to feel like normal typed application code, not a scripting layer bolted on the side.</p>
 <p>The core idea is one protocol:</p>
 <pre><code class="language-swift">public protocol Runnable&lt;Input, Output&gt;: Sendable {
     associatedtype Input: Sendable
     associatedtype Output: Sendable
     func invoke(_ input: Input) async throws -&gt; Output
 }</code></pre>
-<p>Prompt templates, chat models, output parsers, retrievers, and whole chains can all be <code>Runnable</code>. That means a simple prompt-model-parser pipeline can read top to bottom:</p>
+<p>Prompt templates, chat models, output parsers, retrievers, and whole chains can all be <code>Runnable</code>, so a prompt-model-parser pipeline reads top to bottom:</p>
 <pre><code class="language-swift">let chain = ChatPromptTemplate.fromTuples([
     .system("Answer concisely."),
     .human("{question}")
@@ -82,71 +63,24 @@
 .pipe(StringOutputParser())
 
 let answer = try await chain.invoke(["question": "What is Swift Concurrency?"])</code></pre>
-<p>The important part is not the operator. It is the contract.</p>
-<p>If a prompt produces messages, and a model accepts messages, the compiler can check that connection. If a parser expects an <code>AIMessage</code>, the model has to provide one. When a chain works, it can be invoked, batched, retried, wrapped with callbacks, or tested with a fake model in the same style as any smaller piece.</p>
-<pre class="mermaid">flowchart LR
-    prompt[Prompt template]
-    model[Chat model]
-    parser[Output parser]
-    tools[Typed tools]
-    memory[Memory]
-    stateGraph[StateGraph]
-    callbacks[Callbacks]
-
-    prompt --&gt; model --&gt; parser
-    model --&gt; tools
-    tools --&gt; model
-    model --&gt; memory
-    memory --&gt; model
-    parser --&gt; stateGraph
-    callbacks -.-&gt; model
-    callbacks -.-&gt; tools
-    callbacks -.-&gt; stateGraph</pre>
-<p>Shikisha also uses the Swift tools I would expect to reach for in 2026: structured concurrency, <code>Sendable</code> types, <code>AsyncSequence</code> streaming, <code>Codable</code> shapes for provider payloads, and Swift Package Manager as the normal installation path.</p>
+<p>The important part is not the operator, it is the contract. If a prompt produces messages and a model accepts messages, the compiler can check that connection. When a chain works, it can be invoked, batched, retried, wrapped with callbacks, or tested with a fake model in the same style as any smaller piece.</p>
+<p>Under that contract Shikisha leans on the Swift tools I would expect to reach for in 2026: structured concurrency, <code>Sendable</code> types, <code>AsyncSequence</code> streaming, <code>Codable</code> provider payloads, and Swift Package Manager for installation.</p>
 <h2>What Is Included So Far</h2>
-<p>The current release covers the pieces I keep needing.</p>
-<h3>Models and Prompts</h3>
+<p>The current release covers the pieces I keep needing:</p>
 <ul>
-<li>chat model adapters for OpenAI, Anthropic, Google Gemini, and Ollama</li>
-<li>prompt templates</li>
-<li>output parsers, including structured output helpers</li>
+<li><strong>Models and prompts:</strong> chat adapters for OpenAI, Anthropic, Google Gemini, and Ollama; prompt templates; output parsers with structured-output helpers.</li>
+<li><strong>Retrieval:</strong> document loaders, text splitters, embeddings, and vector stores; RAG retrievers (vector, BM25, hybrid, MMR, and several query-rewriting strategies); incremental indexing so changed documents do not force a full re-embed.</li>
+<li><strong>Agents and workflows:</strong> conversation memory, typed tools with a tool-calling agent loop, and <code>StateGraph</code> for cyclic or stateful workflows.</li>
+<li><strong>Observability and testing:</strong> callbacks for tracing, usage, and cost; <code>FakeChatModel</code> and local embeddings for offline tests.</li>
 </ul>
-<h3>Retrieval and Indexing</h3>
-<ul>
-<li>document loaders, text splitters, embeddings, and vector stores</li>
-<li>retrievers for RAG, including vector, BM25, hybrid, MMR, multi-query, parent-document, time-weighted, self-querying, and contextual compression</li>
-<li>incremental indexing so changed documents do not always require re-embedding everything</li>
-</ul>
-<h3>Agents and Workflows</h3>
-<ul>
-<li>memory for conversations</li>
-<li>typed tools and a tool-calling agent loop</li>
-<li><code>StateGraph</code> for cyclic or stateful workflows</li>
-</ul>
-<h3>Observability and Testing</h3>
-<ul>
-<li>callbacks for tracing, usage, cost tracking, and other side effects</li>
-<li><code>FakeChatModel</code> and local embeddings for offline examples and tests</li>
-</ul>
-<p>That list sounds large, but the useful thing is that the pieces share a shape. A RAG chain and a basic one-question prompt are not separate worlds. They are different arrangements of the same few ideas.</p>
-<p>You can run the example suite without an API key:</p>
+<p>The list is long, but the pieces share a shape. A RAG chain and a one-question prompt are not separate worlds; they are different arrangements of the same few ideas. You can run the example suite without an API key:</p>
 <pre><code class="language-bash">swift run ShikishaExamples
 swift run ShikishaExamples basicChain
 swift run ShikishaExamples ragPipeline</code></pre>
-<p>Tests and demos should not depend on a live provider whenever the behavior under test is the workflow itself.</p>
+<p>Tests and demos should not depend on a live provider when the behavior under test is the workflow itself.</p>
 <h2>The Documentation Is Part of the Project</h2>
-<p>I recently added full <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">DocC documentation and tutorials</a>, which changed how the project feels.</p>
-<p>The docs now include conceptual guides for Swift developers who are new to LLM app patterns, plus feature articles for chat models, prompts, output parsers, structured output, documents, embeddings, retrievers, memory, agents, graphs, indexing, observability, and resilience.</p>
-<p>The tutorials are more practical. They walk through building:</p>
-<ul>
-<li>a streaming chatbot with memory</li>
-<li>a RAG app that answers from your own documents</li>
-<li>a tool-using agent</li>
-<li>a small coding agent with file tools</li>
-<li>a universal SwiftUI app around that agent</li>
-</ul>
-<p>The coding-agent tutorial is a good example of why I wanted this framework in Swift. A surprising amount of an AI coding assistant is just a model, a few file tools, and a loop. The details still matter: sandbox paths, typed tool arguments, tool specs, memory, callbacks, and deciding when the model can act. But once those pieces have names, the workflow is easier to reason about.</p>
-<p>Even the agent loop stays small enough to read:</p>
+<p>I recently added full <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">DocC documentation and tutorials</a>, which changed how the project feels. There are conceptual guides for Swift developers new to LLM patterns, a feature article for each major piece, and tutorials that build real things: a streaming chatbot with memory, a RAG app over your own documents, a tool-using agent, a small coding agent with file tools, and a SwiftUI app around that agent.</p>
+<p>The coding-agent tutorial is a good example of why I wanted this in Swift. A surprising amount of an AI coding assistant is just a model, a few file tools, and a loop. The details still matter (sandbox paths, typed tool arguments, memory, deciding when the model can act), but once they have names the loop stays small enough to read:</p>
 <pre><code class="language-swift">let agent = ToolCallingAgent(
     model: model,
     tools: [readFileTool, editFileTool],
@@ -157,33 +91,16 @@ let result = try await agent.run([
     SystemMessage(content: "You are a coding assistant working in this project."),
     HumanMessage(content: "Summarize the TODOs in this project.")
 ])</code></pre>
-<p>It also becomes easier to move from a command-line experiment into a SwiftUI app without rewriting the whole mental model in another language.</p>
+<p>Moving that from a command-line experiment into a SwiftUI app does not mean rewriting the mental model in another language.</p>
 <h2>Where I Am Already Using It</h2>
-<p>JPResume is the first public project where Shikisha fits naturally.</p>
-<p>The resume pipeline needs model calls, structured output, validation, and reviewable intermediate files. Shikisha gives me a cleaner way to express those stages without every stage owning its own provider wrapper or parser convention. It does not remove the hard product decisions, like what the model should be allowed to infer, or how strict validation should be. It just gives the workflow a better foundation.</p>
-<p>I am also using Shikisha in another project that I will write about later. That project pushed on a different side of the library: agent behavior, tools, and app integration. I am not ready to describe it yet, but it has been useful as a second check that Shikisha is not only shaped around one resume tool.</p>
-<p>That is usually the moment when abstractions start proving themselves. Not when the first demo works, but when the same abstractions survive a second project with different pressure.</p>
+<p>JPResume is the first public project where Shikisha fits naturally. Its pipeline needs model calls, structured output, validation, and reviewable intermediate files, and Shikisha lets me express those stages without each one owning its own provider wrapper or parser convention. It does not remove the hard product decisions, like what the model is allowed to infer or how strict validation should be. It just gives the workflow a better foundation.</p>
+<p>I am also using it in a second project I will write about later, which leans on a different side of the library: agent behavior, tools, and app integration. That has been the more useful test. Abstractions tend to prove themselves not when the first demo works, but when they survive a second project with different pressure.</p>
 <h2>What Still Feels Early</h2>
-<p>Shikisha is not a mature ecosystem. It is a young Swift package, and the API may still move as the real use cases sharpen.</p>
-<p>There are also places where the older approach is still fine. If all you need is one provider call behind one button, adding a framework might be more structure than the feature deserves. A small direct <code>URLSession</code> call can be the right answer.</p>
-<p>Shikisha starts to matter when the workflow becomes more than the call: when you need a repeatable chain, retrieval, structured output, tool execution, memory, tracing, retries, streaming, or tests that should run without hitting a provider.</p>
-<p>I am not trying to make every AI feature look elaborate. I am trying to make the elaborate ones less fragile.</p>
-<h2>What Changed</h2>
-<p>The interesting part for me is not that Shikisha can call models.</p>
-<p>It is that the same abstractions now survive across:</p>
-<ul>
-<li>command-line experiments</li>
-<li>SwiftUI apps</li>
-<li>retrieval pipelines</li>
-<li>typed tool execution</li>
-<li>local testing</li>
-</ul>
-<p>That is the point where a library starts becoming infrastructure instead of just a demo.</p>
-<p>The documentation is here:</p>
-<p><a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a></p>
-<p>The repo is here:</p>
-<p><a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
-<p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but it is already past the point of being just an experiment.</p>]]></content:encoded>
+<p>Shikisha is a young Swift package, and the API may still move as the real use cases sharpen. There are also times the older approach is fine: if all you need is one provider call behind one button, a small direct <code>URLSession</code> call can be the right answer. Shikisha starts to matter when the workflow becomes more than the call: a repeatable chain, retrieval, structured output, tool execution, memory, tracing, retries, streaming, or tests that should run without hitting a provider. I am not trying to make every AI feature look elaborate, just to make the elaborate ones less fragile.</p>
+<p>The part I care about is that the same abstractions now survive across command-line experiments, SwiftUI apps, retrieval pipelines, typed tool execution, and local tests. That is when a library starts becoming infrastructure instead of a demo.</p>
+<p>Docs: <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a>
+Repo: <a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
+<p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but already past being just an experiment.</p>]]></content:encoded>
     </item>
     <item>
       <title>Example apps and tutorials</title>
