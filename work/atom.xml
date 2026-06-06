@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <title>Kristopher Baker · Apps, systems, and tools I’ve shipped.</title>
-  <subtitle>Senior product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</subtitle>
+  <subtitle>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</subtitle>
   <link href="https://krisbaker.com/" rel="alternate"/>
   <link href="https://krisbaker.com/work/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>

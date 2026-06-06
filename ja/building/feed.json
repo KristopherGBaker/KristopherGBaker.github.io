@@ -1,127 +1,127 @@
 {
-  "items" : [
-    {
-      "title" : "セクションごとのフィード",
-      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/",
-      "date_published" : "2026-06-05T14:00:00Z",
-      "content_html" : "<p>これまでこのサイトのフィードは一つだけで、しかもブログ記事しか流れていませんでした。実績や制作中のアップデートという、いちばんフィード向きのものを購読する手段がなかったのです。</p>\n<p>Inkwell 0.15.0でそこを直しました。小さな <code>feeds</code> 設定ブロックで、セクションごとに専用フィードを出せるようになりました。記事だけ、実績だけ、あるいはこの制作ログだけ（<code>/building/rss.xml</code>）を追えます。サイトのルートは、すべてを新しい順にまとめたコンバインドフィードになります。子のアップデートはプロジェクトにリンクし、年だけを持つ実績のケーススタディにも妥当な日付が入ります。</p>\n<p>いま読んでいるこのアップデートも、すでに三か所に流れています。このセクションのフィード、コンバインドフィード、そしてホームのタイムラインです。</p>",
-      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/"
-    },
-    {
-      "title" : "クリックで拡大",
-      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/",
-      "date_published" : "2026-06-05T10:00:00Z",
-      "content_html" : "<p>本文の画像は、これまで段組みの幅に収まったままでした。いまはどの画像も、クリックかタップでオーバーレイに原寸表示されます。Escキーか、画像の外側をクリックすると閉じます。</p>\n<p>Inkwell 0.14.0で入れました。quietテーマの小さなJavaScriptと、画像パイプライン側の小さな変更です。各画像が元のURLを覚えておくので、ライトボックスはリサイズ版ではなく本物のファイルを表示します。きっかけは、Domestiqueのスクリーンショットを大きく見たかったことでした。</p>",
-      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/"
-    },
-    {
-      "title" : "制作中セクションを、それ自身で投稿",
-      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-building-section/",
-      "date_published" : "2026-06-04T09:00:00Z",
-      "content_html" : "<p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>\n<p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>\n<p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p>",
-      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-building-section/"
-    },
-    {
-      "title" : "サンプルアプリとチュートリアル",
-      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-examples/",
-      "date_published" : "2026-06-02T10:00:00Z",
-      "content_html" : "<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>\n<p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>\n<p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>",
-      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-examples/"
-    },
-    {
-      "title" : "0.1.0 をタグ付け",
-      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/",
-      "date_published" : "2026-05-29T11:00:00Z",
-      "content_html" : "<p>最初のタグ付きリリースです。0.1.0 は Swift 6.3 上で macOS 14以降・iOS 17以降を対象とし、Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、Codable のワイヤ形式で構成されています。</p>\n<p>同じ日に、JPResume がLLMのトランスポートを Shikisha に切り替えました。これが私の気にしていたテストでした。「デモが動くか」ではなく、「別の実際のツールがこれに依存したいと思うか」です。</p>\n<p>あえて「アクティブな開発中」と呼んでいます。1.0 までにAPIはまだ変わるかもしれませんし、表面が固まったふりをするより、そう言っておきたいのです。</p>",
-      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"
-    },
-    {
-      "title" : "v0.6.0：品質ループと Shikisha への移行",
-      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/",
-      "date_published" : "2026-05-29T08:00:00Z",
-      "content_html" : "<p>v0.6.0 は、出力の品質と整理がテーマでした。生成ステージには自己批評のループ、正規化には検証フィードバックのループを入れ、専用の日本語制約チェッカーが、微妙に間違えやすい慣習を拾うようになりました。プロバイダーが対応している場合は、JSONの応答を期待するのではなく json_object として強制します。</p>\n<p>裏側では二つの整理を行いました。オーケストレーションをドメインに依存しない DocPipeline モジュールへ切り出し、LLMのトランスポートを Shikisha に切り替えたことです。</p>\n<p>満足しているのは二つ目です。JPResume はいまや、自作のワークフローライブラリの最初の実利用者になりました。まさに、Shikisha が支えるために作った依存関係です。</p>",
-      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"
-    },
-    {
-      "title" : "二つの言語、二つの単位系",
-      "url" : "https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/",
-      "date_published" : "2026-05-25T09:00:00Z",
-      "content_html" : "<p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>\n<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>\n<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>\n<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p>",
-      "id" : "https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"
-    },
-    {
-      "title" : "トレーナーの上のモンヴァントゥ",
-      "url" : "https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/",
-      "date_published" : "2026-05-22T09:00:00Z",
-      "content_html" : "<p>トレーナーはパワーターゲットを保持できます。次にほしかったのは地形でした。室内で実際の道を走り、勾配が抵抗を動かす。</p>\n<p>そこでDomestiqueにルートライブラリを足しました。GPXをインポートする、任意のアクティビティからルートを保存する、あるいは保存済みのStravaルートを取り込む。そして、フリーライドや構造化ワークアウトの最中にそれを再生し、標高プロファイルでトレーナーのシミュレート勾配を動かします。ドラッグできるチャートのハンドルとアンドゥ／リドゥを備えたトリムエディタがあり、乱れたGPSトラックからきれいな区間を切り出せます。ルートは端から端まで反転もできます。</p>\n<p>最初にバンドルしたルートはモンヴァントゥで、3つの古典的な登り口に合わせた3つのプリセットです。藤沢の予備の部屋からプロヴァンスの巨人を登り、実際の道で斜度が上がるまさにその地点で抵抗がせり上がってくる。室内のセットアップが屋外に一番近づいた瞬間でした。</p>",
-      "id" : "https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"
-    },
-    {
-      "title" : "専用のバックエンド",
-      "url" : "https://krisbaker.com/ja/building/domestique/domestique-backend/",
-      "date_published" : "2026-05-21T09:00:00Z",
-      "content_html" : "<p>しばらくの間、Domestiqueはシングルデバイスで満足していました。すべてはApplication Support下のファイルとSQLiteの中。二台目のマシンに同じ履歴がほしくなるまで、あるいはうっかり消してしまうかもしれないフォルダ以外のバックアップがほしくなるまでは、それで十分です。</p>\n<p>そこで、バックエンドを書きました。<code>domestiqued</code> という一つのGoバイナリに、<code>serve | migrate | athlete | token</code> のCLI、埋め込みマイグレーション付きのSQLiteストア、ベアラートークン認証、そしてバイナリから直接配信される管理コンソール。CGOなし、コンテナなし、マネージドクラウドなし。自分が管理する小さなマシンの上で動きます。</p>\n<p>Swift側では、SyncClientがワンクリックで差分をプッシュ／プルします。アクティビティとストリーム、ゴールとプランとアドヒアランス、さらにはワークアウトゲームの生涯スタッツやワークアウトごとの自己ベストまで。オートセーブはアプリが何かを変える場所すべてに配線してあり、まとめて束ねられるので、連続した編集も最大で数回のバックグラウンドプッシュに収まります。データモデルはマルチアスリート対応なので、いつか一緒に走る仲間と共有したくなっても、書き直しではなく小さな一歩で済みます。</p>",
-      "id" : "https://krisbaker.com/ja/building/domestique/domestique-backend/"
-    },
-    {
-      "title" : "書くつもりのなかったワークアウトゲーム",
-      "url" : "https://krisbaker.com/ja/building/domestique/domestique-workout-game/",
-      "date_published" : "2026-05-20T09:00:00Z",
-      "content_html" : "<p>室内のインターバルは退屈です。これはどんなトレーナーにも共通する根っこの問題です。だから最初の一週間のどこかで、小さな実験を始めました。ワークアウトをSpriteKitの2D横スクロールのサイクリングゲームとして描き、ライダーの速度を実際のパワーで動かすのです。</p>\n<p>これは、いい意味で手に負えなくなりました。ライダーはトラックパッドのスワイプでホップし、コーナーでバンクし、登りではダンシングし、下りではタックします。昼夜のサイクル、天候、テーマ別の環境、視差で流れる鳥たち、そして追いかけるための自己ベストライドのゴースト。フィニッシュ画面は本物のテレメトリ表示です。NP、IF、TSS、ゾーン内時間、パワーカーブ、そしてセッションをまたいで蓄積されるキャリアスタッツの数々。</p>\n<p>これで素のターゲット数値より速くなるわけではありません。それでも、画面に丘があって破るべき自己ベストがあると、きついインターバルを最後までやり切れる回数が増えます。ここで意味があるのはその一点だけです。ピクセルアートとサウンドは後から、Asepriteのアセットパイプラインを通して入れました。</p>",
-      "id" : "https://krisbaker.com/ja/building/domestique/domestique-workout-game/"
-    },
-    {
-      "title" : "骨組み全体を一気に",
-      "url" : "https://krisbaker.com/ja/building/domestique/domestique-foundation/",
-      "date_published" : "2026-05-18T09:00:00Z",
-      "content_html" : "<p>Domestiqueは、一本の長い一日から始まりました。ガーミンConnectにサインインし、アクティビティをローカルキャッシュに取り込み、意味のあるテレメトリを計算し、それをトレーナーを動かせる形に変える。この全経路をエンドツーエンドで配線したのです。</p>\n<p>その日の終わりには骨組みが立っていました。アナリティクス側は、強度フィルタ付きのアクティビティ一覧、MapKitのマップにルートを描く詳細画面、パワーと心拍のチャート、ミーンマックスのパワーカーブ、そして28日間の負荷と180日間のPMCチャートを並べたダッシュボード。トレーニング側は、ハイブリッドなプランエンジン（カレンダー上のアンカーとアダプティブな内側、Friel流のフェーズ進行に自動のリカバリー週）、組み込みワークアウトのライブラリ、そしてBLE経由でFTMSトレーナーにERGターゲットを送りながらライドを記録するランタイム。</p>\n<p>一番ほしかったのはループが閉じることでした。構造化ワークアウトをこなし、処方にどれだけ忠実だったかをアプリが採点し、それを翌日のおすすめに反映する。それ以降の作業は、すべてこの枠を埋めていくものでした。</p>",
-      "id" : "https://krisbaker.com/ja/building/domestique/domestique-foundation/"
-    },
-    {
-      "title" : "コア一式を一気に実装",
-      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-core/",
-      "date_published" : "2026-05-17T09:00:00Z",
-      "content_html" : "<p>パッケージの土台を作り、コア一式を一日で立ち上げました。メッセージとRunnable、OpenAI・Anthropic・Ollama・Google Gemini のプロバイダーアダプター、続いてプロンプト、出力パーサー、ドキュメントローダー、テキストスプリッター、ベクトルストア、リトリーバー、インクリメンタルなインデックス更新、メモリ、ツール呼び出し型のエージェントループ、そして循環的なワークフローのための StateGraph です。</p>\n<p>一度の作業にしては多く見えますし、実際に多かったのですが、その大部分は LangChain の形をSwiftに忠実に移植したものです。なので設計の仕事は、ゼロから考えることよりも、何を残すかを決めることでした。</p>\n<p>一番欲しかった部分は最初のコミットから入っていました。ストリーミング、ツール呼び出し、そして自己修復ラッパー付きのストリーミングJSONパーサーです。どれも、これまでのプロジェクトで毎回手書きで再実装していたものでした。</p>",
-      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-core/"
-    },
-    {
-      "title" : "/ja/ 以下の多言語対応",
-      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/",
-      "date_published" : "2026-05-01T09:00:00Z",
-      "content_html" : "<p>i18n の基盤を追加しました。設定、コンテンツ、データ、ルーティングです。これにより、このサイトはルートで英語を、/ja/ 以下で日本語を配信します。同じ作業で、エイリアスのリダイレクト、hreflang タグ、トップバーの言語切り替えを入れ、少し後にローカライズしたフィードとサイトマップが続きました。</p>\n<p>落ち着いたルールは、すべてのページが両方の言語で存在するというものです。.ja.md ファイルがあればそのページは翻訳され、なければ英語にフォールバックします。だから、後から翻訳を追加してもリンクが壊れることはありません。</p>\n<p>自分のジェネレーターでやったおかげで、プラグインの前提にサイトを合わせるのではなく、URLの構成をシンプルに保てました。</p>",
-      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/"
-    },
-    {
-      "title" : "コンテンツコレクションと quiet テーマ",
-      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/",
-      "date_published" : "2026-04-30T09:00:00Z",
-      "content_html" : "<p>これが、Inkwell をブログ用のツールからポートフォリオも動かせるものへと変えた変更（v0.3.0）です。</p>\n<p>コンテンツはコレクションになりました。それぞれが、マークダウンの置き場所、ルート、並び順、公開するタクソノミーを宣言し、固定されたひとつのブログの形ではなく、コレクションごとのルーティングを持ちます。同じリリースで author、nav、home、そして任意のコレクションに使える content new コマンドを追加しました。</p>\n<p>quiet テーマも同時に出しました。Fraunces、Manrope、JetBrains Mono を使い、ポートフォリオとブログのレイアウトを備えています。このサイト全体が、いまもこの見た目で動いています。</p>",
-      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/"
-    },
-    {
-      "title" : "v0.5.0：既存レジュメを読み取る取り込み",
-      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/",
-      "date_published" : "2026-04-20T09:00:00Z",
-      "content_html" : "<p>v0.5.0 をタグ付けし、入力解析を作り直して、ツールが本当の意味で「ソースを読み取る」ようにしました。既存の英文レジュメをテキストかPDFで読み込み、すべてを入力し直させるのではなく、それを信頼できる出典として扱います。</p>\n<p>これがブログで書いたバージョンです。JPResume の目的は、ゼロからレジュメを書き起こすことではありませんでした。すでに管理している英語版をもとに、日本語の履歴書と職務経歴書をそれと揃え続けることです。</p>\n<p>取り込みを正しく行うことが、ズレの問題を解消します。さもないと、応募の直前という最悪のタイミングで足をすくわれます。</p>",
-      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"
-    },
-    {
-      "title" : "ポーズポイント方式のパイプライン（最初のリリース）",
-      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/",
-      "date_published" : "2026-04-17T10:00:00Z",
-      "content_html" : "<p>最初のタグ付きリリース（v0.3.0 から v0.4.3）で、実際の形が整いました。個別のステージを持つアーティファクトストアと外部ブリッジ、ステップごとのサブコマンド、そして言語処理の重いステップを外部のエージェントに渡し、その結果を取り込み直せるエージェントモードです。</p>\n<p>PDF対応も入出力の両方でこの時期に入りました。入力の解析は PDFKit で既存のレジュメを読み取り、画像だけのPDFには Vision の OCR を使います。出力は、適切な日本語組版で履歴書と職務経歴書を生成します。</p>\n<p>決定論的なステージとモデルのステージを早い段階で分けたことが、その後のすべてを扱いやすくしてくれました。どのポーズポイントでも処理を止めて、ドキュメントになる前のアーティファクトを確認できます。</p>",
-      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"
-    }
-  ],
-  "language" : "ja",
-  "title" : "Kristopher Baker · Updates",
-  "description" : "iOSに深く根ざしたシニアプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。",
-  "home_page_url" : "https://krisbaker.com/ja/",
+  "description" : "iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。",
   "authors" : [
     {
       "name" : "Kristopher Baker"
     }
   ],
+  "title" : "Kristopher Baker · Updates",
   "feed_url" : "https://krisbaker.com/ja/building/feed.json",
-  "version" : "https://jsonfeed.org/version/1.1"
+  "language" : "ja",
+  "items" : [
+    {
+      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/",
+      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/",
+      "title" : "セクションごとのフィード",
+      "date_published" : "2026-06-05T14:00:00Z",
+      "content_html" : "<p>これまでこのサイトのフィードは一つだけで、しかもブログ記事しか流れていませんでした。実績や制作中のアップデートという、いちばんフィード向きのものを購読する手段がなかったのです。</p>\n<p>Inkwell 0.15.0でそこを直しました。小さな <code>feeds</code> 設定ブロックで、セクションごとに専用フィードを出せるようになりました。記事だけ、実績だけ、あるいはこの制作ログだけ（<code>/building/rss.xml</code>）を追えます。サイトのルートは、すべてを新しい順にまとめたコンバインドフィードになります。子のアップデートはプロジェクトにリンクし、年だけを持つ実績のケーススタディにも妥当な日付が入ります。</p>\n<p>いま読んでいるこのアップデートも、すでに三か所に流れています。このセクションのフィード、コンバインドフィード、そしてホームのタイムラインです。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/",
+      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/",
+      "title" : "クリックで拡大",
+      "date_published" : "2026-06-05T10:00:00Z",
+      "content_html" : "<p>本文の画像は、これまで段組みの幅に収まったままでした。いまはどの画像も、クリックかタップでオーバーレイに原寸表示されます。Escキーか、画像の外側をクリックすると閉じます。</p>\n<p>Inkwell 0.14.0で入れました。quietテーマの小さなJavaScriptと、画像パイプライン側の小さな変更です。各画像が元のURLを覚えておくので、ライトボックスはリサイズ版ではなく本物のファイルを表示します。きっかけは、Domestiqueのスクリーンショットを大きく見たかったことでした。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-building-section/",
+      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-building-section/",
+      "title" : "制作中セクションを、それ自身で投稿",
+      "date_published" : "2026-06-04T09:00:00Z",
+      "content_html" : "<p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>\n<p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>\n<p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-examples/",
+      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-examples/",
+      "title" : "サンプルアプリとチュートリアル",
+      "date_published" : "2026-06-02T10:00:00Z",
+      "content_html" : "<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>\n<p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>\n<p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/",
+      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/",
+      "title" : "0.1.0 をタグ付け",
+      "date_published" : "2026-05-29T11:00:00Z",
+      "content_html" : "<p>最初のタグ付きリリースです。0.1.0 は Swift 6.3 上で macOS 14以降・iOS 17以降を対象とし、Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、Codable のワイヤ形式で構成されています。</p>\n<p>同じ日に、JPResume がLLMのトランスポートを Shikisha に切り替えました。これが私の気にしていたテストでした。「デモが動くか」ではなく、「別の実際のツールがこれに依存したいと思うか」です。</p>\n<p>あえて「アクティブな開発中」と呼んでいます。1.0 までにAPIはまだ変わるかもしれませんし、表面が固まったふりをするより、そう言っておきたいのです。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/",
+      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/",
+      "title" : "v0.6.0：品質ループと Shikisha への移行",
+      "date_published" : "2026-05-29T08:00:00Z",
+      "content_html" : "<p>v0.6.0 は、出力の品質と整理がテーマでした。生成ステージには自己批評のループ、正規化には検証フィードバックのループを入れ、専用の日本語制約チェッカーが、微妙に間違えやすい慣習を拾うようになりました。プロバイダーが対応している場合は、JSONの応答を期待するのではなく json_object として強制します。</p>\n<p>裏側では二つの整理を行いました。オーケストレーションをドメインに依存しない DocPipeline モジュールへ切り出し、LLMのトランスポートを Shikisha に切り替えたことです。</p>\n<p>満足しているのは二つ目です。JPResume はいまや、自作のワークフローライブラリの最初の実利用者になりました。まさに、Shikisha が支えるために作った依存関係です。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/",
+      "url" : "https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/",
+      "title" : "二つの言語、二つの単位系",
+      "date_published" : "2026-05-25T09:00:00Z",
+      "content_html" : "<p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>\n<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>\n<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>\n<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/",
+      "url" : "https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/",
+      "title" : "トレーナーの上のモンヴァントゥ",
+      "date_published" : "2026-05-22T09:00:00Z",
+      "content_html" : "<p>トレーナーはパワーターゲットを保持できます。次にほしかったのは地形でした。室内で実際の道を走り、勾配が抵抗を動かす。</p>\n<p>そこでDomestiqueにルートライブラリを足しました。GPXをインポートする、任意のアクティビティからルートを保存する、あるいは保存済みのStravaルートを取り込む。そして、フリーライドや構造化ワークアウトの最中にそれを再生し、標高プロファイルでトレーナーのシミュレート勾配を動かします。ドラッグできるチャートのハンドルとアンドゥ／リドゥを備えたトリムエディタがあり、乱れたGPSトラックからきれいな区間を切り出せます。ルートは端から端まで反転もできます。</p>\n<p>最初にバンドルしたルートはモンヴァントゥで、3つの古典的な登り口に合わせた3つのプリセットです。藤沢の予備の部屋からプロヴァンスの巨人を登り、実際の道で斜度が上がるまさにその地点で抵抗がせり上がってくる。室内のセットアップが屋外に一番近づいた瞬間でした。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/domestique/domestique-backend/",
+      "url" : "https://krisbaker.com/ja/building/domestique/domestique-backend/",
+      "title" : "専用のバックエンド",
+      "date_published" : "2026-05-21T09:00:00Z",
+      "content_html" : "<p>しばらくの間、Domestiqueはシングルデバイスで満足していました。すべてはApplication Support下のファイルとSQLiteの中。二台目のマシンに同じ履歴がほしくなるまで、あるいはうっかり消してしまうかもしれないフォルダ以外のバックアップがほしくなるまでは、それで十分です。</p>\n<p>そこで、バックエンドを書きました。<code>domestiqued</code> という一つのGoバイナリに、<code>serve | migrate | athlete | token</code> のCLI、埋め込みマイグレーション付きのSQLiteストア、ベアラートークン認証、そしてバイナリから直接配信される管理コンソール。CGOなし、コンテナなし、マネージドクラウドなし。自分が管理する小さなマシンの上で動きます。</p>\n<p>Swift側では、SyncClientがワンクリックで差分をプッシュ／プルします。アクティビティとストリーム、ゴールとプランとアドヒアランス、さらにはワークアウトゲームの生涯スタッツやワークアウトごとの自己ベストまで。オートセーブはアプリが何かを変える場所すべてに配線してあり、まとめて束ねられるので、連続した編集も最大で数回のバックグラウンドプッシュに収まります。データモデルはマルチアスリート対応なので、いつか一緒に走る仲間と共有したくなっても、書き直しではなく小さな一歩で済みます。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/domestique/domestique-workout-game/",
+      "url" : "https://krisbaker.com/ja/building/domestique/domestique-workout-game/",
+      "title" : "書くつもりのなかったワークアウトゲーム",
+      "date_published" : "2026-05-20T09:00:00Z",
+      "content_html" : "<p>室内のインターバルは退屈です。これはどんなトレーナーにも共通する根っこの問題です。だから最初の一週間のどこかで、小さな実験を始めました。ワークアウトをSpriteKitの2D横スクロールのサイクリングゲームとして描き、ライダーの速度を実際のパワーで動かすのです。</p>\n<p>これは、いい意味で手に負えなくなりました。ライダーはトラックパッドのスワイプでホップし、コーナーでバンクし、登りではダンシングし、下りではタックします。昼夜のサイクル、天候、テーマ別の環境、視差で流れる鳥たち、そして追いかけるための自己ベストライドのゴースト。フィニッシュ画面は本物のテレメトリ表示です。NP、IF、TSS、ゾーン内時間、パワーカーブ、そしてセッションをまたいで蓄積されるキャリアスタッツの数々。</p>\n<p>これで素のターゲット数値より速くなるわけではありません。それでも、画面に丘があって破るべき自己ベストがあると、きついインターバルを最後までやり切れる回数が増えます。ここで意味があるのはその一点だけです。ピクセルアートとサウンドは後から、Asepriteのアセットパイプラインを通して入れました。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/domestique/domestique-foundation/",
+      "url" : "https://krisbaker.com/ja/building/domestique/domestique-foundation/",
+      "title" : "骨組み全体を一気に",
+      "date_published" : "2026-05-18T09:00:00Z",
+      "content_html" : "<p>Domestiqueは、一本の長い一日から始まりました。ガーミンConnectにサインインし、アクティビティをローカルキャッシュに取り込み、意味のあるテレメトリを計算し、それをトレーナーを動かせる形に変える。この全経路をエンドツーエンドで配線したのです。</p>\n<p>その日の終わりには骨組みが立っていました。アナリティクス側は、強度フィルタ付きのアクティビティ一覧、MapKitのマップにルートを描く詳細画面、パワーと心拍のチャート、ミーンマックスのパワーカーブ、そして28日間の負荷と180日間のPMCチャートを並べたダッシュボード。トレーニング側は、ハイブリッドなプランエンジン（カレンダー上のアンカーとアダプティブな内側、Friel流のフェーズ進行に自動のリカバリー週）、組み込みワークアウトのライブラリ、そしてBLE経由でFTMSトレーナーにERGターゲットを送りながらライドを記録するランタイム。</p>\n<p>一番ほしかったのはループが閉じることでした。構造化ワークアウトをこなし、処方にどれだけ忠実だったかをアプリが採点し、それを翌日のおすすめに反映する。それ以降の作業は、すべてこの枠を埋めていくものでした。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/shikisha/shikisha-core/",
+      "url" : "https://krisbaker.com/ja/building/shikisha/shikisha-core/",
+      "title" : "コア一式を一気に実装",
+      "date_published" : "2026-05-17T09:00:00Z",
+      "content_html" : "<p>パッケージの土台を作り、コア一式を一日で立ち上げました。メッセージとRunnable、OpenAI・Anthropic・Ollama・Google Gemini のプロバイダーアダプター、続いてプロンプト、出力パーサー、ドキュメントローダー、テキストスプリッター、ベクトルストア、リトリーバー、インクリメンタルなインデックス更新、メモリ、ツール呼び出し型のエージェントループ、そして循環的なワークフローのための StateGraph です。</p>\n<p>一度の作業にしては多く見えますし、実際に多かったのですが、その大部分は LangChain の形をSwiftに忠実に移植したものです。なので設計の仕事は、ゼロから考えることよりも、何を残すかを決めることでした。</p>\n<p>一番欲しかった部分は最初のコミットから入っていました。ストリーミング、ツール呼び出し、そして自己修復ラッパー付きのストリーミングJSONパーサーです。どれも、これまでのプロジェクトで毎回手書きで再実装していたものでした。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/",
+      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/",
+      "title" : "/ja/ 以下の多言語対応",
+      "date_published" : "2026-05-01T09:00:00Z",
+      "content_html" : "<p>i18n の基盤を追加しました。設定、コンテンツ、データ、ルーティングです。これにより、このサイトはルートで英語を、/ja/ 以下で日本語を配信します。同じ作業で、エイリアスのリダイレクト、hreflang タグ、トップバーの言語切り替えを入れ、少し後にローカライズしたフィードとサイトマップが続きました。</p>\n<p>落ち着いたルールは、すべてのページが両方の言語で存在するというものです。.ja.md ファイルがあればそのページは翻訳され、なければ英語にフォールバックします。だから、後から翻訳を追加してもリンクが壊れることはありません。</p>\n<p>自分のジェネレーターでやったおかげで、プラグインの前提にサイトを合わせるのではなく、URLの構成をシンプルに保てました。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/",
+      "url" : "https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/",
+      "title" : "コンテンツコレクションと quiet テーマ",
+      "date_published" : "2026-04-30T09:00:00Z",
+      "content_html" : "<p>これが、Inkwell をブログ用のツールからポートフォリオも動かせるものへと変えた変更（v0.3.0）です。</p>\n<p>コンテンツはコレクションになりました。それぞれが、マークダウンの置き場所、ルート、並び順、公開するタクソノミーを宣言し、固定されたひとつのブログの形ではなく、コレクションごとのルーティングを持ちます。同じリリースで author、nav、home、そして任意のコレクションに使える content new コマンドを追加しました。</p>\n<p>quiet テーマも同時に出しました。Fraunces、Manrope、JetBrains Mono を使い、ポートフォリオとブログのレイアウトを備えています。このサイト全体が、いまもこの見た目で動いています。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/",
+      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/",
+      "title" : "v0.5.0：既存レジュメを読み取る取り込み",
+      "date_published" : "2026-04-20T09:00:00Z",
+      "content_html" : "<p>v0.5.0 をタグ付けし、入力解析を作り直して、ツールが本当の意味で「ソースを読み取る」ようにしました。既存の英文レジュメをテキストかPDFで読み込み、すべてを入力し直させるのではなく、それを信頼できる出典として扱います。</p>\n<p>これがブログで書いたバージョンです。JPResume の目的は、ゼロからレジュメを書き起こすことではありませんでした。すでに管理している英語版をもとに、日本語の履歴書と職務経歴書をそれと揃え続けることです。</p>\n<p>取り込みを正しく行うことが、ズレの問題を解消します。さもないと、応募の直前という最悪のタイミングで足をすくわれます。</p>"
+    },
+    {
+      "id" : "https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/",
+      "url" : "https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/",
+      "title" : "ポーズポイント方式のパイプライン（最初のリリース）",
+      "date_published" : "2026-04-17T10:00:00Z",
+      "content_html" : "<p>最初のタグ付きリリース（v0.3.0 から v0.4.3）で、実際の形が整いました。個別のステージを持つアーティファクトストアと外部ブリッジ、ステップごとのサブコマンド、そして言語処理の重いステップを外部のエージェントに渡し、その結果を取り込み直せるエージェントモードです。</p>\n<p>PDF対応も入出力の両方でこの時期に入りました。入力の解析は PDFKit で既存のレジュメを読み取り、画像だけのPDFには Vision の OCR を使います。出力は、適切な日本語組版で履歴書と職務経歴書を生成します。</p>\n<p>決定論的なステージとモデルのステージを早い段階で分けたことが、その後のすべてを扱いやすくしてくれました。どのポーズポイントでも処理を止めて、ドキュメントになる前のアーティファクトを確認できます。</p>"
+    }
+  ],
+  "version" : "https://jsonfeed.org/version/1.1",
+  "home_page_url" : "https://krisbaker.com/ja/"
 }
