@@ -118,7 +118,10 @@
 <p>I have a sibling app, Aside, that already does furigana, so I started by reaching for its logic. The reading code ported over cleanly: tokenize, convert to hiragana, trim okurigana, split mixed kanji runs. The rendering did not. Aside draws ruby with a single CTRubyAnnotation in one monolithic text block, and Aoede's whole reading experience is a karaoke highlight that slides word by word across the text. A monolithic block gives the highlight nowhere to land. So I rebuilt the rendering per word in SwiftUI: kana stacked over each kanji run, with an invisible kana lane over the plain runs so every line keeps the same baseline. The highlight survives, now gliding under the furigana instead of through it.</p>
 <p>One small bug was worth the detour. When a kanji run is about as wide as its reading (物凄 is roughly as wide as ものすご), the kana-measured column could come up a hair short and SwiftUI would truncate the kanji itself to a single &quot;…&quot;. Pinning the base run to its own ideal width, not just the kana lane's, fixed it. Furigana is a small feature on paper, but when you're reading in a language you're still learning, seeing the reading you're hearing is most of the point.</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/building/aoede/aoede-comes-to-ios/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Aoede Comes to iOS</span>
+      </a>
       <a href="/building/aoede/watashi-not-watakushi/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
         <span class="update-nav-title">Now It Reads Watashi, Not Watakushi</span>

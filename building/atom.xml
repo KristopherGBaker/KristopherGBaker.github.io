@@ -6,11 +6,39 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T23:30:00Z</updated>
+  <updated>2026-06-07T23:59:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Switching Voices Without Opening Settings</title>
+    <link href="https://krisbaker.com/building/aoede/voice-picker-in-the-transport-bar/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/voice-picker-in-the-transport-bar/</id>
+    <updated>2026-06-07T23:59:00Z</updated>
+    <published>2026-06-07T23:59:00Z</published>
+    <content type="html"><![CDATA[<p>The macOS transport bar now has a voice menu next to the engine dropdown, so you can change voice mid-read without opening Settings. It only appears when there is actually a choice to make: the active engine and reading language have to offer more than one voice (Kokoro's curated set, or Apple's system voices for that language). Picking one routes through the same path Settings uses, so the two stay in sync. A small thing, but switching voices is exactly the kind of adjustment you want to make while listening, not buried two windows away.</p>]]></content>
+  </entry>
+  <entry>
+    <title>The Book Was Closed, but Kokoro Kept Going</title>
+    <link href="https://krisbaker.com/building/aoede/book-closed-kokoro-kept-going/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/book-closed-kokoro-kept-going/</id>
+    <updated>2026-06-07T23:55:00Z</updated>
+    <published>2026-06-07T23:55:00Z</published>
+    <content type="html"><![CDATA[<p>Closing a book in Aoede did not actually stop Aoede from working on it. Backing out of a document only cleared the selection; the MLX Kokoro engine kept its cache resident, and worse, the synthesis scheduler kept running. I had set its lookahead to 1000 sentences, so the moment you opened a book it raced ahead synthesizing essentially the whole thing, and it kept churning even while paused, because the scheduler only relaxes as audio actually plays through. On the Mac this mostly hid as memory and CPU that never came back down after you were done reading. On iOS, where overshooting RAM gets your app killed, it was not so quiet.</p>
+<p>The louder iOS problem was a crash on backgrounding. iOS forbids GPU work in the background, and MLX submitting a command buffer there aborts the app outright (&quot;Insufficient Permission to submit GPU work from background&quot;). The naive fix is to stop everything when the app leaves the foreground, but that also kills audio you are allowed to keep playing. So the app now suspends only the neural synthesis: it watches the scene phase, pauses Kokoro's GPU work as early as it goes inactive (giving any in-flight work a moment to finish), purges the MLX cache, and resumes on return. Apple's voices are CPU-only, so they play straight through the background. Kokoro plays out its buffered cushion, then waits, and picks up where it left off when you come back.</p>
+<p>The lookahead is bounded to a few sentences now, closing a book stops synthesis and purges the cache, and the cache cap scales to the device. Most of this was iOS forcing the issue, but the work that lingered after closing a book was a bug on every platform. It just took a system that kills you for it to make me notice.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Aoede Comes to iOS</title>
+    <link href="https://krisbaker.com/building/aoede/aoede-comes-to-ios/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/aoede-comes-to-ios/</id>
+    <updated>2026-06-07T23:45:00Z</updated>
+    <published>2026-06-07T23:45:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede runs on iPhone and iPad now. The surprising part is how little of the work was the iOS app itself. The whole brain of Aoede, the document model, the playback coordinator, the MLX Kokoro speech stack, lived inside the macOS target, which meant there was no app to share, just a Mac app with everything welded to it. So the first step was pulling all of it into a package, AoedeFeatureKit, that both apps now consume. The iOS app on top of it is deliberately thin: a touch-first library, a compact reader that reuses the same karaoke highlighting and follow-scroll, a glass transport bar, lock-screen controls, and background audio.</p>
+<p>Sharing the brain surfaced every place the code quietly assumed it was on a Mac. MLX needs a real Metal GPU, which the iOS Simulator does not have, so launching there aborted instantly; Kokoro is now detected as unsupported on the simulator and the app falls back to Apple's voices. The OpenJTalk dictionary was unpacked by shelling out to /usr/bin/tar, which iOS does not have, so Japanese on device falls back to the Apple-reading G2P and CFStringTokenizer furigana until I write a cross-platform extractor. Memory is tighter too: on iOS, overshooting RAM gets the app killed rather than just enlarging its footprint, so the MLX cache cap scales with the device (roughly a 24th of RAM), and phones under about 6 GB get a gentle caution if they pick Kokoro. Apple speech stays the default everywhere.</p>
+<p>It is the same reader and the same highlight, now sharing one codebase across two platforms. The desktop and the phone diverge only where the hardware forces them to.</p>]]></content>
+  </entry>
   <entry>
     <title>Furigana That Matches the Voice</title>
     <link href="https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/" rel="alternate"/>
@@ -181,36 +209,5 @@
     <content type="html"><![CDATA[<p>First tagged release. <code>0.1.0</code> targets macOS 14+ and iOS 17+ on Swift 6.3, with structured concurrency, <code>Sendable</code> types, <code>AsyncSequence</code> streaming, and <code>Codable</code> wire shapes.</p>
 <p>The same day, JPResume switched its LLM transport over to Shikisha, which was the test I cared about: not &quot;does the demo run&quot; but &quot;does another real tool want to depend on this.&quot;</p>
 <p>I am calling it active development on purpose. The APIs may still move before 1.0, and I would rather say that than pretend the surface is settled.</p>]]></content>
-  </entry>
-  <entry>
-    <title>v0.6.0, quality loops and Shikisha transport</title>
-    <link href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/" rel="alternate"/>
-    <id>https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/</id>
-    <updated>2026-05-29T08:00:00Z</updated>
-    <published>2026-05-29T08:00:00Z</published>
-    <content type="html"><![CDATA[<p>v0.6.0 was about output quality and consolidation. The generate stages got a self-critique loop, normalize got a validation feedback loop, and a dedicated Japanese constraint checker now catches the conventions that are easy to get subtly wrong. Where the provider supports it, JSON responses are enforced as <code>json_object</code> rather than hoped for.</p>
-<p>Under the hood, two cleanups: I pulled the orchestration into a domain-agnostic DocPipeline module, and switched the LLM transport over to Shikisha.</p>
-<p>That second one is the satisfying part. JPResume is now the first real consumer of my own workflow library, which is exactly the dependency I built Shikisha to support.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Two languages, two unit systems</title>
-    <link href="https://krisbaker.com/building/domestique/domestique-bilingual-units/" rel="alternate"/>
-    <id>https://krisbaker.com/building/domestique/domestique-bilingual-units/</id>
-    <updated>2026-05-25T09:00:00Z</updated>
-    <published>2026-05-25T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>A tool that lives on my own machine should speak my languages and my units, both of them.</p>
-<p>So over a few days I made Domestique bilingual and unit-aware. All the app's strings moved into an xcstrings catalog: the views, the status and error messages, the enum labels, the workout and plan and adherence prose, even the labels inside the SpriteKit game. Then a unit-system preference, so distance, elevation, speed, and weight render in metric or imperial, with a separate toggle for energy in kJ or kcal. The kJ to kcal conversion even does the real division by 4.184 now, instead of the 1:1 stub I had been getting away with.</p>
-<p>The same stretch loosened some hard requirements. Garmin sign-in is now optional rather than the front door: you can run the app Strava-only, and the toolbar sync and status pill respect that. The ramp test got smarter too, auto-ending when I fail to hold the step and showing the estimated FTP right there in the cooldown, with per-step coaching cues that no longer overlap.</p>
-<p>None of this is glamorous. It is the layer that decides whether the app feels built for me or merely adapted to me, and living between two countries, I notice the difference.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Mont Ventoux on the trainer</title>
-    <link href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/" rel="alternate"/>
-    <id>https://krisbaker.com/building/domestique/domestique-mont-ventoux/</id>
-    <updated>2026-05-22T09:00:00Z</updated>
-    <published>2026-05-22T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>The trainer can hold a power target. The next thing I wanted was terrain: ride an actual road, indoors, with the gradient driving the resistance.</p>
-<p>So Domestique grew a Routes library. Import a GPX, save a route from any activity, or pull one of your saved Strava routes, then play it back during a free ride or a structured workout while the elevation profile drives the trainer's simulated gradient. There is a trim editor with draggable chart handles and undo/redo for cutting a clean segment out of a messy GPS track, and you can reverse a route end to end.</p>
-<p>The first route I bundled was Mont Ventoux, in three presets for its three classic ascents. Climbing the Géant de Provence from my spare room in Fujisawa, with the resistance ramping up exactly where the real road kicks, is the closest the indoor setup has come to feeling like the outdoor one.</p>]]></content>
   </entry>
 </feed>

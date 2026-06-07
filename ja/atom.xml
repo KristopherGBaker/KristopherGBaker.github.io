@@ -6,11 +6,39 @@
   <link href="https://krisbaker.com/ja/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T23:30:00Z</updated>
+  <updated>2026-06-07T23:59:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>設定を開かずに声を切り替える</title>
+    <link href="https://krisbaker.com/ja/building/aoede/voice-picker-in-the-transport-bar/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/voice-picker-in-the-transport-bar/</id>
+    <updated>2026-06-07T23:59:00Z</updated>
+    <published>2026-06-07T23:59:00Z</published>
+    <content type="html"><![CDATA[<p>macOSのトランスポートバーに、エンジンのドロップダウンの隣に音声メニューが付きました。これで、設定を開かなくても読み上げ中に声を変えられます。表示されるのは、実際に選ぶ余地があるときだけ。つまり、いまのエンジンと読み上げ言語が複数の声を持っているとき（Kokoroの厳選セットか、その言語のAppleシステム音声）です。選ぶと、設定が使うのと同じ経路を通るので、両者は同期したままです。小さなことですが、声の切り替えは、窓を二つ奥に開くより、聴きながらさっとやりたい類いの調整です。</p>]]></content>
+  </entry>
+  <entry>
+    <title>本を閉じても、Kokoroは動き続けていた</title>
+    <link href="https://krisbaker.com/ja/building/aoede/book-closed-kokoro-kept-going/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/book-closed-kokoro-kept-going/</id>
+    <updated>2026-06-07T23:55:00Z</updated>
+    <published>2026-06-07T23:55:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeで本を閉じても、Aoedeはその本の処理をやめていませんでした。ドキュメントから戻っても、選択を解除するだけ。MLXのKokoroエンジンはキャッシュを抱えたままで、さらに悪いことに、合成スケジューラも回り続けていました。先読みを1000文に設定していたので、本を開いた瞬間にほぼ一冊まるごとを先回りして合成し始め、一時停止していても回り続けます。スケジューラは、音声が実際に再生されてはじめて緩むからです。Macでは、これは読み終わっても下がってこないメモリとCPUとして、だいたい隠れていました。RAMの超過でアプリが殺されるiOSでは、そうは静かにいきませんでした。</p>
+<p>iOSでより大きな問題だったのは、バックグラウンドに回したときのクラッシュです。iOSはバックグラウンドでのGPU処理を禁じていて、MLXがそこでコマンドバッファを送ると、アプリごと落ちます（「Insufficient Permission to submit GPU work from background」）。素朴な対処は、フォアグラウンドを離れたら全部止めることですが、それだと再生してよいはずの音声まで止まってしまいます。そこでいまは、ニューラル合成だけを中断します。シーンフェーズを見て、非アクティブになった早い段階でKokoroのGPU処理を止め（実行中の処理に終わる余裕を与え）、MLXのキャッシュを解放し、復帰時に再開します。Appleの音声はCPUだけで動くので、バックグラウンドでもそのまま再生されます。Kokoroは、バッファに溜めたぶんを再生しきってから待機し、戻ってきたら続きから再開します。</p>
+<p>いまは先読みを数文に抑え、本を閉じれば合成を止めてキャッシュを破棄し、キャッシュ上限も端末に合わせて変わります。その多くはiOSが問題を顕在化させたものでしたが、本を閉じたあとに処理が残るバグは、どのプラットフォームでもバグでした。気づくのに、それで殺してくるシステムが必要だっただけです。</p>]]></content>
+  </entry>
+  <entry>
+    <title>AoedeがiPhoneとiPadで動くようになった</title>
+    <link href="https://krisbaker.com/ja/building/aoede/aoede-comes-to-ios/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/aoede-comes-to-ios/</id>
+    <updated>2026-06-07T23:45:00Z</updated>
+    <published>2026-06-07T23:45:00Z</published>
+    <content type="html"><![CDATA[<p>AoedeがiPhoneとiPadでも動くようになりました。意外だったのは、iOSアプリそのものの作業がいかに少なかったか、です。Aoedeの頭脳の全体、つまりドキュメントモデル、再生コーディネーター、MLXのKokoro音声スタックは、すべてmacOSターゲットの中にありました。つまり共有できる「アプリ」などなく、全部が溶接されたMacアプリがあるだけだったのです。だから最初の一歩は、それらをすべてAoedeFeatureKitというパッケージに引き出し、両方のアプリがそれを使うようにすることでした。その上に乗るiOSアプリは、あえて薄くしてあります。タッチ前提のライブラリ、同じカラオケハイライトと追従スクロールを再利用するコンパクトなリーダー、グラスのトランスポートバー、ロック画面のコントロール、そしてバックグラウンド再生です。</p>
+<p>頭脳を共有してみると、コードが「自分はMacの上にいる」と暗黙に決めてかかっていた場所が、ことごとく表に出てきました。MLXは本物のMetal GPUを必要としますが、iOSシミュレータにはそれがないので、起動した瞬間に落ちました。いまはシミュレータ上ではKokoroを非対応として検出し、Appleの音声にフォールバックします。OpenJTalkの辞書は/usr/bin/tarを呼び出して展開していましたが、iOSにtarはないので、端末上の日本語は、クロスプラットフォームの展開処理を書くまで、Apple読みのG2PとCFStringTokenizerのふりがなにフォールバックします。メモリもより厳しくて、iOSではRAMを超過すると、フットプリントが大きくなるだけでなくアプリが殺されます。だからMLXのキャッシュ上限は端末に合わせて変わり（だいたいRAMの24分の1）、6GBに満たないiPhoneでKokoroを選ぶと、やんわり注意が出ます。Appleの音声は、どの端末でも既定のままです。</p>
+<p>同じリーダー、同じハイライトが、いまはひとつのコードベースを二つのプラットフォームで共有しています。デスクトップと電話が分かれるのは、ハードウェアがそうさせるところだけです。</p>]]></content>
+  </entry>
   <entry>
     <title>音声と一致するふりがな</title>
     <link href="https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/" rel="alternate"/>
@@ -239,36 +267,5 @@ let result = try await agent.run([
     <content type="html"><![CDATA[<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>
 <p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>
 <p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>]]></content>
-  </entry>
-  <entry>
-    <title>0.1.0 をタグ付け</title>
-    <link href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</id>
-    <updated>2026-05-29T11:00:00Z</updated>
-    <published>2026-05-29T11:00:00Z</published>
-    <content type="html"><![CDATA[<p>最初のタグ付きリリースです。0.1.0 は Swift 6.3 上で macOS 14以降・iOS 17以降を対象とし、Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、Codable のワイヤ形式で構成されています。</p>
-<p>同じ日に、JPResume がLLMのトランスポートを Shikisha に切り替えました。これが私の気にしていたテストでした。「デモが動くか」ではなく、「別の実際のツールがこれに依存したいと思うか」です。</p>
-<p>あえて「アクティブな開発中」と呼んでいます。1.0 までにAPIはまだ変わるかもしれませんし、表面が固まったふりをするより、そう言っておきたいのです。</p>]]></content>
-  </entry>
-  <entry>
-    <title>v0.6.0：品質ループと Shikisha への移行</title>
-    <link href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</id>
-    <updated>2026-05-29T08:00:00Z</updated>
-    <published>2026-05-29T08:00:00Z</published>
-    <content type="html"><![CDATA[<p>v0.6.0 は、出力の品質と整理がテーマでした。生成ステージには自己批評のループ、正規化には検証フィードバックのループを入れ、専用の日本語制約チェッカーが、微妙に間違えやすい慣習を拾うようになりました。プロバイダーが対応している場合は、JSONの応答を期待するのではなく json_object として強制します。</p>
-<p>裏側では二つの整理を行いました。オーケストレーションをドメインに依存しない DocPipeline モジュールへ切り出し、LLMのトランスポートを Shikisha に切り替えたことです。</p>
-<p>満足しているのは二つ目です。JPResume はいまや、自作のワークフローライブラリの最初の実利用者になりました。まさに、Shikisha が支えるために作った依存関係です。</p>]]></content>
-  </entry>
-  <entry>
-    <title>二つの言語、二つの単位系</title>
-    <link href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</id>
-    <updated>2026-05-25T09:00:00Z</updated>
-    <published>2026-05-25T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>
-<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>
-<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>
-<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p>]]></content>
   </entry>
 </feed>

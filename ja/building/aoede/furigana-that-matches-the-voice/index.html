@@ -118,7 +118,10 @@
 <p>姉妹アプリのAsideがすでにふりがなをやっているので、まずはそのロジックに手を伸ばしました。読みのコードはきれいに移植できました。トークン化し、ひらがなに変換し、送り仮名を落とし、混じった漢字の連なりを分割する。でも描画はそうはいきませんでした。AsideはルビをひとつのCTRubyAnnotationで、一枚岩のテキストブロックに描きます。一方、Aoedeの読書体験の核は、そのテキストの上を単語ごとに滑っていくカラオケ式のハイライトです。一枚岩のブロックには、ハイライトが乗る場所がありません。そこで描画をSwiftUIで単語ごとに作り直しました。漢字の連なりごとに上へ仮名を重ね、ふつうの文字の上には透明な仮名レーンを置いて、どの行もベースラインをそろえます。ハイライトは生き残り、いまはふりがなを突き抜けるのではなく、その下を滑っていきます。</p>
 <p>小さなバグひとつが、寄り道する価値のあるものでした。漢字の連なりが読みとほぼ同じ幅のとき（「物凄」は「ものすご」とだいたい同じ幅です）、仮名で測った列がほんのわずか足りず、SwiftUIが漢字そのものを「…」一文字に切り詰めてしまうことがありました。仮名レーンだけでなく、ベースの文字列も自前の理想幅に固定して直しました。ふりがなは紙の上では小さな機能ですが、まだ勉強中の言語で読むとき、聞いている読みが目に見えることは、ほとんどそれ自体が目的です。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/aoede/aoede-comes-to-ios/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">AoedeがiPhoneとiPadで動くようになった</span>
+      </a>
       <a href="/ja/building/aoede/watashi-not-watakushi/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">「わたくし」ではなく「わたし」と読むようになった</span>
