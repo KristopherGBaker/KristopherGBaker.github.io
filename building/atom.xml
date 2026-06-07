@@ -6,11 +6,74 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-05T14:00:00Z</updated>
+  <updated>2026-06-07T18:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Reading Along, End to End</title>
+    <link href="https://krisbaker.com/building/aoede/reading-along-end-to-end/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/reading-along-end-to-end/</id>
+    <updated>2026-06-07T18:00:00Z</updated>
+    <published>2026-06-07T18:00:00Z</published>
+    <content type="html"><![CDATA[<p>The first thing I wanted from Aoede was the whole loop working, even if thin: open a plain text file, hear it read aloud in a natural voice, watch each word light up as it is spoken, and have it remember where I stopped so reopening drops me back in place. That slice works now, end to end.</p>
+<p>Getting there came down to one decision made early and built around. Every speech backend reports timing differently. Apple's system voice hands you live word callbacks; a neural model hands you nothing and you have to derive it. Rather than let that mess leak into the reader, all of it normalizes into a single highlight timeline, and the reader binds to that one thing without caring where it came from. That seam is what makes adding a better voice later a new backend instead of a rewrite.</p>
+<p>This was the milestone where Aoede stopped being a collection of components and started feeling like a product.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Reading Real Books, Not Just Text Files</title>
+    <link href="https://krisbaker.com/building/aoede/import-epub-and-pdf-one-model/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/import-epub-and-pdf-one-model/</id>
+    <updated>2026-06-07T17:00:00Z</updated>
+    <published>2026-06-07T17:00:00Z</published>
+    <content type="html"><![CDATA[<p>Plain text was the bootstrap. The point of Aoede is to read the books I actually have, and those are EPUB and PDF, so it imports both now. As far as the rest of the app is concerned, nothing else changed: a book is still chapters, paragraphs, and sentences, no matter what file it arrived in.</p>
+<p>That sameness is the whole design. EPUB and PDF are wildly different formats, and PDF in particular is messy: text comes out per page, words break across line ends, headers and footers and bare page numbers litter the content, and paragraphs arrive as hard-wrapped fragments. The importer cleans all of that up, rejoins what belongs together, and uses the document outline for chapters when one exists. A scanned PDF with no text layer is detected and politely refused rather than read aloud as garbage. (Running OCR on those with the Vision framework is on the list for later.)</p>
+<p>The payoff is that everything downstream of import, the speech, the highlight, the resume position, never has to know where a book came from. Adding a format is a new importer and nothing else. Reading positions and cached timing are keyed to a hash of the text, so they stay valid as long as the content does.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Books Should Look Like Books</title>
+    <link href="https://krisbaker.com/building/aoede/keeping-bold-and-italic-from-the-source/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/keeping-bold-and-italic-from-the-source/</id>
+    <updated>2026-06-07T16:00:00Z</updated>
+    <published>2026-06-07T16:00:00Z</published>
+    <content type="html"><![CDATA[<p>Early on, importing a book threw its formatting away. Bold, italic, headings, and lists all collapsed into a flat wall of text. That is fine for the speech, since the engine reads words and not styles, but it makes a book stop looking like a book.</p>
+<p>Now Aoede keeps the formatting for display. EPUB retains bold and italic inline, along with headings, blockquotes, and lists. PDF recovers bold and italic by inferring them from each run's font traits. The reader renders headings in the display face, sets blockquotes with an indent and a rule, marks lists with bullets, and the word highlight still tracks correctly across all of it.</p>
+<p>The decision underneath was the interesting part: letting the spoken text and the shown text diverge. They used to be the same string. Now styling lives only on the display side as offset spans, while the spoken side stays plain. Once I stopped forcing the two to match, a lot got simpler. The formatted path skips spoken-text normalization and lets the speech engines handle numbers and abbreviations themselves, which they already do well. That same split is the groundwork for fixing pronunciation later without changing a thing on the page.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Switching Kokoro From CoreML to MLX</title>
+    <link href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/</id>
+    <updated>2026-06-07T15:00:00Z</updated>
+    <published>2026-06-07T15:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede's quality voice is Kokoro, a small open neural text-to-speech model. My first integration ran it through FluidAudio's CoreML and Apple Neural Engine pipeline, which is the obvious on-device path and works on most Macs.</p>
+<p>It did not work on mine. On this Apple M5, FluidAudio's Kokoro chain crashed across every compute unit I tried: a Metal &quot;JIT not supported&quot; error on the GPU, and a low-level BNNS segfault on CPU and ANE. The same library runs fine on older Apple silicon, so this was the new hardware getting ahead of the dependency. An older app of mine on an older FluidAudio build still spoke, which told me the model was fine and the runtime was the problem.</p>
+<p>So I moved Kokoro to a different runtime: the MLX port, which runs the model through Apple's MLX framework instead of CoreML. That brought its own friction. MLX's Metal shaders only compile under a real Xcode build, not plain <code>swift build</code>, so the provider has to live in the app target, and it needs the Metal Toolchain installed. But it runs on the M5, and it exposes per-token timestamps. The result was simple: Kokoro worked, the voices sounded better, and I gained access to word-level timestamps that made the karaoke highlight more accurate instead of estimated. I kept the FluidAudio work on a branch in case the hardware story changes.</p>
+<p>This switch is also what set up the debugging night in the next update. Moving runtimes solved the crash and quietly introduced a subtler problem.</p>]]></content>
+  </entry>
+  <entry>
+    <title>The Robotic Voice Was a Dependency, Not My Code</title>
+    <link href="https://krisbaker.com/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/</id>
+    <updated>2026-06-07T14:00:00Z</updated>
+    <published>2026-06-07T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede's neural voice, Kokoro, started sounding like a malfunctioning droid. Every sentence opened with a garbled, robotic burst, settled into normal speech, then went robotic again at the start of the next one. The synthesized audio was already wrong before it ever reached the playback engine.</p>
+<p>I spent a long night chasing it with an AI coding agent, and we went down every plausible road. We captured the raw audio and looked at it as waveforms. We rendered the same buffers offline through a copy of the audio graph to rule out playback. We checked the voice file's shape, read the vocoder's source, and even found the synthesis was non-deterministic from an unseeded random generator. Every theory pointed back at our own code: buffering, the audio graph, PCM conversion, timing. We tested them all and kept coming up empty.</p>
+<p>The breakthrough came when we stopped asking &quot;what is wrong with our code?&quot; and started asking &quot;what is different about this environment?&quot; We forced the model onto the CPU instead of the GPU, and the robotic artifact vanished. That was the whole answer: a numerical regression in the GPU/Metal path of a specific dependency version, mlx-swift 0.30.x, on this particular Apple M5 hardware. Pinning back to 0.29.1 fixed it, and the newer 0.31.4 fixes it too. The actual change was a one-line version bump after hours of looking in the wrong place.</p>
+<p>Here is the part worth remembering. I ran this with two different frontier models over the night, Opus 4.8 and GPT-5.5, and neither found the cause on its own. They were genuinely useful: fast at writing capture harnesses, patient at trying ideas, good at reading unfamiliar vocoder code. But the move that mattered, deciding to stop debugging the code and start bisecting the environment, came from human collaboration on how to debug, not from the agent. It eventually found and confirmed the root cause, but only because we changed what it was looking for.</p>
+<p>That matches how I have come to think about these tools. They are excellent at executing a search and weak at noticing the search is aimed at the wrong thing. Knowing when to abandon a whole class of hypotheses is still a human call. The fix was one line. Getting there was a collaboration.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Typography Is the Interface</title>
+    <link href="https://krisbaker.com/building/aoede/giving-aoede-a-face/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/giving-aoede-a-face/</id>
+    <updated>2026-06-07T13:00:00Z</updated>
+    <published>2026-06-07T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>At some point Aoede stopped looking like a prototype. For a reading app that matters more than it would for most software, because here the type and the highlight are not chrome wrapped around the product. They are the product. Typography is not decoration; it is the interface.</p>
+<p>So Aoede now ships its own reading faces instead of borrowing whatever the system has lying around: Literata for the body, drawn for long stretches of reading, and Fraunces, a high-contrast display serif, for titles and headings. It has real reading themes, paper, sepia, night, and high-contrast, with a warm paper texture under the words instead of a flat fill. The word highlight is a soft pill that glides to the active word, easing into a gentler sentence band when the timing is only an estimate. The transport controls float above the page as a Liquid Glass bar, which is exactly the kind of surface that material was made for, while the page itself stays matte and out of the way.</p>
+<p>Even the icon follows the same idea: a lyre turned on its side so its strings read as lines of text, with one line lit by the amber highlight. A nod to Aoede, the Muse of voice, and to the single interaction the whole app is built around.</p>]]></content>
+  </entry>
   <entry>
     <title>A feed for every section</title>
     <link href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/" rel="alternate"/>
@@ -150,25 +213,5 @@
     <content type="html"><![CDATA[<p>This is the change (v0.3.0) that turned Inkwell from a blog tool into something that could run a portfolio.</p>
 <p>Content became collections: each one declares where its markdown lives, its route, how it sorts, and which taxonomies it exposes, with per-collection routing instead of one hardcoded blog shape. The same release added <code>author</code>, <code>nav</code>, <code>home</code>, and the <code>content new</code> command for any collection.</p>
 <p>The quiet theme shipped alongside it: Fraunces, Manrope, and JetBrains Mono, with portfolio and blog layouts. It is the look this whole site still runs on.</p>]]></content>
-  </entry>
-  <entry>
-    <title>v0.5.0, source-aware ingestion</title>
-    <link href="https://krisbaker.com/building/jpresume/jpresume-source-aware/" rel="alternate"/>
-    <id>https://krisbaker.com/building/jpresume/jpresume-source-aware/</id>
-    <updated>2026-04-20T09:00:00Z</updated>
-    <published>2026-04-20T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Tagged v0.5.0 and reworked input parsing so the tool is genuinely source-aware: it reads my existing western resume, as text or PDF, and treats that as the source of truth instead of asking me to re-enter everything.</p>
-<p>That is the version I wrote about on the blog. The point of JPResume was never to author a resume from nothing. It was to take the English one I already maintain and keep the Japanese 履歴書 and 職務経歴書 aligned with it.</p>
-<p>Getting ingestion right is what closes the alignment gap, the thing that otherwise bites you at the worst moment, right before you apply.</p>]]></content>
-  </entry>
-  <entry>
-    <title>The pause-point pipeline, in the first releases</title>
-    <link href="https://krisbaker.com/building/jpresume/jpresume-pipeline/" rel="alternate"/>
-    <id>https://krisbaker.com/building/jpresume/jpresume-pipeline/</id>
-    <updated>2026-04-17T10:00:00Z</updated>
-    <published>2026-04-17T10:00:00Z</published>
-    <content type="html"><![CDATA[<p>The first tagged releases (v0.3.0 through v0.4.3) put the real shape in place: an artifact store with discrete stages and an external bridge, stepwise subcommands, and an agent mode where the language-heavy steps can hand off to an outside agent and re-ingest the result.</p>
-<p>PDF support landed here too, on both ends. Input parsing reads an existing resume via PDFKit, with Vision OCR for image-only PDFs, and output rendering produces the 履歴書 and 職務経歴書 with proper Japanese typography.</p>
-<p>Separating the deterministic stages from the model stages early is what made everything after this manageable. I can stop at any pause point and look at the artifact before it becomes a document.</p>]]></content>
   </entry>
 </feed>

@@ -7,8 +7,65 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 05 Jun 2026 14:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 18:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>最初から最後まで、読み上げが動く</title>
+      <link>https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/</guid>
+      <pubDate>Sun, 07 Jun 2026 18:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoedeに最初にほしかったのは、薄くてもいいから一連のループが動くことでした。プレーンテキストのファイルを開き、自然な声で読み上げ、発話に合わせて単語が一つずつ灯り、どこで止めたかを覚えていて、次に開いたときその場所に戻る。そのひと続きが、いまエンドツーエンドで動いています。</p>
+<p>そこに至るには、早い段階で一つの決断をして、その周りに全部を組み立てる必要がありました。音声バックエンドはどれもタイミングの報告のしかたが違います。Appleのシステム音声は単語ごとのコールバックをリアルタイムで返してくれますが、ニューラルモデルは何も返さないので自分で導き出すしかありません。その厄介さをリーダーに漏らさないために、すべてを一つのハイライトタイムラインに正規化し、リーダーはその一つだけを見て、出どころは気にしません。この境界があるから、あとでより良い声を足すのも、書き直しではなく新しいバックエンドを追加するだけで済みます。</p>
+<p>これは、Aoedeが部品の寄せ集めであることをやめ、製品らしく感じられ始めたマイルストーンでした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>テキストファイルだけでなく、本物の本を読む</title>
+      <link>https://krisbaker.com/ja/building/aoede/import-epub-and-pdf-one-model/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/import-epub-and-pdf-one-model/</guid>
+      <pubDate>Sun, 07 Jun 2026 17:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>プレーンテキストはあくまで足がかりでした。Aoedeの目的は、自分が実際に持っている本を読むこと。そしてそれはEPUBとPDFです。だから、いまはその両方を取り込めます。アプリの残りの部分から見れば、ほかには何も変わりません。本はどんなファイルで届こうと、相変わらず章と段落と文です。</p>
+<p>この「同じであること」が設計上いちばん大事なところです。EPUBとPDFはまるで違う形式で、とくにPDFは厄介です。テキストはページごとに出てきて、単語は行末で割れ、ヘッダーやフッターや裸のページ番号が本文に紛れ込み、段落はハードラップされた断片として届きます。インポーターはそれを全部きれいにし、つながるべきものをつなぎ直し、目次があれば章立てに使います。テキストレイヤーを持たないスキャンPDFは、ゴミとして読み上げる代わりに検出して丁重に断ります。（そうしたPDFにVisionフレームワークでOCRをかけるのは、後回しのリストに入れてあります。）</p>
+<p>その見返りとして、インポートの下流にあるもの、つまり音声、ハイライト、再開位置は、本がどこから来たかを一切知らなくて済みます。形式を増やすのは新しいインポーターを足すだけで、ほかには何もありません。読書位置とキャッシュしたタイミングはテキストのハッシュに紐づけてあるので、内容が変わらないかぎり有効なままです。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>本は、本らしく見えるべき</title>
+      <link>https://krisbaker.com/ja/building/aoede/keeping-bold-and-italic-from-the-source/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/keeping-bold-and-italic-from-the-source/</guid>
+      <pubDate>Sun, 07 Jun 2026 16:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>最初のころ、本を取り込むとその書式は捨てられていました。太字、イタリック、見出し、リストが、すべてのっぺりとした文字の壁に潰れてしまうのです。読み上げにとってはそれで構いません。エンジンが読むのは単語であって書式ではないからです。でもそれでは、本が本らしく見えなくなります。</p>
+<p>いまのAoedeは、表示のために書式を残します。EPUBは太字とイタリックをインラインで保ち、見出し、引用、リストも残します。PDFは、各ランのフォントの特性から推測して太字とイタリックを復元します。リーダーは見出しを表示用の書体で描き、引用はインデントと罫線で組み、リストは箇条書きとして表示します。そのすべてにわたって、単語ハイライトはちゃんと追従します。</p>
+<p>面白かったのは、その下にある決断、つまり読み上げるテキストと表示するテキストを別物にしてよい、としたことです。以前はこの二つは同じ文字列でした。いまは書式は表示側だけにオフセットのスパンとして載り、読み上げ側はプレーンのまま。両者を無理に一致させるのをやめたとたん、多くがシンプルになりました。書式付きの経路は読み上げテキストの正規化を飛ばし、数字や略語の扱いは音声エンジンに任せます。彼らはもともとそれが得意です。同じこの分離が、ページ上を何も変えずに後から発音を直すための下地にもなっています。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>KokoroをCoreMLからMLXへ</title>
+      <link>https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/</guid>
+      <pubDate>Sun, 07 Jun 2026 15:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoedeの高音質の声はKokoro、小さなオープンソースのニューラル音声合成モデルです。最初の統合では、FluidAudioのCoreMLとApple Neural Engineのパイプラインで動かしていました。これは自然な選択で、たいていのMacで動きます。</p>
+<p>ところが自分のMacでは動きませんでした。このApple M5では、FluidAudioのKokoroチェーンが、試したすべての計算ユニットでクラッシュしたのです。GPUではMetalの「JIT not supported」エラー、CPUとANEでは低レベルのBNNSセグフォルト。同じライブラリが古いApple siliconでは問題なく動くので、これは新しいハードウェアが依存ライブラリを追い越した格好でした。古いFluidAudioを使った自分の別アプリは今も喋れたので、モデルは無事でランタイムが問題だとわかりました。</p>
+<p>そこでKokoroを別のランタイムに移しました。CoreMLの代わりにAppleのMLXフレームワークでモデルを動かす、MLX移植版です。こちらはこちらで面倒もありました。MLXのMetalシェーダーは素の<code>swift build</code>ではコンパイルできず、本物のXcodeビルドが必要なので、プロバイダはアプリのターゲットに置かねばならず、Metal Toolchainのインストールも要ります。でも、これはM5で動きます。そしてトークンごとのタイムスタンプを露出します。結果はシンプルでした。Kokoroが動き、声はより良く聞こえ、カラオケのハイライトを推定ではなく正確にする、単語レベルのタイムスタンプが手に入ったのです。ハードウェアの事情が変わったときのために、FluidAudioの作業はブランチに残しておきました。</p>
+<p>この乗り換えが、次のアップデートのデバッグの夜の下地にもなりました。ランタイムの移行はクラッシュを解決し、そしてもっと微妙な問題をひそかに持ち込んだのです。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>ロボットのような声は、自分のコードではなく依存ライブラリのせいだった</title>
+      <link>https://krisbaker.com/ja/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/</guid>
+      <pubDate>Sun, 07 Jun 2026 14:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoedeのニューラル音声、Kokoroが、故障したドロイドのような音を出し始めました。どの文も、ガビガビとロボットのような出だしで開き、やがて普通の発話に落ち着き、次の文の頭でまたロボットに戻る。合成された音声は、再生エンジンに届く前からすでに壊れていました。</p>
+<p>AIコーディングエージェントと一緒に、長い夜をかけてこれを追いかけ、思いつくかぎりの道をたどりました。生の音声を取り込んで波形として眺めました。同じバッファをオーディオグラフの複製でオフラインにレンダリングし、再生を切り分けました。ボイスファイルの形を確かめ、ボコーダーのソースを読み、シードのない乱数生成器のせいで合成が非決定的になっていることまで見つけました。どの仮説も自分たちのコードを指していました。バッファリング、オーディオグラフ、PCM変換、タイミング。全部試して、ことごとく空振りでした。</p>
+<p>突破口は、「自分たちのコードの何が悪いのか?」と問うのをやめ、「この環境の何が違うのか?」と問い始めたときに開きました。モデルをGPUではなくCPUに強制したら、ロボットのようなアーティファクトが消えたのです。それが答えのすべてでした。ある特定の依存ライブラリのバージョン、mlx-swift 0.30.x のGPU/Metal経路にある数値的なリグレッションが、このApple M5というハードウェアで出ていたのです。0.29.1に戻すと直り、新しい0.31.4でも直りました。実際の変更は、見当違いの場所を何時間も探した末の、たった一行のバージョン更新でした。</p>
+<p>ここが覚えておく価値のあるところです。この夜、自分は二つの異なるフロンティアモデル、Opus 4.8とGPT-5.5を回しましたが、どちらも単独では原因を見つけられませんでした。彼らは本当に役に立ちました。取り込み用のハーネスを書くのは速く、アイデアを試すのは根気強く、見慣れないボコーダーのコードを読むのも上手い。でも肝心の一手、つまりコードのデバッグをやめて環境の二分探索を始めるという判断は、どうデバッグするかについての人間との協働から来たもので、エージェントから出てきたものではありませんでした。最終的に原因を見つけて確認したのはエージェントですが、それは何を探すかをこちらが変えたからこそでした。</p>
+<p>これは、自分がこうしたツールについて考えるようになった形と一致します。彼らは探索を実行するのは得意で、その探索が間違った方を向いていることに気づくのは苦手です。仮説の方向性そのものを捨てるべきかどうかを見極めるのは、いまも人間の仕事です。修正は一行。そこにたどり着くのは、協働でした。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>タイポグラフィがインターフェースだ</title>
+      <link>https://krisbaker.com/ja/building/aoede/giving-aoede-a-face/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/giving-aoede-a-face/</guid>
+      <pubDate>Sun, 07 Jun 2026 13:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>あるとき、Aoedeはプロトタイプらしく見えるのをやめました。読書アプリにとって、それはたいていのソフトウェア以上に大事です。ここでは書体とハイライトは、製品を取り巻く飾りではないからです。それ自体が製品なのです。タイポグラフィは装飾ではなく、インターフェースそのものです。</p>
+<p>そこでAoedeは、システムにあるものを借りる代わりに、自前の読書用書体を積むようになりました。本文には、長い読書のために描かれたLiterata。タイトルと見出しには、コントラストの高いディスプレイ用セリフのFraunces。きちんとした読書テーマ（紙、セピア、夜、ハイコントラスト）があり、のっぺりした塗りの代わりに、文字の下に温かみのある紙のテクスチャを敷いています。単語ハイライトは、アクティブな単語へ滑っていく柔らかなピル。タイミングが推定にすぎないときは、より穏やかな文単位のバンドへとほどけます。再生コントロールは、Liquid Glassのバーとしてページの上に浮かびます。まさにあの素材が想定している類いの面で、ページ自体はマットなまま控えめにしています。</p>
+<p>アイコンも同じ発想に従います。横に倒した竪琴(リラ)。その弦が文字の行に読めて、一本の行がアンバーのハイライトで灯っている。声のミューズ、Aoedeへの目配せであり、このアプリ全体が拠って立つ唯一のインタラクションへの目配せです。</p>]]></content:encoded>
+    </item>
     <item>
       <title>セクションごとのフィード</title>
       <link>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</link>
@@ -134,24 +191,6 @@
       <content:encoded><![CDATA[<p>これが、Inkwell をブログ用のツールからポートフォリオも動かせるものへと変えた変更（v0.3.0）です。</p>
 <p>コンテンツはコレクションになりました。それぞれが、マークダウンの置き場所、ルート、並び順、公開するタクソノミーを宣言し、固定されたひとつのブログの形ではなく、コレクションごとのルーティングを持ちます。同じリリースで author、nav、home、そして任意のコレクションに使える content new コマンドを追加しました。</p>
 <p>quiet テーマも同時に出しました。Fraunces、Manrope、JetBrains Mono を使い、ポートフォリオとブログのレイアウトを備えています。このサイト全体が、いまもこの見た目で動いています。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>v0.5.0：既存レジュメを読み取る取り込み</title>
-      <link>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</guid>
-      <pubDate>Mon, 20 Apr 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>v0.5.0 をタグ付けし、入力解析を作り直して、ツールが本当の意味で「ソースを読み取る」ようにしました。既存の英文レジュメをテキストかPDFで読み込み、すべてを入力し直させるのではなく、それを信頼できる出典として扱います。</p>
-<p>これがブログで書いたバージョンです。JPResume の目的は、ゼロからレジュメを書き起こすことではありませんでした。すでに管理している英語版をもとに、日本語の履歴書と職務経歴書をそれと揃え続けることです。</p>
-<p>取り込みを正しく行うことが、ズレの問題を解消します。さもないと、応募の直前という最悪のタイミングで足をすくわれます。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>ポーズポイント方式のパイプライン（最初のリリース）</title>
-      <link>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</guid>
-      <pubDate>Fri, 17 Apr 2026 10:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>最初のタグ付きリリース（v0.3.0 から v0.4.3）で、実際の形が整いました。個別のステージを持つアーティファクトストアと外部ブリッジ、ステップごとのサブコマンド、そして言語処理の重いステップを外部のエージェントに渡し、その結果を取り込み直せるエージェントモードです。</p>
-<p>PDF対応も入出力の両方でこの時期に入りました。入力の解析は PDFKit で既存のレジュメを読み取り、画像だけのPDFには Vision の OCR を使います。出力は、適切な日本語組版で履歴書と職務経歴書を生成します。</p>
-<p>決定論的なステージとモデルのステージを早い段階で分けたことが、その後のすべてを扱いやすくしてくれました。どのポーズポイントでも処理を止めて、ドキュメントになる前のアーティファクトを確認できます。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>
