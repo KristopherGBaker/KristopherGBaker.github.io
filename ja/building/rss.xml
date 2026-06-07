@@ -7,8 +7,25 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 07 Jun 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 20:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>本は翻訳せず、アプリだけをローカライズする</title>
+      <link>https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/</guid>
+      <pubDate>Sun, 07 Jun 2026 20:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>日本語の読み上げは、いままさに取り組んでいるところです。声がそこに届く前に、まずインターフェース自体が日本語を話すべきなので、こちらを先にやりました。ユーザーに見えるすべての文字列を、String Catalogsでローカライズできるようにしました。UI、オンボーディング、リーダー、設定、さらに4つの読書テーマ名まで、すべて日本語訳をそろえています。カタログはビルド時に文字列を抽出するので、新しいTextやButtonのリテラルも自動的に拾われます。こっそり英語のまま出荷される、ということがありません。</p>
+<p>厄介だったのは、ローカライズされているように見えて、実はされていない文字列でした。本のタイトルはコンテンツであってUIではないので、絶対に翻訳してはいけません。そこで、ラベルがリテラルと実行時のコンテンツを混ぜている箇所（リーダーのタイトル、章メニュー、ダウンロードの進捗）では、両者を切り分けて、リテラルだけをカタログに通し、コンテンツはそのまま残すようにしました。作業はSwiftパッケージの内側にも及びました。DocumentKitとSpeechKitのインポートエラーと合成エラーをLocalizedErrorに準拠させたので、あの素っ気ない「操作を完了できませんでした」ではなく、インポートの失敗が読者自身の言語で理由を説明してくれます。</p>
+<p>ローカライズは単純な作業に思えて、実のところ難しさの半分は「何を訳さないか」を決めることにあります。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>初回起動で、まず声をそろえる</title>
+      <link>https://krisbaker.com/ja/building/aoede/first-run-onboarding/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/first-run-onboarding/</guid>
+      <pubDate>Sun, 07 Jun 2026 19:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoedeは何をするにもまず声が要ります。そして、その声のセットアップこそ、このアプリでいちばん分かりにくい部分でもあります。だから初回起動でひと通り案内するようにしました。ようこそ画面、仕組みの簡単な説明、Appleのシステム音声かKokoroかの選択、選んだほうのセットアップ、そして最初の本のインポート。このオンボーディングは、あとからヘルプメニューや設定でいつでも見直せます。</p>
+<p>このセットアップの手順こそ、オンボーディングをつくった理由です。macOSは出来のいいシステム音声を、誰も見ようと思わないVoiceOverユーティリティの奥に隠しています。だからApple音声を選ぶと、オンボーディングはそこへ直接案内します。自分で見つけさせたりはしません。Kokoroを選んだ場合は、エンジンを選んだ瞬間に黙ってダウンロードを始めるのではなく、専用の手順で実際のバイト単位の進捗バーを見せながらモデルを落とします。表示されるのは選んだエンジンの手順だけなので、使わない声のセットアップに付き合わされる人はいません。</p>]]></content:encoded>
+    </item>
     <item>
       <title>最初から最後まで、読み上げが動く</title>
       <link>https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/</link>
@@ -173,24 +190,6 @@
       <content:encoded><![CDATA[<p>パッケージの土台を作り、コア一式を一日で立ち上げました。メッセージとRunnable、OpenAI・Anthropic・Ollama・Google Gemini のプロバイダーアダプター、続いてプロンプト、出力パーサー、ドキュメントローダー、テキストスプリッター、ベクトルストア、リトリーバー、インクリメンタルなインデックス更新、メモリ、ツール呼び出し型のエージェントループ、そして循環的なワークフローのための StateGraph です。</p>
 <p>一度の作業にしては多く見えますし、実際に多かったのですが、その大部分は LangChain の形をSwiftに忠実に移植したものです。なので設計の仕事は、ゼロから考えることよりも、何を残すかを決めることでした。</p>
 <p>一番欲しかった部分は最初のコミットから入っていました。ストリーミング、ツール呼び出し、そして自己修復ラッパー付きのストリーミングJSONパーサーです。どれも、これまでのプロジェクトで毎回手書きで再実装していたものでした。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>/ja/ 以下の多言語対応</title>
-      <link>https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</guid>
-      <pubDate>Fri, 01 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>i18n の基盤を追加しました。設定、コンテンツ、データ、ルーティングです。これにより、このサイトはルートで英語を、/ja/ 以下で日本語を配信します。同じ作業で、エイリアスのリダイレクト、hreflang タグ、トップバーの言語切り替えを入れ、少し後にローカライズしたフィードとサイトマップが続きました。</p>
-<p>落ち着いたルールは、すべてのページが両方の言語で存在するというものです。.ja.md ファイルがあればそのページは翻訳され、なければ英語にフォールバックします。だから、後から翻訳を追加してもリンクが壊れることはありません。</p>
-<p>自分のジェネレーターでやったおかげで、プラグインの前提にサイトを合わせるのではなく、URLの構成をシンプルに保てました。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>コンテンツコレクションと quiet テーマ</title>
-      <link>https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</guid>
-      <pubDate>Thu, 30 Apr 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>これが、Inkwell をブログ用のツールからポートフォリオも動かせるものへと変えた変更（v0.3.0）です。</p>
-<p>コンテンツはコレクションになりました。それぞれが、マークダウンの置き場所、ルート、並び順、公開するタクソノミーを宣言し、固定されたひとつのブログの形ではなく、コレクションごとのルーティングを持ちます。同じリリースで author、nav、home、そして任意のコレクションに使える content new コマンドを追加しました。</p>
-<p>quiet テーマも同時に出しました。Fraunces、Manrope、JetBrains Mono を使い、ポートフォリオとブログのレイアウトを備えています。このサイト全体が、いまもこの見た目で動いています。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

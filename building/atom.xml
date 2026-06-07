@@ -6,11 +6,30 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T18:00:00Z</updated>
+  <updated>2026-06-07T20:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Localizing the App Without Translating the Books</title>
+    <link href="https://krisbaker.com/building/aoede/localizing-aoede-japanese/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/localizing-aoede-japanese/</id>
+    <updated>2026-06-07T20:00:00Z</updated>
+    <published>2026-06-07T20:00:00Z</published>
+    <content type="html"><![CDATA[<p>Reading Japanese aloud is what I'm working on now. Before the voice gets there, the interface itself should speak Japanese, so that came first. Every user-facing string is now localizable through String Catalogs, with a full Japanese translation covering the UI, onboarding, reader, settings, and even the four reading-theme names. The catalogs extract at build time, so new Text and Button literals get picked up automatically instead of quietly shipping in English.</p>
+<p>The harder part was the strings that looked localized but were not. A book's title is content, not UI, and must never be translated, so anywhere a label mixed a literal with runtime content (the reader title, the chapter menu, the download progress) I split them apart, leaving only the literal to go through the catalog while the content stays verbatim. The work also went down into the Swift packages: DocumentKit and SpeechKit now conform their import and synthesis errors to LocalizedError. So instead of the generic &quot;operation couldn't be completed,&quot; a failed import explains itself in the reader's own language.</p>
+<p>Localization sounds mechanical until you realize half the challenge is deciding what not to translate.</p>]]></content>
+  </entry>
+  <entry>
+    <title>A First Run That Sets Up Its Own Voice</title>
+    <link href="https://krisbaker.com/building/aoede/first-run-onboarding/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/first-run-onboarding/</id>
+    <updated>2026-06-07T19:00:00Z</updated>
+    <published>2026-06-07T19:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede needs a voice before it can do anything. The problem is that getting one is also the least obvious part of the experience. So the first launch now walks through it: a welcome, a short tour of how it works, a choice between Apple's system voices and Kokoro, the setup for whichever one you picked, and importing your first book. The entire flow can be revisited later from the Help menu or Settings.</p>
+<p>The setup step is the reason onboarding exists at all. macOS hides its good system voices behind VoiceOver Utility, a place no one would think to look, so if you choose Apple voices, onboarding sends you straight there instead of leaving you to discover it. If you choose Kokoro, the model download happens on an explicit step with a real byte-progress bar, rather than kicking off silently the moment you select the engine. Only the step for the engine you picked shows up, so nobody sits through setup for a voice they are not going to use.</p>]]></content>
+  </entry>
   <entry>
     <title>Reading Along, End to End</title>
     <link href="https://krisbaker.com/building/aoede/reading-along-end-to-end/" rel="alternate"/>
@@ -193,25 +212,5 @@
     <content type="html"><![CDATA[<p>Scaffolded the package and brought up the whole core in a single day: messages and runnables, provider adapters for OpenAI, Anthropic, Ollama, and Google Gemini, then prompts, output parsers, document loaders, text splitters, vector stores, retrievers, incremental indexing, memory, a tool-calling agent loop, and a state graph for cyclic workflows.</p>
 <p>That sounds like a lot for one push, and it was, but it is mostly a faithful Swift port of the LangChain shape, so the design work was deciding what to keep rather than inventing from scratch.</p>
 <p>The parts I most wanted were there from the first commit: streaming, tool calling, and streaming JSON output parsers with self-fixing wrappers. Those are exactly the pieces every previous project had been re-implementing by hand.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Bilingual routes under /ja/</title>
-    <link href="https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/" rel="alternate"/>
-    <id>https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/</id>
-    <updated>2026-05-01T09:00:00Z</updated>
-    <published>2026-05-01T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Added the i18n foundation: config, content, data, and routing, so this site serves English at the root and Japanese under <code>/ja/</code>. The same work brought alias redirects, hreflang tags, and the top-bar language switcher, with localized feeds and a sitemap following shortly after.</p>
-<p>The rule I settled on is that every page exists in both languages. A page is translated where a <code>.ja.md</code> file exists and falls back to English where it does not, so adding a translation later never breaks a link.</p>
-<p>Doing it in my own generator meant I could keep the URL story simple instead of bending the site around a plugin's assumptions.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Content collections and the quiet theme</title>
-    <link href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/" rel="alternate"/>
-    <id>https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/</id>
-    <updated>2026-04-30T09:00:00Z</updated>
-    <published>2026-04-30T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>This is the change (v0.3.0) that turned Inkwell from a blog tool into something that could run a portfolio.</p>
-<p>Content became collections: each one declares where its markdown lives, its route, how it sorts, and which taxonomies it exposes, with per-collection routing instead of one hardcoded blog shape. The same release added <code>author</code>, <code>nav</code>, <code>home</code>, and the <code>content new</code> command for any collection.</p>
-<p>The quiet theme shipped alongside it: Fraunces, Manrope, and JetBrains Mono, with portfolio and blog layouts. It is the look this whole site still runs on.</p>]]></content>
   </entry>
 </feed>

@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>最初から最後まで、読み上げが動く</title>
-    <meta name="description" content="最初から最後まで、読み上げが動く">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/">
-    <meta property="og:title" content="最初から最後まで、読み上げが動く">
-    <meta property="og:description" content="最初から最後まで、読み上げが動く">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/">
+    <title>A First Run That Sets Up Its Own Voice</title>
+    <meta name="description" content="A First Run That Sets Up Its Own Voice">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/first-run-onboarding/">
+    <meta property="og:title" content="A First Run That Sets Up Its Own Voice">
+    <meta property="og:description" content="A First Run That Sets Up Its Own Voice">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/first-run-onboarding/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/reading-along-end-to-end/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/reading-along-end-to-end/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/reading-along-end-to-end/">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/ja/posts/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/ja/posts/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/ja/posts/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/ja/work/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/ja/work/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/ja/work/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/ja/building/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/ja/building/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/ja/building/feed.json">
+    <link rel="alternate" hreflang="en" href="/building/aoede/first-run-onboarding/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/first-run-onboarding/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/first-run-onboarding/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/building/feed.json">
     <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
       (function(){
         var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
@@ -85,19 +85,19 @@
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
   <div class="container top-bar-row">
-    <a href="/ja/" class="top-brand">
+    <a href="/" class="top-brand">
       <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
-        <span class="top-brand-sub">iOSを土台に · プロダクトシステム · AI支援ワークフロー</span>
+        <span class="top-brand-sub">iOS roots · Product systems · AI-assisted workflows</span>
       </span>
     </a>
     <nav class="top-nav">
       <div class="top-nav-links" id="primary-nav">
-        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+        <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/reading-along-end-to-end/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
-      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/first-run-onboarding/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
       </button>
@@ -106,40 +106,39 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
-     · <span>約2分</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">最初から最後まで、読み上げが動く</h1>
+  <h1 class="h1 post-title update-title">A First Run That Sets Up Its Own Voice</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeに最初にほしかったのは、薄くてもいいから一連のループが動くことでした。プレーンテキストのファイルを開き、自然な声で読み上げ、発話に合わせて単語が一つずつ灯り、どこで止めたかを覚えていて、次に開いたときその場所に戻る。そのひと続きが、いまエンドツーエンドで動いています。</p>
-<p>そこに至るには、早い段階で一つの決断をして、その周りに全部を組み立てる必要がありました。音声バックエンドはどれもタイミングの報告のしかたが違います。Appleのシステム音声は単語ごとのコールバックをリアルタイムで返してくれますが、ニューラルモデルは何も返さないので自分で導き出すしかありません。その厄介さをリーダーに漏らさないために、すべてを一つのハイライトタイムラインに正規化し、リーダーはその一つだけを見て、出どころは気にしません。この境界があるから、あとでより良い声を足すのも、書き直しではなく新しいバックエンドを追加するだけで済みます。</p>
-<p>これは、Aoedeが部品の寄せ集めであることをやめ、製品らしく感じられ始めたマイルストーンでした。</p></article>
+    <article class="prose"><p>Aoede needs a voice before it can do anything. The problem is that getting one is also the least obvious part of the experience. So the first launch now walks through it: a welcome, a short tour of how it works, a choice between Apple's system voices and Kokoro, the setup for whichever one you picked, and importing your first book. The entire flow can be revisited later from the Help menu or Settings.</p>
+<p>The setup step is the reason onboarding exists at all. macOS hides its good system voices behind VoiceOver Utility, a place no one would think to look, so if you choose Apple voices, onboarding sends you straight there instead of leaving you to discover it. If you choose Kokoro, the model download happens on an explicit step with a real byte-progress bar, rather than kicking off silently the moment you select the engine. Only the step for the engine you picked shows up, so nobody sits through setup for a voice they are not going to use.</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/first-run-onboarding/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">初回起動で、まず声をそろえる</span>
+      <a href="/building/aoede/localizing-aoede-japanese/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Localizing the App Without Translating the Books</span>
       </a>
-      <a href="/ja/building/aoede/import-epub-and-pdf-one-model/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">テキストファイルだけでなく、本物の本を読む</span>
+      <a href="/building/aoede/reading-along-end-to-end/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">Reading Along, End to End</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 
     <footer class="site-footer no-print">
   <div class="container site-footer-grid">
     <div>
-      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
-      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
       <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">
-      <p class="site-footer-meta-line">東京</p>
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
       <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
       <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
     </div>

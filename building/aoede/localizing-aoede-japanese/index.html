@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Aoede</title>
-    <meta name="description" content="A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/">
-    <meta property="og:title" content="Aoede">
-    <meta property="og:description" content="A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/">
+    <title>Localizing the App Without Translating the Books</title>
+    <meta name="description" content="Localizing the App Without Translating the Books">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
+    <meta property="og:title" content="Localizing the App Without Translating the Books">
+    <meta property="og:description" content="Localizing the App Without Translating the Books">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/localizing-aoede-japanese/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/localizing-aoede-japanese/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/localizing-aoede-japanese/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/localizing-aoede-japanese/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -105,96 +105,26 @@
   </div>
 </header>
 
-<main class="container building-detail page-shell">
-  <a href="/building/" class="case-study-back">← The workshop</a>
-
-  <div class="building-detail-head is-active">
-    <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated today</span>
-    
-  </div>
-
-  <h1 class="h1 building-detail-title">Aoede</h1>
-  <p class="body-lg building-detail-blurb">A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.</p>
-  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/tts/" class="tag-chip">TTS</a><a href="/building/tags/mlx/" class="tag-chip">MLX</a><a href="/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
-
-  <article class="prose building-detail-prose"><p>I wanted to read a book on my Mac the way Speechify does it, a voice reading aloud with the words highlighting as it goes, but I did not want to pay for yet another subscription to get it. From other project work I had recently learned that I could run genuinely good-sounding text-to-speech locally with Kokoro, a small open neural model. So I built my own reader around that.</p>
-<p>Most read-aloud products assume your books live in someone else's cloud and that listening to them takes a subscription. Aoede takes the opposite approach. Import a document, synthesize the speech locally, follow along with synchronized word highlighting, and keep your library on your own device. No account, no subscription, no cloud.</p>
-<p><img src="/assets/building/aoede/reader.png" alt="Aoede reading Accelerando, with the chapter's headings and list preserved and the active word lit by an amber highlight." />
-<em>Aoede reading <a href="https://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando-intro.html">Accelerando</a>, with EPUB structure preserved, synchronized word highlighting, and floating playback controls.</em></p>
-<p>The name is the idea. Aoede is the Muse of voice and song. I do not need a celebrity reading to me, just a few simple, good-sounding voices that I own. Under the hood it uses both Apple's built-in voices and Kokoro running locally through MLX. The goal is not hundreds of voices. It is a small set of genuinely good ones that work offline, with the door left open to a cloud option like ElevenLabs later if I ever actually want it.</p>
-<p>It needs a modern Apple silicon device and macOS 26 (iOS 26 when the mobile version lands). For now it is a personal project, and I am still deciding whether to build the iOS version and put it in front of a small group through TestFlight if there turns out to be interest.</p>
-<p>The updates below are the build log: the foundation wired end to end, the move from a CoreML Kokoro runtime to MLX, keeping bold and italic from the source files, and a long night spent debugging a robotic voice that turned out not to be my code at all.</p></article>
-
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">8</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/building/aoede/localizing-aoede-japanese/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Localizing the App Without Translating the Books</span>
-</a>
-<a href="/building/aoede/first-run-onboarding/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">A First Run That Sets Up Its Own Voice</span>
-</a>
-<a href="/building/aoede/reading-along-end-to-end/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Reading Along, End to End</span>
-</a>
-<a href="/building/aoede/import-epub-and-pdf-one-model/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Reading Real Books, Not Just Text Files</span>
-</a>
-<a href="/building/aoede/keeping-bold-and-italic-from-the-source/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Books Should Look Like Books</span>
-</a>
-<a href="/building/aoede/switching-kokoro-from-coreml-to-mlx/" class="update-entry is-decision">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">decision</span>
-  </span>
-  <span class="update-entry-title">Switching Kokoro From CoreML to MLX</span>
-</a>
-<a href="/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">The Robotic Voice Was a Dependency, Not My Code</span>
-</a>
-<a href="/building/aoede/giving-aoede-a-face/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Typography Is the Interface</span>
-</a>
-</div>
-  </section>
-
-  <div class="case-study-next">
-    <p class="case-study-next-label">Next</p>
-    <a href="/building/shikisha/" class="case-study-next-row">
-      <span class="case-study-next-title">Shikisha</span>
-      <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
-    </a>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
+     · <span>1 min read</span>
+  </p>
+  <h1 class="h1 post-title update-title">Localizing the App Without Translating the Books</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>Reading Japanese aloud is what I'm working on now. Before the voice gets there, the interface itself should speak Japanese, so that came first. Every user-facing string is now localizable through String Catalogs, with a full Japanese translation covering the UI, onboarding, reader, settings, and even the four reading-theme names. The catalogs extract at build time, so new Text and Button literals get picked up automatically instead of quietly shipping in English.</p>
+<p>The harder part was the strings that looked localized but were not. A book's title is content, not UI, and must never be translated, so anywhere a label mixed a literal with runtime content (the reader title, the chapter menu, the download progress) I split them apart, leaving only the literal to go through the catalog while the content stays verbatim. The work also went down into the Swift packages: DocumentKit and SpeechKit now conform their import and synthesis errors to LocalizedError. So instead of the generic &quot;operation couldn't be completed,&quot; a failed import explains itself in the reader's own language.</p>
+<p>Localization sounds mechanical until you realize half the challenge is deciding what not to translate.</p></article>
+    <nav class="update-nav">
+      <span></span>
+      <a href="/building/aoede/first-run-onboarding/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">A First Run That Sets Up Its Own Voice</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 
