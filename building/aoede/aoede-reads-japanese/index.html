@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Localizing the App Without Translating the Books</title>
-    <meta name="description" content="Localizing the App Without Translating the Books">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
-    <meta property="og:title" content="Localizing the App Without Translating the Books">
-    <meta property="og:description" content="Localizing the App Without Translating the Books">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
+    <title>Aoede Reads Japanese Now</title>
+    <meta name="description" content="Aoede Reads Japanese Now">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/aoede-reads-japanese/">
+    <meta property="og:title" content="Aoede Reads Japanese Now">
+    <meta property="og:description" content="Aoede Reads Japanese Now">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/aoede-reads-japanese/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/localizing-aoede-japanese/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/aoede-reads-japanese/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/aoede-reads-japanese/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/aoede-reads-japanese/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/localizing-aoede-japanese/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/aoede-reads-japanese/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -109,22 +109,22 @@
   <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
-     · <span>1 min read</span>
+     · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Localizing the App Without Translating the Books</h1>
+  <h1 class="h1 post-title update-title">Aoede Reads Japanese Now</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Reading Japanese aloud is what I'm working on now. Before the voice gets there, the interface itself should speak Japanese, so that came first. Every user-facing string is now localizable through String Catalogs, with a full Japanese translation covering the UI, onboarding, reader, settings, and even the four reading-theme names. The catalogs extract at build time, so new Text and Button literals get picked up automatically instead of quietly shipping in English.</p>
-<p>The harder part was the strings that looked localized but were not. A book's title is content, not UI, and must never be translated, so anywhere a label mixed a literal with runtime content (the reader title, the chapter menu, the download progress) I split them apart, leaving only the literal to go through the catalog while the content stays verbatim. The work also went down into the Swift packages: DocumentKit and SpeechKit now conform their import and synthesis errors to LocalizedError. So instead of the generic &quot;operation couldn't be completed,&quot; a failed import explains itself in the reader's own language.</p>
-<p>Localization sounds mechanical until you realize half the challenge is deciding what not to translate.</p></article>
+    <article class="prose"><p>A short while after localizing the interface, Aoede reads Japanese aloud. Open a Japanese book and it detects the language, picks a Japanese Kokoro voice, and reads with the same synchronized word highlighting English already had. Settings has a Reading Language picker (Automatic, English, Japanese) for when detection guesses wrong, and the app remembers your chosen voice per language.</p>
+<p>The interesting problem was that Japanese has no spaces between words. The reader's highlight tokenizer split on whitespace, so a whole Japanese sentence arrived as one enormous &quot;word.&quot; It overflowed the line, and the highlight covered the entire thing instead of tracking word by word. The fix was to tokenize Japanese with CFStringTokenizer, the same engine the speech G2P uses, so the on-screen word boundaries line up exactly with the per-word timing the highlight follows. Japanese paragraphs lay out with no word spacing, so the characters flow naturally while still wrapping line to line.</p>
+<p>Getting the word boundaries right was only half the problem. Pronunciation is the other half, and a single constraint shaped everything about it: all of this runs on Apple frameworks alone, with no GPL dependencies. That rules out the usual open-source pronunciation engines but keeps the app clean to ship, and it has a cost I'm paying down now. The current readings come from the dictionary's first guess, so 私 comes out <em>watakushi</em> instead of <em>watashi</em>, and there is no pitch accent, which in Japanese is the difference between 箸 (chopsticks) and 橋 (bridge). I'm working on a second pass built on OpenJTalk, which is BSD licensed rather than GPL, to get accurate readings and real pitch. For now it reads Japanese well enough to actually listen to, which a week ago it could not do at all.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/the-49gb-was-a-cache/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Aoede Reads Japanese Now</span>
+        <span class="update-nav-title">The 49 GB Was a Cache, Not a Leak</span>
       </a>
-      <a href="/building/aoede/first-run-onboarding/" class="update-nav-item update-nav-older">
+      <a href="/building/aoede/localizing-aoede-japanese/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A First Run That Sets Up Its Own Voice</span>
+        <span class="update-nav-title">Localizing the App Without Translating the Books</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

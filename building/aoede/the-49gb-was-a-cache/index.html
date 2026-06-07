@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Localizing the App Without Translating the Books</title>
-    <meta name="description" content="Localizing the App Without Translating the Books">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
-    <meta property="og:title" content="Localizing the App Without Translating the Books">
-    <meta property="og:description" content="Localizing the App Without Translating the Books">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/localizing-aoede-japanese/">
+    <title>The 49 GB Was a Cache, Not a Leak</title>
+    <meta name="description" content="The 49 GB Was a Cache, Not a Leak">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/the-49gb-was-a-cache/">
+    <meta property="og:title" content="The 49 GB Was a Cache, Not a Leak">
+    <meta property="og:description" content="The 49 GB Was a Cache, Not a Leak">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/the-49gb-was-a-cache/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/localizing-aoede-japanese/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/the-49gb-was-a-cache/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/the-49gb-was-a-cache/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/the-49gb-was-a-cache/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/localizing-aoede-japanese/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/the-49gb-was-a-cache/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.07</span>
      · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Localizing the App Without Translating the Books</h1>
+  <h1 class="h1 post-title update-title">The 49 GB Was a Cache, Not a Leak</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Reading Japanese aloud is what I'm working on now. Before the voice gets there, the interface itself should speak Japanese, so that came first. Every user-facing string is now localizable through String Catalogs, with a full Japanese translation covering the UI, onboarding, reader, settings, and even the four reading-theme names. The catalogs extract at build time, so new Text and Button literals get picked up automatically instead of quietly shipping in English.</p>
-<p>The harder part was the strings that looked localized but were not. A book's title is content, not UI, and must never be translated, so anywhere a label mixed a literal with runtime content (the reader title, the chapter menu, the download progress) I split them apart, leaving only the literal to go through the catalog while the content stays verbatim. The work also went down into the Swift packages: DocumentKit and SpeechKit now conform their import and synthesis errors to LocalizedError. So instead of the generic &quot;operation couldn't be completed,&quot; a failed import explains itself in the reader's own language.</p>
-<p>Localization sounds mechanical until you realize half the challenge is deciding what not to translate.</p></article>
+    <article class="prose"><p>Watching Activity Monitor while Aoede synthesized a long book, I saw its memory climb to 49 GB. That looks like a catastrophic leak, the kind that ends with the app getting killed. It was not a leak at all.</p>
+<p>The cause was MLX, the framework running Kokoro on the GPU. It keeps freed buffers in an uncapped reuse pool, which grows to match the peak working set of synthesis and then just sits there. The memory was reclaimable the whole time, never lost, but an app that idles at tens of gigabytes is still a bad neighbor on the machine. The fix is small: cap the pool at 512 MB when the model loads, and clear it when the engine goes idle. Live memory during synthesis is tiny, so the footprint drops to 1 to 2 GB with no change in behavior or speed.</p>
+<p>The lesson I keep relearning is that a number going up is not the same as a number leaking. The honest fix was not chasing a phantom leak but telling the framework how much cache I was willing to pay for.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Aoede Reads Japanese Now</span>
-      </a>
-      <a href="/building/aoede/first-run-onboarding/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A First Run That Sets Up Its Own Voice</span>
+        <span class="update-nav-title">Aoede Reads Japanese Now</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>本は翻訳せず、アプリだけをローカライズする</title>
-    <meta name="description" content="本は翻訳せず、アプリだけをローカライズする">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/">
-    <meta property="og:title" content="本は翻訳せず、アプリだけをローカライズする">
-    <meta property="og:description" content="本は翻訳せず、アプリだけをローカライズする">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/">
+    <title>49GBはリークではなくキャッシュだった</title>
+    <meta name="description" content="49GBはリークではなくキャッシュだった">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/">
+    <meta property="og:title" content="49GBはリークではなくキャッシュだった">
+    <meta property="og:description" content="49GBはリークではなくキャッシュだった">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/localizing-aoede-japanese/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/localizing-aoede-japanese/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/the-49gb-was-a-cache/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/the-49gb-was-a-cache/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/the-49gb-was-a-cache/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/localizing-aoede-japanese/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/the-49gb-was-a-cache/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.07</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">本は翻訳せず、アプリだけをローカライズする</h1>
+  <h1 class="h1 post-title update-title">49GBはリークではなくキャッシュだった</h1>
   
   <div class="post-body">
-    <article class="prose"><p>日本語の読み上げは、いままさに取り組んでいるところです。声がそこに届く前に、まずインターフェース自体が日本語を話すべきなので、こちらを先にやりました。ユーザーに見えるすべての文字列を、String Catalogsでローカライズできるようにしました。UI、オンボーディング、リーダー、設定、さらに4つの読書テーマ名まで、すべて日本語訳をそろえています。カタログはビルド時に文字列を抽出するので、新しいTextやButtonのリテラルも自動的に拾われます。こっそり英語のまま出荷される、ということがありません。</p>
-<p>厄介だったのは、ローカライズされているように見えて、実はされていない文字列でした。本のタイトルはコンテンツであってUIではないので、絶対に翻訳してはいけません。そこで、ラベルがリテラルと実行時のコンテンツを混ぜている箇所（リーダーのタイトル、章メニュー、ダウンロードの進捗）では、両者を切り分けて、リテラルだけをカタログに通し、コンテンツはそのまま残すようにしました。作業はSwiftパッケージの内側にも及びました。DocumentKitとSpeechKitのインポートエラーと合成エラーをLocalizedErrorに準拠させたので、あの素っ気ない「操作を完了できませんでした」ではなく、インポートの失敗が読者自身の言語で理由を説明してくれます。</p>
-<p>ローカライズは単純な作業に思えて、実のところ難しさの半分は「何を訳さないか」を決めることにあります。</p></article>
+    <article class="prose"><p>長い本を合成している最中にアクティビティモニタを見ていたら、Aoedeのメモリ使用量が49GBまで上がっていました。ふつうなら、これは深刻なリーク、最後にはアプリが強制終了させられるやつに見えます。でも、リークではまったくありませんでした。</p>
+<p>原因はMLX、KokoroをGPUで動かしているフレームワークでした。解放したバッファを上限なしの再利用プールに溜めるので、プールは合成のピーク作業セットに合わせて膨らんだまま居座ります。メモリはずっと回収可能で、失われてはいません。とはいえ、何もしていないときに数十GBを抱えているアプリは、やはりマシンにとって迷惑な隣人です。直し方は小さくて、モデルのロード時にプールを512MBに制限し、エンジンがアイドルになったらクリアするだけです。合成中のライブメモリはごくわずかなので、フットプリントは挙動も速度も変えずに1〜2GBまで下がりました。</p>
+<p>毎回学び直すのは、数字が上がることと、リークすることは別だということです。ここでの誠実な直し方は、ありもしないリークを追いかけることではなく、どれだけキャッシュにコストを払うつもりかをフレームワークに伝えることでした。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">Aoedeが日本語を読み上げるようになった</span>
-      </a>
-      <a href="/ja/building/aoede/first-run-onboarding/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">初回起動で、まず声をそろえる</span>
+        <span class="update-nav-title">Aoedeが日本語を読み上げるようになった</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

@@ -7,8 +7,26 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 20:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 22:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>The 49 GB Was a Cache, Not a Leak</title>
+      <link>https://krisbaker.com/building/aoede/the-49gb-was-a-cache/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/the-49gb-was-a-cache/</guid>
+      <pubDate>Sun, 07 Jun 2026 22:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Watching Activity Monitor while Aoede synthesized a long book, I saw its memory climb to 49 GB. That looks like a catastrophic leak, the kind that ends with the app getting killed. It was not a leak at all.</p>
+<p>The cause was MLX, the framework running Kokoro on the GPU. It keeps freed buffers in an uncapped reuse pool, which grows to match the peak working set of synthesis and then just sits there. The memory was reclaimable the whole time, never lost, but an app that idles at tens of gigabytes is still a bad neighbor on the machine. The fix is small: cap the pool at 512 MB when the model loads, and clear it when the engine goes idle. Live memory during synthesis is tiny, so the footprint drops to 1 to 2 GB with no change in behavior or speed.</p>
+<p>The lesson I keep relearning is that a number going up is not the same as a number leaking. The honest fix was not chasing a phantom leak but telling the framework how much cache I was willing to pay for.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Aoede Reads Japanese Now</title>
+      <link>https://krisbaker.com/building/aoede/aoede-reads-japanese/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/aoede-reads-japanese/</guid>
+      <pubDate>Sun, 07 Jun 2026 21:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>A short while after localizing the interface, Aoede reads Japanese aloud. Open a Japanese book and it detects the language, picks a Japanese Kokoro voice, and reads with the same synchronized word highlighting English already had. Settings has a Reading Language picker (Automatic, English, Japanese) for when detection guesses wrong, and the app remembers your chosen voice per language.</p>
+<p>The interesting problem was that Japanese has no spaces between words. The reader's highlight tokenizer split on whitespace, so a whole Japanese sentence arrived as one enormous &quot;word.&quot; It overflowed the line, and the highlight covered the entire thing instead of tracking word by word. The fix was to tokenize Japanese with CFStringTokenizer, the same engine the speech G2P uses, so the on-screen word boundaries line up exactly with the per-word timing the highlight follows. Japanese paragraphs lay out with no word spacing, so the characters flow naturally while still wrapping line to line.</p>
+<p>Getting the word boundaries right was only half the problem. Pronunciation is the other half, and a single constraint shaped everything about it: all of this runs on Apple frameworks alone, with no GPL dependencies. That rules out the usual open-source pronunciation engines but keeps the app clean to ship, and it has a cost I'm paying down now. The current readings come from the dictionary's first guess, so 私 comes out <em>watakushi</em> instead of <em>watashi</em>, and there is no pitch accent, which in Japanese is the difference between 箸 (chopsticks) and 橋 (bridge). I'm working on a second pass built on OpenJTalk, which is BSD licensed rather than GPL, to get accurate readings and real pitch. For now it reads Japanese well enough to actually listen to, which a week ago it could not do at all.</p>]]></content:encoded>
+    </item>
     <item>
       <title>Localizing the App Without Translating the Books</title>
       <link>https://krisbaker.com/building/aoede/localizing-aoede-japanese/</link>
@@ -230,24 +248,6 @@ Repo: <a href="https://github.com/KristopherGBaker/Shikisha">github.com/Kristoph
       <content:encoded><![CDATA[<p>For a while Domestique was happily single-device: everything in files and SQLite under Application Support. That is fine until you want the same history on a second machine, or simply want a backup that is not a folder you might delete by accident.</p>
 <p>So I wrote it a backend. One Go binary, <code>domestiqued</code>, with a <code>serve | migrate | athlete | token</code> CLI, a SQLite store with embedded migrations, bearer-token auth, and an admin console served right out of the binary. No CGO, no container, no managed cloud. It runs on a small box I control.</p>
 <p>On the Swift side, a SyncClient does push and pull deltas in one click: activities and streams, goals and plans and adherence, even the workout game's lifetime stats and per-workout personal bests. Autosave is wired into every place the app changes something, coalesced so a flurry of edits collapses into at most a couple of background pushes. The data model is multi-athlete-ready, so the day I want to share this with a riding partner is a small step, not a rewrite.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>A workout game I did not plan to write</title>
-      <link>https://krisbaker.com/building/domestique/domestique-workout-game/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/domestique/domestique-workout-game/</guid>
-      <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Indoor intervals are boring. That is the core problem every trainer has. So somewhere in the first week I started a small experiment: render the workout as a 2D side-scrolling cycling game in SpriteKit, with the rider's speed driven by my actual power.</p>
-<p>It got away from me, in the good way. The rider hops on a trackpad swipe, leans into corners, stands out of the saddle on climbs and tucks on descents. There are day-night cycles, weather, themed environments, parallax birds, and a ghost of your personal-best ride to chase. The finish screen is a real telemetry readout: NP, IF, TSS, time in zone, a power curve, and a stack of career stats that persist across every session.</p>
-<p>None of this makes me fitter than a plain target number would. But I finish more of my hard intervals when there is a hill on the screen and a personal best to beat, and that is the only metric that counts here. The pixel art and sound came later, through an Aseprite asset pipeline.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>The whole skeleton in one pass</title>
-      <link>https://krisbaker.com/building/domestique/domestique-foundation/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/domestique/domestique-foundation/</guid>
-      <pubDate>Mon, 18 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Domestique started as one long day of wiring the full path end to end: sign in to Garmin Connect, pull activities into a local cache, compute the telemetry that matters, and turn it into something that can drive a trainer.</p>
-<p>By the end the skeleton was standing. On the analytics side: an activity list with intensity filters, a detail view with the route on a MapKit map, a power and heart-rate chart, a mean-max power curve, and a dashboard of 28-day load with a 180-day PMC chart. On the training side: a hybrid plan engine (calendar anchors plus an adaptive interior, Friel-style phases with auto-recovery weeks), a library of built-in workouts, and a runtime that pushes ERG targets to an FTMS trainer over BLE while it records the ride.</p>
-<p>The piece I wanted most was the loop closing: ride a structured workout, have the app score how closely I matched the prescription, and feed that back into what it recommends tomorrow. Everything since has been filling in that frame.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>
