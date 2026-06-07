@@ -280,54 +280,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/macos/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/domestique/domestique-bilingual-units/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/domestique/domestique-mont-ventoux/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/domestique/domestique-backend/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/domestique/domestique-workout-game/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/domestique/domestique-foundation/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-examples/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-0-1-0/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-core/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
-  </url>
-  <url>
     <loc>https://krisbaker.com/building/aoede/the-49gb-was-a-cache/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/aoede/the-49gb-was-a-cache/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/"/>
@@ -406,6 +358,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-examples/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-0-1-0/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-core/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/"/>
@@ -434,6 +404,36 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/domestique/domestique-bilingual-units/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/domestique/domestique-mont-ventoux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/domestique/domestique-backend/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/domestique/domestique-workout-game/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/domestique/domestique-foundation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/about/</loc>
@@ -732,6 +732,24 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags//"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/shikisha/shikisha-examples/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
@@ -810,54 +828,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/giving-aoede-a-face/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-backend/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-foundation/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
-  </url>
-  <url>
     <loc>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/"/>
@@ -886,6 +856,36 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-backend/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-foundation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/about/</loc>
