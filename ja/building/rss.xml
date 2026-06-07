@@ -7,8 +7,17 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 07 Jun 2026 23:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 23:30:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>音声と一致するふりがな</title>
+      <link>https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/</guid>
+      <pubDate>Sun, 07 Jun 2026 23:30:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoedeで漢字の上に小さな読み仮名、つまりふりがなを表示できるようになりました。日本語のときだけ出るツールバーのボタンで切り替えます。こだわったのは、ふりがなが音声と一致することです。表示される読みも、読み上げられる読みも、どちらもOpenJTalkから来ます。だからナレーターが「私」を「わたし」と読むとき、漢字の上に見えるのもまさにそれで、文脈で決まる助詞の読みまで一致します。OpenJTalkの辞書がなければ、ふりがなは音声と同じくCFStringTokenizerにフォールバックします。</p>
+<p>姉妹アプリのAsideがすでにふりがなをやっているので、まずはそのロジックに手を伸ばしました。読みのコードはきれいに移植できました。トークン化し、ひらがなに変換し、送り仮名を落とし、混じった漢字の連なりを分割する。でも描画はそうはいきませんでした。AsideはルビをひとつのCTRubyAnnotationで、一枚岩のテキストブロックに描きます。一方、Aoedeの読書体験の核は、そのテキストの上を単語ごとに滑っていくカラオケ式のハイライトです。一枚岩のブロックには、ハイライトが乗る場所がありません。そこで描画をSwiftUIで単語ごとに作り直しました。漢字の連なりごとに上へ仮名を重ね、ふつうの文字の上には透明な仮名レーンを置いて、どの行もベースラインをそろえます。ハイライトは生き残り、いまはふりがなを突き抜けるのではなく、その下を滑っていきます。</p>
+<p>小さなバグひとつが、寄り道する価値のあるものでした。漢字の連なりが読みとほぼ同じ幅のとき（「物凄」は「ものすご」とだいたい同じ幅です）、仮名で測った列がほんのわずか足りず、SwiftUIが漢字そのものを「…」一文字に切り詰めてしまうことがありました。仮名レーンだけでなく、ベースの文字列も自前の理想幅に固定して直しました。ふりがなは紙の上では小さな機能ですが、まだ勉強中の言語で読むとき、聞いている読みが目に見えることは、ほとんどそれ自体が目的です。</p>]]></content:encoded>
+    </item>
     <item>
       <title>「わたくし」ではなく「わたし」と読むようになった</title>
       <link>https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/</link>
@@ -181,15 +190,6 @@
       <content:encoded><![CDATA[<p>トレーナーはパワーターゲットを保持できます。次にほしかったのは地形でした。室内で実際の道を走り、勾配が抵抗を動かす。</p>
 <p>そこでDomestiqueにルートライブラリを足しました。GPXをインポートする、任意のアクティビティからルートを保存する、あるいは保存済みのStravaルートを取り込む。そして、フリーライドや構造化ワークアウトの最中にそれを再生し、標高プロファイルでトレーナーのシミュレート勾配を動かします。ドラッグできるチャートのハンドルとアンドゥ／リドゥを備えたトリムエディタがあり、乱れたGPSトラックからきれいな区間を切り出せます。ルートは端から端まで反転もできます。</p>
 <p>最初にバンドルしたルートはモンヴァントゥで、3つの古典的な登り口に合わせた3つのプリセットです。藤沢の予備の部屋からプロヴァンスの巨人を登り、実際の道で斜度が上がるまさにその地点で抵抗がせり上がってくる。室内のセットアップが屋外に一番近づいた瞬間でした。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>専用のバックエンド</title>
-      <link>https://krisbaker.com/ja/building/domestique/domestique-backend/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-backend/</guid>
-      <pubDate>Thu, 21 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>しばらくの間、Domestiqueはシングルデバイスで満足していました。すべてはApplication Support下のファイルとSQLiteの中。二台目のマシンに同じ履歴がほしくなるまで、あるいはうっかり消してしまうかもしれないフォルダ以外のバックアップがほしくなるまでは、それで十分です。</p>
-<p>そこで、バックエンドを書きました。<code>domestiqued</code> という一つのGoバイナリに、<code>serve | migrate | athlete | token</code> のCLI、埋め込みマイグレーション付きのSQLiteストア、ベアラートークン認証、そしてバイナリから直接配信される管理コンソール。CGOなし、コンテナなし、マネージドクラウドなし。自分が管理する小さなマシンの上で動きます。</p>
-<p>Swift側では、SyncClientがワンクリックで差分をプッシュ／プルします。アクティビティとストリーム、ゴールとプランとアドヒアランス、さらにはワークアウトゲームの生涯スタッツやワークアウトごとの自己ベストまで。オートセーブはアプリが何かを変える場所すべてに配線してあり、まとめて束ねられるので、連続した編集も最大で数回のバックグラウンドプッシュに収まります。データモデルはマルチアスリート対応なので、いつか一緒に走る仲間と共有したくなっても、書き直しではなく小さな一歩で済みます。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

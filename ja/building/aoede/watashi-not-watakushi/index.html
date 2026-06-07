@@ -118,7 +118,10 @@
 <p>OpenJTalkはPythonのpyopenjtalkの裏にあるエンジンで、そもそも使えた理由は、GPLではなくBSDライセンスだからです。純Appleのフェーズ1が守ろうとしていたのと同じ基準を、ちゃんとクリアします。そのカタカナ読みを、フォールバックがすでに使っているのと同じKokoro語彙の音素テーブルにそのまま流し込むので、新しい音素体系を作ったわけではなく、読みの出どころをより良いものに替えただけです。約23MBの辞書は、Kokoroモデル自体と同じく、日本語を初めて使うときにダウンロードします。もしそのダウンロードが失敗しても、日本語は壊れる代わりに、Appleだけの経路へ静かにフォールバックします。</p>
 <p>ひとつ、わざと保留にした部分があります。OpenJTalkはダウンステップ、つまり句の途中で起きる小さなピッチの下がりも予測しますが、それはまだ音素ストリームに入れていません。Kokoroには独自の韻律モデルがあるので、明示的なダウンステップのマークを入れたほうが本当に良く聞こえるのか、決める前にA/Bで確かめたいからです。いまのところ読みは正しく、アクセントも音韻的に合っていて、それがそもそもの目的でした。一日前の、平板で少しずれた日本語はもうありません。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/aoede/furigana-that-matches-the-voice/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">音声と一致するふりがな</span>
+      </a>
       <a href="/ja/building/aoede/the-49gb-was-a-cache/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">49GBはリークではなくキャッシュだった</span>

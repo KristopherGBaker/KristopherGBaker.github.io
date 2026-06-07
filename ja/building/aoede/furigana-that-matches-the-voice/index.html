@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Shikisha</title>
-    <meta name="description" content="macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/shikisha/">
-    <meta property="og:title" content="Shikisha">
-    <meta property="og:description" content="macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/shikisha/">
+    <title>音声と一致するふりがな</title>
+    <meta name="description" content="音声と一致するふりがな">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/">
+    <meta property="og:title" content="音声と一致するふりがな">
+    <meta property="og:description" content="音声と一致するふりがな">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/shikisha/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/shikisha/">
-    <link rel="alternate" hreflang="x-default" href="/building/shikisha/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/furigana-that-matches-the-voice/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/furigana-that-matches-the-voice/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/furigana-that-matches-the-voice/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/shikisha/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/furigana-that-matches-the-voice/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -105,58 +105,26 @@
   </div>
 </header>
 
-<main class="container building-detail page-shell">
-  <a href="/ja/building/" class="case-study-back">← 制作中へ</a>
-
-  <div class="building-detail-head is-active">
-    <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 5d ago</span>
-    <a href="https://github.com/KristopherGBaker/Shikisha" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-
-  <h1 class="h1 building-detail-title">Shikisha</h1>
-  <p class="body-lg building-detail-blurb">macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/llm/" class="tag-chip">LLM</a><a href="/ja/building/tags//" class="tag-chip">ツール</a><a href="/ja/building/tags//" class="tag-chip">オープンソース</a></div>
-
-  <article class="prose building-detail-prose"><p>SwiftからLLMを呼ぶこと自体は簡単です。難しいのは、その呼び出しの周りにあるワークフローを、分かりやすく保守しやすい形に保つことです。</p>
-<p>Shikishaはそこを整えるための試みです。小さなチェーン、RAGパイプライン、ツールを使うエージェント、アプリのUI。これらに共通の語彙を与えて、プロンプト・構造化出力・リトライ・ストリーミング・ツール・テストが、プロジェクトごとのグルーコードの山にならないようにしています。</p>
-<p>まだ早い段階で、バージョンはおよそ <code>0.1.0</code> ですが、例を作るためではなく、実際のプロジェクトで使う段階まで来ました。最初に役立っているのがJPResumeです。</p>
-<p>面白かったのはモデル呼び出しそのものではありません。その呼び出しが「全体」ではなく「組み合わせ可能な一つのステップ」になったときに、残りのシステムがどう変わるかでした。</p></article>
-
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">3</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/ja/building/shikisha/shikisha-examples/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.02</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">サンプルアプリとチュートリアル</span>
-</a>
-<a href="/ja/building/shikisha/shikisha-0-1-0/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">0.1.0 をタグ付け</span>
-</a>
-<a href="/ja/building/shikisha/shikisha-core/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.17</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">コア一式を一気に実装</span>
-</a>
-</div>
-  </section>
-
-  <div class="case-study-next">
-    <p class="case-study-next-label">次へ</p>
-    <a href="/ja/building/jpresume/" class="case-study-next-row">
-      <span class="case-study-next-title">JPResume</span>
-      <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
-    </a>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
+     · <span>約2分</span>
+  </p>
+  <h1 class="h1 post-title update-title">音声と一致するふりがな</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>Aoedeで漢字の上に小さな読み仮名、つまりふりがなを表示できるようになりました。日本語のときだけ出るツールバーのボタンで切り替えます。こだわったのは、ふりがなが音声と一致することです。表示される読みも、読み上げられる読みも、どちらもOpenJTalkから来ます。だからナレーターが「私」を「わたし」と読むとき、漢字の上に見えるのもまさにそれで、文脈で決まる助詞の読みまで一致します。OpenJTalkの辞書がなければ、ふりがなは音声と同じくCFStringTokenizerにフォールバックします。</p>
+<p>姉妹アプリのAsideがすでにふりがなをやっているので、まずはそのロジックに手を伸ばしました。読みのコードはきれいに移植できました。トークン化し、ひらがなに変換し、送り仮名を落とし、混じった漢字の連なりを分割する。でも描画はそうはいきませんでした。AsideはルビをひとつのCTRubyAnnotationで、一枚岩のテキストブロックに描きます。一方、Aoedeの読書体験の核は、そのテキストの上を単語ごとに滑っていくカラオケ式のハイライトです。一枚岩のブロックには、ハイライトが乗る場所がありません。そこで描画をSwiftUIで単語ごとに作り直しました。漢字の連なりごとに上へ仮名を重ね、ふつうの文字の上には透明な仮名レーンを置いて、どの行もベースラインをそろえます。ハイライトは生き残り、いまはふりがなを突き抜けるのではなく、その下を滑っていきます。</p>
+<p>小さなバグひとつが、寄り道する価値のあるものでした。漢字の連なりが読みとほぼ同じ幅のとき（「物凄」は「ものすご」とだいたい同じ幅です）、仮名で測った列がほんのわずか足りず、SwiftUIが漢字そのものを「…」一文字に切り詰めてしまうことがありました。仮名レーンだけでなく、ベースの文字列も自前の理想幅に固定して直しました。ふりがなは紙の上では小さな機能ですが、まだ勉強中の言語で読むとき、聞いている読みが目に見えることは、ほとんどそれ自体が目的です。</p></article>
+    <nav class="update-nav">
+      <span></span>
+      <a href="/ja/building/aoede/watashi-not-watakushi/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">古い</span>
+        <span class="update-nav-title">「わたくし」ではなく「わたし」と読むようになった</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

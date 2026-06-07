@@ -7,8 +7,17 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 23:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 23:30:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Furigana That Matches the Voice</title>
+      <link>https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/</guid>
+      <pubDate>Sun, 07 Jun 2026 23:30:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoede can now show furigana, the small kana readings printed above kanji, toggled from a toolbar button that only appears for Japanese. The part I care about is that the furigana matches the voice. Both the printed reading and the spoken one come from OpenJTalk, so when the narrator says わたし for 私, that is exactly what you see above the kanji, contextual particle readings included. If the OpenJTalk dictionary isn't present, the furigana falls back to CFStringTokenizer, the same fallback the audio uses.</p>
+<p>I have a sibling app, Aside, that already does furigana, so I started by reaching for its logic. The reading code ported over cleanly: tokenize, convert to hiragana, trim okurigana, split mixed kanji runs. The rendering did not. Aside draws ruby with a single CTRubyAnnotation in one monolithic text block, and Aoede's whole reading experience is a karaoke highlight that slides word by word across the text. A monolithic block gives the highlight nowhere to land. So I rebuilt the rendering per word in SwiftUI: kana stacked over each kanji run, with an invisible kana lane over the plain runs so every line keeps the same baseline. The highlight survives, now gliding under the furigana instead of through it.</p>
+<p>One small bug was worth the detour. When a kanji run is about as wide as its reading (物凄 is roughly as wide as ものすご), the kana-measured column could come up a hair short and SwiftUI would truncate the kanji itself to a single &quot;…&quot;. Pinning the base run to its own ideal width, not just the kana lane's, fixed it. Furigana is a small feature on paper, but when you're reading in a language you're still learning, seeing the reading you're hearing is most of the point.</p>]]></content:encoded>
+    </item>
     <item>
       <title>Now It Reads Watashi, Not Watakushi</title>
       <link>https://krisbaker.com/building/aoede/watashi-not-watakushi/</link>
@@ -239,15 +248,6 @@ Repo: <a href="https://github.com/KristopherGBaker/Shikisha">github.com/Kristoph
 <p>So over a few days I made Domestique bilingual and unit-aware. All the app's strings moved into an xcstrings catalog: the views, the status and error messages, the enum labels, the workout and plan and adherence prose, even the labels inside the SpriteKit game. Then a unit-system preference, so distance, elevation, speed, and weight render in metric or imperial, with a separate toggle for energy in kJ or kcal. The kJ to kcal conversion even does the real division by 4.184 now, instead of the 1:1 stub I had been getting away with.</p>
 <p>The same stretch loosened some hard requirements. Garmin sign-in is now optional rather than the front door: you can run the app Strava-only, and the toolbar sync and status pill respect that. The ramp test got smarter too, auto-ending when I fail to hold the step and showing the estimated FTP right there in the cooldown, with per-step coaching cues that no longer overlap.</p>
 <p>None of this is glamorous. It is the layer that decides whether the app feels built for me or merely adapted to me, and living between two countries, I notice the difference.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Mont Ventoux on the trainer</title>
-      <link>https://krisbaker.com/building/domestique/domestique-mont-ventoux/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/domestique/domestique-mont-ventoux/</guid>
-      <pubDate>Fri, 22 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>The trainer can hold a power target. The next thing I wanted was terrain: ride an actual road, indoors, with the gradient driving the resistance.</p>
-<p>So Domestique grew a Routes library. Import a GPX, save a route from any activity, or pull one of your saved Strava routes, then play it back during a free ride or a structured workout while the elevation profile drives the trainer's simulated gradient. There is a trim editor with draggable chart handles and undo/redo for cutting a clean segment out of a messy GPS track, and you can reverse a route end to end.</p>
-<p>The first route I bundled was Mont Ventoux, in three presets for its three classic ascents. Climbing the Géant de Provence from my spare room in Fujisawa, with the resistance ramping up exactly where the real road kicks, is the closest the indoor setup has come to feeling like the outdoor one.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

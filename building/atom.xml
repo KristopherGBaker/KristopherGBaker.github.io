@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T23:00:00Z</updated>
+  <updated>2026-06-07T23:30:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Furigana That Matches the Voice</title>
+    <link href="https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/</id>
+    <updated>2026-06-07T23:30:00Z</updated>
+    <published>2026-06-07T23:30:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede can now show furigana, the small kana readings printed above kanji, toggled from a toolbar button that only appears for Japanese. The part I care about is that the furigana matches the voice. Both the printed reading and the spoken one come from OpenJTalk, so when the narrator says わたし for 私, that is exactly what you see above the kanji, contextual particle readings included. If the OpenJTalk dictionary isn't present, the furigana falls back to CFStringTokenizer, the same fallback the audio uses.</p>
+<p>I have a sibling app, Aside, that already does furigana, so I started by reaching for its logic. The reading code ported over cleanly: tokenize, convert to hiragana, trim okurigana, split mixed kanji runs. The rendering did not. Aside draws ruby with a single CTRubyAnnotation in one monolithic text block, and Aoede's whole reading experience is a karaoke highlight that slides word by word across the text. A monolithic block gives the highlight nowhere to land. So I rebuilt the rendering per word in SwiftUI: kana stacked over each kanji run, with an invisible kana lane over the plain runs so every line keeps the same baseline. The highlight survives, now gliding under the furigana instead of through it.</p>
+<p>One small bug was worth the detour. When a kanji run is about as wide as its reading (物凄 is roughly as wide as ものすご), the kana-measured column could come up a hair short and SwiftUI would truncate the kanji itself to a single &quot;…&quot;. Pinning the base run to its own ideal width, not just the kana lane's, fixed it. Furigana is a small feature on paper, but when you're reading in a language you're still learning, seeing the reading you're hearing is most of the point.</p>]]></content>
+  </entry>
   <entry>
     <title>Now It Reads Watashi, Not Watakushi</title>
     <link href="https://krisbaker.com/building/aoede/watashi-not-watakushi/" rel="alternate"/>
@@ -202,15 +212,5 @@
     <content type="html"><![CDATA[<p>The trainer can hold a power target. The next thing I wanted was terrain: ride an actual road, indoors, with the gradient driving the resistance.</p>
 <p>So Domestique grew a Routes library. Import a GPX, save a route from any activity, or pull one of your saved Strava routes, then play it back during a free ride or a structured workout while the elevation profile drives the trainer's simulated gradient. There is a trim editor with draggable chart handles and undo/redo for cutting a clean segment out of a messy GPS track, and you can reverse a route end to end.</p>
 <p>The first route I bundled was Mont Ventoux, in three presets for its three classic ascents. Climbing the Géant de Provence from my spare room in Fujisawa, with the resistance ramping up exactly where the real road kicks, is the closest the indoor setup has come to feeling like the outdoor one.</p>]]></content>
-  </entry>
-  <entry>
-    <title>A backend of its own</title>
-    <link href="https://krisbaker.com/building/domestique/domestique-backend/" rel="alternate"/>
-    <id>https://krisbaker.com/building/domestique/domestique-backend/</id>
-    <updated>2026-05-21T09:00:00Z</updated>
-    <published>2026-05-21T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>For a while Domestique was happily single-device: everything in files and SQLite under Application Support. That is fine until you want the same history on a second machine, or simply want a backup that is not a folder you might delete by accident.</p>
-<p>So I wrote it a backend. One Go binary, <code>domestiqued</code>, with a <code>serve | migrate | athlete | token</code> CLI, a SQLite store with embedded migrations, bearer-token auth, and an admin console served right out of the binary. No CGO, no container, no managed cloud. It runs on a small box I control.</p>
-<p>On the Swift side, a SyncClient does push and pull deltas in one click: activities and streams, goals and plans and adherence, even the workout game's lifetime stats and per-workout personal bests. Autosave is wired into every place the app changes something, coalesced so a flurry of edits collapses into at most a couple of background pushes. The data model is multi-athlete-ready, so the day I want to share this with a riding partner is a small step, not a rewrite.</p>]]></content>
   </entry>
 </feed>
