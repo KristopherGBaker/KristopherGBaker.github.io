@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>49GBはリークではなくキャッシュだった</title>
-    <meta name="description" content="49GBはリークではなくキャッシュだった">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/">
-    <meta property="og:title" content="49GBはリークではなくキャッシュだった">
-    <meta property="og:description" content="49GBはリークではなくキャッシュだった">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/">
+    <title>「わたくし」ではなく「わたし」と読むようになった</title>
+    <meta name="description" content="「わたくし」ではなく「わたし」と読むようになった">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/">
+    <meta property="og:title" content="「わたくし」ではなく「わたし」と読むようになった">
+    <meta property="og:description" content="「わたくし」ではなく「わたし」と読むようになった">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/the-49gb-was-a-cache/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/the-49gb-was-a-cache/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/the-49gb-was-a-cache/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/watashi-not-watakushi/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/watashi-not-watakushi/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/watashi-not-watakushi/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/the-49gb-was-a-cache/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/watashi-not-watakushi/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-note">
-    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.07</span>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.07</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">49GBはリークではなくキャッシュだった</h1>
+  <h1 class="h1 post-title update-title">「わたくし」ではなく「わたし」と読むようになった</h1>
   
   <div class="post-body">
-    <article class="prose"><p>長い本を合成している最中にアクティビティモニタを見ていたら、Aoedeのメモリ使用量が49GBまで上がっていました。ふつうなら、これは深刻なリーク、最後にはアプリが強制終了させられるやつに見えます。でも、リークではまったくありませんでした。</p>
-<p>原因はMLX、KokoroをGPUで動かしているフレームワークでした。解放したバッファを上限なしの再利用プールに溜めるので、プールは合成のピーク作業セットに合わせて膨らんだまま居座ります。メモリはずっと回収可能で、失われてはいません。とはいえ、何もしていないときに数十GBを抱えているアプリは、やはりマシンにとって迷惑な隣人です。直し方は小さくて、モデルのロード時にプールを512MBに制限し、エンジンがアイドルになったらクリアするだけです。合成中のライブメモリはごくわずかなので、フットプリントは挙動も速度も変えずに1〜2GBまで下がりました。</p>
-<p>毎回学び直すのは、数字が上がることと、リークすることは別だということです。ここでの誠実な直し方は、ありもしないリークを追いかけることではなく、どれだけキャッシュにコストを払うつもりかをフレームワークに伝えることでした。</p></article>
+    <article class="prose"><p>前回の日本語アップデートは、不満で終わっていました。アプリは「私」を「わたし」ではなく「わたくし」と読み、ピッチアクセントもなかったので、箸と橋が同じに聞こえる、と。その二段目がようやく入りました。日本語の発音はOpenJTalkを通るようになり、アクセント辞書を使った本物の形態素解析をします。読みも正しくなりました。「私」は「わたし」、「三日」は「みっか」、「100円」は「ひゃくえん」、そしてピッチもちゃんと出ます。</p>
+<p>OpenJTalkはPythonのpyopenjtalkの裏にあるエンジンで、そもそも使えた理由は、GPLではなくBSDライセンスだからです。純Appleのフェーズ1が守ろうとしていたのと同じ基準を、ちゃんとクリアします。そのカタカナ読みを、フォールバックがすでに使っているのと同じKokoro語彙の音素テーブルにそのまま流し込むので、新しい音素体系を作ったわけではなく、読みの出どころをより良いものに替えただけです。約23MBの辞書は、Kokoroモデル自体と同じく、日本語を初めて使うときにダウンロードします。もしそのダウンロードが失敗しても、日本語は壊れる代わりに、Appleだけの経路へ静かにフォールバックします。</p>
+<p>ひとつ、わざと保留にした部分があります。OpenJTalkはダウンステップ、つまり句の途中で起きる小さなピッチの下がりも予測しますが、それはまだ音素ストリームに入れていません。Kokoroには独自の韻律モデルがあるので、明示的なダウンステップのマークを入れたほうが本当に良く聞こえるのか、決める前にA/Bで確かめたいからです。いまのところ読みは正しく、アクセントも音韻的に合っていて、それがそもそもの目的でした。一日前の、平板で少しずれた日本語はもうありません。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/watashi-not-watakushi/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">「わたくし」ではなく「わたし」と読むようになった</span>
-      </a>
-      <a href="/ja/building/aoede/aoede-reads-japanese/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/the-49gb-was-a-cache/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">Aoedeが日本語を読み上げるようになった</span>
+        <span class="update-nav-title">49GBはリークではなくキャッシュだった</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

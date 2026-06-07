@@ -7,8 +7,17 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 07 Jun 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 23:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>「わたくし」ではなく「わたし」と読むようになった</title>
+      <link>https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/</guid>
+      <pubDate>Sun, 07 Jun 2026 23:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>前回の日本語アップデートは、不満で終わっていました。アプリは「私」を「わたし」ではなく「わたくし」と読み、ピッチアクセントもなかったので、箸と橋が同じに聞こえる、と。その二段目がようやく入りました。日本語の発音はOpenJTalkを通るようになり、アクセント辞書を使った本物の形態素解析をします。読みも正しくなりました。「私」は「わたし」、「三日」は「みっか」、「100円」は「ひゃくえん」、そしてピッチもちゃんと出ます。</p>
+<p>OpenJTalkはPythonのpyopenjtalkの裏にあるエンジンで、そもそも使えた理由は、GPLではなくBSDライセンスだからです。純Appleのフェーズ1が守ろうとしていたのと同じ基準を、ちゃんとクリアします。そのカタカナ読みを、フォールバックがすでに使っているのと同じKokoro語彙の音素テーブルにそのまま流し込むので、新しい音素体系を作ったわけではなく、読みの出どころをより良いものに替えただけです。約23MBの辞書は、Kokoroモデル自体と同じく、日本語を初めて使うときにダウンロードします。もしそのダウンロードが失敗しても、日本語は壊れる代わりに、Appleだけの経路へ静かにフォールバックします。</p>
+<p>ひとつ、わざと保留にした部分があります。OpenJTalkはダウンステップ、つまり句の途中で起きる小さなピッチの下がりも予測しますが、それはまだ音素ストリームに入れていません。Kokoroには独自の韻律モデルがあるので、明示的なダウンステップのマークを入れたほうが本当に良く聞こえるのか、決める前にA/Bで確かめたいからです。いまのところ読みは正しく、アクセントも音韻的に合っていて、それがそもそもの目的でした。一日前の、平板で少しずれた日本語はもうありません。</p>]]></content:encoded>
+    </item>
     <item>
       <title>49GBはリークではなくキャッシュだった</title>
       <link>https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/</link>
@@ -181,15 +190,6 @@
       <content:encoded><![CDATA[<p>しばらくの間、Domestiqueはシングルデバイスで満足していました。すべてはApplication Support下のファイルとSQLiteの中。二台目のマシンに同じ履歴がほしくなるまで、あるいはうっかり消してしまうかもしれないフォルダ以外のバックアップがほしくなるまでは、それで十分です。</p>
 <p>そこで、バックエンドを書きました。<code>domestiqued</code> という一つのGoバイナリに、<code>serve | migrate | athlete | token</code> のCLI、埋め込みマイグレーション付きのSQLiteストア、ベアラートークン認証、そしてバイナリから直接配信される管理コンソール。CGOなし、コンテナなし、マネージドクラウドなし。自分が管理する小さなマシンの上で動きます。</p>
 <p>Swift側では、SyncClientがワンクリックで差分をプッシュ／プルします。アクティビティとストリーム、ゴールとプランとアドヒアランス、さらにはワークアウトゲームの生涯スタッツやワークアウトごとの自己ベストまで。オートセーブはアプリが何かを変える場所すべてに配線してあり、まとめて束ねられるので、連続した編集も最大で数回のバックグラウンドプッシュに収まります。データモデルはマルチアスリート対応なので、いつか一緒に走る仲間と共有したくなっても、書き直しではなく小さな一歩で済みます。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>書くつもりのなかったワークアウトゲーム</title>
-      <link>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/domestique/domestique-workout-game/</guid>
-      <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>室内のインターバルは退屈です。これはどんなトレーナーにも共通する根っこの問題です。だから最初の一週間のどこかで、小さな実験を始めました。ワークアウトをSpriteKitの2D横スクロールのサイクリングゲームとして描き、ライダーの速度を実際のパワーで動かすのです。</p>
-<p>これは、いい意味で手に負えなくなりました。ライダーはトラックパッドのスワイプでホップし、コーナーでバンクし、登りではダンシングし、下りではタックします。昼夜のサイクル、天候、テーマ別の環境、視差で流れる鳥たち、そして追いかけるための自己ベストライドのゴースト。フィニッシュ画面は本物のテレメトリ表示です。NP、IF、TSS、ゾーン内時間、パワーカーブ、そしてセッションをまたいで蓄積されるキャリアスタッツの数々。</p>
-<p>これで素のターゲット数値より速くなるわけではありません。それでも、画面に丘があって破るべき自己ベストがあると、きついインターバルを最後までやり切れる回数が増えます。ここで意味があるのはその一点だけです。ピクセルアートとサウンドは後から、Asepriteのアセットパイプラインを通して入れました。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

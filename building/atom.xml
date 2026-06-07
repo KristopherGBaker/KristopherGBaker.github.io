@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T22:00:00Z</updated>
+  <updated>2026-06-07T23:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Now It Reads Watashi, Not Watakushi</title>
+    <link href="https://krisbaker.com/building/aoede/watashi-not-watakushi/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/watashi-not-watakushi/</id>
+    <updated>2026-06-07T23:00:00Z</updated>
+    <published>2026-06-07T23:00:00Z</published>
+    <content type="html"><![CDATA[<p>The last Japanese update ended on a complaint: the app read 私 as <em>watakushi</em> instead of <em>watashi</em>, and it had no pitch accent, so 箸 (chopsticks) and 橋 (bridge) sounded identical. That second pass is now in. Japanese pronunciation runs through OpenJTalk, which does real morphological analysis against an accent dictionary, and the readings come out right: 私 is <em>watashi</em>, 三日 is <em>mikka</em>, 100円 is <em>hyaku-en</em>, and the pitch is actually there.</p>
+<p>OpenJTalk is the engine behind Python's pyopenjtalk, and the reason I could use it at all is that it is BSD licensed, not GPL. It clears the same bar the pure-Apple Phase 1 was built to protect. Its katakana readings feed the exact Kokoro-vocab phoneme table the fallback already used, so I didn't invent a new phoneme inventory, just a better source of readings. The ~23 MB dictionary downloads on first Japanese use, the same pattern as the Kokoro model itself, and if that download ever fails, Japanese quietly falls back to the Apple-only path rather than breaking.</p>
+<p>One piece is held back on purpose. OpenJTalk also predicts downstep, the small pitch drop inside a phrase, and I'm not injecting that into the phoneme stream yet. Kokoro has its own prosody model, so I want to A/B whether the explicit downstep marks actually sound better before committing to them. For now the readings are correct and the accent is phonemically right, which was the whole point. The flat, slightly-wrong Japanese from a day ago is gone.</p>]]></content>
+  </entry>
   <entry>
     <title>The 49 GB Was a Cache, Not a Leak</title>
     <link href="https://krisbaker.com/building/aoede/the-49gb-was-a-cache/" rel="alternate"/>
@@ -202,15 +212,5 @@
     <content type="html"><![CDATA[<p>For a while Domestique was happily single-device: everything in files and SQLite under Application Support. That is fine until you want the same history on a second machine, or simply want a backup that is not a folder you might delete by accident.</p>
 <p>So I wrote it a backend. One Go binary, <code>domestiqued</code>, with a <code>serve | migrate | athlete | token</code> CLI, a SQLite store with embedded migrations, bearer-token auth, and an admin console served right out of the binary. No CGO, no container, no managed cloud. It runs on a small box I control.</p>
 <p>On the Swift side, a SyncClient does push and pull deltas in one click: activities and streams, goals and plans and adherence, even the workout game's lifetime stats and per-workout personal bests. Autosave is wired into every place the app changes something, coalesced so a flurry of edits collapses into at most a couple of background pushes. The data model is multi-athlete-ready, so the day I want to share this with a riding partner is a small step, not a rewrite.</p>]]></content>
-  </entry>
-  <entry>
-    <title>A workout game I did not plan to write</title>
-    <link href="https://krisbaker.com/building/domestique/domestique-workout-game/" rel="alternate"/>
-    <id>https://krisbaker.com/building/domestique/domestique-workout-game/</id>
-    <updated>2026-05-20T09:00:00Z</updated>
-    <published>2026-05-20T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Indoor intervals are boring. That is the core problem every trainer has. So somewhere in the first week I started a small experiment: render the workout as a 2D side-scrolling cycling game in SpriteKit, with the rider's speed driven by my actual power.</p>
-<p>It got away from me, in the good way. The rider hops on a trackpad swipe, leans into corners, stands out of the saddle on climbs and tucks on descents. There are day-night cycles, weather, themed environments, parallax birds, and a ghost of your personal-best ride to chase. The finish screen is a real telemetry readout: NP, IF, TSS, time in zone, a power curve, and a stack of career stats that persist across every session.</p>
-<p>None of this makes me fitter than a plain target number would. But I finish more of my hard intervals when there is a hill on the screen and a personal best to beat, and that is the only metric that counts here. The pixel art and sound came later, through an Aseprite asset pipeline.</p>]]></content>
   </entry>
 </feed>

@@ -7,8 +7,17 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 22:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 23:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Now It Reads Watashi, Not Watakushi</title>
+      <link>https://krisbaker.com/building/aoede/watashi-not-watakushi/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/watashi-not-watakushi/</guid>
+      <pubDate>Sun, 07 Jun 2026 23:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>The last Japanese update ended on a complaint: the app read 私 as <em>watakushi</em> instead of <em>watashi</em>, and it had no pitch accent, so 箸 (chopsticks) and 橋 (bridge) sounded identical. That second pass is now in. Japanese pronunciation runs through OpenJTalk, which does real morphological analysis against an accent dictionary, and the readings come out right: 私 is <em>watashi</em>, 三日 is <em>mikka</em>, 100円 is <em>hyaku-en</em>, and the pitch is actually there.</p>
+<p>OpenJTalk is the engine behind Python's pyopenjtalk, and the reason I could use it at all is that it is BSD licensed, not GPL. It clears the same bar the pure-Apple Phase 1 was built to protect. Its katakana readings feed the exact Kokoro-vocab phoneme table the fallback already used, so I didn't invent a new phoneme inventory, just a better source of readings. The ~23 MB dictionary downloads on first Japanese use, the same pattern as the Kokoro model itself, and if that download ever fails, Japanese quietly falls back to the Apple-only path rather than breaking.</p>
+<p>One piece is held back on purpose. OpenJTalk also predicts downstep, the small pitch drop inside a phrase, and I'm not injecting that into the phoneme stream yet. Kokoro has its own prosody model, so I want to A/B whether the explicit downstep marks actually sound better before committing to them. For now the readings are correct and the accent is phonemically right, which was the whole point. The flat, slightly-wrong Japanese from a day ago is gone.</p>]]></content:encoded>
+    </item>
     <item>
       <title>The 49 GB Was a Cache, Not a Leak</title>
       <link>https://krisbaker.com/building/aoede/the-49gb-was-a-cache/</link>
@@ -239,15 +248,6 @@ Repo: <a href="https://github.com/KristopherGBaker/Shikisha">github.com/Kristoph
       <content:encoded><![CDATA[<p>The trainer can hold a power target. The next thing I wanted was terrain: ride an actual road, indoors, with the gradient driving the resistance.</p>
 <p>So Domestique grew a Routes library. Import a GPX, save a route from any activity, or pull one of your saved Strava routes, then play it back during a free ride or a structured workout while the elevation profile drives the trainer's simulated gradient. There is a trim editor with draggable chart handles and undo/redo for cutting a clean segment out of a messy GPS track, and you can reverse a route end to end.</p>
 <p>The first route I bundled was Mont Ventoux, in three presets for its three classic ascents. Climbing the Géant de Provence from my spare room in Fujisawa, with the resistance ramping up exactly where the real road kicks, is the closest the indoor setup has come to feeling like the outdoor one.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>A backend of its own</title>
-      <link>https://krisbaker.com/building/domestique/domestique-backend/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/domestique/domestique-backend/</guid>
-      <pubDate>Thu, 21 May 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>For a while Domestique was happily single-device: everything in files and SQLite under Application Support. That is fine until you want the same history on a second machine, or simply want a backup that is not a folder you might delete by accident.</p>
-<p>So I wrote it a backend. One Go binary, <code>domestiqued</code>, with a <code>serve | migrate | athlete | token</code> CLI, a SQLite store with embedded migrations, bearer-token auth, and an admin console served right out of the binary. No CGO, no container, no managed cloud. It runs on a small box I control.</p>
-<p>On the Swift side, a SyncClient does push and pull deltas in one click: activities and streams, goals and plans and adherence, even the workout game's lifetime stats and per-workout personal bests. Autosave is wired into every place the app changes something, coalesced so a flurry of edits collapses into at most a couple of background pushes. The data model is multi-athlete-ready, so the day I want to share this with a riding partner is a small step, not a rewrite.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>
