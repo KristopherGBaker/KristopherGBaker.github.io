@@ -7,8 +7,18 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 23:59:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 10:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>A Reading Mode With No Voice</title>
+      <link>https://krisbaker.com/building/aoede/reading-pacer-no-voice/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/reading-pacer-no-voice/</guid>
+      <pubDate>Mon, 08 Jun 2026 10:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoede is a text-to-speech app, so the odd thing I added next is a reading mode that makes no sound at all.</p>
+<p>It is called the Reading Pacer, and it sits next to Kokoro and the Apple voices as a third engine that never speaks. It just advances the same karaoke highlight across the page at a reading pace, the way you might run a finger under the line, or the way a speed-reader follows a moving marker. The highlight was originally built to follow the voice. It turns out it works just as well on its own, as a way to keep your eyes moving when you would rather read than listen. And because the pacer never touches the audio session, whatever you already have playing keeps playing under it.</p>
+<p>The pace tries to match how text actually reads, giving each word a slice of time scaled by its length so long words linger and short ones pass quickly, with the slider retuning the speed live. What matters more in practice is the grain. You can pace word by word, by a phrase of up to ten words, or a whole sentence at a time, where the highlight becomes one band over the chunk. Three different reading rhythms from the same page.</p>
+<p>A voice app with a silent mode sounds like a contradiction, but reading and listening are two speeds of the same act, and some evenings, with the kids finally asleep, you want the one that does not fill the room with sound.</p>]]></content:encoded>
+    </item>
     <item>
       <title>Switching Voices Without Opening Settings</title>
       <link>https://krisbaker.com/building/aoede/voice-picker-in-the-transport-bar/</link>
@@ -236,15 +246,6 @@ let result = try await agent.run([
 <p>Docs: <a href="https://krisbaker.com/Shikisha/documentation/shikisha/">krisbaker.com/Shikisha/documentation/shikisha</a>
 Repo: <a href="https://github.com/KristopherGBaker/Shikisha">github.com/KristopherGBaker/Shikisha</a></p>
 <p>If you build Swift apps and have been curious about adding LLM workflows without leaving the Apple-platform toolchain, Shikisha is my current answer. It is still early, but already past being just an experiment.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Example apps and tutorials</title>
-      <link>https://krisbaker.com/building/shikisha/shikisha-examples/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/shikisha/shikisha-examples/</guid>
-      <pubDate>Tue, 02 Jun 2026 10:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Added the things that make a library actually approachable: a universal SwiftUI chat app, a &quot;Build a Coding Agent&quot; tutorial backed by a real file-editing agent example, and a RAG tutorial.</p>
-<p>Writing the examples is also the most honest design review I get. Every place the chat app or the coding agent felt awkward to wire up was a place the API needed another look, not the example.</p>
-<p>This also lines up with the post I wrote about why Shikisha exists, which goes deeper on the glue-code problem it is meant to remove.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

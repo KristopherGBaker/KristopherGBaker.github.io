@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tags: Kokoro</title>
-    <meta name="description" content="Archive page for tags Kokoro.">
-    <link rel="canonical" href="https://krisbaker.com/building/tags/kokoro/">
-    <meta property="og:title" content="Tags: Kokoro">
-    <meta property="og:description" content="Archive page for tags Kokoro.">
-    <meta property="og:url" content="https://krisbaker.com/building/tags/kokoro/">
+    <title>A Reading Mode With No Voice</title>
+    <meta name="description" content="A Reading Mode With No Voice">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/reading-pacer-no-voice/">
+    <meta property="og:title" content="A Reading Mode With No Voice">
+    <meta property="og:description" content="A Reading Mode With No Voice">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/reading-pacer-no-voice/">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/aoede/reading-pacer-no-voice/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/reading-pacer-no-voice/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/reading-pacer-no-voice/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -93,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/reading-pacer-no-voice/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -102,19 +105,28 @@
   </div>
 </header>
 
-<main class="container page-shell" style="padding-top: var(--page-padding-top);">
-  <p class="eyebrow" style="margin-bottom: 18px;">tags</p>
-  <h1 class="h1" style="max-width: 880px; margin: 0 0 24px;">Kokoro</h1>
-  <div><a href="/building/aoede/" class="post-list-item">
-  <p class="post-list-meta">
-    <span></span>
-    <span class="post-list-meta-sep">·</span><span>Swift</span>
-    <span class="post-list-meta-sep">·</span><span>3 min read</span>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.08</span>
+     · <span>2 min read</span>
   </p>
-  <h3 class="post-list-title">Aoede</h3>
-  <p class="post-list-blurb">A local-first, privacy-first reading app for macOS and iOS. Import txt, EPUB, or PDF and move through it your way, reading aloud with synchronized word highlighting or pacing yourself silently with no audio at all. Speech is synthesized on-device and your library stays on your own machine. No account, no subscription, no cloud.</p>
-</a>
-</div>
+  <h1 class="h1 post-title update-title">A Reading Mode With No Voice</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>Aoede is a text-to-speech app, so the odd thing I added next is a reading mode that makes no sound at all.</p>
+<p>It is called the Reading Pacer, and it sits next to Kokoro and the Apple voices as a third engine that never speaks. It just advances the same karaoke highlight across the page at a reading pace, the way you might run a finger under the line, or the way a speed-reader follows a moving marker. The highlight was originally built to follow the voice. It turns out it works just as well on its own, as a way to keep your eyes moving when you would rather read than listen. And because the pacer never touches the audio session, whatever you already have playing keeps playing under it.</p>
+<p>The pace tries to match how text actually reads, giving each word a slice of time scaled by its length so long words linger and short ones pass quickly, with the slider retuning the speed live. What matters more in practice is the grain. You can pace word by word, by a phrase of up to ten words, or a whole sentence at a time, where the highlight becomes one band over the chunk. Three different reading rhythms from the same page.</p>
+<p>A voice app with a silent mode sounds like a contradiction, but reading and listening are two speeds of the same act, and some evenings, with the kids finally asleep, you want the one that does not fill the room with sound.</p></article>
+    <nav class="update-nav">
+      <span></span>
+      <a href="/building/aoede/voice-picker-in-the-transport-bar/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">Switching Voices Without Opening Settings</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
+  </div>
 </main>
 
     <footer class="site-footer no-print">

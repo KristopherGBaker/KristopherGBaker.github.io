@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Aoede</title>
-    <meta name="description" content="Speechify風に、単語のハイライトと同期させて本を読み上げる、ローカルファースト・プライバシーファーストのmacOSリーダー。txt、EPUB、PDFを取り込み、デバイス上で音声を合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
+    <meta name="description" content="ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
     <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/">
     <meta property="og:title" content="Aoede">
-    <meta property="og:description" content="Speechify風に、単語のハイライトと同期させて本を読み上げる、ローカルファースト・プライバシーファーストのmacOSリーダー。txt、EPUB、PDFを取り込み、デバイス上で音声を合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
+    <meta property="og:description" content="ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
     <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/">
@@ -115,22 +115,30 @@
   </div>
 
   <h1 class="h1 building-detail-title">Aoede</h1>
-  <p class="body-lg building-detail-blurb">Speechify風に、単語のハイライトと同期させて本を読み上げる、ローカルファースト・プライバシーファーストのmacOSリーダー。txt、EPUB、PDFを取り込み、デバイス上で音声を合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/tts/" class="tag-chip">TTS</a><a href="/ja/building/tags/mlx/" class="tag-chip">MLX</a><a href="/ja/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
+  <p class="body-lg building-detail-blurb">ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/ios/" class="tag-chip">iOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/tts/" class="tag-chip">TTS</a><a href="/ja/building/tags/mlx/" class="tag-chip">MLX</a><a href="/ja/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
 
   <article class="prose building-detail-prose"><p>自分のMacで、Speechifyのように「読みながら聴く」体験がほしいと思いました。声が読み上げ、進むにつれて単語がハイライトされていく、あの体験です。でも、そのためにまた新しいサブスクリプションを払うのは嫌でした。別のプロジェクトの作業を通じて、Kokoroという小さなオープンソースのニューラルモデルを使えば、本当に良い音質の音声合成をローカルで動かせると最近知ったところでした。だから、それを核にして自分用のリーダーを作りました。</p>
 <p>ほとんどの読み上げ製品は、あなたの本が誰かのクラウドにあること、そして聴くにはサブスクが要ることを前提にしています。Aoedeは逆の発想を取ります。書類を取り込み、音声をローカルで合成し、同期した単語ハイライトで追いかけ、ライブラリは自分のデバイスに置いたまま。アカウントも、サブスクも、クラウドもありません。</p>
 <p><img src="/assets/building/aoede/reader.png" alt="Accelerandoを読み上げるAoede。章の見出しとリストが保持され、アクティブな単語がアンバーのハイライトで灯っている。" />
 <em><a href="https://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando-intro.html">Accelerando</a>を読み上げるAoede。EPUBの構造を保ったまま、単語ハイライトを同期させ、再生コントロールが浮かんでいます。</em></p>
 <p>名前がそのまま狙いです。Aoede（アオイデー）は、声と歌のミューズ。有名人に読んでもらう必要はありません。自分のものだと言える、シンプルで音の良い声がいくつかあれば十分です。内部ではAppleの組み込み音声と、MLX経由でローカルに動くKokoroの両方を使っています。目指すのは何百もの声ではなく、オフラインで動く、本当に良い少数の声です。いつか本当に使いたくなったときのために、ElevenLabsのようなクラウド版の余地も残してあります。</p>
-<p>動かすには、新しめのApple siliconのデバイスとmacOS 26が必要です（モバイル版が出るころにはiOS 26も）。いまのところ個人プロジェクトで、iOS版を作るか、そして関心があれば少人数にTestFlightで配るか、まだ決めかねています。</p>
-<p>下のアップデートが制作ログです。エンドツーエンドで配線した土台、KokoroのランタイムをCoreMLからMLXへ移したこと、ソースファイルから太字とイタリックを残したこと、そして自分のコードではなかったロボットのような声を追いかけた長い夜。</p></article>
+<p>「聴くための道具」として始まったものが、「読むための道具」になってきました。Aoedeはいまでは英語だけでなく日本語にも対応し、ふりがなと読みの補正も入っています。そしてページを読み進める方法も一つではありません。声で読み上げる方法もあれば、音をまったく出さずにハイライトだけを自分のペースで進めるサイレントなReading Pacerもあります。出発点は声でしたが、いま育っているのは読書体験そのものです。</p>
+<p>動くのは新しめのApple silicon、macOS 26、そしていまはiOS 26です。Macアプリと、iPhone・iPadとで、ひとつのコアを共有しています。いまのところ個人プロジェクトで、関心があれば少人数にTestFlightで配るか、まだ決めかねています。</p>
+<p>下のアップデートが制作ログです。エンドツーエンドで配線した土台、KokoroのランタイムをCoreMLからMLXへ移したこと、ふりがなと読みの補正つきで日本語を読めるようにしたこと、コア全体をパッケージに抽出してiOSで動くようにしたこと、数十ギガバイトのまま居座っていたメモリキャッシュに上限を付けたこと、そして「これは声ではなく読書アプリになりつつある」と気づかせてくれたサイレントな読書ペーサー。</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">15</span></h2>
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">16</span></h2>
     </div>
-    <div class="update-timeline"><a href="/ja/building/aoede/voice-picker-in-the-transport-bar/" class="update-entry is-shipped">
+    <div class="update-timeline"><a href="/ja/building/aoede/reading-pacer-no-voice/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.08</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">声を出さない読書モード</span>
+</a>
+<a href="/ja/building/aoede/voice-picker-in-the-transport-bar/" class="update-entry is-shipped">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.06.07</span>
     <span class="update-entry-status">shipped</span>

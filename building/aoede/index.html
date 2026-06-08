@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Aoede</title>
-    <meta name="description" content="A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.">
+    <meta name="description" content="A local-first, privacy-first reading app for macOS and iOS. Import txt, EPUB, or PDF and move through it your way, reading aloud with synchronized word highlighting or pacing yourself silently with no audio at all. Speech is synthesized on-device and your library stays on your own machine. No account, no subscription, no cloud.">
     <link rel="canonical" href="https://krisbaker.com/building/aoede/">
     <meta property="og:title" content="Aoede">
-    <meta property="og:description" content="A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.">
+    <meta property="og:description" content="A local-first, privacy-first reading app for macOS and iOS. Import txt, EPUB, or PDF and move through it your way, reading aloud with synchronized word highlighting or pacing yourself silently with no audio at all. Speech is synthesized on-device and your library stays on your own machine. No account, no subscription, no cloud.">
     <meta property="og:url" content="https://krisbaker.com/building/aoede/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/">
@@ -115,22 +115,30 @@
   </div>
 
   <h1 class="h1 building-detail-title">Aoede</h1>
-  <p class="body-lg building-detail-blurb">A local-first, privacy-first macOS reader that reads books aloud with synchronized word highlighting, Speechify-style. Import txt, EPUB, or PDF, synthesize speech on-device, and keep your library on your own machine. No account, no subscription, no cloud.</p>
-  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/tts/" class="tag-chip">TTS</a><a href="/building/tags/mlx/" class="tag-chip">MLX</a><a href="/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
+  <p class="body-lg building-detail-blurb">A local-first, privacy-first reading app for macOS and iOS. Import txt, EPUB, or PDF and move through it your way, reading aloud with synchronized word highlighting or pacing yourself silently with no audio at all. Speech is synthesized on-device and your library stays on your own machine. No account, no subscription, no cloud.</p>
+  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/ios/" class="tag-chip">iOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/tts/" class="tag-chip">TTS</a><a href="/building/tags/mlx/" class="tag-chip">MLX</a><a href="/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
 
   <article class="prose building-detail-prose"><p>I wanted to read a book on my Mac the way Speechify does it, a voice reading aloud with the words highlighting as it goes, but I did not want to pay for yet another subscription to get it. From other project work I had recently learned that I could run genuinely good-sounding text-to-speech locally with Kokoro, a small open neural model. So I built my own reader around that.</p>
 <p>Most read-aloud products assume your books live in someone else's cloud and that listening to them takes a subscription. Aoede takes the opposite approach. Import a document, synthesize the speech locally, follow along with synchronized word highlighting, and keep your library on your own device. No account, no subscription, no cloud.</p>
 <p><img src="/assets/building/aoede/reader.png" alt="Aoede reading Accelerando, with the chapter's headings and list preserved and the active word lit by an amber highlight." />
 <em>Aoede reading <a href="https://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando-intro.html">Accelerando</a>, with EPUB structure preserved, synchronized word highlighting, and floating playback controls.</em></p>
 <p>The name is the idea. Aoede is the Muse of voice and song. I do not need a celebrity reading to me, just a few simple, good-sounding voices that I own. Under the hood it uses both Apple's built-in voices and Kokoro running locally through MLX. The goal is not hundreds of voices. It is a small set of genuinely good ones that work offline, with the door left open to a cloud option like ElevenLabs later if I ever actually want it.</p>
-<p>It needs a modern Apple silicon device and macOS 26 (iOS 26 when the mobile version lands). For now it is a personal project, and I am still deciding whether to build the iOS version and put it in front of a small group through TestFlight if there turns out to be interest.</p>
-<p>The updates below are the build log: the foundation wired end to end, the move from a CoreML Kokoro runtime to MLX, keeping bold and italic from the source files, and a long night spent debugging a robotic voice that turned out not to be my code at all.</p></article>
+<p>What started as a way to listen has become a way to read. Aoede now handles Japanese as well as English, with furigana and corrected pronunciation, and it gives you more than one way to move through a page: a voice reading aloud, or a silent Reading Pacer that just advances the highlight at your pace with no audio at all. The voice was the starting point. The reading experience is what it is turning into.</p>
+<p>It runs on modern Apple silicon, on macOS 26 and now iOS 26, sharing a single core between the Mac app and iPhone and iPad. For now it is a personal project, and I am still deciding whether to put it in front of a small group through TestFlight if there turns out to be interest.</p>
+<p>The updates below are the build log: the foundation wired end to end, the move from a CoreML Kokoro runtime to MLX, reading Japanese with furigana and corrected pronunciation, extracting the whole core into a package so it could run on iOS, a memory cache that idled at tens of gigabytes until I capped it, and the silent reading pacer that made me realize this was becoming a reading app, not just a voice.</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">15</span></h2>
+      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">16</span></h2>
     </div>
-    <div class="update-timeline"><a href="/building/aoede/voice-picker-in-the-transport-bar/" class="update-entry is-shipped">
+    <div class="update-timeline"><a href="/building/aoede/reading-pacer-no-voice/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.08</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">A Reading Mode With No Voice</span>
+</a>
+<a href="/building/aoede/voice-picker-in-the-transport-bar/" class="update-entry is-shipped">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.06.07</span>
     <span class="update-entry-status">shipped</span>

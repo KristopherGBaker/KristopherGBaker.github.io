@@ -6,11 +6,22 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-07T23:59:00Z</updated>
+  <updated>2026-06-08T10:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>声を出さない読書モード</title>
+    <link href="https://krisbaker.com/ja/building/aoede/reading-pacer-no-voice/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/reading-pacer-no-voice/</id>
+    <updated>2026-06-08T10:00:00Z</updated>
+    <published>2026-06-08T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeは読み上げ（text-to-speech）アプリなので、次に足した機能が「音をまったく出さない読書モード」だというのは、自分でも少し変な気がします。</p>
+<p>名前はReading Pacer。KokoroやAppleの音声と並ぶ三つ目のエンジンですが、これだけは喋りません。同じカラオケハイライトを、読むペースに合わせてページの上を進めていくだけです。行の下を指でなぞるような、あるいは速読で使う動くマーカーを追うような感覚です。このハイライトはもともと音声に追従させるために作ったものですが、単体でも十分に役立つことがわかりました。聴くより読みたいときに、目を止めずに動かし続けるための仕組みです。しかもペーサーはオーディオセッションに一切触れないので、自分でかけている音楽はそのまま流れ続けます。</p>
+<p>ペースは実際に文章を読む感覚に近づけてあり、各単語にはその長さに応じた時間が割り当てられます。長い単語は少し長く留まり、短い単語はさっと過ぎ、速度はスライダーでリアルタイムに変わります。実際に効いてくるのは、むしろ粒度のほうです。一語ずつ、最大10語のまとまり、あるいは一文まるごと。文単位ではハイライトがチャンク全体にかかった一本の帯になります。同じページから、三つの異なる読みのリズムが選べます。</p>
+<p>音声アプリに無音モードがあるのは矛盾のようですが、読むことと聴くことは同じ行為の二つの速度でしかありません。子どもがようやく寝た夜には、部屋を音で満たさないほうがありがたい日もあります。</p>]]></content>
+  </entry>
   <entry>
     <title>設定を開かずに声を切り替える</title>
     <link href="https://krisbaker.com/ja/building/aoede/voice-picker-in-the-transport-bar/" rel="alternate"/>
@@ -199,15 +210,5 @@
     <content type="html"><![CDATA[<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>
 <p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>
 <p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>]]></content>
-  </entry>
-  <entry>
-    <title>0.1.0 をタグ付け</title>
-    <link href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</id>
-    <updated>2026-05-29T11:00:00Z</updated>
-    <published>2026-05-29T11:00:00Z</published>
-    <content type="html"><![CDATA[<p>最初のタグ付きリリースです。0.1.0 は Swift 6.3 上で macOS 14以降・iOS 17以降を対象とし、Structured Concurrency、Sendable な型、AsyncSequence によるストリーミング、Codable のワイヤ形式で構成されています。</p>
-<p>同じ日に、JPResume がLLMのトランスポートを Shikisha に切り替えました。これが私の気にしていたテストでした。「デモが動くか」ではなく、「別の実際のツールがこれに依存したいと思うか」です。</p>
-<p>あえて「アクティブな開発中」と呼んでいます。1.0 までにAPIはまだ変わるかもしれませんし、表面が固まったふりをするより、そう言っておきたいのです。</p>]]></content>
   </entry>
 </feed>
