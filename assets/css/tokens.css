@@ -1,6 +1,8 @@
 /* ============================================================
    Portfolio + Journal — unified tokens
-   Pulled directly from krisbaker.com (Tailwind stone + amber).
+   Local override of the bundled quiet theme.
+   Light mode: "Conifer" — cool oat paper + pine green accent.
+   Dark mode + component styles below are unchanged from the bundle.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -59,32 +61,32 @@
   --dur-page: 520ms;
 }
 
-/* Light (default) — matches blog's stone-50 + amber */
+/* Light (default) — "Conifer": cool oat paper + pine green accent */
 :root, [data-theme="light"] {
-  --bg: #faf7f2;       /* stone-50ish, blog's actual */
-  --bg-2: #f4efe7;     /* gradient bottom */
-  --bg-3: #e9e2d5;
-  --surface: rgba(250, 250, 249, 0.6);    /* card bg-stone-50/60 */
-  --surface-strong: #fafaf9;
-  --ink: #1c1917;      /* stone-900 */
-  --ink-2: #44403c;    /* stone-700 */
-  --ink-3: #78716c;    /* stone-500 */
-  --ink-4: #a8a29e;    /* stone-400 */
-  --border: rgba(214, 211, 209, 0.7);   /* stone-300/70 */
-  --border-strong: rgba(168, 162, 158, 0.9); /* stone-400/90 */
-  --accent: #b45309;     /* amber-700 */
-  --accent-2: #92400e;   /* amber-800 */
-  --accent-soft: rgba(245, 158, 11, 0.13); /* amber-500/13 — exact blog gradient stop */
-  --accent-ink: #faf7f2;
-  --success: #4d7c0f;
-  --selection: #fde68a;
-  --shadow-card: 0 10px 40px -22px rgba(28, 25, 23, 0.45);
-  --shadow-card-hover: 0 18px 50px -24px rgba(146, 64, 14, 0.35);
+  --bg: #edf1ec;       /* green-tinted oat */
+  --bg-2: #e1e8e0;     /* gradient bottom */
+  --bg-3: #d4ddd1;
+  --surface: rgba(255, 255, 255, 0.62);   /* card surface */
+  --surface-strong: #ffffff;
+  --ink: #15231b;      /* deep pine, near-black green */
+  --ink-2: #324739;    /* pine-700 */
+  --ink-3: #697c70;    /* pine-500 */
+  --ink-4: #9aa99f;    /* pine-400 */
+  --border: rgba(190, 203, 193, 0.7);    /* pine-300/70 */
+  --border-strong: rgba(150, 167, 154, 0.9); /* pine-400/90 */
+  --accent: #1f6f43;     /* forest */
+  --accent-2: #14502f;   /* forest, darker */
+  --accent-soft: rgba(31, 111, 67, 0.12); /* forest/12 — matches gradient stop */
+  --accent-ink: #f4faf6;
+  --success: #1f6f43;
+  --selection: #c2e6cf;
+  --shadow-card: 0 12px 44px -24px rgba(20, 40, 28, 0.45);
+  --shadow-card-hover: 0 20px 56px -26px rgba(31, 111, 67, 0.32);
 
   --bg-radial:
-    radial-gradient(circle at 20% 10%, rgba(245, 158, 11, 0.13), transparent 48%),
-    radial-gradient(circle at 80% 0%, rgba(28, 25, 23, 0.08), transparent 35%),
-    linear-gradient(to bottom, #faf7f2, #f4efe7);
+    radial-gradient(circle at 18% 8%, rgba(31, 111, 67, 0.12), transparent 46%),
+    radial-gradient(circle at 82% 0%, rgba(21, 35, 27, 0.06), transparent 32%),
+    linear-gradient(to bottom, #edf1ec, #e1e8e0);
 }
 
 [data-theme="dark"] {
