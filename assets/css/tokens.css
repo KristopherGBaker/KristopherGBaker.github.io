@@ -1,8 +1,9 @@
 /* ============================================================
    Portfolio + Journal — unified tokens
    Local override of the bundled quiet theme.
-   Light mode: "Conifer" — cool oat paper + pine green accent.
-   Dark mode + component styles below are unchanged from the bundle.
+   "Conifer" palette — cool oat paper + pine green (light),
+   pine-black paper + spring green (dark).
+   Component styles below are unchanged from the bundle.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -89,31 +90,32 @@
     linear-gradient(to bottom, #edf1ec, #e1e8e0);
 }
 
+/* Dark — "Conifer": pine-black paper + spring-green accent */
 [data-theme="dark"] {
-  --bg: #111315;
-  --bg-2: #0a0b0d;
-  --bg-3: #1c1f22;
-  --surface: rgba(28, 25, 23, 0.55);  /* stone-900/55 */
-  --surface-strong: #18181b;
-  --ink: #fafaf9;       /* stone-50 */
-  --ink-2: #d6d3d1;     /* stone-300 */
-  --ink-3: #a8a29e;     /* stone-400 */
-  --ink-4: #78716c;     /* stone-500 */
-  --border: #44403c;    /* stone-700 */
-  --border-strong: #57534e;
-  --accent: #fcd34d;     /* amber-300 — used in dark links */
-  --accent-2: #fbbf24;   /* amber-400 */
-  --accent-soft: rgba(245, 158, 11, 0.08);
-  --accent-ink: #111315;
+  --bg: #0d120f;
+  --bg-2: #080b09;
+  --bg-3: #161d18;
+  --surface: rgba(20, 27, 22, 0.55);  /* pine-900/55 */
+  --surface-strong: #141b16;
+  --ink: #eef3ef;       /* off-white, faint green */
+  --ink-2: #ccd6cf;     /* pine-200 */
+  --ink-3: #97a89d;     /* pine-400 */
+  --ink-4: #69796f;     /* pine-500 */
+  --border: #2b3a31;    /* pine-700 */
+  --border-strong: #3b4d42;
+  --accent: #5fc585;     /* spring green — used in dark links */
+  --accent-2: #7ed79f;   /* spring green, lighter */
+  --accent-soft: rgba(95, 197, 133, 0.10);
+  --accent-ink: #0d120f;
   --success: #84cc16;
-  --selection: rgba(252, 211, 77, 0.3);
+  --selection: rgba(95, 197, 133, 0.3);
   --shadow-card: 0 16px 42px -28px rgba(0, 0, 0, 0.8);
-  --shadow-card-hover: 0 22px 60px -28px rgba(146, 64, 14, 0.4);
+  --shadow-card-hover: 0 22px 60px -28px rgba(31, 111, 67, 0.4);
 
   --bg-radial:
-    radial-gradient(circle at 20% 10%, rgba(245, 158, 11, 0.08), transparent 42%),
-    radial-gradient(circle at 75% 0%, rgba(250, 250, 249, 0.06), transparent 28%),
-    linear-gradient(to bottom, #111315, #0a0b0d);
+    radial-gradient(circle at 20% 10%, rgba(95, 197, 133, 0.08), transparent 42%),
+    radial-gradient(circle at 75% 0%, rgba(238, 243, 239, 0.05), transparent 28%),
+    linear-gradient(to bottom, #0d120f, #080b09);
 }
 
 * { box-sizing: border-box; }
