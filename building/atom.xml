@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-10T12:00:00Z</updated>
+  <updated>2026-06-10T22:30:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>What a Full Code Review Found in Aoede</title>
+    <link href="https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/</id>
+    <updated>2026-06-10T22:30:00Z</updated>
+    <published>2026-06-10T22:30:00Z</published>
+    <content type="html"><![CDATA[<p>I started Aoede on Saturday. By Wednesday, instead of piling on more features, I stopped and ran a full quality and performance review of the app and its packages. About fifty findings came back, most of them real, and I spent the day clearing the board.</p>
+<p>A few were the kind you only catch by looking hard. Pause then resume quietly re-synthesized the current sentence almost every time, so continuing meant a multi-second Kokoro spinner instead of picking up where I left off. The Kokoro warm-up ran on every launch regardless of voice, so anyone on a system voice or the silent pacer kicked off a ~330 MB download they would never use. &quot;$1,000&quot; was read aloud as &quot;one dollar, zero.&quot; Cover colors reshuffled each launch because the hue came from <code>String.hashValue</code>. And the iOS string catalog had zero Japanese across all sixty keys.</p>
+<p>The rest was unglamorous: deleting a dead M1-era speech path, folding duplicated download and tokenization code together, streaming a tar extraction that used to spike hundreds of megabytes on iPhone, and finally testing the playback controller, which ran all of audio with zero coverage. Two findings I left open on purpose: download checksums and resume (a correct version needs real resume-data plumbing and pinned hashes I do not have), and one per-word gesture cost I would rather measure in Instruments than guess at. The point of a review is not to close every line. It is to know which ones you are leaving open.</p>]]></content>
+  </entry>
   <entry>
     <title>A note on Apple&apos;s Foundation Models framework</title>
     <link href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/" rel="alternate"/>
@@ -20,6 +30,15 @@
     <content type="html"><![CDATA[<p>WWDC26 expanded Apple's <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models framework</a> into much of Shikisha's territory: sessions, typed structured output, tool calling, image input, and a public <code>LanguageModel</code> protocol that can back a session with the on-device model, Private Cloud Compute, or third-party models.</p>
 <p>If you are targeting current Apple platforms, I would start there first. Shikisha still has value for older OS versions, a fuller retrieval stack, <code>StateGraph</code> workflows, and offline testing, but the system framework now covers a much larger portion of the workflow surface than it did when I started this project.</p>
 <p>I added the same note to the <a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">blog post</a> and the README. I plan to explore Foundation Models myself when time allows, both on its own terms and to see where Shikisha should sit on top of it.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Open With Aoede</title>
+    <link href="https://krisbaker.com/building/aoede/open-with-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/open-with-aoede/</id>
+    <updated>2026-06-09T23:30:00Z</updated>
+    <published>2026-06-09T23:30:00Z</published>
+    <content type="html"><![CDATA[<p>Until now the only way a book got into Aoede was the in-app import button. On macOS you can now right-click an EPUB, PDF, or text file in Finder, choose Open With Aoede, or just drag it onto the icon, and it imports and opens straight into the reader.</p>
+<p>The one decision worth noting is that Aoede registers as an alternate handler, not the default one. Double-clicking a PDF still opens Preview the way it always did. Aoede only shows up in the Open With menu when you go looking for it, so it earns a place in the workflow without taking over file types that already have a home. The open routes through <code>onOpenURL</code> into a small <code>openExternalFiles</code> path that dismisses onboarding first, so a file opened on a fresh install lands in the reader instead of getting stranded behind the welcome screen.</p>]]></content>
   </entry>
   <entry>
     <title>A Reading Mode With No Voice</title>
@@ -191,24 +210,5 @@
     <content type="html"><![CDATA[<p>Until now the site had one feed, and it only carried blog posts. The work and the building updates, the most feed-shaped things here, had no way to subscribe.</p>
 <p>Inkwell 0.15.0 fixes that. A small <code>feeds</code> config block now gives each section its own feed, so you can follow just the writing, just the work, or just this building log at <code>/building/rss.xml</code>. The site root becomes a combined feed of everything, newest first. Child updates link back to their project, and work case studies that only carry a year still get a sensible date.</p>
 <p>The update you are reading is already in all three: this section's feed, the combined feed, and the home timeline.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Click to enlarge</title>
-    <link href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/" rel="alternate"/>
-    <id>https://krisbaker.com/building/inkwell/inkwell-image-lightbox/</id>
-    <updated>2026-06-05T10:00:00Z</updated>
-    <published>2026-06-05T10:00:00Z</published>
-    <content type="html"><![CDATA[<p>Content images used to be stuck at the width of the column. Now any of them opens full size in an overlay: click or tap to enlarge, Escape or a click outside to close.</p>
-<p>It shipped in Inkwell 0.14.0 as a small piece of quiet-theme JavaScript, plus one change in the image pipeline so each image remembers its original URL. The lightbox shows the true file, not a resized copy. The Domestique screenshots were the reason I finally wanted it.</p>]]></content>
-  </entry>
-  <entry>
-    <title>A Building section, posted from itself</title>
-    <link href="https://krisbaker.com/building/inkwell/inkwell-building-section/" rel="alternate"/>
-    <id>https://krisbaker.com/building/inkwell/inkwell-building-section/</id>
-    <updated>2026-06-04T09:00:00Z</updated>
-    <published>2026-06-04T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Added the Building section you are reading right now (v0.11.0), which meant teaching Inkwell something new: child collections.</p>
-<p>A project and its updates are a one-to-many relationship, and Inkwell's collections were flat. So a collection can now declare a parent. Update files live in their own folder, each naming its project, and Inkwell routes them under that project, builds the timeline you see here, and surfaces the most recent ones on the home page. A follow-up release (v0.12.0) updated the agent skills to cover it.</p>
-<p>The satisfying part is that this very update is the first thing posted through the feature. If the timeline below renders, it worked.</p>]]></content>
   </entry>
 </feed>

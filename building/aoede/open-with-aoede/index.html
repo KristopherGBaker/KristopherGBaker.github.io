@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>A Reading Mode With No Voice</title>
-    <meta name="description" content="A Reading Mode With No Voice">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/reading-pacer-no-voice/">
-    <meta property="og:title" content="A Reading Mode With No Voice">
-    <meta property="og:description" content="A Reading Mode With No Voice">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/reading-pacer-no-voice/">
+    <title>Open With Aoede</title>
+    <meta name="description" content="Open With Aoede">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/open-with-aoede/">
+    <meta property="og:title" content="Open With Aoede">
+    <meta property="og:description" content="Open With Aoede">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/open-with-aoede/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/reading-pacer-no-voice/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/reading-pacer-no-voice/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/reading-pacer-no-voice/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/open-with-aoede/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/open-with-aoede/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/open-with-aoede/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/reading-pacer-no-voice/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/open-with-aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,24 +108,22 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.08</span>
-     · <span>2 min read</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.09</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">A Reading Mode With No Voice</h1>
+  <h1 class="h1 post-title update-title">Open With Aoede</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoede is a text-to-speech app, so the odd thing I added next is a reading mode that makes no sound at all.</p>
-<p>It is called the Reading Pacer, and it sits next to Kokoro and the Apple voices as a third engine that never speaks. It just advances the same karaoke highlight across the page at a reading pace, the way you might run a finger under the line, or the way a speed-reader follows a moving marker. The highlight was originally built to follow the voice. It turns out it works just as well on its own, as a way to keep your eyes moving when you would rather read than listen. And because the pacer never touches the audio session, whatever you already have playing keeps playing under it.</p>
-<p>The pace tries to match how text actually reads, giving each word a slice of time scaled by its length so long words linger and short ones pass quickly, with the slider retuning the speed live. What matters more in practice is the grain. You can pace word by word, by a phrase of up to ten words, or a whole sentence at a time, where the highlight becomes one band over the chunk. Three different reading rhythms from the same page.</p>
-<p>A voice app with a silent mode sounds like a contradiction, but reading and listening are two speeds of the same act, and some evenings, with the kids finally asleep, you want the one that does not fill the room with sound.</p></article>
+    <article class="prose"><p>Until now the only way a book got into Aoede was the in-app import button. On macOS you can now right-click an EPUB, PDF, or text file in Finder, choose Open With Aoede, or just drag it onto the icon, and it imports and opens straight into the reader.</p>
+<p>The one decision worth noting is that Aoede registers as an alternate handler, not the default one. Double-clicking a PDF still opens Preview the way it always did. Aoede only shows up in the Open With menu when you go looking for it, so it earns a place in the workflow without taking over file types that already have a home. The open routes through <code>onOpenURL</code> into a small <code>openExternalFiles</code> path that dismisses onboarding first, so a file opened on a fresh install lands in the reader instead of getting stranded behind the welcome screen.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/open-with-aoede/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/what-a-full-code-review-found-in-aoede/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Open With Aoede</span>
+        <span class="update-nav-title">What a Full Code Review Found in Aoede</span>
       </a>
-      <a href="/building/aoede/voice-picker-in-the-transport-bar/" class="update-nav-item update-nav-older">
+      <a href="/building/aoede/reading-pacer-no-voice/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Switching Voices Without Opening Settings</span>
+        <span class="update-nav-title">A Reading Mode With No Voice</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

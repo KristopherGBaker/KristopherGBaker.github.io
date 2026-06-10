@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-10T12:00:00Z</updated>
+  <updated>2026-06-10T22:30:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>コードレビューでAoedeから出てきたもの</title>
+    <link href="https://krisbaker.com/ja/building/aoede/what-a-full-code-review-found-in-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/what-a-full-code-review-found-in-aoede/</id>
+    <updated>2026-06-10T22:30:00Z</updated>
+    <published>2026-06-10T22:30:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeを作り始めたのは土曜日でした。水曜のいま、機能をさらに積む前に、いったん手を止めて、アプリとパッケージ全体に品質とパフォーマンスのレビューをかけました。指摘は五十件ほど、その大半は本物で、今日は一日かけて片付けました。</p>
+<p>いくつかは、じっくり見ないと気づかないものでした。一時停止してから再生すると、ほとんど毎回いまの文を再合成していて、続きから始まる代わりにKokoroのスピナーが数秒回っていました。Kokoroのウォームアップは音声に関係なく起動のたびに走り、システム音声やサイレントのペーサーを使う人まで、絶対に使わない約330MBのダウンロードを始めていました。「$1,000」は「1ドル、ゼロ」と読み上げられ、本の表紙の色は色相を<code>String.hashValue</code>から取っていたせいで起動のたびに入れ替わっていました。そしてiOSの文字列カタログは、六十個のキーすべてで日本語訳がゼロでした。</p>
+<p>残りは地味な作業です。M1時代の死んだ音声パスを削除し、重複していたダウンロードと単語分割の処理をまとめ、iPhoneで数百MBスパイクしていたtar展開をストリーミングに変え、最後に、カバレッジがゼロだった再生コントローラーのテストをようやく書きました。あえて開けたままにした指摘も二つあります。ダウンロードのチェックサムと再開（ちゃんとやるにはresume-dataの配線と、手元にないピン留めしたハッシュが要る）、それと単語ごとのジェスチャーのコストで、これは当てずっぽうで直すよりInstrumentsで測りたい。レビューの狙いは、すべての行を閉じることではありません。どれを開けたままにしているかを分かっていることです。</p>]]></content>
+  </entry>
   <entry>
     <title>Apple の Foundation Models フレームワークについて</title>
     <link href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/" rel="alternate"/>
@@ -20,6 +30,15 @@
     <content type="html"><![CDATA[<p>WWDC26 で Apple の <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models フレームワーク</a>が拡張され、Shikisha の領域の多くと重なるようになりました。セッション、型付きの構造化出力、ツール呼び出し、画像入力、そしてオンデバイスモデル・Private Cloud Compute・サードパーティモデルを同じセッションで使える公開の <code>LanguageModel</code> プロトコルです。</p>
 <p>現行の Apple プラットフォームだけを対象にするなら、私ならまずそちらから始めます。Shikisha には、古い OS バージョン、より充実したリトリーバル、<code>StateGraph</code> のワークフロー、オフラインのテストといった価値が残っていますが、このプロジェクトを始めた頃に比べて、システム標準のフレームワークがカバーする範囲はずっと広くなりました。</p>
 <p>同じ内容のノートを<a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">ブログ記事</a>と README にも追加しました。時間ができたら、自分でも Foundation Models を触ってみるつもりです。単体でどこまでできるかと、その上に Shikisha がどう乗るべきかの両方を見たいと思っています。</p>]]></content>
+  </entry>
+  <entry>
+    <title>Finderから「このアプリケーションで開く」</title>
+    <link href="https://krisbaker.com/ja/building/aoede/open-with-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/open-with-aoede/</id>
+    <updated>2026-06-09T23:30:00Z</updated>
+    <published>2026-06-09T23:30:00Z</published>
+    <content type="html"><![CDATA[<p>これまでAoedeに本を入れる方法は、アプリ内のインポートボタンだけでした。macOSでは、FinderでEPUBやPDF、テキストファイルを右クリックして「このアプリケーションで開く」からAoedeを選ぶか、アイコンにドラッグするだけで、インポートしてそのままリーダーで開けるようになりました。</p>
+<p>ひとつ書いておきたいのは、Aoedeをデフォルトではなく代替のハンドラとして登録したことです。PDFをダブルクリックすれば、これまで通りプレビューで開きます。Aoedeは「このアプリケーションで開く」のメニューに、探したときだけ出てきます。すでに居場所のあるファイル形式を奪わずに、ワークフローの中に居場所を得る、という形です。開く処理は<code>onOpenURL</code>から小さな<code>openExternalFiles</code>に渡していて、ここで先にオンボーディングを閉じます。インストール直後にファイルを開いても、ウェルカム画面の裏に取り残されず、ちゃんとリーダーに着くようにするためです。</p>]]></content>
   </entry>
   <entry>
     <title>声を出さない読書モード</title>
@@ -191,24 +210,5 @@
     <content type="html"><![CDATA[<p>これまでこのサイトのフィードは一つだけで、しかもブログ記事しか流れていませんでした。実績や制作中のアップデートという、いちばんフィード向きのものを購読する手段がなかったのです。</p>
 <p>Inkwell 0.15.0でそこを直しました。小さな <code>feeds</code> 設定ブロックで、セクションごとに専用フィードを出せるようになりました。記事だけ、実績だけ、あるいはこの制作ログだけ（<code>/building/rss.xml</code>）を追えます。サイトのルートは、すべてを新しい順にまとめたコンバインドフィードになります。子のアップデートはプロジェクトにリンクし、年だけを持つ実績のケーススタディにも妥当な日付が入ります。</p>
 <p>いま読んでいるこのアップデートも、すでに三か所に流れています。このセクションのフィード、コンバインドフィード、そしてホームのタイムラインです。</p>]]></content>
-  </entry>
-  <entry>
-    <title>クリックで拡大</title>
-    <link href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/</id>
-    <updated>2026-06-05T10:00:00Z</updated>
-    <published>2026-06-05T10:00:00Z</published>
-    <content type="html"><![CDATA[<p>本文の画像は、これまで段組みの幅に収まったままでした。いまはどの画像も、クリックかタップでオーバーレイに原寸表示されます。Escキーか、画像の外側をクリックすると閉じます。</p>
-<p>Inkwell 0.14.0で入れました。quietテーマの小さなJavaScriptと、画像パイプライン側の小さな変更です。各画像が元のURLを覚えておくので、ライトボックスはリサイズ版ではなく本物のファイルを表示します。きっかけは、Domestiqueのスクリーンショットを大きく見たかったことでした。</p>]]></content>
-  </entry>
-  <entry>
-    <title>制作中セクションを、それ自身で投稿</title>
-    <link href="https://krisbaker.com/ja/building/inkwell/inkwell-building-section/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/inkwell/inkwell-building-section/</id>
-    <updated>2026-06-04T09:00:00Z</updated>
-    <published>2026-06-04T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>
-<p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>
-<p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p>]]></content>
   </entry>
 </feed>

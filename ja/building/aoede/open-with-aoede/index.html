@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>声を出さない読書モード</title>
-    <meta name="description" content="声を出さない読書モード">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/reading-pacer-no-voice/">
-    <meta property="og:title" content="声を出さない読書モード">
-    <meta property="og:description" content="声を出さない読書モード">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/reading-pacer-no-voice/">
+    <title>Finderから「このアプリケーションで開く」</title>
+    <meta name="description" content="Finderから「このアプリケーションで開く」">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/open-with-aoede/">
+    <meta property="og:title" content="Finderから「このアプリケーションで開く」">
+    <meta property="og:description" content="Finderから「このアプリケーションで開く」">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/open-with-aoede/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/reading-pacer-no-voice/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/reading-pacer-no-voice/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/reading-pacer-no-voice/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/open-with-aoede/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/open-with-aoede/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/open-with-aoede/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/reading-pacer-no-voice/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/open-with-aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,24 +108,22 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.08</span>
-     · <span>約2分</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.09</span>
+     · <span>約1分</span>
   </p>
-  <h1 class="h1 post-title update-title">声を出さない読書モード</h1>
+  <h1 class="h1 post-title update-title">Finderから「このアプリケーションで開く」</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeは読み上げ（text-to-speech）アプリなので、次に足した機能が「音をまったく出さない読書モード」だというのは、自分でも少し変な気がします。</p>
-<p>名前はReading Pacer。KokoroやAppleの音声と並ぶ三つ目のエンジンですが、これだけは喋りません。同じカラオケハイライトを、読むペースに合わせてページの上を進めていくだけです。行の下を指でなぞるような、あるいは速読で使う動くマーカーを追うような感覚です。このハイライトはもともと音声に追従させるために作ったものですが、単体でも十分に役立つことがわかりました。聴くより読みたいときに、目を止めずに動かし続けるための仕組みです。しかもペーサーはオーディオセッションに一切触れないので、自分でかけている音楽はそのまま流れ続けます。</p>
-<p>ペースは実際に文章を読む感覚に近づけてあり、各単語にはその長さに応じた時間が割り当てられます。長い単語は少し長く留まり、短い単語はさっと過ぎ、速度はスライダーでリアルタイムに変わります。実際に効いてくるのは、むしろ粒度のほうです。一語ずつ、最大10語のまとまり、あるいは一文まるごと。文単位ではハイライトがチャンク全体にかかった一本の帯になります。同じページから、三つの異なる読みのリズムが選べます。</p>
-<p>音声アプリに無音モードがあるのは矛盾のようですが、読むことと聴くことは同じ行為の二つの速度でしかありません。子どもがようやく寝た夜には、部屋を音で満たさないほうがありがたい日もあります。</p></article>
+    <article class="prose"><p>これまでAoedeに本を入れる方法は、アプリ内のインポートボタンだけでした。macOSでは、FinderでEPUBやPDF、テキストファイルを右クリックして「このアプリケーションで開く」からAoedeを選ぶか、アイコンにドラッグするだけで、インポートしてそのままリーダーで開けるようになりました。</p>
+<p>ひとつ書いておきたいのは、Aoedeをデフォルトではなく代替のハンドラとして登録したことです。PDFをダブルクリックすれば、これまで通りプレビューで開きます。Aoedeは「このアプリケーションで開く」のメニューに、探したときだけ出てきます。すでに居場所のあるファイル形式を奪わずに、ワークフローの中に居場所を得る、という形です。開く処理は<code>onOpenURL</code>から小さな<code>openExternalFiles</code>に渡していて、ここで先にオンボーディングを閉じます。インストール直後にファイルを開いても、ウェルカム画面の裏に取り残されず、ちゃんとリーダーに着くようにするためです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/open-with-aoede/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">Finderから「このアプリケーションで開く」</span>
+        <span class="update-nav-title">コードレビューでAoedeから出てきたもの</span>
       </a>
-      <a href="/ja/building/aoede/voice-picker-in-the-transport-bar/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/aoede/reading-pacer-no-voice/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">設定を開かずに声を切り替える</span>
+        <span class="update-nav-title">声を出さない読書モード</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
