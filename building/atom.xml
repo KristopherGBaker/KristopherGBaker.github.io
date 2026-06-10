@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-08T10:00:00Z</updated>
+  <updated>2026-06-10T12:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>A note on Apple&apos;s Foundation Models framework</title>
+    <link href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/" rel="alternate"/>
+    <id>https://krisbaker.com/building/shikisha/shikisha-foundation-models/</id>
+    <updated>2026-06-10T12:00:00Z</updated>
+    <published>2026-06-10T12:00:00Z</published>
+    <content type="html"><![CDATA[<p>WWDC26 expanded Apple's <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models framework</a> into much of Shikisha's territory: sessions, typed structured output, tool calling, image input, and a public <code>LanguageModel</code> protocol that can back a session with the on-device model, Private Cloud Compute, or third-party models.</p>
+<p>If you are targeting current Apple platforms, I would start there first. Shikisha still has value for older OS versions, a fuller retrieval stack, <code>StateGraph</code> workflows, and offline testing, but the system framework now covers a much larger portion of the workflow surface than it did when I started this project.</p>
+<p>I added the same note to the <a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">blog post</a> and the README. I plan to explore Foundation Models myself when time allows, both on its own terms and to see where Shikisha should sit on top of it.</p>]]></content>
+  </entry>
   <entry>
     <title>A Reading Mode With No Voice</title>
     <link href="https://krisbaker.com/building/aoede/reading-pacer-no-voice/" rel="alternate"/>
@@ -200,15 +210,5 @@
     <content type="html"><![CDATA[<p>Added the Building section you are reading right now (v0.11.0), which meant teaching Inkwell something new: child collections.</p>
 <p>A project and its updates are a one-to-many relationship, and Inkwell's collections were flat. So a collection can now declare a parent. Update files live in their own folder, each naming its project, and Inkwell routes them under that project, builds the timeline you see here, and surfaces the most recent ones on the home page. A follow-up release (v0.12.0) updated the agent skills to cover it.</p>
 <p>The satisfying part is that this very update is the first thing posted through the feature. If the timeline below renders, it worked.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Example apps and tutorials</title>
-    <link href="https://krisbaker.com/building/shikisha/shikisha-examples/" rel="alternate"/>
-    <id>https://krisbaker.com/building/shikisha/shikisha-examples/</id>
-    <updated>2026-06-02T10:00:00Z</updated>
-    <published>2026-06-02T10:00:00Z</published>
-    <content type="html"><![CDATA[<p>Added the things that make a library actually approachable: a universal SwiftUI chat app, a &quot;Build a Coding Agent&quot; tutorial backed by a real file-editing agent example, and a RAG tutorial.</p>
-<p>Writing the examples is also the most honest design review I get. Every place the chat app or the coding agent felt awkward to wire up was a place the API needed another look, not the example.</p>
-<p>This also lines up with the post I wrote about why Shikisha exists, which goes deeper on the glue-code problem it is meant to remove.</p>]]></content>
   </entry>
 </feed>

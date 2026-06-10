@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Shikisha</title>
-    <meta name="description" content="macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/shikisha/">
-    <meta property="og:title" content="Shikisha">
-    <meta property="og:description" content="macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/shikisha/">
+    <title>Apple の Foundation Models フレームワークについて</title>
+    <meta name="description" content="Apple の Foundation Models フレームワークについて">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/">
+    <meta property="og:title" content="Apple の Foundation Models フレームワークについて">
+    <meta property="og:description" content="Apple の Foundation Models フレームワークについて">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/shikisha/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/shikisha/">
-    <link rel="alternate" hreflang="x-default" href="/building/shikisha/">
+    <link rel="alternate" hreflang="en" href="/building/shikisha/shikisha-foundation-models/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/shikisha/shikisha-foundation-models/">
+    <link rel="alternate" hreflang="x-default" href="/building/shikisha/shikisha-foundation-models/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/shikisha/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/shikisha/shikisha-foundation-models/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -105,65 +105,26 @@
   </div>
 </header>
 
-<main class="container building-detail page-shell">
-  <a href="/ja/building/" class="case-study-back">← 制作中へ</a>
-
-  <div class="building-detail-head is-active">
-    <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated today</span>
-    <a href="https://github.com/KristopherGBaker/Shikisha" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-
-  <h1 class="h1 building-detail-title">Shikisha</h1>
-  <p class="body-lg building-detail-blurb">macOSとiOS向けに、LangChainのようなLLMワークフローをSwiftらしく構築するためのライブラリ。モデル呼び出しの周りのグルーコードを、プロジェクトごとに書き直さずに済むようにするのが狙いです。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/llm/" class="tag-chip">LLM</a><a href="/ja/building/tags//" class="tag-chip">ツール</a><a href="/ja/building/tags//" class="tag-chip">オープンソース</a></div>
-
-  <article class="prose building-detail-prose"><p>SwiftからLLMを呼ぶこと自体は簡単です。難しいのは、その呼び出しの周りにあるワークフローを、分かりやすく保守しやすい形に保つことです。</p>
-<p>Shikishaはそこを整えるための試みです。小さなチェーン、RAGパイプライン、ツールを使うエージェント、アプリのUI。これらに共通の語彙を与えて、プロンプト・構造化出力・リトライ・ストリーミング・ツール・テストが、プロジェクトごとのグルーコードの山にならないようにしています。</p>
-<p>まだ早い段階で、バージョンはおよそ <code>0.1.0</code> ですが、例を作るためではなく、実際のプロジェクトで使う段階まで来ました。最初に役立っているのがJPResumeです。</p>
-<p>面白かったのはモデル呼び出しそのものではありません。その呼び出しが「全体」ではなく「組み合わせ可能な一つのステップ」になったときに、残りのシステムがどう変わるかでした。</p></article>
-
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">4</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/ja/building/shikisha/shikisha-foundation-models/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.10</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">Apple の Foundation Models フレームワークについて</span>
-</a>
-<a href="/ja/building/shikisha/shikisha-examples/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.02</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">サンプルアプリとチュートリアル</span>
-</a>
-<a href="/ja/building/shikisha/shikisha-0-1-0/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">0.1.0 をタグ付け</span>
-</a>
-<a href="/ja/building/shikisha/shikisha-core/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.17</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">コア一式を一気に実装</span>
-</a>
-</div>
-  </section>
-
-  <div class="case-study-next">
-    <p class="case-study-next-label">次へ</p>
-    <a href="/ja/building/aoede/" class="case-study-next-row">
-      <span class="case-study-next-title">Aoede</span>
-      <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
-    </a>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/ja/building/shikisha/" class="post-back">← Shikisha</a>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.10</span>
+     · <span>約1分</span>
+  </p>
+  <h1 class="h1 post-title update-title">Apple の Foundation Models フレームワークについて</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>WWDC26 で Apple の <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models フレームワーク</a>が拡張され、Shikisha の領域の多くと重なるようになりました。セッション、型付きの構造化出力、ツール呼び出し、画像入力、そしてオンデバイスモデル・Private Cloud Compute・サードパーティモデルを同じセッションで使える公開の <code>LanguageModel</code> プロトコルです。</p>
+<p>現行の Apple プラットフォームだけを対象にするなら、私ならまずそちらから始めます。Shikisha には、古い OS バージョン、より充実したリトリーバル、<code>StateGraph</code> のワークフロー、オフラインのテストといった価値が残っていますが、このプロジェクトを始めた頃に比べて、システム標準のフレームワークがカバーする範囲はずっと広くなりました。</p>
+<p>同じ内容のノートを<a href="/posts/shikisha-building-llm-workflows-in-swift/">ブログ記事</a>と README にも追加しました。時間ができたら、自分でも Foundation Models を触ってみるつもりです。単体でどこまでできるかと、その上に Shikisha がどう乗るべきかの両方を見たいと思っています。</p></article>
+    <nav class="update-nav">
+      <span></span>
+      <a href="/ja/building/shikisha/shikisha-examples/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">古い</span>
+        <span class="update-nav-title">サンプルアプリとチュートリアル</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/ja/building/shikisha/" class="read-link">Shikisha <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

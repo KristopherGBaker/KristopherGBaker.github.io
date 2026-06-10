@@ -7,8 +7,17 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.0</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 08 Jun 2026 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 12:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Apple の Foundation Models フレームワークについて</title>
+      <link>https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/</guid>
+      <pubDate>Wed, 10 Jun 2026 12:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>WWDC26 で Apple の <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models フレームワーク</a>が拡張され、Shikisha の領域の多くと重なるようになりました。セッション、型付きの構造化出力、ツール呼び出し、画像入力、そしてオンデバイスモデル・Private Cloud Compute・サードパーティモデルを同じセッションで使える公開の <code>LanguageModel</code> プロトコルです。</p>
+<p>現行の Apple プラットフォームだけを対象にするなら、私ならまずそちらから始めます。Shikisha には、古い OS バージョン、より充実したリトリーバル、<code>StateGraph</code> のワークフロー、オフラインのテストといった価値が残っていますが、このプロジェクトを始めた頃に比べて、システム標準のフレームワークがカバーする範囲はずっと広くなりました。</p>
+<p>同じ内容のノートを<a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">ブログ記事</a>と README にも追加しました。時間ができたら、自分でも Foundation Models を触ってみるつもりです。単体でどこまでできるかと、その上に Shikisha がどう乗るべきかの両方を見たいと思っています。</p>]]></content:encoded>
+    </item>
     <item>
       <title>声を出さない読書モード</title>
       <link>https://krisbaker.com/ja/building/aoede/reading-pacer-no-voice/</link>
@@ -179,15 +188,6 @@
       <content:encoded><![CDATA[<p>いま読んでいるこの制作中セクション（v0.11.0）を追加しました。そのために、Inkwell に新しいことを教える必要がありました。子コレクションです。</p>
 <p>プロジェクトとその更新は一対多の関係ですが、Inkwell のコレクションはフラットでした。そこで、コレクションが親を宣言できるようにしました。更新のファイルは専用のフォルダに置かれ、それぞれが自分のプロジェクトを指定します。Inkwell はそれらをそのプロジェクトの下にルーティングし、ここに見えるタイムラインを組み立て、最新のものをホームページに表示します。続くリリース（v0.12.0）で、エージェントのスキルもこれに対応させました。</p>
 <p>気に入っているのは、この更新そのものが、この機能を通して投稿された最初のものだということです。下のタイムラインが表示されていれば、うまくいったということです。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>サンプルアプリとチュートリアル</title>
-      <link>https://krisbaker.com/ja/building/shikisha/shikisha-examples/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/shikisha/shikisha-examples/</guid>
-      <pubDate>Tue, 02 Jun 2026 10:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>ライブラリを実際に使い始めやすくするものを追加しました。ユニバーサルなSwiftUIのチャットアプリ、実際にファイルを編集するエージェントのサンプルに支えられた「コーディングエージェントを作る」チュートリアル、そしてRAGのチュートリアルです。</p>
-<p>サンプルを書くことは、私にとって最も正直な設計レビューでもあります。チャットアプリやコーディングエージェントを組み立てていて不格好に感じた箇所は、サンプルではなくAPIの側を見直すべき箇所でした。</p>
-<p>これは、Shikisha がなぜ存在するのかについて書いた記事ともつながっています。記事では、Shikisha が取り除こうとしているグルーコードの問題をより深く掘り下げています。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>
