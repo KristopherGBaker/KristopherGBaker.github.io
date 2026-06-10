@@ -122,7 +122,12 @@
   </ol>
 </nav>
 
-    <article class="prose"><p>I have been building more AI-assisted tools in Swift lately, and I kept hitting the same edge. Calling an LLM from Swift is easy. Keeping the workflow around that call understandable and maintainable is the hard part, and that part shows up the moment a feature becomes a real system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
+    <article class="prose"><p><strong>Update (June 10, 2026):</strong> A week after this post went up, WWDC26 expanded Apple's <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models framework</a> into much of what I describe below: sessions, typed structured output, tool calling, image input, and a public <code>LanguageModel</code> protocol that can back a session with the on-device model, Private Cloud Compute, or third-party models.</p>
+<p>If you are targeting current Apple platforms, I would start there first.</p>
+<p>Shikisha still has value for older OS versions, a fuller retrieval stack, <code>StateGraph</code> workflows, and offline testing, but Apple's framework now covers a much larger portion of the workflow surface than it did when I originally wrote this post.</p>
+<p>My own advice from later in the article still applies: when the system framework covers your workflow, use it.</p>
+<hr />
+<p>I have been building more AI-assisted tools in Swift lately, and I kept hitting the same edge. Calling an LLM from Swift is easy. Keeping the workflow around that call understandable and maintainable is the hard part, and that part shows up the moment a feature becomes a real system: prompts, structured output, retries, streaming, tools, retrieval, memory, tests, and a UI that should still feel like a normal Apple-platform app.</p>
 <p>That is why I started building <a href="https://github.com/KristopherGBaker/Shikisha">Shikisha</a>, a Swift-native take on LangChain-style workflows for macOS and iOS. It is still early, currently <code>0.1.0</code>, but it has reached the point where I reach for it in real projects instead of just sketching examples around it.</p>
 <h2 id="the-problem-was-the-glue">The Problem Was the Glue</h2>
 <p>Most LLM demos start in a reasonable place: send a few messages, get text back, print the answer. That is enough for a toy chatbot. It is not enough for the tools I have been building.</p>
