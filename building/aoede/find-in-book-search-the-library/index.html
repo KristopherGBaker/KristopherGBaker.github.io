@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>What a Full Code Review Found in Aoede</title>
-    <meta name="description" content="What a Full Code Review Found in Aoede">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <meta property="og:title" content="What a Full Code Review Found in Aoede">
-    <meta property="og:description" content="What a Full Code Review Found in Aoede">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <title>Find in the Book, Search the Whole Library</title>
+    <meta name="description" content="Find in the Book, Search the Whole Library">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/find-in-book-search-the-library/">
+    <meta property="og:title" content="Find in the Book, Search the Whole Library">
+    <meta property="og:description" content="Find in the Book, Search the Whole Library">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/find-in-book-search-the-library/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/find-in-book-search-the-library/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/find-in-book-search-the-library/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/find-in-book-search-the-library/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/find-in-book-search-the-library/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-note">
-    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.10</span>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.12</span>
      · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">What a Full Code Review Found in Aoede</h1>
+  <h1 class="h1 post-title update-title">Find in the Book, Search the Whole Library</h1>
   
   <div class="post-body">
-    <article class="prose"><p>I started Aoede on Saturday. By Wednesday, instead of piling on more features, I stopped and ran a full quality and performance review of the app and its packages. About fifty findings came back, most of them real, and I spent the day clearing the board.</p>
-<p>A few were the kind you only catch by looking hard. Pause then resume quietly re-synthesized the current sentence almost every time, so continuing meant a multi-second Kokoro spinner instead of picking up where I left off. The Kokoro warm-up ran on every launch regardless of voice, so anyone on a system voice or the silent pacer kicked off a ~330 MB download they would never use. &quot;$1,000&quot; was read aloud as &quot;one dollar, zero.&quot; Cover colors reshuffled each launch because the hue came from <code>String.hashValue</code>. And the iOS string catalog had zero Japanese across all sixty keys.</p>
-<p>The rest was unglamorous: deleting a dead M1-era speech path, folding duplicated download and tokenization code together, streaming a tar extraction that used to spike hundreds of megabytes on iPhone, and finally testing the playback controller, which ran all of audio with zero coverage. Two findings I left open on purpose: download checksums and resume (a correct version needs real resume-data plumbing and pinned hashes I do not have), and one per-word gesture cost I would rather measure in Instruments than guess at. The point of a review is not to close every line. It is to know which ones you are leaving open.</p></article>
+    <article class="prose"><p>You could read a book in Aoede, but you couldn't find anything in it. Now ⌘F (or a toolbar button) opens a slim find bar in the reader: type, see &quot;n of m,&quot; step through the matches, close when you're done. On the Mac, ⌘G and ⇧⌘G step forward and back and Esc closes it. Every match gets a cool-toned underline beneath the reading highlight (the word being spoken still wins the color), the current one drawn stronger, and tapping a match starts reading from there. Find never moves playback on its own. It only scrolls, so you can look ahead while the voice keeps going.</p>
+<p>Search also widened to the whole library. The book list is searchable now, and a query swaps it for results grouped by book with the matched phrase emphasized in each snippet; tap one to open that book at that sentence. Underneath is a per-sentence index in SQLite with a normalized column I scan with LIKE. I skipped full-text search on purpose: FTS has a minimum token length that quietly drops short queries, and a lot of what I search in Japanese is one or two characters. A plain normalized LIKE behaves the same for English and Japanese at any length. The normalizing folds away case, width, and accents but keeps kana distinctions, because in Japanese that difference is meaning, not noise. Books imported before the index existed get backfilled once on launch.</p>
+<p>The part that ate the most time wasn't search, it was where search sends you. Jumping to a hit near the end of a long book used to animate the whole way there, a disorienting whoosh through content that hadn't rendered yet, and the scroll would chase rows it couldn't find and land in the wrong spot. Long jumps now snap straight to the target (anything past ten to fourteen segments, depending on platform), while short ones still glide. Getting &quot;instant&quot; to actually mean &quot;on the right line&quot; took a few passes, ending with the target row reporting its real position the moment it lays out, so the scroll corrects exactly onto it instead of guessing from estimated row heights.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/following-the-voice-line-by-line/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Following the Voice, Line by Line</span>
-      </a>
-      <a href="/building/aoede/open-with-aoede/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/aoede/i-reed-it-yesterday/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Open With Aoede</span>
+        <span class="update-nav-title">When the Voice Said &quot;I Reed It Yesterday&quot;</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

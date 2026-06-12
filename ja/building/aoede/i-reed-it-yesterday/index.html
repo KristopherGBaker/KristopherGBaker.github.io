@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>コードレビューでAoedeから出てきたもの</title>
-    <meta name="description" content="コードレビューでAoedeから出てきたもの">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <meta property="og:title" content="コードレビューでAoedeから出てきたもの">
-    <meta property="og:description" content="コードレビューでAoedeから出てきたもの">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <title>「I reed it yesterday」と読み上げていたころ</title>
+    <meta name="description" content="「I reed it yesterday」と読み上げていたころ">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/i-reed-it-yesterday/">
+    <meta property="og:title" content="「I reed it yesterday」と読み上げていたころ">
+    <meta property="og:description" content="「I reed it yesterday」と読み上げていたころ">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/i-reed-it-yesterday/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/i-reed-it-yesterday/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/i-reed-it-yesterday/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/i-reed-it-yesterday/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/what-a-full-code-review-found-in-aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/i-reed-it-yesterday/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,23 +108,23 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-note">
-    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.10</span>
-     · <span>約2分</span>
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.12</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">コードレビューでAoedeから出てきたもの</h1>
+  <h1 class="h1 post-title update-title">「I reed it yesterday」と読み上げていたころ</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeを作り始めたのは土曜日でした。水曜のいま、機能をさらに積む前に、いったん手を止めて、アプリとパッケージ全体に品質とパフォーマンスのレビューをかけました。指摘は五十件ほど、その大半は本物で、今日は一日かけて片付けました。</p>
-<p>いくつかは、じっくり見ないと気づかないものでした。一時停止してから再生すると、ほとんど毎回いまの文を再合成していて、続きから始まる代わりにKokoroのスピナーが数秒回っていました。Kokoroのウォームアップは音声に関係なく起動のたびに走り、システム音声やサイレントのペーサーを使う人まで、絶対に使わない約330MBのダウンロードを始めていました。「$1,000」は「1ドル、ゼロ」と読み上げられ、本の表紙の色は色相を<code>String.hashValue</code>から取っていたせいで起動のたびに入れ替わっていました。そしてiOSの文字列カタログは、六十個のキーすべてで日本語訳がゼロでした。</p>
-<p>残りは地味な作業です。M1時代の死んだ音声パスを削除し、重複していたダウンロードと単語分割の処理をまとめ、iPhoneで数百MBスパイクしていたtar展開をストリーミングに変え、最後に、カバレッジがゼロだった再生コントローラーのテストをようやく書きました。あえて開けたままにした指摘も二つあります。ダウンロードのチェックサムと再開（ちゃんとやるにはresume-dataの配線と、手元にないピン留めしたハッシュが要る）、それと単語ごとのジェスチャーのコストで、これは当てずっぽうで直すよりInstrumentsで測りたい。レビューの狙いは、すべての行を閉じることではありません。どれを開けたままにしているかを分かっていることです。</p></article>
+    <article class="prose"><p>AoedeのEnglish音声にはクセがありました。「read」を現在形では正しく、過去形では間違って読むのです。「I read it yesterday」は毎回「I reed it yesterday」になっていました。同じバグが「reread」と「wound」（windの過去形）にも出ていて、wound は包帯を巻く方の「傷」のように読まれていました。</p>
+<p>直す材料の大半はすでに揃っていました。ローカルの音声は、この手の「綴りは同じで読みが違う単語（ヘテロニム）」に対して定石どおりのことをやっています。品詞をタグ付けして、そのタグをキーにした辞書から読みを引く、というものです。過去形の「read」の正しいエントリも、過去形のキーの下にちゃんと入っていました。それが見つからなかった原因は二つあります。ひとつは、辞書を引く前に細かい動詞の時制タグをただの「動詞」に潰していたこと。「read」には「動詞」のエントリが無いので、いつもデフォルトの「reed」に落ちていました。もうひとつは、Pythonのモデルの代わりに使っているAppleのオンデバイスのタガーが、そもそも時制を返さないこと。「read」は過去形も現在形も綴りが同じなので、単語そのものには時制を復元する手がかりがありません。</p>
+<p>そこで、合成の前に周りの単語から時制を読むようにしました。前に「have」「has」「had」があれば過去分詞なので「red」（「I have read it」）、「to」や「will」のような助動詞があれば原形なので「reed」（「I will read it」）、動詞の近くに「yesterday」のような時間の手がかりがあれば、それだけで「red」に寄せます。手がかりが無ければ、より安全でよくある「reed」のままにします。オンデバイスで動く決定論的なルールがいくつか、モデルは無し。リサーチでも、ここはこれが正解だと出ていました。ニューラルな手法は本当に難しいケース、たとえば綴りも品詞も同じ「bass」（魚 vs 楽器）のようなペアのためにあって、この種の文脈による判別は upstream でもまだ未対応の TODO のままです。そうした難しいケースはAoedeでもまだ間違っていて、時間の手がかりが無い「she read her book」も「reed」のままです。それでも、これまで文ごとに引っかかっていた日常的な過去形は、ちゃんと読まれるようになりました。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/following-the-voice-line-by-line/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/aoede/find-in-book-search-the-library/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">声を追って、一行ずつ</span>
+        <span class="update-nav-title">本の中を探す、ライブラリ全体を探す</span>
       </a>
-      <a href="/ja/building/aoede/open-with-aoede/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/aoede/following-the-voice-line-by-line/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">Finderから「このアプリケーションで開く」</span>
+        <span class="update-nav-title">声を追って、一行ずつ</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

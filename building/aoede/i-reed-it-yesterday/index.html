@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>What a Full Code Review Found in Aoede</title>
-    <meta name="description" content="What a Full Code Review Found in Aoede">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <meta property="og:title" content="What a Full Code Review Found in Aoede">
-    <meta property="og:description" content="What a Full Code Review Found in Aoede">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <title>When the Voice Said &quot;I Reed It Yesterday&quot;</title>
+    <meta name="description" content="When the Voice Said &quot;I Reed It Yesterday&quot;">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/i-reed-it-yesterday/">
+    <meta property="og:title" content="When the Voice Said &quot;I Reed It Yesterday&quot;">
+    <meta property="og:description" content="When the Voice Said &quot;I Reed It Yesterday&quot;">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/i-reed-it-yesterday/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/what-a-full-code-review-found-in-aoede/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/i-reed-it-yesterday/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/i-reed-it-yesterday/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/i-reed-it-yesterday/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/i-reed-it-yesterday/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,23 +108,23 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-note">
-    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.10</span>
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.12</span>
      · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">What a Full Code Review Found in Aoede</h1>
+  <h1 class="h1 post-title update-title">When the Voice Said &quot;I Reed It Yesterday&quot;</h1>
   
   <div class="post-body">
-    <article class="prose"><p>I started Aoede on Saturday. By Wednesday, instead of piling on more features, I stopped and ran a full quality and performance review of the app and its packages. About fifty findings came back, most of them real, and I spent the day clearing the board.</p>
-<p>A few were the kind you only catch by looking hard. Pause then resume quietly re-synthesized the current sentence almost every time, so continuing meant a multi-second Kokoro spinner instead of picking up where I left off. The Kokoro warm-up ran on every launch regardless of voice, so anyone on a system voice or the silent pacer kicked off a ~330 MB download they would never use. &quot;$1,000&quot; was read aloud as &quot;one dollar, zero.&quot; Cover colors reshuffled each launch because the hue came from <code>String.hashValue</code>. And the iOS string catalog had zero Japanese across all sixty keys.</p>
-<p>The rest was unglamorous: deleting a dead M1-era speech path, folding duplicated download and tokenization code together, streaming a tar extraction that used to spike hundreds of megabytes on iPhone, and finally testing the playback controller, which ran all of audio with zero coverage. Two findings I left open on purpose: download checksums and resume (a correct version needs real resume-data plumbing and pinned hashes I do not have), and one per-word gesture cost I would rather measure in Instruments than guess at. The point of a review is not to close every line. It is to know which ones you are leaving open.</p></article>
+    <article class="prose"><p>Aoede's English voice had a tell. It read &quot;read&quot; right in the present tense and wrong in the past: &quot;I read it yesterday&quot; came out &quot;I reed it yesterday,&quot; every time. The same bug hit &quot;reread&quot; and &quot;wound,&quot; the past of &quot;wind,&quot; which it pronounced like a wound you bandage.</p>
+<p>Most of the fix was already in the box. The local voice does the standard thing for these same-spelling, different-sound words: tag the part of speech, then look the pronunciation up in a dictionary keyed by that tag. The right entry for past-tense &quot;read&quot; was sitting there under the past-tense keys. Two things kept it from being found. The lookup collapsed the fine verb-tense tag down to a plain &quot;verb&quot; before searching, and there is no plain-verb entry for &quot;read,&quot; so it always fell through to the default &quot;reed.&quot; And Apple's on-device tagger, which I use instead of a Python model, doesn't report tense at all. &quot;Read&quot; is spelled the same in past and present, so the word by itself carries no signal to recover.</p>
+<p>So the fix reads tense from the words around it before synthesis. A &quot;have,&quot; &quot;has,&quot; or &quot;had&quot; in front means past participle, so &quot;red&quot; (&quot;I have read it&quot;); a &quot;to&quot; or a modal like &quot;will&quot; means the base form, so &quot;reed&quot; (&quot;I will read it&quot;); a bare time cue like &quot;yesterday&quot; near the verb also tips it to &quot;red.&quot; No signal, and it keeps the safer, more common &quot;reed.&quot; It's a handful of deterministic rules running on-device with no model, which a research pass said is exactly right here. The neural approaches exist for the genuinely hard cases, the same-spelling, same-part-of-speech pairs like bass the fish versus bass the instrument, and even upstream this kind of disambiguation is still an open to-do. Those are still wrong in Aoede, and &quot;she read her book&quot; with no cue still comes out &quot;reed.&quot; But the everyday past tense that grated on every other sentence reads right now.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/following-the-voice-line-by-line/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/find-in-book-search-the-library/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Following the Voice, Line by Line</span>
+        <span class="update-nav-title">Find in the Book, Search the Whole Library</span>
       </a>
-      <a href="/building/aoede/open-with-aoede/" class="update-nav-item update-nav-older">
+      <a href="/building/aoede/following-the-voice-line-by-line/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Open With Aoede</span>
+        <span class="update-nav-title">Following the Voice, Line by Line</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
