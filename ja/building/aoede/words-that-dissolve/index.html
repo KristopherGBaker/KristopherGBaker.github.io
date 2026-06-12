@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>本の中を探す、ライブラリ全体を探す</title>
-    <meta name="description" content="本の中を探す、ライブラリ全体を探す">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/find-in-book-search-the-library/">
-    <meta property="og:title" content="本の中を探す、ライブラリ全体を探す">
-    <meta property="og:description" content="本の中を探す、ライブラリ全体を探す">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/find-in-book-search-the-library/">
+    <title>読むそばから溶けていく単語</title>
+    <meta name="description" content="読むそばから溶けていく単語">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/words-that-dissolve/">
+    <meta property="og:title" content="読むそばから溶けていく単語">
+    <meta property="og:description" content="読むそばから溶けていく単語">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/words-that-dissolve/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/find-in-book-search-the-library/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/find-in-book-search-the-library/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/find-in-book-search-the-library/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/words-that-dissolve/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/words-that-dissolve/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/words-that-dissolve/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/find-in-book-search-the-library/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/words-that-dissolve/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,24 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.12</span>
-     · <span>約3分</span>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.12</span>
+     · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">本の中を探す、ライブラリ全体を探す</h1>
+  <h1 class="h1 post-title update-title">読むそばから溶けていく単語</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeで本は読めても、その中を検索することはできませんでした。いまはリーダーで⌘F（またはツールバーのボタン）を押すと、細い検索バーが開きます。入力すると「n / m」が出て、マッチを順に送って、終わったら閉じます。Macでは⌘Gと⇧⌘Gで次・前へ送り、Escで閉じます。ヒットした箇所にはどれも読み上げハイライトの下に寒色系の下線が付き（いま喋っている単語の色が優先）、現在のヒットは少し強く描かれます。ヒットをタップすると、そこから読み始めます。検索が自分で再生位置を動かすことはありません。スクロールするだけなので、声はそのまま進めながら先を見られます。</p>
-<p>検索はライブラリ全体にも広げました。本の一覧が検索可能になり、クエリを入れると一覧が本ごとにまとまった結果に切り替わって、各スニペットでマッチした語句が強調されます。タップすると、その本のその文から開きます。裏側にあるのは SQLite の文単位のインデックスで、正規化したカラムを LIKE でスキャンしています。全文検索（FTS）はあえて使いませんでした。FTS には最小トークン長があって短いクエリが黙って落ちるのですが、日本語で検索したいものの多くは一文字か二文字です。素朴な正規化済みの LIKE なら、英語でも日本語でも長さに関係なく同じように効きます。正規化では大文字小文字・全半角・アクセントは畳みますが、仮名の違いは残します。日本語ではその違いはノイズではなく意味だからです。インデックスができる前に取り込んだ本は、起動時に一度だけバックフィルされます。</p>
-<p>いちばん時間を食ったのは検索そのものではなく、検索が連れて行く先でした。長い本の終盤のヒットへ飛ぶと、以前はそこまでの道のりを全部アニメーションしていました。まだ描画もされていない中身を猛スピードで通り過ぎる、方向感覚を失うようなスクロールで、しかもスクロールは見つからない行を追いかけて見当違いのところに着地していました。いまは長いジャンプはターゲットに直接スナップします（プラットフォームによって、だいたい10〜14セグメントより遠ければ）。近いジャンプはこれまでどおり滑らかに動きます。「直接」を本当に「正しい行に」着地させるまでには何度か作り直しが要って、最終的には、ターゲットの行がレイアウトされた瞬間に自分の実際の位置を報告し、スクロールが推定の行の高さで当てずっぽうをする代わりに、そこへぴったり補正する形になりました。</p></article>
+    <article class="prose"><p>単語のハイライトをいじっている流れで、もう少し思い切ったものをサイドの実験として試しました。いま聞いている文だけを表示する、独立したmacOSのウィンドウです。リーダーのツールバーから開くと、一行だけが浮かんで、再生に同期します。</p>
+<p>単語はただ出たり消えたりするわけではありません。文が来るとMetalのノイズ・ディゾルブで粒状に立ち上がってきて（ノイズの中から文字が現像されてくるような感じ）、読み上げのカーソルが通り過ぎるたびに一語ずつ溶けて消えていきます。つまり文が、声のうしろで少しずつ自分を消していくわけです。現在の単語はアクセントのオレンジで描かれ、カーソルが進むのに合わせて色がイージングするので、いま喋られている単語はひと目で分かります。</p>
+<p>このディゾルブをいい感じにするまでには何度かやり直しが要って、面倒だったのはほとんど最後の単語でした。最初は、karaokeのフィルと同じサブワードの進捗で、各単語を喋られながら徐々に侵食させていました。見た目はよかったのですが、文の最後の単語には次の単語が無いので退場のきっかけが無く、文が切り替わる瞬間にパッと消えてしまいました。そこで、カーソルが単語を通り過ぎたら一気に溶かす素直な方式に戻して、最後の単語はそれ自身の読み上げがほぼ終わった時点で消えるようにしました。いまのところmacOSだけで、完全に実験の段階ですが、文が読まれながら自分を消していくのを眺めるのは、不思議と落ち着く、文章の追いかけ方です。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/words-that-dissolve/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/aoede/shimmer-wave-or-just-a-tint/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">読むそばから溶けていく単語</span>
+        <span class="update-nav-title">シマーか、ウェーブか、ただのティントか</span>
       </a>
-      <a href="/ja/building/aoede/i-reed-it-yesterday/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/aoede/find-in-book-search-the-library/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">「I reed it yesterday」と読み上げていたころ</span>
+        <span class="update-nav-title">本の中を探す、ライブラリ全体を探す</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

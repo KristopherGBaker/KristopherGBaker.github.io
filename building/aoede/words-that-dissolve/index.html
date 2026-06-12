@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Shikisha</title>
-    <meta name="description" content="A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.">
-    <link rel="canonical" href="https://krisbaker.com/building/shikisha/">
-    <meta property="og:title" content="Shikisha">
-    <meta property="og:description" content="A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.">
-    <meta property="og:url" content="https://krisbaker.com/building/shikisha/">
+    <title>Words That Dissolve as You Read Them</title>
+    <meta name="description" content="Words That Dissolve as You Read Them">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/words-that-dissolve/">
+    <meta property="og:title" content="Words That Dissolve as You Read Them">
+    <meta property="og:description" content="Words That Dissolve as You Read Them">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/words-that-dissolve/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/shikisha/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/shikisha/">
-    <link rel="alternate" hreflang="x-default" href="/building/shikisha/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/words-that-dissolve/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/words-that-dissolve/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/words-that-dissolve/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/shikisha/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/words-that-dissolve/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -105,65 +105,29 @@
   </div>
 </header>
 
-<main class="container building-detail page-shell">
-  <a href="/building/" class="case-study-back">← The workshop</a>
-
-  <div class="building-detail-head is-active">
-    <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2d ago</span>
-    <a href="https://github.com/KristopherGBaker/Shikisha" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-
-  <h1 class="h1 building-detail-title">Shikisha</h1>
-  <p class="body-lg building-detail-blurb">A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.</p>
-  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/llm/" class="tag-chip">LLM</a><a href="/building/tags/tooling/" class="tag-chip">Tooling</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
-
-  <article class="prose building-detail-prose"><p>Calling an LLM from Swift is easy. Keeping the workflow around that call understandable and maintainable is the hard part.</p>
-<p>Shikisha is my attempt to fix that. It gives small chains, RAG pipelines, tool-using agents, and app UIs the same basic vocabulary, so prompts, structured output, retries, streaming, tools, and tests stop being a per-project pile of glue code.</p>
-<p>It is still early, currently around <code>0.1.0</code>, but it has reached the point where I reach for it in real projects instead of sketching examples around it. JPResume is the first place it earns its keep.</p>
-<p>The interesting part has not been the model calls. It is what happens to the rest of the system once those calls become one composable step instead of the whole thing.</p></article>
-
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">4</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/building/shikisha/shikisha-foundation-models/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.10</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">A note on Apple's Foundation Models framework</span>
-</a>
-<a href="/building/shikisha/shikisha-examples/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.02</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">Example apps and tutorials</span>
-</a>
-<a href="/building/shikisha/shikisha-0-1-0/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Tagged 0.1.0</span>
-</a>
-<a href="/building/shikisha/shikisha-core/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.17</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">The core landed in one push</span>
-</a>
-</div>
-  </section>
-
-  <div class="case-study-next">
-    <p class="case-study-next-label">Next</p>
-    <a href="/building/aoede/" class="case-study-next-row">
-      <span class="case-study-next-title">Aoede</span>
-      <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
-    </a>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.12</span>
+     · <span>2 min read</span>
+  </p>
+  <h1 class="h1 post-title update-title">Words That Dissolve as You Read Them</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>While I was playing with word highlights I tried something more extreme as a side experiment: a separate macOS window that shows only the sentence you're currently hearing, nothing else. You toggle it from the reader toolbar and it floats there, one line, in sync with playback.</p>
+<p>The words don't just appear and disappear. They grain in with a Metal noise-dissolve when the sentence arrives, like text developing out of static, and then dissolve away one by one as the reading cursor passes them, so the sentence slowly erases itself behind the voice. The current word is drawn in the accent orange, and the color eases as the cursor advances, so the word being spoken still reads at a glance.</p>
+<p>Getting the dissolve to feel right took a few tries, and most of the fiddly part was the last word. I first eroded each word gradually as it was spoken, driven by the same sub-word progress the karaoke fill uses. It looked nice, but the final word had no next word to trigger its exit, so it blinked out when the view swapped to the next sentence. I went back to a cleaner all-at-once dissolve when the cursor passes a word, and made the last word vanish once its own reading is essentially done instead. It's macOS-only and firmly in the experiment column, but watching a sentence erase itself as it's read turns out to be a strangely calming way to follow along.</p></article>
+    <nav class="update-nav">
+      <a href="/building/aoede/shimmer-wave-or-just-a-tint/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Shimmer, Wave, or Just a Tint</span>
+      </a>
+      <a href="/building/aoede/find-in-book-search-the-library/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">Find in the Book, Search the Whole Library</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

@@ -6,11 +6,31 @@
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-12T23:00:00Z</updated>
+  <updated>2026-06-12T23:55:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Shimmer, Wave, or Just a Tint</title>
+    <link href="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/</id>
+    <updated>2026-06-12T23:55:00Z</updated>
+    <published>2026-06-12T23:55:00Z</published>
+    <content type="html"><![CDATA[<p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>
+<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>
+<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Words That Dissolve as You Read Them</title>
+    <link href="https://krisbaker.com/building/aoede/words-that-dissolve/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/words-that-dissolve/</id>
+    <updated>2026-06-12T23:30:00Z</updated>
+    <published>2026-06-12T23:30:00Z</published>
+    <content type="html"><![CDATA[<p>While I was playing with word highlights I tried something more extreme as a side experiment: a separate macOS window that shows only the sentence you're currently hearing, nothing else. You toggle it from the reader toolbar and it floats there, one line, in sync with playback.</p>
+<p>The words don't just appear and disappear. They grain in with a Metal noise-dissolve when the sentence arrives, like text developing out of static, and then dissolve away one by one as the reading cursor passes them, so the sentence slowly erases itself behind the voice. The current word is drawn in the accent orange, and the color eases as the cursor advances, so the word being spoken still reads at a glance.</p>
+<p>Getting the dissolve to feel right took a few tries, and most of the fiddly part was the last word. I first eroded each word gradually as it was spoken, driven by the same sub-word progress the karaoke fill uses. It looked nice, but the final word had no next word to trigger its exit, so it blinked out when the view swapped to the next sentence. I went back to a cleaner all-at-once dissolve when the cursor passes a word, and made the last word vanish once its own reading is essentially done instead. It's macOS-only and firmly in the experiment column, but watching a sentence erase itself as it's read turns out to be a strangely calming way to follow along.</p>]]></content>
+  </entry>
   <entry>
     <title>Find in the Book, Search the Whole Library</title>
     <link href="https://krisbaker.com/building/aoede/find-in-book-search-the-library/" rel="alternate"/>
@@ -187,26 +207,5 @@
     <content type="html"><![CDATA[<p>Plain text was the bootstrap. The point of Aoede is to read the books I actually have, and those are EPUB and PDF, so it imports both now. As far as the rest of the app is concerned, nothing else changed: a book is still chapters, paragraphs, and sentences, no matter what file it arrived in.</p>
 <p>That sameness is the whole design. EPUB and PDF are wildly different formats, and PDF in particular is messy: text comes out per page, words break across line ends, headers and footers and bare page numbers litter the content, and paragraphs arrive as hard-wrapped fragments. The importer cleans all of that up, rejoins what belongs together, and uses the document outline for chapters when one exists. A scanned PDF with no text layer is detected and politely refused rather than read aloud as garbage. (Running OCR on those with the Vision framework is on the list for later.)</p>
 <p>The payoff is that everything downstream of import, the speech, the highlight, the resume position, never has to know where a book came from. Adding a format is a new importer and nothing else. Reading positions and cached timing are keyed to a hash of the text, so they stay valid as long as the content does.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Books Should Look Like Books</title>
-    <link href="https://krisbaker.com/building/aoede/keeping-bold-and-italic-from-the-source/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/keeping-bold-and-italic-from-the-source/</id>
-    <updated>2026-06-07T16:00:00Z</updated>
-    <published>2026-06-07T16:00:00Z</published>
-    <content type="html"><![CDATA[<p>Early on, importing a book threw its formatting away. Bold, italic, headings, and lists all collapsed into a flat wall of text. That is fine for the speech, since the engine reads words and not styles, but it makes a book stop looking like a book.</p>
-<p>Now Aoede keeps the formatting for display. EPUB retains bold and italic inline, along with headings, blockquotes, and lists. PDF recovers bold and italic by inferring them from each run's font traits. The reader renders headings in the display face, sets blockquotes with an indent and a rule, marks lists with bullets, and the word highlight still tracks correctly across all of it.</p>
-<p>The decision underneath was the interesting part: letting the spoken text and the shown text diverge. They used to be the same string. Now styling lives only on the display side as offset spans, while the spoken side stays plain. Once I stopped forcing the two to match, a lot got simpler. The formatted path skips spoken-text normalization and lets the speech engines handle numbers and abbreviations themselves, which they already do well. That same split is the groundwork for fixing pronunciation later without changing a thing on the page.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Switching Kokoro From CoreML to MLX</title>
-    <link href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/</id>
-    <updated>2026-06-07T15:00:00Z</updated>
-    <published>2026-06-07T15:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoede's quality voice is Kokoro, a small open neural text-to-speech model. My first integration ran it through FluidAudio's CoreML and Apple Neural Engine pipeline, which is the obvious on-device path and works on most Macs.</p>
-<p>It did not work on mine. On this Apple M5, FluidAudio's Kokoro chain crashed across every compute unit I tried: a Metal &quot;JIT not supported&quot; error on the GPU, and a low-level BNNS segfault on CPU and ANE. The same library runs fine on older Apple silicon, so this was the new hardware getting ahead of the dependency. An older app of mine on an older FluidAudio build still spoke, which told me the model was fine and the runtime was the problem.</p>
-<p>So I moved Kokoro to a different runtime: the MLX port, which runs the model through Apple's MLX framework instead of CoreML. That brought its own friction. MLX's Metal shaders only compile under a real Xcode build, not plain <code>swift build</code>, so the provider has to live in the app target, and it needs the Metal Toolchain installed. But it runs on the M5, and it exposes per-token timestamps. The result was simple: Kokoro worked, the voices sounded better, and I gained access to word-level timestamps that made the karaoke highlight more accurate instead of estimated. I kept the FluidAudio work on a branch in case the hardware story changes.</p>
-<p>This switch is also what set up the debugging night in the next update. Moving runtimes solved the crash and quietly introduced a subtler problem.</p>]]></content>
   </entry>
 </feed>

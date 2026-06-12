@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Shikisha</title>
-    <meta name="description" content="A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.">
-    <link rel="canonical" href="https://krisbaker.com/building/shikisha/">
-    <meta property="og:title" content="Shikisha">
-    <meta property="og:description" content="A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.">
-    <meta property="og:url" content="https://krisbaker.com/building/shikisha/">
+    <title>Shimmer, Wave, or Just a Tint</title>
+    <meta name="description" content="Shimmer, Wave, or Just a Tint">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/">
+    <meta property="og:title" content="Shimmer, Wave, or Just a Tint">
+    <meta property="og:description" content="Shimmer, Wave, or Just a Tint">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/shikisha/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/shikisha/">
-    <link rel="alternate" hreflang="x-default" href="/building/shikisha/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/shimmer-wave-or-just-a-tint/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/shimmer-wave-or-just-a-tint/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/shimmer-wave-or-just-a-tint/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/shikisha/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/shimmer-wave-or-just-a-tint/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -105,65 +105,26 @@
   </div>
 </header>
 
-<main class="container building-detail page-shell">
-  <a href="/building/" class="case-study-back">← The workshop</a>
-
-  <div class="building-detail-head is-active">
-    <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2d ago</span>
-    <a href="https://github.com/KristopherGBaker/Shikisha" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-
-  <h1 class="h1 building-detail-title">Shikisha</h1>
-  <p class="body-lg building-detail-blurb">A Swift-native take on LangChain-style LLM workflows for macOS and iOS, built so the glue around a model call stops being per-project scaffolding.</p>
-  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/llm/" class="tag-chip">LLM</a><a href="/building/tags/tooling/" class="tag-chip">Tooling</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
-
-  <article class="prose building-detail-prose"><p>Calling an LLM from Swift is easy. Keeping the workflow around that call understandable and maintainable is the hard part.</p>
-<p>Shikisha is my attempt to fix that. It gives small chains, RAG pipelines, tool-using agents, and app UIs the same basic vocabulary, so prompts, structured output, retries, streaming, tools, and tests stop being a per-project pile of glue code.</p>
-<p>It is still early, currently around <code>0.1.0</code>, but it has reached the point where I reach for it in real projects instead of sketching examples around it. JPResume is the first place it earns its keep.</p>
-<p>The interesting part has not been the model calls. It is what happens to the rest of the system once those calls become one composable step instead of the whole thing.</p></article>
-
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">4</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/building/shikisha/shikisha-foundation-models/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.10</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">A note on Apple's Foundation Models framework</span>
-</a>
-<a href="/building/shikisha/shikisha-examples/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.02</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">Example apps and tutorials</span>
-</a>
-<a href="/building/shikisha/shikisha-0-1-0/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Tagged 0.1.0</span>
-</a>
-<a href="/building/shikisha/shikisha-core/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.05.17</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">The core landed in one push</span>
-</a>
-</div>
-  </section>
-
-  <div class="case-study-next">
-    <p class="case-study-next-label">Next</p>
-    <a href="/building/aoede/" class="case-study-next-row">
-      <span class="case-study-next-title">Aoede</span>
-      <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
-    </a>
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.12</span>
+     · <span>2 min read</span>
+  </p>
+  <h1 class="h1 post-title update-title">Shimmer, Wave, or Just a Tint</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>
+<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>
+<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p></article>
+    <nav class="update-nav">
+      <span></span>
+      <a href="/building/aoede/words-that-dissolve/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">Words That Dissolve as You Read Them</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 
