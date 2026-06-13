@@ -6,11 +6,29 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-12T23:55:00Z</updated>
+  <updated>2026-06-13T12:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>横にして読む</title>
+    <link href="https://krisbaker.com/ja/building/aoede/rotate-to-read/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/rotate-to-read/</id>
+    <updated>2026-06-13T12:00:00Z</updated>
+    <published>2026-06-13T12:00:00Z</published>
+    <content type="html"><![CDATA[<p>昨日まで、フォーカスビュー（一文ずつ表示して、読むそばから単語が溶けていくやつ）はmacOSだけの、浮かぶウィンドウの実験でした。いまは両プラットフォームでちゃんとした読書モードになっています。Macでは本の上に浮かんで、専用の再生／一時停止コントロールを持ち、大きな文字がちょうどいい行長で折り返すように列を広げました。スペースキーで再生が切り替わります。iPhoneでは、管理するウィンドウなんてそもそもありません。本体を横向きにすると、ページが同じディゾルブのフォーカスビューに引き継がれて、全画面、まわりのUIは消えます。スクロールでき、喋っている単語を追いかけ、縦向きに戻すと、さっきいた場所にちゃんと戻ります。</p>
+<p>フォーカスモードの意味は、見るものを減らすことです。だから今回の修正は、ほとんどが「邪魔をしない」ことに向いていました。ディゾルブは単語の立ち上がりを速くして、声が追いつく前に文が読めるようにしました（前はノイズの塊として出てきていました）。それと、フォーカスレンズのエフェクトは、カーソルが届くたびに現在の単語を太字にしていて、それで行全体がわずかに組み直されていたのですが、太字をやめて拡大とグローにしたので、テキストが動かなくなりました。どれも小さなことですが、落ち着きが全てのモードでは、ピクッと動く一行こそ、いちばん目につくものです。</p>]]></content>
+  </entry>
+  <entry>
+    <title>「16%」が「sixteen」になっていた</title>
+    <link href="https://krisbaker.com/ja/building/aoede/sixteen-percent/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/sixteen-percent/</id>
+    <updated>2026-06-13T09:00:00Z</updated>
+    <published>2026-06-13T09:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeのローカル音声は、「16%」を「sixteen」と読んでいました。パーセント記号がまるごと消えていたのです。原因は、二つのインポート経路の境界にありました。プレーンテキストの本は記号を読み下すTTSのノーマライザを通るのですが、EPUBとPDFは、ハイライトのオフセットを整形済みテキストと合わせ続けるために、あえてそれをスキップする別のビルドを使っています。なので、実際のたいていの本では、素の「%」がそのまま音声エンジンに届いて、G2Pがそれを黙って落としていました。</p>
+<p>修正では、ごく一部の記号（<code>&amp; % + = #</code>）を、合成に渡すテキストの中だけ、しかも英語に限って展開します（日本語の記号は事情が違うので）。ハイライトのタイムラインは元の手つかずの文から作られたままなので、音声のために差し込んだ単語は画面上のどれとも対応せず、ただスキップされます。耳には「sixteen percent」と聞こえて、ハイライトはどれも正しい単語に乗ったままです。</p>]]></content>
+  </entry>
   <entry>
     <title>シマーか、ウェーブか、ただのティントか</title>
     <link href="https://krisbaker.com/ja/building/aoede/shimmer-wave-or-just-a-tint/" rel="alternate"/>
@@ -187,25 +205,5 @@
     <published>2026-06-07T19:00:00Z</published>
     <content type="html"><![CDATA[<p>Aoedeは何をするにもまず声が要ります。そして、その声のセットアップこそ、このアプリでいちばん分かりにくい部分でもあります。だから初回起動でひと通り案内するようにしました。ようこそ画面、仕組みの簡単な説明、Appleのシステム音声かKokoroかの選択、選んだほうのセットアップ、そして最初の本のインポート。このオンボーディングは、あとからヘルプメニューや設定でいつでも見直せます。</p>
 <p>このセットアップの手順こそ、オンボーディングをつくった理由です。macOSは出来のいいシステム音声を、誰も見ようと思わないVoiceOverユーティリティの奥に隠しています。だからApple音声を選ぶと、オンボーディングはそこへ直接案内します。自分で見つけさせたりはしません。Kokoroを選んだ場合は、エンジンを選んだ瞬間に黙ってダウンロードを始めるのではなく、専用の手順で実際のバイト単位の進捗バーを見せながらモデルを落とします。表示されるのは選んだエンジンの手順だけなので、使わない声のセットアップに付き合わされる人はいません。</p>]]></content>
-  </entry>
-  <entry>
-    <title>最初から最後まで、読み上げが動く</title>
-    <link href="https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/reading-along-end-to-end/</id>
-    <updated>2026-06-07T18:00:00Z</updated>
-    <published>2026-06-07T18:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoedeに最初にほしかったのは、薄くてもいいから一連のループが動くことでした。プレーンテキストのファイルを開き、自然な声で読み上げ、発話に合わせて単語が一つずつ灯り、どこで止めたかを覚えていて、次に開いたときその場所に戻る。そのひと続きが、いまエンドツーエンドで動いています。</p>
-<p>そこに至るには、早い段階で一つの決断をして、その周りに全部を組み立てる必要がありました。音声バックエンドはどれもタイミングの報告のしかたが違います。Appleのシステム音声は単語ごとのコールバックをリアルタイムで返してくれますが、ニューラルモデルは何も返さないので自分で導き出すしかありません。その厄介さをリーダーに漏らさないために、すべてを一つのハイライトタイムラインに正規化し、リーダーはその一つだけを見て、出どころは気にしません。この境界があるから、あとでより良い声を足すのも、書き直しではなく新しいバックエンドを追加するだけで済みます。</p>
-<p>これは、Aoedeが部品の寄せ集めであることをやめ、製品らしく感じられ始めたマイルストーンでした。</p>]]></content>
-  </entry>
-  <entry>
-    <title>テキストファイルだけでなく、本物の本を読む</title>
-    <link href="https://krisbaker.com/ja/building/aoede/import-epub-and-pdf-one-model/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/import-epub-and-pdf-one-model/</id>
-    <updated>2026-06-07T17:00:00Z</updated>
-    <published>2026-06-07T17:00:00Z</published>
-    <content type="html"><![CDATA[<p>プレーンテキストはあくまで足がかりでした。Aoedeの目的は、自分が実際に持っている本を読むこと。そしてそれはEPUBとPDFです。だから、いまはその両方を取り込めます。アプリの残りの部分から見れば、ほかには何も変わりません。本はどんなファイルで届こうと、相変わらず章と段落と文です。</p>
-<p>この「同じであること」が設計上いちばん大事なところです。EPUBとPDFはまるで違う形式で、とくにPDFは厄介です。テキストはページごとに出てきて、単語は行末で割れ、ヘッダーやフッターや裸のページ番号が本文に紛れ込み、段落はハードラップされた断片として届きます。インポーターはそれを全部きれいにし、つながるべきものをつなぎ直し、目次があれば章立てに使います。テキストレイヤーを持たないスキャンPDFは、ゴミとして読み上げる代わりに検出して丁重に断ります。（そうしたPDFにVisionフレームワークでOCRをかけるのは、後回しのリストに入れてあります。）</p>
-<p>その見返りとして、インポートの下流にあるもの、つまり音声、ハイライト、再開位置は、本がどこから来たかを一切知らなくて済みます。形式を増やすのは新しいインポーターを足すだけで、ほかには何もありません。読書位置とキャッシュしたタイミングはテキストのハッシュに紐づけてあるので、内容が変わらないかぎり有効なままです。</p>]]></content>
   </entry>
 </feed>

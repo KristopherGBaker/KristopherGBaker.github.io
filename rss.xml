@@ -7,8 +7,24 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jun 2026 23:55:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 12:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Rotate to Read</title>
+      <link>https://krisbaker.com/building/aoede/rotate-to-read/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/rotate-to-read/</guid>
+      <pubDate>Sat, 13 Jun 2026 12:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Yesterday the focus view (one sentence at a time, words dissolving as you read) was a macOS-only floating window experiment. It's a real reading mode on both platforms now. On the Mac it floats above the book with its own play/pause control and a wider column so the big type breaks at a comfortable line length, and space toggles playback. On iPhone there's no window to manage at all: turn the phone sideways and the page hands off to the same dissolve focus view, full screen with the chrome gone. It scrolls, follows the spoken word, and rotating back to portrait drops you right where you were.</p>
+<p>The point of a focus mode is fewer things to look at, so the fixes were mostly about getting out of the way. The dissolve grains words in faster now, so a sentence is legible before the voice catches up instead of arriving as static. And the focus-lens effect used to bold the current word as the cursor reached it, which nudged the whole line into reflowing; it scales and glows instead, so the text holds still. Small things, but in a mode whose whole job is calm, a line that twitches is the one thing you notice.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>&quot;16%&quot; Came Out &quot;Sixteen&quot;</title>
+      <link>https://krisbaker.com/building/aoede/sixteen-percent/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/aoede/sixteen-percent/</guid>
+      <pubDate>Sat, 13 Jun 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>
+<p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p>]]></content:encoded>
+    </item>
     <item>
       <title>Shimmer, Wave, or Just a Tint</title>
       <link>https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/</link>
@@ -167,24 +183,6 @@
       <pubDate>Sun, 07 Jun 2026 19:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>Aoede needs a voice before it can do anything. The problem is that getting one is also the least obvious part of the experience. So the first launch now walks through it: a welcome, a short tour of how it works, a choice between Apple's system voices and Kokoro, the setup for whichever one you picked, and importing your first book. The entire flow can be revisited later from the Help menu or Settings.</p>
 <p>The setup step is the reason onboarding exists at all. macOS hides its good system voices behind VoiceOver Utility, a place no one would think to look, so if you choose Apple voices, onboarding sends you straight there instead of leaving you to discover it. If you choose Kokoro, the model download happens on an explicit step with a real byte-progress bar, rather than kicking off silently the moment you select the engine. Only the step for the engine you picked shows up, so nobody sits through setup for a voice they are not going to use.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Reading Along, End to End</title>
-      <link>https://krisbaker.com/building/aoede/reading-along-end-to-end/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/aoede/reading-along-end-to-end/</guid>
-      <pubDate>Sun, 07 Jun 2026 18:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>The first thing I wanted from Aoede was the whole loop working, even if thin: open a plain text file, hear it read aloud in a natural voice, watch each word light up as it is spoken, and have it remember where I stopped so reopening drops me back in place. That slice works now, end to end.</p>
-<p>Getting there came down to one decision made early and built around. Every speech backend reports timing differently. Apple's system voice hands you live word callbacks; a neural model hands you nothing and you have to derive it. Rather than let that mess leak into the reader, all of it normalizes into a single highlight timeline, and the reader binds to that one thing without caring where it came from. That seam is what makes adding a better voice later a new backend instead of a rewrite.</p>
-<p>This was the milestone where Aoede stopped being a collection of components and started feeling like a product.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Reading Real Books, Not Just Text Files</title>
-      <link>https://krisbaker.com/building/aoede/import-epub-and-pdf-one-model/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/aoede/import-epub-and-pdf-one-model/</guid>
-      <pubDate>Sun, 07 Jun 2026 17:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Plain text was the bootstrap. The point of Aoede is to read the books I actually have, and those are EPUB and PDF, so it imports both now. As far as the rest of the app is concerned, nothing else changed: a book is still chapters, paragraphs, and sentences, no matter what file it arrived in.</p>
-<p>That sameness is the whole design. EPUB and PDF are wildly different formats, and PDF in particular is messy: text comes out per page, words break across line ends, headers and footers and bare page numbers litter the content, and paragraphs arrive as hard-wrapped fragments. The importer cleans all of that up, rejoins what belongs together, and uses the document outline for chapters when one exists. A scanned PDF with no text layer is detected and politely refused rather than read aloud as garbage. (Running OCR on those with the Vision framework is on the list for later.)</p>
-<p>The payoff is that everything downstream of import, the speech, the highlight, the resume position, never has to know where a book came from. Adding a format is a new importer and nothing else. Reading positions and cached timing are keyed to a hash of the text, so they stay valid as long as the content does.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

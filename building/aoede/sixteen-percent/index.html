@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Shimmer, Wave, or Just a Tint</title>
-    <meta name="description" content="Shimmer, Wave, or Just a Tint">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/">
-    <meta property="og:title" content="Shimmer, Wave, or Just a Tint">
-    <meta property="og:description" content="Shimmer, Wave, or Just a Tint">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/">
+    <title>&quot;16%&quot; Came Out &quot;Sixteen&quot;</title>
+    <meta name="description" content="&quot;16%&quot; Came Out &quot;Sixteen&quot;">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/sixteen-percent/">
+    <meta property="og:title" content="&quot;16%&quot; Came Out &quot;Sixteen&quot;">
+    <meta property="og:description" content="&quot;16%&quot; Came Out &quot;Sixteen&quot;">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/sixteen-percent/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/shimmer-wave-or-just-a-tint/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/shimmer-wave-or-just-a-tint/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/shimmer-wave-or-just-a-tint/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/sixteen-percent/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/sixteen-percent/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/sixteen-percent/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/shimmer-wave-or-just-a-tint/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/sixteen-percent/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,23 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.12</span>
-     · <span>2 min read</span>
+  <p class="post-meta update-meta is-note">
+    <span class="update-meta-status"><span class="status-dot"></span>note</span> · <span>2026.06.13</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Shimmer, Wave, or Just a Tint</h1>
+  <h1 class="h1 post-title update-title">&quot;16%&quot; Came Out &quot;Sixteen&quot;</h1>
   
   <div class="post-body">
-    <article class="prose"><p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>
-<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>
-<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p></article>
+    <article class="prose"><p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>
+<p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/sixteen-percent/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/rotate-to-read/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">&quot;16%&quot; Came Out &quot;Sixteen&quot;</span>
+        <span class="update-nav-title">Rotate to Read</span>
       </a>
-      <a href="/building/aoede/words-that-dissolve/" class="update-nav-item update-nav-older">
+      <a href="/building/aoede/shimmer-wave-or-just-a-tint/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Words That Dissolve as You Read Them</span>
+        <span class="update-nav-title">Shimmer, Wave, or Just a Tint</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

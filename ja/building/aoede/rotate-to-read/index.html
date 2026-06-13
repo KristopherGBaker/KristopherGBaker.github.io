@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>シマーか、ウェーブか、ただのティントか</title>
-    <meta name="description" content="シマーか、ウェーブか、ただのティントか">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/shimmer-wave-or-just-a-tint/">
-    <meta property="og:title" content="シマーか、ウェーブか、ただのティントか">
-    <meta property="og:description" content="シマーか、ウェーブか、ただのティントか">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/shimmer-wave-or-just-a-tint/">
+    <title>横にして読む</title>
+    <meta name="description" content="横にして読む">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/rotate-to-read/">
+    <meta property="og:title" content="横にして読む">
+    <meta property="og:description" content="横にして読む">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/rotate-to-read/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/shimmer-wave-or-just-a-tint/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/shimmer-wave-or-just-a-tint/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/shimmer-wave-or-just-a-tint/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/rotate-to-read/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/rotate-to-read/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/rotate-to-read/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/shimmer-wave-or-just-a-tint/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/rotate-to-read/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,23 +108,19 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.12</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.13</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">シマーか、ウェーブか、ただのティントか</h1>
+  <h1 class="h1 post-title update-title">横にして読む</h1>
   
   <div class="post-body">
-    <article class="prose"><p>読み上げのハイライトは、見た目がひとつだけでした。いま喋っている単語に、アクセント色のピルが付くというものです。「これがAoedeの形」をひとつ決め打ちする前に、いくつか試してみたかったので、ハイライトそのものを差し替え可能にしました。いまは現在の単語の見せ方をトランスポートバーから選べる設定になっていて、テーマと同じように保存され、下のタイミングの仕組みには一切触れずに、喋っている単語の示し方だけを変えられます。各単語はもともとそれぞれが小さなビューなので、新しいエフェクトはその場に差し込むだけで済みます。テキストと同期させる別レイヤーは要りません。</p>
-<p>そのうえで、選べるメニューを用意しました。Tint がいちばん控えめで、文のバンドはそのままに、現在の単語に色を付けるだけ、ピルもなし。Karaoke は喋られるのに合わせて単語が左から右へアクセント色で埋まっていって、文字の中を進むプログレスバーのようになり、読み終わると ink に戻ります。Shimmer は単語の上を明るい光沢が走り、Wave は小さな波で単語をゆらします。後ろの二つは Metal シェーダーです。</p>
-<p>全部に共通して気にしていたのは、これがフレームレートを食わないことです。フィルやシマーは、再生ドライバーが毎ティック計算しているサブワードの進捗値（レート非依存なので、どの速度でも正直な値）から駆動していて、毎フレーム描き直すのは現在の単語だけ、ページ全体ではありません。Metal シェーダーは stitchable な種類で、パッケージ自体にコンパイルされるので、素の <code>swift build</code> でも Xcode でも同じようにビルドでき、速いパッケージ単位のテストループも緑のままです。狙いは五種類のハイライトを出すことではありませんでした。実際の本でひとつずつ感触を確かめてから、どれがAoedeのハイライトなのかを決められるようにすることでした。</p></article>
+    <article class="prose"><p>昨日まで、フォーカスビュー（一文ずつ表示して、読むそばから単語が溶けていくやつ）はmacOSだけの、浮かぶウィンドウの実験でした。いまは両プラットフォームでちゃんとした読書モードになっています。Macでは本の上に浮かんで、専用の再生／一時停止コントロールを持ち、大きな文字がちょうどいい行長で折り返すように列を広げました。スペースキーで再生が切り替わります。iPhoneでは、管理するウィンドウなんてそもそもありません。本体を横向きにすると、ページが同じディゾルブのフォーカスビューに引き継がれて、全画面、まわりのUIは消えます。スクロールでき、喋っている単語を追いかけ、縦向きに戻すと、さっきいた場所にちゃんと戻ります。</p>
+<p>フォーカスモードの意味は、見るものを減らすことです。だから今回の修正は、ほとんどが「邪魔をしない」ことに向いていました。ディゾルブは単語の立ち上がりを速くして、声が追いつく前に文が読めるようにしました（前はノイズの塊として出てきていました）。それと、フォーカスレンズのエフェクトは、カーソルが届くたびに現在の単語を太字にしていて、それで行全体がわずかに組み直されていたのですが、太字をやめて拡大とグローにしたので、テキストが動かなくなりました。どれも小さなことですが、落ち着きが全てのモードでは、ピクッと動く一行こそ、いちばん目につくものです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/sixteen-percent/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">「16%」が「sixteen」になっていた</span>
-      </a>
-      <a href="/ja/building/aoede/words-that-dissolve/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/sixteen-percent/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">読むそばから溶けていく単語</span>
+        <span class="update-nav-title">「16%」が「sixteen」になっていた</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
