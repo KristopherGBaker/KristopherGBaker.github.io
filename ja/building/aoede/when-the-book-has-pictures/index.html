@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>横にして読む</title>
-    <meta name="description" content="横にして読む">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/rotate-to-read/">
-    <meta property="og:title" content="横にして読む">
-    <meta property="og:description" content="横にして読む">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/rotate-to-read/">
+    <title>本に絵があるとき</title>
+    <meta name="description" content="本に絵があるとき">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/when-the-book-has-pictures/">
+    <meta property="og:title" content="本に絵があるとき">
+    <meta property="og:description" content="本に絵があるとき">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/when-the-book-has-pictures/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/rotate-to-read/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/rotate-to-read/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/rotate-to-read/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/when-the-book-has-pictures/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/when-the-book-has-pictures/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/when-the-book-has-pictures/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/rotate-to-read/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/when-the-book-has-pictures/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,22 +108,22 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.13</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.14</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">横にして読む</h1>
+  <h1 class="h1 post-title update-title">本に絵があるとき</h1>
   
   <div class="post-body">
-    <article class="prose"><p>昨日まで、フォーカスビュー（一文ずつ表示して、読むそばから単語が溶けていくやつ）はmacOSだけの、浮かぶウィンドウの実験でした。いまは両プラットフォームでちゃんとした読書モードになっています。Macでは本の上に浮かんで、専用の再生／一時停止コントロールを持ち、大きな文字がちょうどいい行長で折り返すように列を広げました。スペースキーで再生が切り替わります。iPhoneでは、管理するウィンドウなんてそもそもありません。本体を横向きにすると、ページが同じディゾルブのフォーカスビューに引き継がれて、全画面、まわりのUIは消えます。スクロールでき、喋っている単語を追いかけ、縦向きに戻すと、さっきいた場所にちゃんと戻ります。</p>
-<p>フォーカスモードの意味は、見るものを減らすことです。だから今回の修正は、ほとんどが「邪魔をしない」ことに向いていました。ディゾルブは単語の立ち上がりを速くして、声が追いつく前に文が読めるようにしました（前はノイズの塊として出てきていました）。それと、フォーカスレンズのエフェクトは、カーソルが届くたびに現在の単語を太字にしていて、それで行全体がわずかに組み直されていたのですが、太字をやめて拡大とグローにしたので、テキストが動かなくなりました。どれも小さなことですが、落ち着きが全てのモードでは、ピクッと動く一行こそ、いちばん目につくものです。</p></article>
+    <article class="prose"><p>EPUBには絵がたくさん入っています。章扉、図版、ときどき著者の写真。これまでAoedeはインポート時にそれを全部捨てて、テキストだけを渡していました。これからはリーダーが絵を残します。インポーターがEPUBアーカイブから画像を取り出し、それがあった章ファイルを基準に解決して、テキスト中の登場位置にアンカーします。その画像データは単語と同じ保存ペイロードに一緒に乗るので、前にインポートした本もちゃんと開けます。再インポートするまで画像が出ないだけです。</p>
+<p>単語を読み上げに合わせてハイライトするリーダーに絵を織り込むのは、少し手がかかりました。読書面はいま、段落だけではなく、段落と画像を交互に並べたブロックのリストで動いています。なので同期ハイライトとフォロースクロールは、画像を単語を置く場所ではなく、飛ばして通り過ぎるものとして扱います。画像はプラットフォームごとにデコードし、描けないとき（たとえばiPhoneでのSVG）は代替テキストにフォールバックするので、ページはそれでも読めます。一文ずつ表示するフォーカス読書モードは、あえてテキストだけのままにしています。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/finding-books-without-leaving-aoede/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/aoede/the-voice-kept-reading-the-page-didnt/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">Aoedeの中だけで本を見つける</span>
+        <span class="update-nav-title">音声は読み続けたのに、ページは止まった</span>
       </a>
-      <a href="/ja/building/aoede/sixteen-percent/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/aoede/finding-books-without-leaving-aoede/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">「16%」が「sixteen」になっていた</span>
+        <span class="update-nav-title">Aoedeの中だけで本を見つける</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

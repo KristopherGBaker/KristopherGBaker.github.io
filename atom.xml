@@ -6,11 +6,38 @@
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-13T12:00:00Z</updated>
+  <updated>2026-06-15T11:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>The Voice Kept Reading, the Page Didn&apos;t</title>
+    <link href="https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/</id>
+    <updated>2026-06-15T11:00:00Z</updated>
+    <published>2026-06-15T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>
+<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>]]></content>
+  </entry>
+  <entry>
+    <title>When the Book Has Pictures</title>
+    <link href="https://krisbaker.com/building/aoede/when-the-book-has-pictures/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/when-the-book-has-pictures/</id>
+    <updated>2026-06-14T16:00:00Z</updated>
+    <published>2026-06-14T16:00:00Z</published>
+    <content type="html"><![CDATA[<p>EPUBs are full of pictures: chapter plates, diagrams, the occasional author photo. Until now Aoede threw all of them away at import and gave you the text and nothing else. The reader keeps them now. The importer pulls each image out of the EPUB archive, resolves it against the chapter file it lived in, and anchors it to the spot in the text where it appeared. Those bytes ride along in the same saved payload as the words, so a book you imported before still opens fine; it just will not show images until you re-import it.</p>
+<p>Weaving pictures into a reader that highlights words as they are spoken took some care. The reading surface now runs on a list of blocks, paragraphs and images interleaved, instead of bare paragraphs, so the synchronized highlight and the follow-scroll treat an image as something to pass over rather than a place to land a word. Images decode per platform, and when one cannot be drawn (an SVG on iPhone, say) it falls back to its alt text so the page still reads. The focus reading mode, one sentence at a time, stays text-only on purpose.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Finding Books Without Leaving Aoede</title>
+    <link href="https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/</id>
+    <updated>2026-06-14T10:00:00Z</updated>
+    <published>2026-06-14T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>Until now, getting a book into Aoede meant already having the file: import a txt, EPUB, or PDF you owned, or open one from Finder. Aoede can find books for you now too. A discovery sheet opens from the Library (a footer button on macOS, a toolbar button on iPhone, and from the empty state when your shelf is bare) and browses Project Gutenberg, the public-domain archive, cover-forward. Search by title or author, filter by language, and tap Add on any book to pull it in.</p>
+<p>It talks to Gutendex, a JSON API over the Gutenberg catalog, through plain URLSession and Codable, so there is no HTML scraping and no new dependency. Search is debounced and paginated, and the language filter starts with English and Japanese since those are the two I read. Adding a book downloads the EPUB through the same FileDownloader the rest of the app uses, then hands off to the exact same import path a local file takes. From there it is just another book on the shelf, read aloud the same way.</p>]]></content>
+  </entry>
   <entry>
     <title>Rotate to Read</title>
     <link href="https://krisbaker.com/building/aoede/rotate-to-read/" rel="alternate"/>
@@ -176,34 +203,5 @@
     <content type="html"><![CDATA[<p>Watching Activity Monitor while Aoede synthesized a long book, I saw its memory climb to 49 GB. That looks like a catastrophic leak, the kind that ends with the app getting killed. It was not a leak at all.</p>
 <p>The cause was MLX, the framework running Kokoro on the GPU. It keeps freed buffers in an uncapped reuse pool, which grows to match the peak working set of synthesis and then just sits there. The memory was reclaimable the whole time, never lost, but an app that idles at tens of gigabytes is still a bad neighbor on the machine. The fix is small: cap the pool at 512 MB when the model loads, and clear it when the engine goes idle. Live memory during synthesis is tiny, so the footprint drops to 1 to 2 GB with no change in behavior or speed.</p>
 <p>The lesson I keep relearning is that a number going up is not the same as a number leaking. The honest fix was not chasing a phantom leak but telling the framework how much cache I was willing to pay for.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Aoede Reads Japanese Now</title>
-    <link href="https://krisbaker.com/building/aoede/aoede-reads-japanese/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/aoede-reads-japanese/</id>
-    <updated>2026-06-07T21:00:00Z</updated>
-    <published>2026-06-07T21:00:00Z</published>
-    <content type="html"><![CDATA[<p>A short while after localizing the interface, Aoede reads Japanese aloud. Open a Japanese book and it detects the language, picks a Japanese Kokoro voice, and reads with the same synchronized word highlighting English already had. Settings has a Reading Language picker (Automatic, English, Japanese) for when detection guesses wrong, and the app remembers your chosen voice per language.</p>
-<p>The interesting problem was that Japanese has no spaces between words. The reader's highlight tokenizer split on whitespace, so a whole Japanese sentence arrived as one enormous &quot;word.&quot; It overflowed the line, and the highlight covered the entire thing instead of tracking word by word. The fix was to tokenize Japanese with CFStringTokenizer, the same engine the speech G2P uses, so the on-screen word boundaries line up exactly with the per-word timing the highlight follows. Japanese paragraphs lay out with no word spacing, so the characters flow naturally while still wrapping line to line.</p>
-<p>Getting the word boundaries right was only half the problem. Pronunciation is the other half, and a single constraint shaped everything about it: all of this runs on Apple frameworks alone, with no GPL dependencies. That rules out the usual open-source pronunciation engines but keeps the app clean to ship, and it has a cost I'm paying down now. The current readings come from the dictionary's first guess, so 私 comes out <em>watakushi</em> instead of <em>watashi</em>, and there is no pitch accent, which in Japanese is the difference between 箸 (chopsticks) and 橋 (bridge). I'm working on a second pass built on OpenJTalk, which is BSD licensed rather than GPL, to get accurate readings and real pitch. For now it reads Japanese well enough to actually listen to, which a day ago it could not do at all.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Localizing the App Without Translating the Books</title>
-    <link href="https://krisbaker.com/building/aoede/localizing-aoede-japanese/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/localizing-aoede-japanese/</id>
-    <updated>2026-06-07T20:00:00Z</updated>
-    <published>2026-06-07T20:00:00Z</published>
-    <content type="html"><![CDATA[<p>Reading Japanese aloud is what I'm working on now. Before the voice gets there, the interface itself should speak Japanese, so that came first. Every user-facing string is now localizable through String Catalogs, with a full Japanese translation covering the UI, onboarding, reader, settings, and even the four reading-theme names. The catalogs extract at build time, so new Text and Button literals get picked up automatically instead of quietly shipping in English.</p>
-<p>The harder part was the strings that looked localized but were not. A book's title is content, not UI, and must never be translated, so anywhere a label mixed a literal with runtime content (the reader title, the chapter menu, the download progress) I split them apart, leaving only the literal to go through the catalog while the content stays verbatim. The work also went down into the Swift packages: DocumentKit and SpeechKit now conform their import and synthesis errors to LocalizedError. So instead of the generic &quot;operation couldn't be completed,&quot; a failed import explains itself in the reader's own language.</p>
-<p>Localization sounds mechanical until you realize half the challenge is deciding what not to translate.</p>]]></content>
-  </entry>
-  <entry>
-    <title>A First Run That Sets Up Its Own Voice</title>
-    <link href="https://krisbaker.com/building/aoede/first-run-onboarding/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/first-run-onboarding/</id>
-    <updated>2026-06-07T19:00:00Z</updated>
-    <published>2026-06-07T19:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoede needs a voice before it can do anything. The problem is that getting one is also the least obvious part of the experience. So the first launch now walks through it: a welcome, a short tour of how it works, a choice between Apple's system voices and Kokoro, the setup for whichever one you picked, and importing your first book. The entire flow can be revisited later from the Help menu or Settings.</p>
-<p>The setup step is the reason onboarding exists at all. macOS hides its good system voices behind VoiceOver Utility, a place no one would think to look, so if you choose Apple voices, onboarding sends you straight there instead of leaving you to discover it. If you choose Kokoro, the model download happens on an explicit step with a real byte-progress bar, rather than kicking off silently the moment you select the engine. Only the step for the engine you picked shows up, so nobody sits through setup for a voice they are not going to use.</p>]]></content>
   </entry>
 </feed>

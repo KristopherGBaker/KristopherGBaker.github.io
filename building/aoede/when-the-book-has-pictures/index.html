@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rotate to Read</title>
-    <meta name="description" content="Rotate to Read">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/rotate-to-read/">
-    <meta property="og:title" content="Rotate to Read">
-    <meta property="og:description" content="Rotate to Read">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/rotate-to-read/">
+    <title>When the Book Has Pictures</title>
+    <meta name="description" content="When the Book Has Pictures">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/when-the-book-has-pictures/">
+    <meta property="og:title" content="When the Book Has Pictures">
+    <meta property="og:description" content="When the Book Has Pictures">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/when-the-book-has-pictures/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/rotate-to-read/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/rotate-to-read/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/rotate-to-read/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/when-the-book-has-pictures/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/when-the-book-has-pictures/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/when-the-book-has-pictures/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/rotate-to-read/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/when-the-book-has-pictures/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,22 +108,22 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.13</span>
-     · <span>2 min read</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.14</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Rotate to Read</h1>
+  <h1 class="h1 post-title update-title">When the Book Has Pictures</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Yesterday the focus view (one sentence at a time, words dissolving as you read) was a macOS-only floating window experiment. It's a real reading mode on both platforms now. On the Mac it floats above the book with its own play/pause control and a wider column so the big type breaks at a comfortable line length, and space toggles playback. On iPhone there's no window to manage at all: turn the phone sideways and the page hands off to the same dissolve focus view, full screen with the chrome gone. It scrolls, follows the spoken word, and rotating back to portrait drops you right where you were.</p>
-<p>The point of a focus mode is fewer things to look at, so the fixes were mostly about getting out of the way. The dissolve grains words in faster now, so a sentence is legible before the voice catches up instead of arriving as static. And the focus-lens effect used to bold the current word as the cursor reached it, which nudged the whole line into reflowing; it scales and glows instead, so the text holds still. Small things, but in a mode whose whole job is calm, a line that twitches is the one thing you notice.</p></article>
+    <article class="prose"><p>EPUBs are full of pictures: chapter plates, diagrams, the occasional author photo. Until now Aoede threw all of them away at import and gave you the text and nothing else. The reader keeps them now. The importer pulls each image out of the EPUB archive, resolves it against the chapter file it lived in, and anchors it to the spot in the text where it appeared. Those bytes ride along in the same saved payload as the words, so a book you imported before still opens fine; it just will not show images until you re-import it.</p>
+<p>Weaving pictures into a reader that highlights words as they are spoken took some care. The reading surface now runs on a list of blocks, paragraphs and images interleaved, instead of bare paragraphs, so the synchronized highlight and the follow-scroll treat an image as something to pass over rather than a place to land a word. Images decode per platform, and when one cannot be drawn (an SVG on iPhone, say) it falls back to its alt text so the page still reads. The focus reading mode, one sentence at a time, stays text-only on purpose.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/finding-books-without-leaving-aoede/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/the-voice-kept-reading-the-page-didnt/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Finding Books Without Leaving Aoede</span>
+        <span class="update-nav-title">The Voice Kept Reading, the Page Didn't</span>
       </a>
-      <a href="/building/aoede/sixteen-percent/" class="update-nav-item update-nav-older">
+      <a href="/building/aoede/finding-books-without-leaving-aoede/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">&quot;16%&quot; Came Out &quot;Sixteen&quot;</span>
+        <span class="update-nav-title">Finding Books Without Leaving Aoede</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

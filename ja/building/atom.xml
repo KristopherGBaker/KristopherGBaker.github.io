@@ -6,11 +6,38 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-13T12:00:00Z</updated>
+  <updated>2026-06-15T11:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>音声は読み続けたのに、ページは止まった</title>
+    <link href="https://krisbaker.com/ja/building/aoede/the-voice-kept-reading-the-page-didnt/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/the-voice-kept-reading-the-page-didnt/</id>
+    <updated>2026-06-15T11:00:00Z</updated>
+    <published>2026-06-15T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>リーダーに画像を入れたことで、実は画像より前から潜んでいたバグが表に出ました。背の高い画像の下にある段落にハイライトが入ると、音声はそのまま読み進めるのに、ページがその場で止まってしまうのです。原因はページの追従のしかたにありました。Aoedeは読み上げ中の単語を決まった行に保つようにスクロールしていて、それはアクティブな単語が画面上のどこにいるかを報告してくる位置を見て行っています。ところが、まだ描画されていない行の上の単語、つまり背の高い画像に押し下げられた段落がまさにそうなのですが、その単語は位置をいっさい報告しません。スクロールが待っていた信号がそもそも来ないので、再生は続いたままページだけが止まっていました。</p>
+<p>修正では、その一つの信号だけに頼るのをやめました。単語がフレームを報告してくるのを待つのではなく、いまどの単語がアクティブかを見て、少し経ってもスクロールが追いついていなければ、その単語の段落へ直接ジャンプし、レイアウトが落ち着いてから微調整します。すでに画面に出ている単語は一回のレイアウトパスでフレームを報告するので、余計なジャンプは起こしません。取り残されていた画面外の単語だけが、この回復経路を通ります。これで音声とページは、画像があってもなくても、また一緒に動くようになりました。</p>]]></content>
+  </entry>
+  <entry>
+    <title>本に絵があるとき</title>
+    <link href="https://krisbaker.com/ja/building/aoede/when-the-book-has-pictures/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/when-the-book-has-pictures/</id>
+    <updated>2026-06-14T16:00:00Z</updated>
+    <published>2026-06-14T16:00:00Z</published>
+    <content type="html"><![CDATA[<p>EPUBには絵がたくさん入っています。章扉、図版、ときどき著者の写真。これまでAoedeはインポート時にそれを全部捨てて、テキストだけを渡していました。これからはリーダーが絵を残します。インポーターがEPUBアーカイブから画像を取り出し、それがあった章ファイルを基準に解決して、テキスト中の登場位置にアンカーします。その画像データは単語と同じ保存ペイロードに一緒に乗るので、前にインポートした本もちゃんと開けます。再インポートするまで画像が出ないだけです。</p>
+<p>単語を読み上げに合わせてハイライトするリーダーに絵を織り込むのは、少し手がかかりました。読書面はいま、段落だけではなく、段落と画像を交互に並べたブロックのリストで動いています。なので同期ハイライトとフォロースクロールは、画像を単語を置く場所ではなく、飛ばして通り過ぎるものとして扱います。画像はプラットフォームごとにデコードし、描けないとき（たとえばiPhoneでのSVG）は代替テキストにフォールバックするので、ページはそれでも読めます。一文ずつ表示するフォーカス読書モードは、あえてテキストだけのままにしています。</p>]]></content>
+  </entry>
+  <entry>
+    <title>Aoedeの中だけで本を見つける</title>
+    <link href="https://krisbaker.com/ja/building/aoede/finding-books-without-leaving-aoede/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/finding-books-without-leaving-aoede/</id>
+    <updated>2026-06-14T10:00:00Z</updated>
+    <published>2026-06-14T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>これまでAoedeに本を入れるには、ファイルを自分で持っている必要がありました。手元のtxtやEPUB、PDFをインポートするか、Finderから開くか。これからはAoedeが本を探してきてくれます。ライブラリから開く発見シート（macOSではフッターのボタン、iPhoneではツールバーのボタン、棚が空のときは空状態からも）で、パブリックドメインのアーカイブであるProject Gutenbergを、表紙中心のレイアウトで眺められます。タイトルや著者で検索し、言語で絞り込んで、どの本でもAddをタップすれば取り込めます。</p>
+<p>GutenbergのカタログをJSONで返すAPI、Gutendexと、素のURLSessionとCodableでやり取りしているので、HTMLスクレイピングも新しい依存もありません。検索はデバウンスとページングをかけてあり、言語フィルタは自分が読む英語と日本語から始めています。本を追加すると、アプリの他の部分と同じFileDownloaderでEPUBをダウンロードし、ローカルファイルをインポートするのとまったく同じ経路に渡します。そこから先は、ただの棚の一冊として、いつもと同じように読み上げられます。</p>]]></content>
+  </entry>
   <entry>
     <title>横にして読む</title>
     <link href="https://krisbaker.com/ja/building/aoede/rotate-to-read/" rel="alternate"/>
@@ -176,34 +203,5 @@
     <content type="html"><![CDATA[<p>長い本を合成している最中にアクティビティモニタを見ていたら、Aoedeのメモリ使用量が49GBまで上がっていました。ふつうなら、これは深刻なリーク、最後にはアプリが強制終了させられるやつに見えます。でも、リークではまったくありませんでした。</p>
 <p>原因はMLX、KokoroをGPUで動かしているフレームワークでした。解放したバッファを上限なしの再利用プールに溜めるので、プールは合成のピーク作業セットに合わせて膨らんだまま居座ります。メモリはずっと回収可能で、失われてはいません。とはいえ、何もしていないときに数十GBを抱えているアプリは、やはりマシンにとって迷惑な隣人です。直し方は小さくて、モデルのロード時にプールを512MBに制限し、エンジンがアイドルになったらクリアするだけです。合成中のライブメモリはごくわずかなので、フットプリントは挙動も速度も変えずに1〜2GBまで下がりました。</p>
 <p>毎回学び直すのは、数字が上がることと、リークすることは別だということです。ここでの誠実な直し方は、ありもしないリークを追いかけることではなく、どれだけキャッシュにコストを払うつもりかをフレームワークに伝えることでした。</p>]]></content>
-  </entry>
-  <entry>
-    <title>Aoedeが日本語を読み上げるようになった</title>
-    <link href="https://krisbaker.com/ja/building/aoede/aoede-reads-japanese/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/aoede-reads-japanese/</id>
-    <updated>2026-06-07T21:00:00Z</updated>
-    <published>2026-06-07T21:00:00Z</published>
-    <content type="html"><![CDATA[<p>インターフェースを日本語化してから少しして、Aoedeが日本語を読み上げるようになりました。日本語の本を開くと言語を検出し、日本語のKokoro音声を選び、英語と同じ同期ハイライトで読み上げます。設定には、検出が外れたときのための「読み上げ言語」ピッカー（自動／英語／日本語）もあり、選んだ音声は言語ごとに記憶されます。</p>
-<p>おもしろかったのは、日本語には単語の間に空白がないことでした。リーダーのハイライト用トークナイザーは空白で区切っていたので、日本語の文がまるごとひとつの巨大な「単語」として入ってきます。行からあふれ、ハイライトが単語ごとに動かず、文全体を覆ってしまいました。直し方は、日本語を音声側のG2Pと同じCFStringTokenizerでトークン化すること。こうすると画面上の単語境界が、ハイライトが追う単語ごとのタイミングとぴったり一致します。日本語の段落は単語間の空白なしでレイアウトするので、文字が自然につながりつつ、行ごとに折り返します。</p>
-<p>画面上で単語の境界を合わせるのは、問題の半分にすぎません。もう半分は発音で、ここではひとつの制約がすべてを決めました。AoedeはすべてをAppleのフレームワークだけで動かしていて、GPLの依存はありません。おかげで定番のオープンソース発音エンジンは使えませんが、アプリは安心して配布できます。そしてこの選択にはコストがあり、いまそれを払っているところです。現在の読みは辞書の最初の候補なので、「私」が「わたし」ではなく「わたくし」と読まれ、ピッチアクセントもありません。日本語ではこれは箸と橋を分けるものです。いまはOpenJTalk（GPLではなくBSDライセンス）を使った二段目の処理に取り組んでいて、正確な読みと本物のピッチを目指しています。とはいえ今の時点でも、一日前にはまったくできなかった日本語の読み上げが、実際に聴けるくらいにはなっています。</p>]]></content>
-  </entry>
-  <entry>
-    <title>本は翻訳せず、アプリだけをローカライズする</title>
-    <link href="https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/localizing-aoede-japanese/</id>
-    <updated>2026-06-07T20:00:00Z</updated>
-    <published>2026-06-07T20:00:00Z</published>
-    <content type="html"><![CDATA[<p>日本語の読み上げは、いままさに取り組んでいるところです。声がそこに届く前に、まずインターフェース自体が日本語を話すべきなので、こちらを先にやりました。ユーザーに見えるすべての文字列を、String Catalogsでローカライズできるようにしました。UI、オンボーディング、リーダー、設定、さらに4つの読書テーマ名まで、すべて日本語訳をそろえています。カタログはビルド時に文字列を抽出するので、新しいTextやButtonのリテラルも自動的に拾われます。こっそり英語のまま出荷される、ということがありません。</p>
-<p>厄介だったのは、ローカライズされているように見えて、実はされていない文字列でした。本のタイトルはコンテンツであってUIではないので、絶対に翻訳してはいけません。そこで、ラベルがリテラルと実行時のコンテンツを混ぜている箇所（リーダーのタイトル、章メニュー、ダウンロードの進捗）では、両者を切り分けて、リテラルだけをカタログに通し、コンテンツはそのまま残すようにしました。作業はSwiftパッケージの内側にも及びました。DocumentKitとSpeechKitのインポートエラーと合成エラーをLocalizedErrorに準拠させたので、あの素っ気ない「操作を完了できませんでした」ではなく、インポートの失敗が読者自身の言語で理由を説明してくれます。</p>
-<p>ローカライズは単純な作業に思えて、実のところ難しさの半分は「何を訳さないか」を決めることにあります。</p>]]></content>
-  </entry>
-  <entry>
-    <title>初回起動で、まず声をそろえる</title>
-    <link href="https://krisbaker.com/ja/building/aoede/first-run-onboarding/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/first-run-onboarding/</id>
-    <updated>2026-06-07T19:00:00Z</updated>
-    <published>2026-06-07T19:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoedeは何をするにもまず声が要ります。そして、その声のセットアップこそ、このアプリでいちばん分かりにくい部分でもあります。だから初回起動でひと通り案内するようにしました。ようこそ画面、仕組みの簡単な説明、Appleのシステム音声かKokoroかの選択、選んだほうのセットアップ、そして最初の本のインポート。このオンボーディングは、あとからヘルプメニューや設定でいつでも見直せます。</p>
-<p>このセットアップの手順こそ、オンボーディングをつくった理由です。macOSは出来のいいシステム音声を、誰も見ようと思わないVoiceOverユーティリティの奥に隠しています。だからApple音声を選ぶと、オンボーディングはそこへ直接案内します。自分で見つけさせたりはしません。Kokoroを選んだ場合は、エンジンを選んだ瞬間に黙ってダウンロードを始めるのではなく、専用の手順で実際のバイト単位の進捗バーを見せながらモデルを落とします。表示されるのは選んだエンジンの手順だけなので、使わない声のセットアップに付き合わされる人はいません。</p>]]></content>
   </entry>
 </feed>
