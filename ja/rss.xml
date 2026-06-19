@@ -110,7 +110,7 @@
       <pubDate>Wed, 10 Jun 2026 12:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>WWDC26 で Apple の <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models フレームワーク</a>が拡張され、Shikisha の領域の多くと重なるようになりました。セッション、型付きの構造化出力、ツール呼び出し、画像入力、そしてオンデバイスモデル・Private Cloud Compute・サードパーティモデルを同じセッションで使える公開の <code>LanguageModel</code> プロトコルです。</p>
 <p>現行の Apple プラットフォームだけを対象にするなら、私ならまずそちらから始めます。Shikisha には、古い OS バージョン、より充実したリトリーバル、<code>StateGraph</code> のワークフロー、オフラインのテストといった価値が残っていますが、このプロジェクトを始めた頃に比べて、システム標準のフレームワークがカバーする範囲はずっと広くなりました。</p>
-<p>同じ内容のノートを<a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">ブログ記事</a>と README にも追加しました。時間ができたら、自分でも Foundation Models を触ってみるつもりです。単体でどこまでできるかと、その上に Shikisha がどう乗るべきかの両方を見たいと思っています。</p>]]></content:encoded>
+<p>同じ内容のノートをREADMEにも追加しました。時間ができたら、自分でも Foundation Models を触ってみるつもりです。単体でどこまでできるかと、その上に Shikisha がどう乗るべきかの両方を見たいと思っています。</p>]]></content:encoded>
     </item>
     <item>
       <title>Finderから「このアプリケーションで開く」</title>

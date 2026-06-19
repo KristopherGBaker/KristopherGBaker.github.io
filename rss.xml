@@ -110,7 +110,7 @@
       <pubDate>Wed, 10 Jun 2026 12:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>WWDC26 expanded Apple's <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models framework</a> into much of Shikisha's territory: sessions, typed structured output, tool calling, image input, and a public <code>LanguageModel</code> protocol that can back a session with the on-device model, Private Cloud Compute, or third-party models.</p>
 <p>If you are targeting current Apple platforms, I would start there first. Shikisha still has value for older OS versions, a fuller retrieval stack, <code>StateGraph</code> workflows, and offline testing, but the system framework now covers a much larger portion of the workflow surface than it did when I started this project.</p>
-<p>I added the same note to the <a href="https://krisbaker.com/posts/shikisha-building-llm-workflows-in-swift/">blog post</a> and the README. I plan to explore Foundation Models myself when time allows, both on its own terms and to see where Shikisha should sit on top of it.</p>]]></content:encoded>
+<p>I added the same note to the README. I plan to explore Foundation Models myself when time allows, both on its own terms and to see where Shikisha should sit on top of it.</p>]]></content:encoded>
     </item>
     <item>
       <title>Open With Aoede</title>
