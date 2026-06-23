@@ -5,7 +5,7 @@
     <link>https://krisbaker.com/ja/</link>
     <atom:link href="https://krisbaker.com/ja/posts/rss.xml" rel="self" type="application/rss+xml"/>
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
-    <generator>Inkwell 0.15.0</generator>
+    <generator>Inkwell 0.15.1</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 20 Apr 2026 12:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
