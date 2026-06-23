@@ -117,7 +117,10 @@
     <article class="prose"><p>リーダーに画像を入れたことで、実は画像より前から潜んでいたバグが表に出ました。背の高い画像の下にある段落にハイライトが入ると、音声はそのまま読み進めるのに、ページがその場で止まってしまうのです。原因はページの追従のしかたにありました。Aoedeは読み上げ中の単語を決まった行に保つようにスクロールしていて、それはアクティブな単語が画面上のどこにいるかを報告してくる位置を見て行っています。ところが、まだ描画されていない行の上の単語、つまり背の高い画像に押し下げられた段落がまさにそうなのですが、その単語は位置をいっさい報告しません。スクロールが待っていた信号がそもそも来ないので、再生は続いたままページだけが止まっていました。</p>
 <p>修正では、その一つの信号だけに頼るのをやめました。単語がフレームを報告してくるのを待つのではなく、いまどの単語がアクティブかを見て、少し経ってもスクロールが追いついていなければ、その単語の段落へ直接ジャンプし、レイアウトが落ち着いてから微調整します。すでに画面に出ている単語は一回のレイアウトパスでフレームを報告するので、余計なジャンプは起こしません。取り残されていた画面外の単語だけが、この回復経路を通ります。これで音声とページは、画像があってもなくても、また一緒に動くようになりました。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/aoede/a-dictionary-inside-the-reader/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">リーダーの中で辞書を引く</span>
+      </a>
       <a href="/ja/building/aoede/when-the-book-has-pictures/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">本に絵があるとき</span>

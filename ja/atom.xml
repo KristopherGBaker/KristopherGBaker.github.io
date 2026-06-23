@@ -6,11 +6,65 @@
   <link href="https://krisbaker.com/ja/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-15T11:00:00Z</updated>
+  <updated>2026-06-23T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>学ぶほど、ふりがなが減っていく</title>
+    <link href="https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/</id>
+    <updated>2026-06-23T14:00:00Z</updated>
+    <published>2026-06-23T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>ふりがなは、まだ知らない単語には役立ちますが、覚えたあとには見なくなります。Aoedeでは、復習を重ねて定着した単語や、自分で既知にした単語の読みを隠せるようになりました。テキストにはうっすら目印が残り、タップすると読みが出て、助けが必要だったことも記録されます。長押しすれば、忘れた単語として戻せます。表示するかどうかは単語の基本形ごとに決めるので、同じ本の中では一貫した動きになります。</p>
+<p>既知と判断する期間は7日、30日、90日から選べ、本ごとに上書きもできます。単語カードにはJLPTレベルのバッジが付き、学習モードの<code>Today</code>画面では日本語の復習を優先します。ふりがなは、全体でオンかオフにするだけの設定ではなく、実際に何を覚えたかに合わせて変わるようになりました。</p>]]></content>
+  </entry>
+  <entry>
+    <title>いま印をつけて、カードはあとで作る</title>
+    <link href="https://krisbaker.com/ja/building/aoede/mark-it-now-make-cards-later/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/mark-it-now-make-cards-later/</id>
+    <updated>2026-06-23T13:00:00Z</updated>
+    <published>2026-06-23T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>カード生成が速くても、面白い段落の途中でカード作りを始めると読書は止まります。そこで、文章に印だけつけて、そのまま読み続けられる流れをAoedeに追加しました。セクションの終わりに一括画面を開くと、保留中の印がまとまって表示されます。そこからまとめてカードにすることも、あとで必要ないと思ったものを外すこともできます。</p>
+<p>一括生成でも、個別のカードと同じローカル優先の境界を守ります。オンデバイス生成なら、そのまま実行できます。選んだバックエンドがクラウドへテキストを送る場合は、何が端末の外へ出るのかを表示し、そのリクエストごとに同意を求めます。どちらを選んでも、復習履歴と既知の単語リストは端末内に残ります。</p>]]></content>
+  </entry>
+  <entry>
+    <title>編集しても壊れないノート</title>
+    <link href="https://krisbaker.com/ja/building/aoede/notes-that-survive-their-own-edits/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/notes-that-survive-their-own-edits/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeの中でノートを作成、編集し、そのまま通常のリーダーへ切り替えて読み上げや学習用のキャプチャーに使えるようになりました。ノートはライブラリの専用セクションに並びます。エディターで選んだテキストから、本と同じ流れでカードを作ることもできます。</p>
+<p>難しかったのは、テキストを編集したあとも、それに結びついた情報を保つことでした。保存すると、カード、ブックマーク、あとでカードにするための印、前回の読書位置を、編集後の文に合わせて付け直します。一致する場所が見つからない場合は、何も言わずに間違った文章へ結びつけるのではなく、参照先がなくなったことを表示するか、明示的に先頭へ戻します。</p>]]></content>
+  </entry>
+  <entry>
+    <title>読むだけでなく、復習まで</title>
+    <link href="https://krisbaker.com/ja/building/aoede/from-reading-to-reviewing/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/from-reading-to-reviewing/</id>
+    <updated>2026-06-23T11:00:00Z</updated>
+    <published>2026-06-23T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoedeは、読むための道具から、覚えるところまで支える道具になってきました。文章を選び、単語、例文、穴埋め、Q&amp;A、定義のカードを生成し、保存前に編集して、4段階の評価とFSRSのスケジュールで復習できます。日本語の単語カードはまず辞書から作り、JMdictに答えがないときだけモデルを使います。カードは最初から手書きでも作れるので、学習機能そのものがAIに依存しているわけではありません。</p>
+<p>新しい<code>Today</code>画面には、現在の連続記録、最近読んだ本、いま復習するカードがまとまっています。学習する言語と学習モードは別々に選べます。Aoedeをシンプルなリーダーとして使い続けることもできるし、必要な人だけがカード、復習、日本語辞書、それらを組み合わせた機能を有効にできます。</p>]]></content>
+  </entry>
+  <entry>
+    <title>その文章についてAoedeに聞く</title>
+    <link href="https://krisbaker.com/ja/building/aoede/ask-aoede-about-the-passage/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/ask-aoede-about-the-passage/</id>
+    <updated>2026-06-23T10:00:00Z</updated>
+    <published>2026-06-23T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>単語は全部分かるのに、文全体の意味がつかめないことがあります。Aoedeでは、いま読んでいる文章についてリーダーの中から質問できるようになりました。翻訳、文法や語彙の説明、自由な質問に対応し、元の文章を表示したまま回答をストリーミングします。質問している間は読み上げが自動で一時停止しますが、この動作は設定でオフにもできます。</p>
+<p>アシスタントはローカル優先です。Appleのオンデバイスモデルか、OpenAI互換のローカルサーバーを使えます。共通のバックエンドにはShikishaを使い、自分でクラウドモデルを選んだ場合はAnthropicにもネイティブ対応します。大事なのは、チャットボットを追加したことではありません。文章をコピーし、別のアプリへ移り、貼り付け、また読んでいた場所を探す。その手間を読書からなくしたことです。</p>]]></content>
+  </entry>
+  <entry>
+    <title>リーダーの中で辞書を引く</title>
+    <link href="https://krisbaker.com/ja/building/aoede/a-dictionary-inside-the-reader/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/aoede/a-dictionary-inside-the-reader/</id>
+    <updated>2026-06-23T09:00:00Z</updated>
+    <published>2026-06-23T09:00:00Z</published>
+    <content type="html"><![CDATA[<p>日本語を読んでいると、何度も小さな疑問で止まります。この単語はどういう意味だろう。Aoedeでは、単語や漢字を選ぶと、ローカルのJMdictから読み方と英語の意味をその場で確認できるようになりました。ページを離れる必要も、テキストを外部に送る必要もありません。活用した単語は先に基本形へ戻すので、たとえば「食べました」からでも「食べる」を引けます。</p>
+<p>同じ辞書を使って、カタカナ語の上に英語の元の単語を表示する読み方も追加しました。漢字の上にふりがなを出すのと似た仕組みですが、十分に確かな場合だけ表示します。和製英語や英語以外から来た外来語は慎重に扱います。間違った英語を見せるくらいなら、何も出さないほうがいいと考えました。</p>]]></content>
+  </entry>
   <entry>
     <title>音声は読み続けたのに、ページは止まった</title>
     <link href="https://krisbaker.com/ja/building/aoede/the-voice-kept-reading-the-page-didnt/" rel="alternate"/>
@@ -145,63 +199,5 @@
 <p>名前はReading Pacer。KokoroやAppleの音声と並ぶ三つ目のエンジンですが、これだけは喋りません。同じカラオケハイライトを、読むペースに合わせてページの上を進めていくだけです。行の下を指でなぞるような、あるいは速読で使う動くマーカーを追うような感覚です。このハイライトはもともと音声に追従させるために作ったものですが、単体でも十分に役立つことがわかりました。聴くより読みたいときに、目を止めずに動かし続けるための仕組みです。しかもペーサーはオーディオセッションに一切触れないので、自分でかけている音楽はそのまま流れ続けます。</p>
 <p>ペースは実際に文章を読む感覚に近づけてあり、各単語にはその長さに応じた時間が割り当てられます。長い単語は少し長く留まり、短い単語はさっと過ぎ、速度はスライダーでリアルタイムに変わります。実際に効いてくるのは、むしろ粒度のほうです。一語ずつ、最大10語のまとまり、あるいは一文まるごと。文単位ではハイライトがチャンク全体にかかった一本の帯になります。同じページから、三つの異なる読みのリズムが選べます。</p>
 <p>音声アプリに無音モードがあるのは矛盾のようですが、読むことと聴くことは同じ行為の二つの速度でしかありません。子どもがようやく寝た夜には、部屋を音で満たさないほうがありがたい日もあります。</p>]]></content>
-  </entry>
-  <entry>
-    <title>設定を開かずに声を切り替える</title>
-    <link href="https://krisbaker.com/ja/building/aoede/voice-picker-in-the-transport-bar/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/voice-picker-in-the-transport-bar/</id>
-    <updated>2026-06-07T23:59:00Z</updated>
-    <published>2026-06-07T23:59:00Z</published>
-    <content type="html"><![CDATA[<p>macOSのトランスポートバーに音声ピッカーが付きました。これで、設定を開かずに、聴きながら声を変えられます。表示されるのは、いまのエンジンと読み上げ言語に複数の声があるときだけです。小さな機能ですが、声の切り替えは、設定の二つ奥に埋もれているより、聴きながらさっとやりたい類いの調整です。</p>]]></content>
-  </entry>
-  <entry>
-    <title>本を閉じても、Kokoroは動き続けていた</title>
-    <link href="https://krisbaker.com/ja/building/aoede/book-closed-kokoro-kept-going/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/book-closed-kokoro-kept-going/</id>
-    <updated>2026-06-07T23:55:00Z</updated>
-    <published>2026-06-07T23:55:00Z</published>
-    <content type="html"><![CDATA[<p>Aoedeで本を閉じても、Aoedeはその本の処理をやめていませんでした。ドキュメントから戻っても、選択を解除するだけ。MLXのKokoroエンジンはキャッシュを抱えたままで、さらに悪いことに、合成スケジューラも回り続けていました。先読みを1000文に設定していたので、本を開いた瞬間にほぼ一冊まるごとを先回りして合成し始め、一時停止していても回り続けます。スケジューラは、音声が実際に再生されてはじめて緩むからです。Macでは、これは読み終わっても下がってこないメモリとCPUとして、だいたい隠れていました。RAMの超過でアプリが殺されるiOSでは、そうは静かにいきませんでした。</p>
-<p>iOSでより大きな問題だったのは、バックグラウンドに回したときのクラッシュです。iOSはバックグラウンドでのGPU処理を禁じていて、MLXがそこでコマンドバッファを送ると、アプリごと落ちます（「Insufficient Permission to submit GPU work from background」）。素朴な対処は、フォアグラウンドを離れたら全部止めることですが、それだと再生してよいはずの音声まで止まってしまいます。そこでいまは、ニューラル合成だけを中断します。シーンフェーズを見て、非アクティブになった早い段階でKokoroのGPU処理を止め（実行中の処理に終わる余裕を与え）、MLXのキャッシュを解放し、復帰時に再開します。Appleの音声はCPUだけで動くので、バックグラウンドでもそのまま再生されます。Kokoroは、バッファに溜めたぶんを再生しきってから待機し、戻ってきたら続きから再開します。</p>
-<p>いまは先読みを数文に抑え、本を閉じれば合成を止めてキャッシュを破棄し、キャッシュ上限も端末に合わせて変わります。その多くはiOSが問題を顕在化させたものでしたが、本を閉じたあとに処理が残るバグは、どのプラットフォームでもバグでした。気づくのに、それで殺してくるシステムが必要だっただけです。</p>]]></content>
-  </entry>
-  <entry>
-    <title>AoedeがiPhoneとiPadで動くようになった</title>
-    <link href="https://krisbaker.com/ja/building/aoede/aoede-comes-to-ios/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/aoede-comes-to-ios/</id>
-    <updated>2026-06-07T23:45:00Z</updated>
-    <published>2026-06-07T23:45:00Z</published>
-    <content type="html"><![CDATA[<p>アプリを移植しているつもりが、実際には抽出していました。AoedeはiPhoneとiPadでも動くようになりましたが、作業のほとんどはiOSアプリそのものではありません。Aoedeの頭脳の全体、つまりドキュメントモデル、再生コーディネーター、MLXのKokoro音声スタックは、すべてmacOSターゲットの中にあって、共有できる「アプリ」などなく、全部が溶接されたMacアプリがあるだけだったのです。だから最初の一歩は、それらをすべてAoedeFeatureKitというパッケージに引き出し、両方のアプリがそれを使うようにすることでした。その上に乗るiOSアプリは、あえて薄くしてあります。タッチ前提のライブラリ、同じカラオケハイライトと追従スクロールを再利用するコンパクトなリーダー、グラスのトランスポートバー、ロック画面のコントロール、そしてバックグラウンド再生です。</p>
-<p>頭脳を共有してみると、コードが「自分はMacの上にいる」と暗黙に決めてかかっていた場所が、ことごとく表に出てきました。MLXは本物のMetal GPUを必要としますが、iOSシミュレータにはそれがないので、起動した瞬間に落ちました。いまはシミュレータ上ではKokoroを非対応として検出し、Appleの音声にフォールバックします。OpenJTalkの辞書は/usr/bin/tarを呼び出して展開していましたが、iOSにtarはないので、端末上の日本語は、クロスプラットフォームの展開処理を書くまで、Apple読みのG2PとCFStringTokenizerのふりがなにフォールバックします。メモリもより厳しくて、iOSではRAMを超過すると、フットプリントが大きくなるだけでなくアプリが殺されます。だからMLXのキャッシュ上限は端末に合わせて変わり（だいたいRAMの24分の1）、6GBに満たないiPhoneでKokoroを選ぶと、やんわり注意が出ます。Appleの音声は、どの端末でも既定のままです。</p>
-<p>同じリーダー、同じハイライトが、いまはひとつのコードベースを二つのプラットフォームで共有しています。デスクトップと電話が分かれるのは、ハードウェアがそうさせるところだけです。</p>]]></content>
-  </entry>
-  <entry>
-    <title>音声と一致するふりがな</title>
-    <link href="https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/furigana-that-matches-the-voice/</id>
-    <updated>2026-06-07T23:30:00Z</updated>
-    <published>2026-06-07T23:30:00Z</published>
-    <content type="html"><![CDATA[<p>Aoedeで漢字の上に小さな読み仮名、つまりふりがなを表示できるようになりました。日本語のときだけ出るツールバーのボタンで切り替えます。こだわったのは、ふりがなが音声と一致することです。表示される読みも、読み上げられる読みも、どちらもOpenJTalkから来ます。だからナレーターが「私」を「わたし」と読むとき、漢字の上に見えるのもまさにそれで、文脈で決まる助詞の読みまで一致します。OpenJTalkの辞書がなければ、ふりがなは音声と同じくCFStringTokenizerにフォールバックします。</p>
-<p>姉妹アプリのAsideがすでにふりがなをやっているので、まずはそのロジックに手を伸ばしました。読みのコードはきれいに移植できました。トークン化し、ひらがなに変換し、送り仮名を落とし、混じった漢字の連なりを分割する。でも描画はそうはいきませんでした。AsideはルビをひとつのCTRubyAnnotationで、一枚岩のテキストブロックに描きます。一方、Aoedeの読書体験の核は、そのテキストの上を単語ごとに滑っていくカラオケ式のハイライトです。一枚岩のブロックには、ハイライトが乗る場所がありません。そこで描画をSwiftUIで単語ごとに作り直しました。漢字の連なりごとに上へ仮名を重ね、ふつうの文字の上には透明な仮名レーンを置いて、どの行もベースラインをそろえます。ハイライトは生き残り、いまはふりがなを突き抜けるのではなく、その下を滑っていきます。</p>
-<p>小さなバグひとつが、寄り道する価値のあるものでした。漢字の連なりが読みとほぼ同じ幅のとき（「物凄」は「ものすご」とだいたい同じ幅です）、仮名で測った列がほんのわずか足りず、SwiftUIが漢字そのものを「…」一文字に切り詰めてしまうことがありました。仮名レーンだけでなく、ベースの文字列も自前の理想幅に固定して直しました。ふりがなは紙の上では小さな機能ですが、まだ勉強中の言語で読むとき、聞いている読みが目に見えることは、ほとんどそれ自体が目的です。</p>]]></content>
-  </entry>
-  <entry>
-    <title>「わたくし」ではなく「わたし」と読むようになった</title>
-    <link href="https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/watashi-not-watakushi/</id>
-    <updated>2026-06-07T23:00:00Z</updated>
-    <published>2026-06-07T23:00:00Z</published>
-    <content type="html"><![CDATA[<p>前回の日本語アップデートは、不満で終わっていました。アプリは「私」を「わたし」ではなく「わたくし」と読み、ピッチアクセントもなかったので、箸と橋が同じに聞こえる、と。その二段目がようやく入りました。日本語の発音はOpenJTalkを通るようになり、アクセント辞書を使った本物の形態素解析をします。読みも正しくなりました。「私」は「わたし」、「三日」は「みっか」、「100円」は「ひゃくえん」、そしてピッチもちゃんと出ます。</p>
-<p>OpenJTalkはPythonのpyopenjtalkの裏にあるエンジンで、そもそも使えた理由は、GPLではなくBSDライセンスだからです。純Appleのフェーズ1が守ろうとしていたのと同じ基準を、ちゃんとクリアします。そのカタカナ読みを、フォールバックがすでに使っているのと同じKokoro語彙の音素テーブルにそのまま流し込むので、新しい音素体系を作ったわけではなく、読みの出どころをより良いものに替えただけです。約23MBの辞書は、Kokoroモデル自体と同じく、日本語を初めて使うときにダウンロードします。もしそのダウンロードが失敗しても、日本語は壊れる代わりに、Appleだけの経路へ静かにフォールバックします。</p>
-<p>ひとつ、わざと保留にした部分があります。OpenJTalkはダウンステップ、つまり句の途中で起きる小さなピッチの下がりも予測しますが、それはまだ音素ストリームに入れていません。Kokoroには独自の韻律モデルがあるので、明示的なダウンステップのマークを入れたほうが本当に良く聞こえるのか、決める前にA/Bで確かめたいからです。いまのところ読みは正しく、アクセントも音韻的に合っていて、それがそもそもの目的でした。一日前の、平板で少しずれた日本語はもうありません。</p>]]></content>
-  </entry>
-  <entry>
-    <title>49GBはリークではなくキャッシュだった</title>
-    <link href="https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/building/aoede/the-49gb-was-a-cache/</id>
-    <updated>2026-06-07T22:00:00Z</updated>
-    <published>2026-06-07T22:00:00Z</published>
-    <content type="html"><![CDATA[<p>長い本を合成している最中にアクティビティモニタを見ていたら、Aoedeのメモリ使用量が49GBまで上がっていました。ふつうなら、これは深刻なリーク、最後にはアプリが強制終了させられるやつに見えます。でも、リークではまったくありませんでした。</p>
-<p>原因はMLX、KokoroをGPUで動かしているフレームワークでした。解放したバッファを上限なしの再利用プールに溜めるので、プールは合成のピーク作業セットに合わせて膨らんだまま居座ります。メモリはずっと回収可能で、失われてはいません。とはいえ、何もしていないときに数十GBを抱えているアプリは、やはりマシンにとって迷惑な隣人です。直し方は小さくて、モデルのロード時にプールを512MBに制限し、エンジンがアイドルになったらクリアするだけです。合成中のライブメモリはごくわずかなので、フットプリントは挙動も速度も変えずに1〜2GBまで下がりました。</p>
-<p>毎回学び直すのは、数字が上がることと、リークすることは別だということです。ここでの誠実な直し方は、ありもしないリークを追いかけることではなく、どれだけキャッシュにコストを払うつもりかをフレームワークに伝えることでした。</p>]]></content>
   </entry>
 </feed>

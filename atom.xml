@@ -6,11 +6,65 @@
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.0">Inkwell</generator>
-  <updated>2026-06-15T11:00:00Z</updated>
+  <updated>2026-06-23T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Furigana That Steps Back as You Learn</title>
+    <link href="https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/</id>
+    <updated>2026-06-23T14:00:00Z</updated>
+    <published>2026-06-23T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>
+<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Mark It Now, Make Cards Later</title>
+    <link href="https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/</id>
+    <updated>2026-06-23T13:00:00Z</updated>
+    <published>2026-06-23T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>
+<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Notes That Survive Their Own Edits</title>
+    <link href="https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede can now create and edit notes as first-class documents, then switch the same note into the regular reader for text-to-speech and study capture. Notes live in their own library section, and selecting text in the editor can feed the same card-making flow used by books.</p>
+<p>The awkward part was preserving everything attached to text after the text changes. On save, Aoede re-anchors cards, bookmarks, capture marks, and the previous reading position against the edited sentences. When a match cannot be found, it surfaces the orphan or falls back explicitly instead of silently pointing a card at the wrong passage.</p>]]></content>
+  </entry>
+  <entry>
+    <title>From Reading to Reviewing</title>
+    <link href="https://krisbaker.com/building/aoede/from-reading-to-reviewing/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/from-reading-to-reviewing/</id>
+    <updated>2026-06-23T11:00:00Z</updated>
+    <published>2026-06-23T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede has crossed from helping me read into helping me remember. I can select a passage, generate vocabulary, sentence, cloze, question-and-answer, or definition cards, edit them before saving, and review them with a four-button FSRS schedule. Japanese vocabulary stays dictionary-first, using a model only when JMdict has no answer. Cards can also be written by hand, so the study system does not depend on AI.</p>
+<p>A new Today screen ties the loop together with the current streak, recently read books, and reviews due now. The app treats target language and study mode as separate choices, which means someone can keep Aoede as a straightforward reader while learners opt into cards, review, Japanese lookup, and the features that combine them.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Ask Aoede About the Passage</title>
+    <link href="https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/</id>
+    <updated>2026-06-23T10:00:00Z</updated>
+    <published>2026-06-23T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>
+<p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>]]></content>
+  </entry>
+  <entry>
+    <title>A Dictionary Inside the Reader</title>
+    <link href="https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/</id>
+    <updated>2026-06-23T09:00:00Z</updated>
+    <published>2026-06-23T09:00:00Z</published>
+    <content type="html"><![CDATA[<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>
+<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>]]></content>
+  </entry>
   <entry>
     <title>The Voice Kept Reading, the Page Didn&apos;t</title>
     <link href="https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/" rel="alternate"/>
@@ -145,63 +199,5 @@
 <p>It is called the Reading Pacer, and it sits next to Kokoro and the Apple voices as a third engine that never speaks. It just advances the same karaoke highlight across the page at a reading pace, the way you might run a finger under the line, or the way a speed-reader follows a moving marker. The highlight was originally built to follow the voice. It turns out it works just as well on its own, as a way to keep your eyes moving when you would rather read than listen. And because the pacer never touches the audio session, whatever you already have playing keeps playing under it.</p>
 <p>The pace tries to match how text actually reads, giving each word a slice of time scaled by its length so long words linger and short ones pass quickly, with the slider retuning the speed live. What matters more in practice is the grain. You can pace word by word, by a phrase of up to ten words, or a whole sentence at a time, where the highlight becomes one band over the chunk. Three different reading rhythms from the same page.</p>
 <p>A voice app with a silent mode sounds like a contradiction, but reading and listening are two speeds of the same act, and some evenings, with the kids finally asleep, you want the one that does not fill the room with sound.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Switching Voices Without Opening Settings</title>
-    <link href="https://krisbaker.com/building/aoede/voice-picker-in-the-transport-bar/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/voice-picker-in-the-transport-bar/</id>
-    <updated>2026-06-07T23:59:00Z</updated>
-    <published>2026-06-07T23:59:00Z</published>
-    <content type="html"><![CDATA[<p>The macOS transport bar now has a voice picker, so you can change voice while listening instead of opening Settings. It only shows up when there is actually more than one voice for the current engine and reading language. Small feature, but switching voices is exactly the kind of adjustment you want to make mid-listen, not buried two windows away.</p>]]></content>
-  </entry>
-  <entry>
-    <title>The Book Was Closed, but Kokoro Kept Going</title>
-    <link href="https://krisbaker.com/building/aoede/book-closed-kokoro-kept-going/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/book-closed-kokoro-kept-going/</id>
-    <updated>2026-06-07T23:55:00Z</updated>
-    <published>2026-06-07T23:55:00Z</published>
-    <content type="html"><![CDATA[<p>Closing a book in Aoede did not actually stop Aoede from working on it. Backing out of a document only cleared the selection; the MLX Kokoro engine kept its cache resident, and worse, the synthesis scheduler kept running. I had set its lookahead to 1000 sentences, so the moment you opened a book it raced ahead synthesizing essentially the whole thing, and it kept churning even while paused, because the scheduler only relaxes as audio actually plays through. On the Mac this mostly hid as memory and CPU that never came back down after you were done reading. On iOS, where overshooting RAM gets your app killed, it was not so quiet.</p>
-<p>The louder iOS problem was a crash on backgrounding. iOS forbids GPU work in the background, and MLX submitting a command buffer there aborts the app outright (&quot;Insufficient Permission to submit GPU work from background&quot;). The naive fix is to stop everything when the app leaves the foreground, but that also kills audio you are allowed to keep playing. So the app now suspends only the neural synthesis: it watches the scene phase, pauses Kokoro's GPU work as early as it goes inactive (giving any in-flight work a moment to finish), purges the MLX cache, and resumes on return. Apple's voices are CPU-only, so they play straight through the background. Kokoro plays out its buffered cushion, then waits, and picks up where it left off when you come back.</p>
-<p>The lookahead is bounded to a few sentences now, closing a book stops synthesis and purges the cache, and the cache cap scales to the device. Most of this was iOS forcing the issue, but the work that lingered after closing a book was a bug on every platform. It just took a system that kills you for it to make me notice.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Aoede Comes to iOS</title>
-    <link href="https://krisbaker.com/building/aoede/aoede-comes-to-ios/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/aoede-comes-to-ios/</id>
-    <updated>2026-06-07T23:45:00Z</updated>
-    <published>2026-06-07T23:45:00Z</published>
-    <content type="html"><![CDATA[<p>I thought I was porting an app. It turned out I was extracting one. Aoede runs on iPhone and iPad now, but almost none of the work was the iOS app itself. The whole brain of Aoede, the document model, the playback coordinator, the MLX Kokoro speech stack, lived inside the macOS target, which meant there was no app to share, just a Mac app with everything welded to it. So the first step was pulling all of it into a package, AoedeFeatureKit, that both apps now consume. The iOS app on top of it is deliberately thin: a touch-first library, a compact reader that reuses the same karaoke highlighting and follow-scroll, a glass transport bar, lock-screen controls, and background audio.</p>
-<p>Sharing the brain surfaced every place the code quietly assumed it was on a Mac. MLX needs a real Metal GPU, which the iOS Simulator does not have, so launching there aborted instantly; Kokoro is now detected as unsupported on the simulator and the app falls back to Apple's voices. The OpenJTalk dictionary was unpacked by shelling out to /usr/bin/tar, which iOS does not have, so Japanese on device falls back to the Apple-reading G2P and CFStringTokenizer furigana until I write a cross-platform extractor. Memory is tighter too: on iOS, overshooting RAM gets the app killed rather than just enlarging its footprint, so the MLX cache cap scales with the device (roughly a 24th of RAM), and phones under about 6 GB get a gentle caution if they pick Kokoro. Apple speech stays the default everywhere.</p>
-<p>It is the same reader and the same highlight, now sharing one codebase across two platforms. The desktop and the phone diverge only where the hardware forces them to.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Furigana That Matches the Voice</title>
-    <link href="https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/furigana-that-matches-the-voice/</id>
-    <updated>2026-06-07T23:30:00Z</updated>
-    <published>2026-06-07T23:30:00Z</published>
-    <content type="html"><![CDATA[<p>Aoede can now show furigana, the small kana readings printed above kanji, toggled from a toolbar button that only appears for Japanese. The part I care about is that the furigana matches the voice. Both the printed reading and the spoken one come from OpenJTalk, so when the narrator says わたし for 私, that is exactly what you see above the kanji, contextual particle readings included. If the OpenJTalk dictionary isn't present, the furigana falls back to CFStringTokenizer, the same fallback the audio uses.</p>
-<p>I have a sibling app, Aside, that already does furigana, so I started by reaching for its logic. The reading code ported over cleanly: tokenize, convert to hiragana, trim okurigana, split mixed kanji runs. The rendering did not. Aside draws ruby with a single CTRubyAnnotation in one monolithic text block, and Aoede's whole reading experience is a karaoke highlight that slides word by word across the text. A monolithic block gives the highlight nowhere to land. So I rebuilt the rendering per word in SwiftUI: kana stacked over each kanji run, with an invisible kana lane over the plain runs so every line keeps the same baseline. The highlight survives, now gliding under the furigana instead of through it.</p>
-<p>One small bug was worth the detour. When a kanji run is about as wide as its reading (物凄 is roughly as wide as ものすご), the kana-measured column could come up a hair short and SwiftUI would truncate the kanji itself to a single &quot;…&quot;. Pinning the base run to its own ideal width, not just the kana lane's, fixed it. Furigana is a small feature on paper, but when you're reading in a language you're still learning, seeing the reading you're hearing is most of the point.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Now It Reads Watashi, Not Watakushi</title>
-    <link href="https://krisbaker.com/building/aoede/watashi-not-watakushi/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/watashi-not-watakushi/</id>
-    <updated>2026-06-07T23:00:00Z</updated>
-    <published>2026-06-07T23:00:00Z</published>
-    <content type="html"><![CDATA[<p>The last Japanese update ended on a complaint: the app read 私 as <em>watakushi</em> instead of <em>watashi</em>, and it had no pitch accent, so 箸 (chopsticks) and 橋 (bridge) sounded identical. That second pass is now in. Japanese pronunciation runs through OpenJTalk, which does real morphological analysis against an accent dictionary, and the readings come out right: 私 is <em>watashi</em>, 三日 is <em>mikka</em>, 100円 is <em>hyaku-en</em>, and the pitch is actually there.</p>
-<p>OpenJTalk is the engine behind Python's pyopenjtalk, and the reason I could use it at all is that it is BSD licensed, not GPL. It clears the same bar the pure-Apple Phase 1 was built to protect. Its katakana readings feed the exact Kokoro-vocab phoneme table the fallback already used, so I didn't invent a new phoneme inventory, just a better source of readings. The ~23 MB dictionary downloads on first Japanese use, the same pattern as the Kokoro model itself, and if that download ever fails, Japanese quietly falls back to the Apple-only path rather than breaking.</p>
-<p>One piece is held back on purpose. OpenJTalk also predicts downstep, the small pitch drop inside a phrase, and I'm not injecting that into the phoneme stream yet. Kokoro has its own prosody model, so I want to A/B whether the explicit downstep marks actually sound better before committing to them. For now the readings are correct and the accent is phonemically right, which was the whole point. The flat, slightly-wrong Japanese from a day ago is gone.</p>]]></content>
-  </entry>
-  <entry>
-    <title>The 49 GB Was a Cache, Not a Leak</title>
-    <link href="https://krisbaker.com/building/aoede/the-49gb-was-a-cache/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/the-49gb-was-a-cache/</id>
-    <updated>2026-06-07T22:00:00Z</updated>
-    <published>2026-06-07T22:00:00Z</published>
-    <content type="html"><![CDATA[<p>Watching Activity Monitor while Aoede synthesized a long book, I saw its memory climb to 49 GB. That looks like a catastrophic leak, the kind that ends with the app getting killed. It was not a leak at all.</p>
-<p>The cause was MLX, the framework running Kokoro on the GPU. It keeps freed buffers in an uncapped reuse pool, which grows to match the peak working set of synthesis and then just sits there. The memory was reclaimable the whole time, never lost, but an app that idles at tens of gigabytes is still a bad neighbor on the machine. The fix is small: cap the pool at 512 MB when the model loads, and clear it when the engine goes idle. Live memory during synthesis is tiny, so the footprint drops to 1 to 2 GB with no change in behavior or speed.</p>
-<p>The lesson I keep relearning is that a number going up is not the same as a number leaking. The honest fix was not chasing a phantom leak but telling the framework how much cache I was willing to pay for.</p>]]></content>
   </entry>
 </feed>

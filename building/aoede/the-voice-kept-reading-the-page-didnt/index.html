@@ -117,7 +117,10 @@
     <article class="prose"><p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>
 <p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/building/aoede/a-dictionary-inside-the-reader/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">A Dictionary Inside the Reader</span>
+      </a>
       <a href="/building/aoede/when-the-book-has-pictures/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
         <span class="update-nav-title">When the Book Has Pictures</span>
