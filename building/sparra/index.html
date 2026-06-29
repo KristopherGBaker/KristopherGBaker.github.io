@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sparra</title>
+    <meta name="description" content="A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.">
+    <link rel="canonical" href="https://krisbaker.com/building/sparra/">
+    <meta property="og:title" content="Sparra">
+    <meta property="og:description" content="A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.">
+    <meta property="og:url" content="https://krisbaker.com/building/sparra/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/sparra/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/building/feed.json">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<script defer src="/assets/js/lightbox.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS roots · Product systems · AI-assisted workflows</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container building-detail page-shell">
+  <a href="/building/" class="case-study-back">← The workshop</a>
+
+  <div class="building-detail-head is-active">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-detail-updated">updated today</span>
+    <a href="https://github.com/KristopherGBaker/Sparra" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <h1 class="h1 building-detail-title">Sparra</h1>
+  <p class="body-lg building-detail-blurb">A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.</p>
+  <div class="case-study-tags"><a href="/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/building/tags/ai-agents/" class="tag-chip">AI agents</a><a href="/building/tags/claude/" class="tag-chip">Claude</a><a href="/building/tags/codex/" class="tag-chip">Codex</a><a href="/building/tags/cli/" class="tag-chip">CLI</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
+
+  <article class="prose building-detail-prose"><p>Sparra came out of a single idea I could not stop turning over after watching <a href="https://youtu.be/mR-WAvEPRwE?si=wd97P5XHDPJZXsDB">Build Agents That Run for Hours</a>, an Anthropic workshop by Ash Prabaker and Andrew Wilson. The pitch was that an agent can do real work for a long stretch if you give it the right scaffolding: a clear contract for &quot;done,&quot; a way to check its own output, and state that lives on disk so the whole thing survives interruptions. I wanted to feel that for myself, on my own projects, so I built a harness around it.</p>
+<p>The shape is a loop. Each work item gets negotiated into a small, checkable contract (a handful of assertions, not a wishlist), handed to a generator that implements it, then handed to an adversarial evaluator that does not take the generator's word for anything. The evaluator actually runs the artifact, reads the evidence, and refuses to pass something that only works on a degenerate input or whose own tests crash as delivered. Stuck items get discarded and restarted from scratch rather than nursed along. The part I care about most is the cross-model judging: Claude can build while Codex judges, or the reverse, which gives a genuinely independent second opinion instead of a model grading its own homework.</p>
+<p>The guiding principle is that the filesystem is the source of truth and the only shared state. Every step reads its inputs from disk and writes its outputs back, so a run is inspectable, diffable, and resumable from any point. That one decision is what makes the long-running part actually work. When a model hits a rate limit at hour two, the loop can wait the window out or fall back to another provider and pick up exactly where it left off.</p>
+<p>There are two ways to drive it. Most of my sessions are interactive: a <code>/sparra-loop</code> skill puts me on the wheel inside Claude Code, steering between contract, generate, evaluate, and accept, with a holdout wall the builder cannot see enforced by the runner. The other way is to hand off entirely and let the CLI run <code>plan → freeze → build → reflect</code> unattended. Both modes share the same on-disk state and the same role-runner underneath.</p>
+<p>It is early and it is personal, but it has already built real things, including large parts of itself. The updates below are the build log: the whole loop standing in a day, teaching the judge to run an iOS app and read its screenshots, cross-model judging, closing the door on contracts the generator could game, surviving provider rate limits mid-run, driving it by hand from Claude Code, and the day it started auditing its own prompts.</p></article>
+
+  <section class="building-updates">
+    <div class="section-head">
+      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">7</span></h2>
+    </div>
+    <div class="update-timeline"><a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.29</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Sparra audits its own prompts</span>
+</a>
+<a href="/building/sparra/driving-it-by-hand-from-claude-code/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.28</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Driving it by hand from Claude Code</span>
+</a>
+<a href="/building/sparra/surviving-the-rate-limit/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.27</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Surviving the rate limit</span>
+</a>
+<a href="/building/sparra/closing-the-door-on-a-gamed-contract/" class="update-entry is-decision">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.26</span>
+    <span class="update-entry-status">decision</span>
+  </span>
+  <span class="update-entry-title">Closing the door on a gamed contract</span>
+</a>
+<a href="/building/sparra/one-model-builds-another-judges/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.25</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">One model builds, another judges</span>
+</a>
+<a href="/building/sparra/letting-the-judge-run-the-app/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.24</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Letting the judge run the app</span>
+</a>
+<a href="/building/sparra/the-whole-loop-standing-in-a-day/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.23</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">The whole loop, standing in a day</span>
+</a>
+</div>
+  </section>
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">Next</p>
+    <a href="/building/inkwell/" class="case-study-next-row">
+      <span class="case-study-next-title">Inkwell</span>
+      <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

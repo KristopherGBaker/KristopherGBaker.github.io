@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Sparra</title>
+    <meta name="description" content="長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/">
+    <meta property="og:title" content="Sparra">
+    <meta property="og:description" content="長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/sparra/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/ja/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/ja/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/ja/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/ja/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/ja/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/ja/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/ja/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/ja/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/ja/building/feed.json">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<script defer src="/assets/js/lightbox.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOSを土台に · プロダクトシステム · AI支援ワークフロー</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><a href="/building/sparra/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container building-detail page-shell">
+  <a href="/ja/building/" class="case-study-back">← 制作中へ</a>
+
+  <div class="building-detail-head is-active">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-detail-updated">updated today</span>
+    <a href="https://github.com/KristopherGBaker/Sparra" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <h1 class="h1 building-detail-title">Sparra</h1>
+  <p class="body-lg building-detail-blurb">長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/ja/building/tags/ai/" class="tag-chip">AIエージェント</a><a href="/ja/building/tags/claude/" class="tag-chip">Claude</a><a href="/ja/building/tags/codex/" class="tag-chip">Codex</a><a href="/ja/building/tags/cli/" class="tag-chip">CLI</a><a href="/ja/building/tags//" class="tag-chip">オープンソース</a></div>
+
+  <article class="prose building-detail-prose"><p>Sparraは、AshPrabakerとAndrewWilsonによるAnthropicのワークショップ「<a href="https://youtu.be/mR-WAvEPRwE?si=wd97P5XHDPJZXsDB">Build Agents That Run for Hours</a>」を見たあと、頭から離れなくなった一つのアイデアから生まれました。要点は、適切な足場さえ用意すれば、エージェントは長い時間まともな仕事をこなせる、というもの。「完了」の明確なコントラクト、自分の出力をチェックする手段、そして中断を生き延びるためにディスク上に置かれた状態。それを自分のプロジェクトで体感したくて、まわりにハーネスを組みました。</p>
+<p>形はループです。各作業項目を小さなチェック可能なコントラクト（ウィッシュリストではなく、ひと握りのアサーション）に落とし込み、それを実装するジェネレーターに渡し、ジェネレーターの言い分を一切鵜呑みにしない敵対的なエバリュエーターに渡す。エバリュエーターは成果物を実際に動かし、証拠を読み、退化した入力でしか動かないものや、届いた時点で自分のテストがクラッシュするものを通しません。詰まった項目は手当てして延命させるのではなく、捨ててゼロからやり直します。いちばん大事にしているのはクロスモデル判定です。ClaudeがビルドしてCodexが判定する、あるいはその逆。モデルが自分の宿題を採点するのではなく、本当に独立したセカンドオピニオンが得られます。</p>
+<p>指針は、ファイルシステムが真実の源であり、唯一の共有状態だということ。すべてのステップが入力をディスクから読み、出力をディスクへ書き戻すので、実行は検査でき、差分で追え、どの地点からでも再開できます。この一つの決定こそが、長時間動き続ける部分を実際に成り立たせています。2時間目にモデルがレート制限に当たっても、ループはその枠が空くのを待つか、別のプロバイダにフォールバックして、止まった場所からちょうど続けられます。</p>
+<p>回し方は二つあります。私のセッションはたいてい対話的です。<code>/sparra-loop</code>スキルがClaude Codeの中で私をハンドルに座らせ、コントラクト、生成、評価、受け入れの間を操縦させます。ビルド側からは見えないホールドアウトの壁はランナーが守ります。もう一つは丸ごと任せて、CLIに<code>plan → freeze → build → reflect</code>を無人で走らせるやり方。どちらのモードも、同じディスク上の状態と、その下にある同じロールランナーを共有します。</p>
+<p>まだ初期段階で、あくまで個人的なものですが、すでに実際のものを作っています。自分自身の大部分を含めて。下のアップデートが制作ログです。ループ全体が一日で立ち上がった日、iOSアプリを動かしてスクリーンショットを読むことをジャッジに教えた話、クロスモデル判定、ジェネレーターが出し抜けるコントラクトの穴をふさいだ話、実行中のプロバイダのレート制限を生き延びた話、Claude Codeから手で回す話、そしてSparraが自分のプロンプトを監査しはじめた日。</p></article>
+
+  <section class="building-updates">
+    <div class="section-head">
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">7</span></h2>
+    </div>
+    <div class="update-timeline"><a href="/ja/building/sparra/sparra-audits-its-own-prompts/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.29</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Sparraが自分のプロンプトを監査する</span>
+</a>
+<a href="/ja/building/sparra/driving-it-by-hand-from-claude-code/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.28</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">Claude Codeから手で回す</span>
+</a>
+<a href="/ja/building/sparra/surviving-the-rate-limit/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.27</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">レート制限を生き延びる</span>
+</a>
+<a href="/ja/building/sparra/closing-the-door-on-a-gamed-contract/" class="update-entry is-decision">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.26</span>
+    <span class="update-entry-status">decision</span>
+  </span>
+  <span class="update-entry-title">出し抜けるコントラクトの穴をふさぐ</span>
+</a>
+<a href="/ja/building/sparra/one-model-builds-another-judges/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.25</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">片方がビルドし、もう片方が判定する</span>
+</a>
+<a href="/ja/building/sparra/letting-the-judge-run-the-app/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.24</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">ジャッジにアプリを動かさせる</span>
+</a>
+<a href="/ja/building/sparra/the-whole-loop-standing-in-a-day/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.23</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">ループ全体が一日で立ち上がった</span>
+</a>
+</div>
+  </section>
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/building/inkwell/" class="case-study-next-row">
+      <span class="case-study-next-title">Inkwell</span>
+      <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

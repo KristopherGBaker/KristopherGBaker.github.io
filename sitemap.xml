@@ -166,6 +166,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/sparra/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/inkwell/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/"/>
@@ -184,6 +190,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/tags/ai-agents/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/ai-agents/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/ai-agents/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/tags/ai-assisted/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/ai-assisted/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/ai-assisted/"/>
@@ -199,6 +210,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/cli/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/cli/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/cli/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/tags/claude/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/claude/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/claude/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/claude/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/tags/codex/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/codex/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/codex/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/codex/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/building/tags/cycling/</loc>
@@ -268,6 +291,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/tooling/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/tags/typescript/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/typescript/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/typescript/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/typescript/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/tags/ios/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/ios/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/ios/"/>
@@ -280,22 +309,28 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/macos/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-foundation-models/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/jpresume/jpresume-source-aware/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-examples/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/jpresume/jpresume-pipeline/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-0-1-0/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/shikisha/shikisha-core/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/</loc>
@@ -532,28 +567,64 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/giving-aoede-a-face/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-foundation-models/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
+    <loc>https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-examples/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+    <loc>https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/driving-it-by-hand-from-claude-code/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-0-1-0/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+    <loc>https://krisbaker.com/building/sparra/surviving-the-rate-limit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/surviving-the-rate-limit/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/surviving-the-rate-limit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/surviving-the-rate-limit/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/shikisha/shikisha-core/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+    <loc>https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/sparra/one-model-builds-another-judges/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/one-model-builds-another-judges/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/one-model-builds-another-judges/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/one-model-builds-another-judges/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/letting-the-judge-run-the-app/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/the-whole-loop-standing-in-a-day/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/jpresume/jpresume-source-aware/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/jpresume/jpresume-pipeline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/building/domestique/domestique-bilingual-units/</loc>
@@ -774,6 +845,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/sparra/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/inkwell/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/"/>
@@ -796,6 +873,10 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/ai/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/tags/ai/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/ai/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/tags/ble/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/ble/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/ble/"/>
@@ -806,6 +887,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/cli/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/cli/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/cli/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/tags/claude/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/claude/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/claude/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/claude/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/tags/codex/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/codex/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/codex/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/codex/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/building/tags/go/</loc>
@@ -850,6 +943,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/tts/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/tags/typescript/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/typescript/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/typescript/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/typescript/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/tags/ios/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/tags/ios/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags/ios/"/>
@@ -882,82 +981,28 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/tags//"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
+    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/"/>
+    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-examples/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-building-section/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-building-section/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-building-section/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-building-section/"/>
+    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-backend/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/domestique/domestique-foundation/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-core/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/</loc>
@@ -1164,28 +1209,124 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/giving-aoede-a-face/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-foundation-models/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-foundation-models/"/>
+    <loc>https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-examples/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-examples/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-examples/"/>
+    <loc>https://krisbaker.com/ja/building/sparra/driving-it-by-hand-from-claude-code/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/driving-it-by-hand-from-claude-code/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-0-1-0/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-0-1-0/"/>
+    <loc>https://krisbaker.com/ja/building/sparra/surviving-the-rate-limit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/surviving-the-rate-limit/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/surviving-the-rate-limit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/surviving-the-rate-limit/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/building/shikisha/shikisha-core/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/shikisha/shikisha-core/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/shikisha/shikisha-core/"/>
+    <loc>https://krisbaker.com/ja/building/sparra/closing-the-door-on-a-gamed-contract/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/sparra/one-model-builds-another-judges/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/one-model-builds-another-judges/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/one-model-builds-another-judges/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/one-model-builds-another-judges/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/sparra/letting-the-judge-run-the-app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/letting-the-judge-run-the-app/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/sparra/the-whole-loop-standing-in-a-day/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sparra/the-whole-loop-standing-in-a-day/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-per-collection-feeds/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-per-collection-feeds/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-image-lightbox/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-image-lightbox/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-building-section/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-building-section/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-building-section/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-building-section/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-bilingual-routes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-bilingual-routes/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/inkwell/inkwell-collections-quiet-theme/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/inkwell/inkwell-collections-quiet-theme/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-shikisha-transport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-shikisha-transport/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-source-aware/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-source-aware/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/jpresume/jpresume-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/jpresume/jpresume-pipeline/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-bilingual-units/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-mont-ventoux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-mont-ventoux/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-backend/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-backend/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-backend/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-workout-game/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-workout-game/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-workout-game/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/domestique/domestique-foundation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/domestique/domestique-foundation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/domestique/domestique-foundation/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/about/</loc>

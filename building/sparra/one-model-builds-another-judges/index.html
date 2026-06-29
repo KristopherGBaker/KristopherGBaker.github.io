@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>One model builds, another judges</title>
+    <meta name="description" content="One model builds, another judges">
+    <link rel="canonical" href="https://krisbaker.com/building/sparra/one-model-builds-another-judges/">
+    <meta property="og:title" content="One model builds, another judges">
+    <meta property="og:description" content="One model builds, another judges">
+    <meta property="og:url" content="https://krisbaker.com/building/sparra/one-model-builds-another-judges/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/sparra/one-model-builds-another-judges/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/one-model-builds-another-judges/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/one-model-builds-another-judges/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/building/feed.json">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<script defer src="/assets/js/lightbox.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOS roots · Product systems · AI-assisted workflows</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/one-model-builds-another-judges/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
+  <a href="/building/sparra/" class="post-back">← Sparra</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.25</span>
+     · <span>2 min read</span>
+  </p>
+  <h1 class="h1 post-title update-title">One model builds, another judges</h1>
+  
+  <div class="post-body">
+    <article class="prose"><p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>
+<p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p></article>
+    <nav class="update-nav">
+      <a href="/building/sparra/closing-the-door-on-a-gamed-contract/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Closing the door on a gamed contract</span>
+      </a>
+      <a href="/building/sparra/letting-the-judge-run-the-app/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">Older</span>
+        <span class="update-nav-title">Letting the judge run the app</span>
+      </a>
+    </nav>
+    <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
+      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
