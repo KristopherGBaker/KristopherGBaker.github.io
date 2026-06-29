@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>学ぶほど、ふりがなが減っていく</title>
-    <meta name="description" content="学ぶほど、ふりがなが減っていく">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <meta property="og:title" content="学ぶほど、ふりがなが減っていく">
-    <meta property="og:description" content="学ぶほど、ふりがなが減っていく">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/">
+    <title>スクロールのための、TextKit 2リーダー</title>
+    <meta name="description" content="スクロールのための、TextKit 2リーダー">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <meta property="og:title" content="スクロールのための、TextKit 2リーダー">
+    <meta property="og:description" content="スクロールのための、TextKit 2リーダー">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/furigana-that-steps-back-as-you-learn/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/furigana-that-steps-back-as-you-learn/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/a-textkit-2-reader-for-the-scroll/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,23 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.23</span>
-     · <span>約1分</span>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.06.29</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">学ぶほど、ふりがなが減っていく</h1>
+  <h1 class="h1 post-title update-title">スクロールのための、TextKit 2リーダー</h1>
   
   <div class="post-body">
-    <article class="prose"><p>ふりがなは、まだ知らない単語には役立ちますが、覚えたあとには見なくなります。Aoedeでは、復習を重ねて定着した単語や、自分で既知にした単語の読みを隠せるようになりました。テキストにはうっすら目印が残り、タップすると読みが出て、助けが必要だったことも記録されます。長押しすれば、忘れた単語として戻せます。表示するかどうかは単語の基本形ごとに決めるので、同じ本の中では一貫した動きになります。</p>
-<p>既知と判断する期間は7日、30日、90日から選べ、本ごとに上書きもできます。単語カードにはJLPTレベルのバッジが付き、学習モードの<code>Today</code>画面では日本語の復習を優先します。ふりがなは、全体でオンかオフにするだけの設定ではなく、実際に何を覚えたかに合わせて変わるようになりました。</p></article>
+    <article class="prose"><p>Aoedeの読書画面はSwiftUIで作られていて、単語の一つひとつがそれぞれ小さなビューになっています。おかげで看板のエフェクトはその場に貼り付けやすかったのですが、長い章には向かない形です。数千語あれば、レイアウトすべきビューも数千個。フォロースクロールもぎこちない段取りを踏むことになります。遅延リストでは画面外の位置がわからないので、アクティブな行を中央に保つために、settleパスと、着地点を再確認するリカバリーのタスクが要るのです。動きはしますが、本が長くなるほどこちらに抗ってくる構造です。</p>
+<p>そこでワークツリーで、リーダーをTextKit 2の上に作り直しました。<code>NSTextLayoutManager</code>をUIKitとAppKitでホストし、SwiftUI側のインターフェースは同じまま。ドキュメント全体が一つのattributed stringになり、単一のフラグメントパスで描かれます。TextKitは画面外の矩形を直接解決するので、settleとリカバリーの段取りはまるごと消えます。読書ハイライトはTextKitのレンダリング属性で再レイアウトなしに色を変え、カラオケの塗りとフォーカスレンズのグローは、ディスプレイリンクからアクティブな単語の矩形だけを描き直します。GPUエフェクトのシマーとウェーブは、実際のレイアウトフラグメントに合わせたCAMetalLayerのオーバーレイへ移しました。Aoedeのリーダーをリーダーたらしめるものは、すべて連れてくる必要がありました。行間に余白を確保したふりがなのルビ、隠した既知語、辞書のポップオーバー、本文内検索、そしてあらゆるジェスチャー。</p>
+<p>まだ実験です。全体をLabsのトグルの裏に置いてあるので、同じ本と同じ再生で二つの画面をA/B比較できます。それが唯一の正直な判定方法です。MetalのエフェクトはシミュレータのMetalが限られているため実機未検証で、フレームレートの改善もまだ腰を据えて計測していません。ここでの賭けは、証明済みというより構造的なものです。一つにレイアウトされたテキストオブジェクトのほうが、数千個の個別ビューより長い本を滑らかにスクロールするはず。SwiftUIリーダーを置き換えるのか、それともフォークのまま残すのかを決める前に、それを体で確かめたいのです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">スクロールのための、TextKit 2リーダー</span>
-      </a>
-      <a href="/ja/building/aoede/mark-it-now-make-cards-later/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">いま印をつけて、カードはあとで作る</span>
+        <span class="update-nav-title">学ぶほど、ふりがなが減っていく</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

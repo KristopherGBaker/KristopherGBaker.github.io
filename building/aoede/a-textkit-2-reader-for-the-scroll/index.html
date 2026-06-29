@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Furigana That Steps Back as You Learn</title>
-    <meta name="description" content="Furigana That Steps Back as You Learn">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <meta property="og:title" content="Furigana That Steps Back as You Learn">
-    <meta property="og:description" content="Furigana That Steps Back as You Learn">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/">
+    <title>A TextKit 2 reader, for the scroll</title>
+    <meta name="description" content="A TextKit 2 reader, for the scroll">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <meta property="og:title" content="A TextKit 2 reader, for the scroll">
+    <meta property="og:description" content="A TextKit 2 reader, for the scroll">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/furigana-that-steps-back-as-you-learn/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,23 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.23</span>
-     · <span>1 min read</span>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.06.29</span>
+     · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Furigana That Steps Back as You Learn</h1>
+  <h1 class="h1 post-title update-title">A TextKit 2 reader, for the scroll</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>
-<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p></article>
+    <article class="prose"><p>Aoede's reading surface is built in SwiftUI, where every word is its own small view. That made the signature effects easy to attach in place, but it is the wrong shape for a long chapter. A few thousand words means a few thousand views to lay out, and the follow-scroll has to do an awkward dance: because off-screen positions are not known in a lazy list, the active line is kept centered with a settle pass and a recovery task that re-checks where things landed. It works, but it is the kind of structure that fights you as the book gets longer.</p>
+<p>So in a worktree I rebuilt the reader on TextKit 2, hosting an <code>NSTextLayoutManager</code> in UIKit and AppKit under the same SwiftUI signature. The whole document becomes one attributed string drawn in a single fragment pass, and TextKit resolves off-screen rectangles directly, which deletes the settle-and-recover dance entirely. The reading highlight recolors through TextKit rendering attributes with no re-layout, and the karaoke fill and focus-lens glow redraw only the active word's rectangle off a display link. The two GPU effects, shimmer and wave, moved to a CAMetalLayer overlay aligned to the real layout fragments. Everything that makes the reader Aoede's had to come along: furigana ruby with reserved line headroom, hidden known words, the dictionary popover, find-in-book, and every gesture.</p>
+<p>It is still an experiment. The whole thing sits behind a Labs toggle so I can A/B the two surfaces on the same book and the same playback, which is the only honest way to judge it. The Metal effects are device-unverified because the Simulator's Metal is limited, and I have not yet sat down and measured the frame-rate win rigorously. The bet here is structural rather than proven: a single laid-out text object should scroll a long book more smoothly than a few thousand individual views, and I want to feel that before I decide whether it replaces the SwiftUI reader or stays a fork.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/a-textkit-2-reader-for-the-scroll/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">A TextKit 2 reader, for the scroll</span>
-      </a>
-      <a href="/building/aoede/mark-it-now-make-cards-later/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/aoede/furigana-that-steps-back-as-you-learn/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Mark It Now, Make Cards Later</span>
+        <span class="update-nav-title">Furigana That Steps Back as You Learn</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
