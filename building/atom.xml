@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.1">Inkwell</generator>
-  <updated>2026-06-30T10:00:00Z</updated>
+  <updated>2026-06-30T11:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>KiFinder becomes an app</title>
+    <link href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/</id>
+    <updated>2026-06-30T11:00:00Z</updated>
+    <published>2026-06-30T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>
+<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
+<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p>]]></content>
+  </entry>
   <entry>
     <title>One cell per paragraph</title>
     <link href="https://krisbaker.com/building/aoede/one-cell-per-paragraph/" rel="alternate"/>
@@ -20,6 +30,15 @@
     <content type="html"><![CDATA[<p>Last time I wrote about moving Aoede's reader onto TextKit 2, and the version I described rendered the whole book as one long attributed string. It looked clean and it was fine for a short document, but it did not scale. A long book meant laying the entire thing out before I could show the first page, and on iOS that was slow and heavy enough to feel broken. The structural bet from last time was half right. TextKit was the correct tool, but rendering the book as a single object was the wrong shape.</p>
 <p>What surprised me was how hard it was to get from there to the right shape. When I asked the AI doing the work to fix the scaling, it kept reaching for architectures that did not hold up. It would rebuild the single whole-document attributed string a different way, or quietly pull the old SwiftUI reader components back into the TextKit path, which dragged the per-word-view cost right back in with them. It could execute almost any approach cleanly. It just kept choosing ones that fell over on a real 400-page book. The unlock was an architectural call I had to make and then insist on: stop rendering the book as one thing. Put it in a list, one cell per paragraph, each cell laid out with TextKit. On iOS that is a UICollectionView, on macOS an NSCollectionView with a custom layout for per-paragraph heights. The list only realizes the paragraphs near the screen, so a long book opens as fast as a short one because it never lays out more than a screenful at a time.</p>
 <p>Resume took its own pass to get right. To reopen a book exactly where I left off, down to the current word inside a long paragraph, the list has to know each cell's height before it scrolls there, so I size the items up front instead of letting them self-size lazily as they appear. Image-heavy books needed a little more, since the height of a picture is not known until it loads, so the resume re-asserts its target until the layout settles. The cell-list reader is now the default on both platforms, the whole-document version is gone, and the original SwiftUI reader stays behind a Labs toggle for comparison. Long books finally load fast, including on iPhone and iPad, and they come back to the exact spot I stopped. The lesson I keep relearning is that the model is very good at building an architecture and not always at picking the one that survives contact with a real book. That part still needed me.</p>]]></content>
+  </entry>
+  <entry>
+    <title>A window to review the maybes</title>
+    <link href="https://krisbaker.com/building/kifinder/a-window-to-review-the-maybes/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/a-window-to-review-the-maybes/</id>
+    <updated>2026-06-29T10:00:00Z</updated>
+    <published>2026-06-29T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>The engine learns from my confirms and rejects, but right now I deliver those corrections by typing photo ids into a <code>feedback</code> command. That is fine for me and wrong for the workflow. The whole point of a monthly chore is that it should take a couple of minutes, and a command line is not where you want to be while glancing at thumbnails deciding which blurry kid is yours. So the next piece is a small SwiftUI review window for the Mac, and I started it as a throwaway prototype to feel the shape before committing to it.</p>
+<p>A few things settled quickly once I had it on screen. The manifest the engine already writes decodes cleanly into the UI with no extra format, so the window is just a view onto a scan. A flat keep-or-not split hides the signal, so the grid groups photos into strong, moderate, borderline, and weak, which lets me start where the doubt is and skip the obvious ones. Each card needs exactly three states (pending, decided with an undo, and a greyed no-face), and saving has to be an explicit button rather than firing on every tap, because a fat-fingered reject I can't take back is worse than an extra click. It is still a prototype, not wired to the live engine yet, but it already answered the questions I built it to answer. The plan is to grow it into the actual front door: scan, glance, confirm, done.</p>]]></content>
   </entry>
   <entry>
     <title>Sparra audits its own prompts</title>
@@ -57,6 +76,24 @@
     <published>2026-06-27T09:00:00Z</published>
     <content type="html"><![CDATA[<p>The whole premise is agents that run for hours, and the thing that actually ends a multi-hour run is mundane: you hit a provider's rate or usage window and the loop dies two hours of progress in. Because Sparra keeps all its state on disk, the fix was within reach. I added opt-in auto-restart. When a model hits a limit, the loop either waits the window out or falls back to a configured cross-provider model, then retries the same round from where it stopped, bounded by hard wait and restart caps so it can never spin forever.</p>
 <p>This is the update that made unattended runs feel real rather than aspirational. The same day I also taught the exerciser about macOS apps, driving them through an XCUITest spine instead of the simulator path, so the judge can run a Mac app the way it already runs an iOS one. Resilience and reach are the two things that separate a demo that runs for ten minutes from a harness you can actually walk away from.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Learning from my corrections</title>
+    <link href="https://krisbaker.com/building/kifinder/learning-from-my-corrections/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/learning-from-my-corrections/</id>
+    <updated>2026-06-26T17:00:00Z</updated>
+    <published>2026-06-26T17:00:00Z</published>
+    <content type="html"><![CDATA[<p>A single averaged face works until it doesn't. Kion at one is not Kion turned away under a hat, and a hard shot like that scores low no matter how good the reference photos are. The fix in the second cycle was to let the tool learn from me without ever re-running the model. The trick is that <code>scan</code> now caches each photo's face embedding directly in the manifest. So when I confirm a real match or reject a look-alike, that decision is just an append to the profile, never a recompute.</p>
+<p>The profile grew from one averaged vector into an exemplar bundle: the stable enrolled core, plus confirmed positives and rejected negatives that I add over time. A face now scores as its best match across all of those, so the moment I confirm one hard low-scoring shot, every similar shot in future albums gets lifted with it. Two new commands do the work. <code>feedback</code> folds a manifest's confirms and rejects into the profile, quality-gated so a tiny blurry crop can't poison it and idempotent so I can't double-count. <code>rescore</code> re-buckets an old scan against the improved profile with no image loading and no model calls at all, which makes re-running last month after a few corrections nearly instant. The references I enrolled stay untouched as the trusted core; everything I teach it lives alongside them.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Finding Kion in a crowd</title>
+    <link href="https://krisbaker.com/building/kifinder/finding-kion-in-a-crowd/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/finding-kion-in-a-crowd/</id>
+    <updated>2026-06-26T10:00:00Z</updated>
+    <published>2026-06-26T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>The first cycle was the finder itself, end to end. You run <code>enroll</code> on a few reference photos of one person, which detects the largest face in each and averages their ArcFace embeddings into a profile. Then <code>scan</code> takes an album, a directory, or the preschool's zip files straight as they arrive, finds every face in every photo, and scores it by cosine similarity against the profile. Anything close enough lands in <code>keep</code>, the borderline ones in <code>maybe</code>, and the rest in <code>no</code>. It writes thumbnails and a <code>manifest.json</code> recording what it decided and at what score, so I can see its reasoning instead of trusting a black box.</p>
+<p>The defaults matter more than they look. Set the threshold too high and you miss the candid shot where Kion is half-turned at the edge of the frame; too low and you are back to scrolling through everyone else's kids. So I added <code>calibrate</code>, which walks a small labeled set of yes and no photos and recommends the highest threshold that still catches every real match while keeping the false matches manageable. It prints the number but never applies it on its own, because the call about missing a real photo of my daughter should be mine. HEIC was non-negotiable since that is what the photos arrive as, so that went in too. By the end of the day it could take a month's albums and hand me back a folder that was mostly Kion.</p>]]></content>
   </entry>
   <entry>
     <title>Closing the door on a gamed contract</title>
@@ -156,41 +193,5 @@
     <published>2026-06-15T11:00:00Z</published>
     <content type="html"><![CDATA[<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>
 <p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>]]></content>
-  </entry>
-  <entry>
-    <title>When the Book Has Pictures</title>
-    <link href="https://krisbaker.com/building/aoede/when-the-book-has-pictures/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/when-the-book-has-pictures/</id>
-    <updated>2026-06-14T16:00:00Z</updated>
-    <published>2026-06-14T16:00:00Z</published>
-    <content type="html"><![CDATA[<p>EPUBs are full of pictures: chapter plates, diagrams, the occasional author photo. Until now Aoede threw all of them away at import and gave you the text and nothing else. The reader keeps them now. The importer pulls each image out of the EPUB archive, resolves it against the chapter file it lived in, and anchors it to the spot in the text where it appeared. Those bytes ride along in the same saved payload as the words, so a book you imported before still opens fine; it just will not show images until you re-import it.</p>
-<p>Weaving pictures into a reader that highlights words as they are spoken took some care. The reading surface now runs on a list of blocks, paragraphs and images interleaved, instead of bare paragraphs, so the synchronized highlight and the follow-scroll treat an image as something to pass over rather than a place to land a word. Images decode per platform, and when one cannot be drawn (an SVG on iPhone, say) it falls back to its alt text so the page still reads. The focus reading mode, one sentence at a time, stays text-only on purpose.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Finding Books Without Leaving Aoede</title>
-    <link href="https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/</id>
-    <updated>2026-06-14T10:00:00Z</updated>
-    <published>2026-06-14T10:00:00Z</published>
-    <content type="html"><![CDATA[<p>Until now, getting a book into Aoede meant already having the file: import a txt, EPUB, or PDF you owned, or open one from Finder. Aoede can find books for you now too. A discovery sheet opens from the Library (a footer button on macOS, a toolbar button on iPhone, and from the empty state when your shelf is bare) and browses Project Gutenberg, the public-domain archive, cover-forward. Search by title or author, filter by language, and tap Add on any book to pull it in.</p>
-<p>It talks to Gutendex, a JSON API over the Gutenberg catalog, through plain URLSession and Codable, so there is no HTML scraping and no new dependency. Search is debounced and paginated, and the language filter starts with English and Japanese since those are the two I read. Adding a book downloads the EPUB through the same FileDownloader the rest of the app uses, then hands off to the exact same import path a local file takes. From there it is just another book on the shelf, read aloud the same way.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Rotate to Read</title>
-    <link href="https://krisbaker.com/building/aoede/rotate-to-read/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/rotate-to-read/</id>
-    <updated>2026-06-13T12:00:00Z</updated>
-    <published>2026-06-13T12:00:00Z</published>
-    <content type="html"><![CDATA[<p>Yesterday the focus view (one sentence at a time, words dissolving as you read) was a macOS-only floating window experiment. It's a real reading mode on both platforms now. On the Mac it floats above the book with its own play/pause control and a wider column so the big type breaks at a comfortable line length, and space toggles playback. On iPhone there's no window to manage at all: turn the phone sideways and the page hands off to the same dissolve focus view, full screen with the chrome gone. It scrolls, follows the spoken word, and rotating back to portrait drops you right where you were.</p>
-<p>The point of a focus mode is fewer things to look at, so the fixes were mostly about getting out of the way. The dissolve grains words in faster now, so a sentence is legible before the voice catches up instead of arriving as static. And the focus-lens effect used to bold the current word as the cursor reached it, which nudged the whole line into reflowing; it scales and glows instead, so the text holds still. Small things, but in a mode whose whole job is calm, a line that twitches is the one thing you notice.</p>]]></content>
-  </entry>
-  <entry>
-    <title>&quot;16%&quot; Came Out &quot;Sixteen&quot;</title>
-    <link href="https://krisbaker.com/building/aoede/sixteen-percent/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/sixteen-percent/</id>
-    <updated>2026-06-13T09:00:00Z</updated>
-    <published>2026-06-13T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>
-<p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p>]]></content>
   </entry>
 </feed>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>KiFinder</title>
+    <meta name="description" content="大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/">
+    <meta property="og:title" content="KiFinder">
+    <meta property="og:description" content="大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/ja/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/ja/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/ja/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/ja/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/ja/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/ja/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/ja/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/ja/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/ja/building/feed.json">
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
+      (function(){
+        var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
+        var OUT=true;
+        var DL=true;
+        document.addEventListener("click",function(ev){
+          var a=ev.target.closest&&ev.target.closest("a[href]");
+          if(!a||!window.umami) return;
+          var u; try{u=new URL(a.href)}catch(e){return}
+          var isDownload=a.hasAttribute("download")||EXT.some(function(x){return u.pathname.toLowerCase().endsWith("."+x)});
+          if(DL&&isDownload){umami.track("download",{file:u.pathname.split("/").pop(),url:a.href});return}
+          if(OUT&&u.host!==location.host){umami.track("outbound-link",{url:a.href})}
+        },true);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  window.addEventListener("DOMContentLoaded", function() {
+    var isDark = document.documentElement.classList.contains("dark") ||
+      document.documentElement.getAttribute("data-theme") === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: isDark ? "dark" : "default"
+    });
+    mermaid.run({ querySelector: ".mermaid" }).catch(function() {});
+  });
+</script>
+<script defer src="/assets/js/theme-toggle.js"></script>
+<script defer src="/assets/js/prism.js"></script>
+<script defer src="/assets/js/code-copy.js"></script>
+<script defer src="/assets/js/lightbox.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+<style>
+  .brand-pill-mark.wolt {
+    background: url("/assets/brands/wolt.png") center/contain no-repeat;
+    width: auto;
+    aspect-ratio: 76 / 48;
+    border-radius: 0;
+  }
+  .brand-pill-mark.wolt::before { content: ""; }
+  .brand-pill-mark.smartnews {
+    background: url("/assets/brands/smartnews.png") center/contain no-repeat;
+  }
+  .brand-pill-mark.smartnews::before { content: ""; }
+</style></head>
+  <body class="grain-bg">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header class="top-bar">
+  <div class="container top-bar-row">
+    <a href="/ja/" class="top-brand">
+      <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+      <span class="top-brand-text">
+        <span class="top-brand-name">Kristopher Baker</span>
+        <span class="top-brand-sub">iOSを土台に · プロダクトシステム · AI支援ワークフロー</span>
+      </span>
+    </a>
+    <nav class="top-nav">
+      <div class="top-nav-links" id="primary-nav">
+        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
+      </div>
+      <span class="lang-switch-group"><a href="/building/kifinder/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
+      <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container building-detail page-shell">
+  <a href="/ja/building/" class="case-study-back">← 制作中へ</a>
+
+  <div class="building-detail-head is-active">
+    <span class="status-line"><span class="status-dot"></span>active</span>
+    <span class="building-detail-updated">updated today</span>
+    
+  </div>
+
+  <h1 class="h1 building-detail-title">KiFinder</h1>
+  <p class="body-lg building-detail-blurb">大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/python/" class="tag-chip">Python</a><a href="/ja/building/tags//" class="tag-chip">顔認識</a><a href="/ja/building/tags/insightface/" class="tag-chip">InsightFace</a><a href="/ja/building/tags//" class="tag-chip">ローカルファースト</a><a href="/ja/building/tags//" class="tag-chip">プライバシー</a></div>
+
+  <article class="prose building-detail-prose"><p>毎月、娘の希穏の保育園から写真アルバムが届きます。実際にはzipファイルが何個か届き、それぞれにクラス全員が写った何百枚もの写真が入っていて、そのどこかに希穏の写った十数枚があります。やることはいつも同じ。全部を解凍し、よその子たちが写った何百枚もの写真をスクロールして、自分の子を選び出し、それをPhotosアプリに入れる。ありがたい悩みではありますが、毎月やるとなると面倒な作業です。</p>
+<p>そこでKiFinderを作りました。その選り分けをやってくれる小さなMacアプリです。人物をエンロールするには参照写真を数枚ドロップし、アルバム（フォルダ、ばらの画像、あるいは届いたままの保育園のzipファイル）に向けると、すべての写真を三つの山に仕分けます。確信のある一致、もう一度見ておきたいもの、そして残り。確信のあるものをざっと確認し、迷うものに目を通し、正しいものをkeepして、keepしたものをそのままPhotosに書き出します。集合写真には専用の扱いがあります。クラス写真には十数個の顔が写っているので、検出した顔をすべて表示し、自分が意図する顔をタップします。中身では、InsightFaceのArcFaceモデルによる端末上のエンベディングで、各顔がエンロールした人物にどれだけ近いかをスコア付けし、本物の写真を取りこぼさず、誤検出に埋もれさせないよう、しきい値を自分で調整します。</p>
+<p><img src="/assets/building/kifinder/review-candidates.png" alt="KiFinderのレビュー画面。類似度スコア付きでKeepと印された一致のグリッド、その下の「もう一度見ておきたい」の列、そして集合写真の各顔を選択用に枠で囲んだインスペクタ。" />
+<em>スキャンの見直し。KiFinderは確信のある一致を自動で選び、際どいものは「もう一度見ておきたい」として脇に置き、残りは外します。集合写真では検出した顔をすべて表示するので、正しい顔をタップできます。デモでは娘ではなく自分をエンロールし、ほかの人物は合成顔で代用しています。</em></p>
+<p>端末上で動くことは、あれば嬉しい機能ではなく、まさに核心です。これらのアルバムには、よその家庭の子どもたちが大勢写っています。自分の子を見つけるために、他人の子の写真を何百枚もクラウドサービスにアップロードするのは、まったく逆の取引です。KiFinderは写真をどこにも送りません。モデルはローカルで動き、オリジナルは一切変更されず、端末から出ていくのは、私がkeepに選んだ数枚だけです。</p>
+<p><img src="/assets/building/kifinder/enroll.png" alt="KiFinderの「人物をエンロール」ダイアログ。LOCAL-ONLYバッジ、「このMacから出ることはありません」と書かれたドロップゾーン、参照写真のサムネイルの列。" />
+<em>人物のエンロールは、参照写真を5枚から十数枚ドロップするだけ。顔はMac上で切り出され、外には出ません。それがこのアプリの基本姿勢です。</em></p>
+<p>そして、私の判断から学びます。スキャンのあと、本物の一致をkeepし、似ているだけの顔をスキップすると、その訂正が人物のプロファイルに反映され、翌月のアルバムでより良くランク付けされます。しかも一ピクセルもモデルにかけ直すことなく。keepしたものは、人物と月でまとめたライブラリに集まり、Photosに渡せる状態になります。</p>
+<p><img src="/assets/building/kifinder/library.png" alt="KiFinderのライブラリ画面。一人の人物の保存済み写真を月ごとにまとめて表示。" />
+<em>keepしたもの。人物と月でまとめたライブラリに集まり、Photosに書き出せる状態です。</em></p>
+<p>これ全体を、私の敵対的ビルドハーネスである<a href="/ja/building/sparra/">Sparra</a>を回して作りました。おかげでKiFinderは、その最初の本物のテスト対象の一つになりました。下のアップデートが制作ログです。マッチングエンジン、私の訂正から学ばせた話、そしてその周りで育っていったMacアプリ。</p></article>
+
+  <section class="building-updates">
+    <div class="section-head">
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">4</span></h2>
+    </div>
+    <div class="update-timeline"><a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.30</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">KiFinderがアプリになる</span>
+</a>
+<a href="/ja/building/kifinder/a-window-to-review-the-maybes/" class="update-entry is-wip">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.29</span>
+    <span class="update-entry-status">wip</span>
+  </span>
+  <span class="update-entry-title">maybeを見直すためのウィンドウ</span>
+</a>
+<a href="/ja/building/kifinder/learning-from-my-corrections/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.26</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">私の訂正から学ばせる</span>
+</a>
+<a href="/ja/building/kifinder/finding-kion-in-a-crowd/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.06.26</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">人混みの中から希穏を見つける</span>
+</a>
+</div>
+  </section>
+
+  <div class="case-study-next">
+    <p class="case-study-next-label">次へ</p>
+    <a href="/ja/building/aoede/" class="case-study-next-row">
+      <span class="case-study-next-title">Aoede</span>
+      <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</main>
+
+    <footer class="site-footer no-print">
+  <div class="container site-footer-grid">
+    <div>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
+      <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
+    </div>
+    <div class="site-footer-meta">
+      <p class="site-footer-meta-line">東京</p>
+      <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
+      <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      (function(){
+        try {
+          var configured = "en,ja".split(",");
+          var defaultLang = "en";
+          if (localStorage.getItem("lang")) return;
+          var path = location.pathname;
+          var hasLangPrefix = configured.some(function(l){ return path === "/" + l || path.indexOf("/" + l + "/") === 0; });
+          if (hasLangPrefix) return;
+          var preferred = (navigator.languages || [navigator.language || "en"]).map(function(l){ return l.toLowerCase().split("-")[0]; });
+          for (var i = 0; i < preferred.length; i++) {
+            var match = configured.find(function(c){ return c.toLowerCase().split("-")[0] === preferred[i]; });
+            if (match && match !== defaultLang) {
+              location.replace("/" + match + path);
+              return;
+            }
+            if (match === defaultLang) return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
