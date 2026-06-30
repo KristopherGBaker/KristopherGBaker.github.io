@@ -6,11 +6,21 @@
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.1">Inkwell</generator>
-  <updated>2026-06-29T09:00:00Z</updated>
+  <updated>2026-06-30T10:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>One cell per paragraph</title>
+    <link href="https://krisbaker.com/building/aoede/one-cell-per-paragraph/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/one-cell-per-paragraph/</id>
+    <updated>2026-06-30T10:00:00Z</updated>
+    <published>2026-06-30T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>Last time I wrote about moving Aoede's reader onto TextKit 2, and the version I described rendered the whole book as one long attributed string. It looked clean and it was fine for a short document, but it did not scale. A long book meant laying the entire thing out before I could show the first page, and on iOS that was slow and heavy enough to feel broken. The structural bet from last time was half right. TextKit was the correct tool, but rendering the book as a single object was the wrong shape.</p>
+<p>What surprised me was how hard it was to get from there to the right shape. When I asked the AI doing the work to fix the scaling, it kept reaching for architectures that did not hold up. It would rebuild the single whole-document attributed string a different way, or quietly pull the old SwiftUI reader components back into the TextKit path, which dragged the per-word-view cost right back in with them. It could execute almost any approach cleanly. It just kept choosing ones that fell over on a real 400-page book. The unlock was an architectural call I had to make and then insist on: stop rendering the book as one thing. Put it in a list, one cell per paragraph, each cell laid out with TextKit. On iOS that is a UICollectionView, on macOS an NSCollectionView with a custom layout for per-paragraph heights. The list only realizes the paragraphs near the screen, so a long book opens as fast as a short one because it never lays out more than a screenful at a time.</p>
+<p>Resume took its own pass to get right. To reopen a book exactly where I left off, down to the current word inside a long paragraph, the list has to know each cell's height before it scrolls there, so I size the items up front instead of letting them self-size lazily as they appear. Image-heavy books needed a little more, since the height of a picture is not known until it loads, so the resume re-asserts its target until the layout settles. The cell-list reader is now the default on both platforms, the whole-document version is gone, and the original SwiftUI reader stays behind a Labs toggle for comparison. Long books finally load fast, including on iPhone and iPad, and they come back to the exact spot I stopped. The lesson I keep relearning is that the model is very good at building an architecture and not always at picking the one that survives contact with a real book. That part still needed me.</p>]]></content>
+  </entry>
   <entry>
     <title>Sparra audits its own prompts</title>
     <link href="https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/" rel="alternate"/>
@@ -182,15 +192,5 @@
     <published>2026-06-13T09:00:00Z</published>
     <content type="html"><![CDATA[<p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>
 <p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Shimmer, Wave, or Just a Tint</title>
-    <link href="https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/</id>
-    <updated>2026-06-12T23:55:00Z</updated>
-    <published>2026-06-12T23:55:00Z</published>
-    <content type="html"><![CDATA[<p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>
-<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>
-<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p>]]></content>
   </entry>
 </feed>

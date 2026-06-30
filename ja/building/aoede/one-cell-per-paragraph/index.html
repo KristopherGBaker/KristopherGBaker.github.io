@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>スクロールのための、TextKit 2リーダー</title>
-    <meta name="description" content="スクロールのための、TextKit 2リーダー">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <meta property="og:title" content="スクロールのための、TextKit 2リーダー">
-    <meta property="og:description" content="スクロールのための、TextKit 2リーダー">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <title>段落ごとに1セル</title>
+    <meta name="description" content="段落ごとに1セル">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/one-cell-per-paragraph/">
+    <meta property="og:title" content="段落ごとに1セル">
+    <meta property="og:description" content="段落ごとに1セル">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/one-cell-per-paragraph/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/one-cell-per-paragraph/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/one-cell-per-paragraph/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/one-cell-per-paragraph/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/aoede/a-textkit-2-reader-for-the-scroll/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/one-cell-per-paragraph/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-wip">
-    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.06.29</span>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
      · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">スクロールのための、TextKit 2リーダー</h1>
+  <h1 class="h1 post-title update-title">段落ごとに1セル</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeの読書画面はSwiftUIで作られていて、単語の一つひとつがそれぞれ小さなビューになっています。おかげで看板のエフェクトはその場に貼り付けやすかったのですが、長い章には向かない形です。数千語あれば、レイアウトすべきビューも数千個。フォロースクロールもぎこちない段取りを踏むことになります。遅延リストでは画面外の位置がわからないので、アクティブな行を中央に保つために、settleパスと、着地点を再確認するリカバリーのタスクが要るのです。動きはしますが、本が長くなるほどこちらに抗ってくる構造です。</p>
-<p>そこでワークツリーで、リーダーをTextKit 2の上に作り直しました。<code>NSTextLayoutManager</code>をUIKitとAppKitでホストし、SwiftUI側のインターフェースは同じまま。ドキュメント全体が一つのattributed stringになり、単一のフラグメントパスで描かれます。TextKitは画面外の矩形を直接解決するので、settleとリカバリーの段取りはまるごと消えます。読書ハイライトはTextKitのレンダリング属性で再レイアウトなしに色を変え、カラオケの塗りとフォーカスレンズのグローは、ディスプレイリンクからアクティブな単語の矩形だけを描き直します。GPUエフェクトのシマーとウェーブは、実際のレイアウトフラグメントに合わせたCAMetalLayerのオーバーレイへ移しました。Aoedeのリーダーをリーダーたらしめるものは、すべて連れてくる必要がありました。行間に余白を確保したふりがなのルビ、隠した既知語、辞書のポップオーバー、本文内検索、そしてあらゆるジェスチャー。</p>
-<p>まだ実験です。全体をLabsのトグルの裏に置いてあるので、同じ本と同じ再生で二つの画面をA/B比較できます。それが唯一の正直な判定方法です。MetalのエフェクトはシミュレータのMetalが限られているため実機未検証で、フレームレートの改善もまだ腰を据えて計測していません。ここでの賭けは、証明済みというより構造的なものです。一つにレイアウトされたテキストオブジェクトのほうが、数千個の個別ビューより長い本を滑らかにスクロールするはず。SwiftUIリーダーを置き換えるのか、それともフォークのまま残すのかを決める前に、それを体で確かめたいのです。</p></article>
+    <article class="prose"><p>前回、AoedeのリーダーをTextKit 2へ移した話を書きました。そこで紹介したバージョンは、本まるごとを一本の長いアトリビュート文字列として描画していました。見た目はきれいで、短いドキュメントなら問題なかったのですが、スケールしませんでした。長い本では、最初のページを出す前に全体をレイアウトする必要があり、iOSではそれが遅く、メモリも重く、壊れているように感じるほどでした。前回の構造的な賭けは、半分だけ当たっていました。TextKitは正しい道具でしたが、本を一つのオブジェクトとして描くのは、間違った形だったのです。</p>
+<p>意外だったのは、そこから正しい形にたどり着くのがどれだけ大変だったかです。作業をしているAIにスケールの問題を直すよう頼むと、持ちこたえない設計に何度も手を伸ばすのです。一本の巨大なアトリビュート文字列を別のやり方で作り直したり、古いSwiftUIリーダーのコンポーネントをこっそりTextKitの経路に戻したり。後者は、せっかく逃れようとしていた単語ごとにビューを作るコストを、まるごと引きずり戻してきます。どの方法もきれいに実装はできるのに、本物の400ページの本で倒れるほうを選び続けるのです。突破口は、自分で決めて押し通すしかなかった設計判断でした。本を一つのものとして描くのをやめる。リストに入れて、段落ごとに1セル、各セルをTextKitでレイアウトする。iOSではUICollectionView、macOSでは段落ごとの高さのためにカスタムレイアウトを付けたNSCollectionView。リストは画面付近の段落しか実体化しないので、常に1画面ぶんしかレイアウトしません。だから長い本も、短い本と同じ速さで開きます。</p>
+<p>前回の位置に戻る処理は、それ自体にもう一段の作業が要りました。長い段落の中の今読んでいる単語まで含めて、本を正確に元の場所で開き直すには、リストはそこへスクロールする前に各セルの高さを知っていなければなりません。だから、セルが現れるときに遅延で自分のサイズを決めさせるのではなく、高さを前もって計算します。画像の多い本にはもう少し必要でした。写真の高さは読み込むまでわからないので、復帰処理はレイアウトが安定するまで目標位置を主張し直します。このセルリスト方式のリーダーは、いまや両プラットフォームのデフォルトです。本まるごとを描く方式はなくなり、元のSwiftUIリーダーは比較用にLabsのトグルの裏に残してあります。長い本がようやく速く開くようになりました。iPhoneでもiPadでも。そして、止めたまさにその場所に戻ってきます。何度も学び直しているのは、モデルは設計を作るのはとても上手いけれど、本物の本との接触を生き延びる設計を選ぶのは必ずしも上手くない、ということです。そこはやはり、私の出番でした。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/one-cell-per-paragraph/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">段落ごとに1セル</span>
-      </a>
-      <a href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">学ぶほど、ふりがなが減っていく</span>
+        <span class="update-nav-title">スクロールのための、TextKit 2リーダー</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

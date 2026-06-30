@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>A TextKit 2 reader, for the scroll</title>
-    <meta name="description" content="A TextKit 2 reader, for the scroll">
-    <link rel="canonical" href="https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <meta property="og:title" content="A TextKit 2 reader, for the scroll">
-    <meta property="og:description" content="A TextKit 2 reader, for the scroll">
-    <meta property="og:url" content="https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <title>One cell per paragraph</title>
+    <meta name="description" content="One cell per paragraph">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/one-cell-per-paragraph/">
+    <meta property="og:title" content="One cell per paragraph">
+    <meta property="og:description" content="One cell per paragraph">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/one-cell-per-paragraph/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/">
-    <link rel="alternate" hreflang="x-default" href="/building/aoede/a-textkit-2-reader-for-the-scroll/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/one-cell-per-paragraph/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/one-cell-per-paragraph/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/one-cell-per-paragraph/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/one-cell-per-paragraph/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/aoede/" class="post-back">← Aoede</a>
-  <p class="post-meta update-meta is-wip">
-    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.06.29</span>
-     · <span>2 min read</span>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
+     · <span>3 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">A TextKit 2 reader, for the scroll</h1>
+  <h1 class="h1 post-title update-title">One cell per paragraph</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoede's reading surface is built in SwiftUI, where every word is its own small view. That made the signature effects easy to attach in place, but it is the wrong shape for a long chapter. A few thousand words means a few thousand views to lay out, and the follow-scroll has to do an awkward dance: because off-screen positions are not known in a lazy list, the active line is kept centered with a settle pass and a recovery task that re-checks where things landed. It works, but it is the kind of structure that fights you as the book gets longer.</p>
-<p>So in a worktree I rebuilt the reader on TextKit 2, hosting an <code>NSTextLayoutManager</code> in UIKit and AppKit under the same SwiftUI signature. The whole document becomes one attributed string drawn in a single fragment pass, and TextKit resolves off-screen rectangles directly, which deletes the settle-and-recover dance entirely. The reading highlight recolors through TextKit rendering attributes with no re-layout, and the karaoke fill and focus-lens glow redraw only the active word's rectangle off a display link. The two GPU effects, shimmer and wave, moved to a CAMetalLayer overlay aligned to the real layout fragments. Everything that makes the reader Aoede's had to come along: furigana ruby with reserved line headroom, hidden known words, the dictionary popover, find-in-book, and every gesture.</p>
-<p>It is still an experiment. The whole thing sits behind a Labs toggle so I can A/B the two surfaces on the same book and the same playback, which is the only honest way to judge it. The Metal effects are device-unverified because the Simulator's Metal is limited, and I have not yet sat down and measured the frame-rate win rigorously. The bet here is structural rather than proven: a single laid-out text object should scroll a long book more smoothly than a few thousand individual views, and I want to feel that before I decide whether it replaces the SwiftUI reader or stays a fork.</p></article>
+    <article class="prose"><p>Last time I wrote about moving Aoede's reader onto TextKit 2, and the version I described rendered the whole book as one long attributed string. It looked clean and it was fine for a short document, but it did not scale. A long book meant laying the entire thing out before I could show the first page, and on iOS that was slow and heavy enough to feel broken. The structural bet from last time was half right. TextKit was the correct tool, but rendering the book as a single object was the wrong shape.</p>
+<p>What surprised me was how hard it was to get from there to the right shape. When I asked the AI doing the work to fix the scaling, it kept reaching for architectures that did not hold up. It would rebuild the single whole-document attributed string a different way, or quietly pull the old SwiftUI reader components back into the TextKit path, which dragged the per-word-view cost right back in with them. It could execute almost any approach cleanly. It just kept choosing ones that fell over on a real 400-page book. The unlock was an architectural call I had to make and then insist on: stop rendering the book as one thing. Put it in a list, one cell per paragraph, each cell laid out with TextKit. On iOS that is a UICollectionView, on macOS an NSCollectionView with a custom layout for per-paragraph heights. The list only realizes the paragraphs near the screen, so a long book opens as fast as a short one because it never lays out more than a screenful at a time.</p>
+<p>Resume took its own pass to get right. To reopen a book exactly where I left off, down to the current word inside a long paragraph, the list has to know each cell's height before it scrolls there, so I size the items up front instead of letting them self-size lazily as they appear. Image-heavy books needed a little more, since the height of a picture is not known until it loads, so the resume re-asserts its target until the layout settles. The cell-list reader is now the default on both platforms, the whole-document version is gone, and the original SwiftUI reader stays behind a Labs toggle for comparison. Long books finally load fast, including on iPhone and iPad, and they come back to the exact spot I stopped. The lesson I keep relearning is that the model is very good at building an architecture and not always at picking the one that survives contact with a real book. That part still needed me.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/one-cell-per-paragraph/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">One cell per paragraph</span>
-      </a>
-      <a href="/building/aoede/furigana-that-steps-back-as-you-learn/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/aoede/a-textkit-2-reader-for-the-scroll/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Furigana That Steps Back as You Learn</span>
+        <span class="update-nav-title">A TextKit 2 reader, for the scroll</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
