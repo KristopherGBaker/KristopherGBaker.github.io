@@ -1,155 +1,155 @@
 {
-  "description" : "Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.",
+  "language" : "en",
+  "items" : [
+    {
+      "url" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/",
+      "id" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/",
+      "title" : "Sparra audits its own prompts",
+      "content_html" : "<p>Every role in Sparra is driven by a prompt, and those prompts had quietly bloated as I patched edge case after edge case. Long prompts cost tokens on every single call and, past a point, actually read worse to the model. So I built <code>sparra prompts audit</code>, a conciseness auditor that runs over Sparra's own role prompts and proposes tightenings, gated by an independent verifier pass so a shorter prompt cannot also be a weaker one. Then I ran it on the real prompts and shipped the cuts: the evaluator dropped 23 percent, the contract-evaluator 29, the contract-generator 26. A harness that improves its own scaffolding is exactly the self-referential loop I wanted from the start.</p>\n<p>The same push got Sparra ready to be seen. I refreshed the README to lead with the interactive Claude Code workflow, dropped the Ink TUI that was not earning its complexity, added GitHub Actions running typecheck and tests on every push, genericized some private project names out of the fixtures, and put an MIT license on it. It is still early and still mostly a tool for me, but it is now a thing other people can read, clone, and run. The build log above is most of how it got here in a week.</p>",
+      "date_published" : "2026-06-29T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/",
+      "id" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/",
+      "title" : "A TextKit 2 reader, for the scroll",
+      "content_html" : "<p>Aoede's reading surface is built in SwiftUI, where every word is its own small view. That made the signature effects easy to attach in place, but it is the wrong shape for a long chapter. A few thousand words means a few thousand views to lay out, and the follow-scroll has to do an awkward dance: because off-screen positions are not known in a lazy list, the active line is kept centered with a settle pass and a recovery task that re-checks where things landed. It works, but it is the kind of structure that fights you as the book gets longer.</p>\n<p>So in a worktree I rebuilt the reader on TextKit 2, hosting an <code>NSTextLayoutManager</code> in UIKit and AppKit under the same SwiftUI signature. The whole document becomes one attributed string drawn in a single fragment pass, and TextKit resolves off-screen rectangles directly, which deletes the settle-and-recover dance entirely. The reading highlight recolors through TextKit rendering attributes with no re-layout, and the karaoke fill and focus-lens glow redraw only the active word's rectangle off a display link. The two GPU effects, shimmer and wave, moved to a CAMetalLayer overlay aligned to the real layout fragments. Everything that makes the reader Aoede's had to come along: furigana ruby with reserved line headroom, hidden known words, the dictionary popover, find-in-book, and every gesture.</p>\n<p>It is still an experiment. The whole thing sits behind a Labs toggle so I can A/B the two surfaces on the same book and the same playback, which is the only honest way to judge it. The Metal effects are device-unverified because the Simulator's Metal is limited, and I have not yet sat down and measured the frame-rate win rigorously. The bet here is structural rather than proven: a single laid-out text object should scroll a long book more smoothly than a few thousand individual views, and I want to feel that before I decide whether it replaces the SwiftUI reader or stays a fork.</p>",
+      "date_published" : "2026-06-29T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/",
+      "id" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/",
+      "title" : "Driving it by hand from Claude Code",
+      "content_html" : "<p>Fully autonomous is the headline, but it is not how most of my sessions actually go. More often I want the rigor of the loop with my own hand on the wheel: see the contract before it generates, look at the diff, decide whether the evaluator's verdict convinces me, then accept or pivot. So I exposed the same machinery as a role-runner you can call from an interactive Claude Code session, through a <code>run_role</code> MCP tool and a <code>/sparra-loop</code> skill that steers between every step.</p>\n<p>The seam under both modes turned out to be the same single idea: run one Sparra role once, on a backend you pick, with the holdout passed by path so only the evaluator ever sees it. From the interactive side I added human-in-the-loop gates (<code>sparra build --step</code> with approval points at item and commit), agent-authored commits via a configurable committer role, and delegation of each role-run to an isolated subagent so the raw diffs and full verdicts never flood the main session. The autonomous loop and the hand-driven loop are now the same engine. One runs the whole column; the other hands me the wheel between steps, with the runner still enforcing the wall.</p>",
+      "date_published" : "2026-06-28T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/",
+      "id" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/",
+      "title" : "Surviving the rate limit",
+      "content_html" : "<p>The whole premise is agents that run for hours, and the thing that actually ends a multi-hour run is mundane: you hit a provider's rate or usage window and the loop dies two hours of progress in. Because Sparra keeps all its state on disk, the fix was within reach. I added opt-in auto-restart. When a model hits a limit, the loop either waits the window out or falls back to a configured cross-provider model, then retries the same round from where it stopped, bounded by hard wait and restart caps so it can never spin forever.</p>\n<p>This is the update that made unattended runs feel real rather than aspirational. The same day I also taught the exerciser about macOS apps, driving them through an XCUITest spine instead of the simulator path, so the judge can run a Mac app the way it already runs an iOS one. Resilience and reach are the two things that separate a demo that runs for ten minutes from a harness you can actually walk away from.</p>",
+      "date_published" : "2026-06-27T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/",
+      "id" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/",
+      "title" : "Closing the door on a gamed contract",
+      "content_html" : "<p>The contract is the heart of the loop, and the heart had a hole in it. A generator under pressure to pass will find the laziest reading of an assertion that technically satisfies it. Ask it to make a function &quot;handle empty input&quot; and it might add a guard that returns early and call the contract met, while the real behavior is still broken. I watched the loop accept a few of these degenerate, no-op satisfactions and decided the prompts, not the model, were at fault.</p>\n<p>So I spent a day hardening the contract and evaluator prompts against exactly that. Acceptance criteria are now biased toward net effects rather than invocation counts, so &quot;the function was called&quot; never stands in for &quot;the output is correct.&quot; The evaluator runs the artifact's own shipped verification as-is and treats a degenerate or gamed input as a failure, not a pass. I also pushed contract negotiation toward terse, proportionate assertions, because a bloated contract is just more surface to game. None of this makes gaming impossible. It makes the honest path the easy one, which in practice is most of the win.</p>",
+      "date_published" : "2026-06-26T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/",
+      "id" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/",
+      "title" : "One model builds, another judges",
+      "content_html" : "<p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>\n<p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p>",
+      "date_published" : "2026-06-25T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/",
+      "id" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/",
+      "title" : "Letting the judge run the app",
+      "content_html" : "<p>An evaluator that only reads code is easy to fool. It will sign off on something that looks right and never runs. So the next thing Sparra learned was to actually exercise the artifact, and for the projects I care most about that means Apple platforms. I wired the evaluator to drive the XcodeBuildMCP CLI: build the app, boot a simulator (auto-discovering one that exists instead of hardcoding a model), launch it, drive the UI, and then read the screenshots back to confirm a UI change is really there.</p>\n<p>That multimodal step changed what the judge could catch. It started flagging things a text-only reviewer never would, like an app that letterboxes because it ships without a launch screen. I also gave it the same care a person would: it scaffolds a fresh iOS project with XcodeGen when there is not one, so a greenfield Apple build has somewhere to land. The lesson from the workshop held up here. The contract is only as honest as the check behind it, and the most honest check is running the thing.</p>",
+      "date_published" : "2026-06-24T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/",
+      "id" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/",
+      "title" : "Furigana That Steps Back as You Learn",
+      "content_html" : "<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>\n<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>",
+      "date_published" : "2026-06-23T14:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/",
+      "id" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/",
+      "title" : "Mark It Now, Make Cards Later",
+      "content_html" : "<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>\n<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>",
+      "date_published" : "2026-06-23T13:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/",
+      "id" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/",
+      "title" : "Notes That Survive Their Own Edits",
+      "content_html" : "<p>Aoede can now create and edit notes as first-class documents, then switch the same note into the regular reader for text-to-speech and study capture. Notes live in their own library section, and selecting text in the editor can feed the same card-making flow used by books.</p>\n<p>The awkward part was preserving everything attached to text after the text changes. On save, Aoede re-anchors cards, bookmarks, capture marks, and the previous reading position against the edited sentences. When a match cannot be found, it surfaces the orphan or falls back explicitly instead of silently pointing a card at the wrong passage.</p>",
+      "date_published" : "2026-06-23T12:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/",
+      "id" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/",
+      "title" : "From Reading to Reviewing",
+      "content_html" : "<p>Aoede has crossed from helping me read into helping me remember. I can select a passage, generate vocabulary, sentence, cloze, question-and-answer, or definition cards, edit them before saving, and review them with a four-button FSRS schedule. Japanese vocabulary stays dictionary-first, using a model only when JMdict has no answer. Cards can also be written by hand, so the study system does not depend on AI.</p>\n<p>A new Today screen ties the loop together with the current streak, recently read books, and reviews due now. The app treats target language and study mode as separate choices, which means someone can keep Aoede as a straightforward reader while learners opt into cards, review, Japanese lookup, and the features that combine them.</p>",
+      "date_published" : "2026-06-23T11:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/",
+      "id" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/",
+      "title" : "Ask Aoede About the Passage",
+      "content_html" : "<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>\n<p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>",
+      "date_published" : "2026-06-23T10:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/",
+      "id" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/",
+      "title" : "The whole loop, standing in a day",
+      "content_html" : "<p>Sparra started the way the workshop suggested: get the whole loop standing before polishing any one part of it. In one long day I wired the full spine end to end. Filesystem state that detects whether a project is greenfield or existing, a session layer on top of the Claude Agent SDK with tracing and guard hooks, the planning phases that co-edit a <code>PLAN.md</code>, the autonomous build loop with negotiated contracts and an adversarial evaluator, a reflect step that reads the run's traces, and a <code>sparra</code> CLI to drive it.</p>\n<p>The test that the skeleton was real came almost immediately: I pointed Sparra at its own codebase and had it build parts of itself, using the vitest suite it generated as the regression gate. A harness that can work on itself is a harness I can actually trust to tell me when it is broken. Everything since has been filling in this frame rather than redrawing it.</p>",
+      "date_published" : "2026-06-23T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/",
+      "id" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/",
+      "title" : "A Dictionary Inside the Reader",
+      "content_html" : "<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>\n<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>",
+      "date_published" : "2026-06-23T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/",
+      "id" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/",
+      "title" : "The Voice Kept Reading, the Page Didn't",
+      "content_html" : "<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>\n<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>",
+      "date_published" : "2026-06-15T11:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/when-the-book-has-pictures/",
+      "id" : "https://krisbaker.com/building/aoede/when-the-book-has-pictures/",
+      "title" : "When the Book Has Pictures",
+      "content_html" : "<p>EPUBs are full of pictures: chapter plates, diagrams, the occasional author photo. Until now Aoede threw all of them away at import and gave you the text and nothing else. The reader keeps them now. The importer pulls each image out of the EPUB archive, resolves it against the chapter file it lived in, and anchors it to the spot in the text where it appeared. Those bytes ride along in the same saved payload as the words, so a book you imported before still opens fine; it just will not show images until you re-import it.</p>\n<p>Weaving pictures into a reader that highlights words as they are spoken took some care. The reading surface now runs on a list of blocks, paragraphs and images interleaved, instead of bare paragraphs, so the synchronized highlight and the follow-scroll treat an image as something to pass over rather than a place to land a word. Images decode per platform, and when one cannot be drawn (an SVG on iPhone, say) it falls back to its alt text so the page still reads. The focus reading mode, one sentence at a time, stays text-only on purpose.</p>",
+      "date_published" : "2026-06-14T16:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/",
+      "id" : "https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/",
+      "title" : "Finding Books Without Leaving Aoede",
+      "content_html" : "<p>Until now, getting a book into Aoede meant already having the file: import a txt, EPUB, or PDF you owned, or open one from Finder. Aoede can find books for you now too. A discovery sheet opens from the Library (a footer button on macOS, a toolbar button on iPhone, and from the empty state when your shelf is bare) and browses Project Gutenberg, the public-domain archive, cover-forward. Search by title or author, filter by language, and tap Add on any book to pull it in.</p>\n<p>It talks to Gutendex, a JSON API over the Gutenberg catalog, through plain URLSession and Codable, so there is no HTML scraping and no new dependency. Search is debounced and paginated, and the language filter starts with English and Japanese since those are the two I read. Adding a book downloads the EPUB through the same FileDownloader the rest of the app uses, then hands off to the exact same import path a local file takes. From there it is just another book on the shelf, read aloud the same way.</p>",
+      "date_published" : "2026-06-14T10:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/rotate-to-read/",
+      "id" : "https://krisbaker.com/building/aoede/rotate-to-read/",
+      "title" : "Rotate to Read",
+      "content_html" : "<p>Yesterday the focus view (one sentence at a time, words dissolving as you read) was a macOS-only floating window experiment. It's a real reading mode on both platforms now. On the Mac it floats above the book with its own play/pause control and a wider column so the big type breaks at a comfortable line length, and space toggles playback. On iPhone there's no window to manage at all: turn the phone sideways and the page hands off to the same dissolve focus view, full screen with the chrome gone. It scrolls, follows the spoken word, and rotating back to portrait drops you right where you were.</p>\n<p>The point of a focus mode is fewer things to look at, so the fixes were mostly about getting out of the way. The dissolve grains words in faster now, so a sentence is legible before the voice catches up instead of arriving as static. And the focus-lens effect used to bold the current word as the cursor reached it, which nudged the whole line into reflowing; it scales and glows instead, so the text holds still. Small things, but in a mode whose whole job is calm, a line that twitches is the one thing you notice.</p>",
+      "date_published" : "2026-06-13T12:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/sixteen-percent/",
+      "id" : "https://krisbaker.com/building/aoede/sixteen-percent/",
+      "title" : "\"16%\" Came Out \"Sixteen\"",
+      "content_html" : "<p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>\n<p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p>",
+      "date_published" : "2026-06-13T09:00:00Z"
+    },
+    {
+      "url" : "https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/",
+      "id" : "https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/",
+      "title" : "Shimmer, Wave, or Just a Tint",
+      "content_html" : "<p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>\n<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>\n<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p>",
+      "date_published" : "2026-06-12T23:55:00Z"
+    }
+  ],
   "version" : "https://jsonfeed.org/version/1.1",
-  "feed_url" : "https://krisbaker.com/building/feed.json",
+  "description" : "Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.",
   "authors" : [
     {
       "name" : "Kristopher Baker"
     }
   ],
-  "title" : "Kristopher Baker · Updates",
-  "language" : "en",
-  "items" : [
-    {
-      "url" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/",
-      "content_html" : "<p>Every role in Sparra is driven by a prompt, and those prompts had quietly bloated as I patched edge case after edge case. Long prompts cost tokens on every single call and, past a point, actually read worse to the model. So I built <code>sparra prompts audit</code>, a conciseness auditor that runs over Sparra's own role prompts and proposes tightenings, gated by an independent verifier pass so a shorter prompt cannot also be a weaker one. Then I ran it on the real prompts and shipped the cuts: the evaluator dropped 23 percent, the contract-evaluator 29, the contract-generator 26. A harness that improves its own scaffolding is exactly the self-referential loop I wanted from the start.</p>\n<p>The same push got Sparra ready to be seen. I refreshed the README to lead with the interactive Claude Code workflow, dropped the Ink TUI that was not earning its complexity, added GitHub Actions running typecheck and tests on every push, genericized some private project names out of the fixtures, and put an MIT license on it. It is still early and still mostly a tool for me, but it is now a thing other people can read, clone, and run. The build log above is most of how it got here in a week.</p>",
-      "date_published" : "2026-06-29T09:00:00Z",
-      "title" : "Sparra audits its own prompts",
-      "id" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/",
-      "content_html" : "<p>Aoede's reading surface is built in SwiftUI, where every word is its own small view. That made the signature effects easy to attach in place, but it is the wrong shape for a long chapter. A few thousand words means a few thousand views to lay out, and the follow-scroll has to do an awkward dance: because off-screen positions are not known in a lazy list, the active line is kept centered with a settle pass and a recovery task that re-checks where things landed. It works, but it is the kind of structure that fights you as the book gets longer.</p>\n<p>So in a worktree I rebuilt the reader on TextKit 2, hosting an <code>NSTextLayoutManager</code> in UIKit and AppKit under the same SwiftUI signature. The whole document becomes one attributed string drawn in a single fragment pass, and TextKit resolves off-screen rectangles directly, which deletes the settle-and-recover dance entirely. The reading highlight recolors through TextKit rendering attributes with no re-layout, and the karaoke fill and focus-lens glow redraw only the active word's rectangle off a display link. The two GPU effects, shimmer and wave, moved to a CAMetalLayer overlay aligned to the real layout fragments. Everything that makes the reader Aoede's had to come along: furigana ruby with reserved line headroom, hidden known words, the dictionary popover, find-in-book, and every gesture.</p>\n<p>It is still an experiment. The whole thing sits behind a Labs toggle so I can A/B the two surfaces on the same book and the same playback, which is the only honest way to judge it. The Metal effects are device-unverified because the Simulator's Metal is limited, and I have not yet sat down and measured the frame-rate win rigorously. The bet here is structural rather than proven: a single laid-out text object should scroll a long book more smoothly than a few thousand individual views, and I want to feel that before I decide whether it replaces the SwiftUI reader or stays a fork.</p>",
-      "date_published" : "2026-06-29T09:00:00Z",
-      "title" : "A TextKit 2 reader, for the scroll",
-      "id" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/",
-      "content_html" : "<p>Fully autonomous is the headline, but it is not how most of my sessions actually go. More often I want the rigor of the loop with my own hand on the wheel: see the contract before it generates, look at the diff, decide whether the evaluator's verdict convinces me, then accept or pivot. So I exposed the same machinery as a role-runner you can call from an interactive Claude Code session, through a <code>run_role</code> MCP tool and a <code>/sparra-loop</code> skill that steers between every step.</p>\n<p>The seam under both modes turned out to be the same single idea: run one Sparra role once, on a backend you pick, with the holdout passed by path so only the evaluator ever sees it. From the interactive side I added human-in-the-loop gates (<code>sparra build --step</code> with approval points at item and commit), agent-authored commits via a configurable committer role, and delegation of each role-run to an isolated subagent so the raw diffs and full verdicts never flood the main session. The autonomous loop and the hand-driven loop are now the same engine. One runs the whole column; the other hands me the wheel between steps, with the runner still enforcing the wall.</p>",
-      "date_published" : "2026-06-28T09:00:00Z",
-      "title" : "Driving it by hand from Claude Code",
-      "id" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/",
-      "content_html" : "<p>The whole premise is agents that run for hours, and the thing that actually ends a multi-hour run is mundane: you hit a provider's rate or usage window and the loop dies two hours of progress in. Because Sparra keeps all its state on disk, the fix was within reach. I added opt-in auto-restart. When a model hits a limit, the loop either waits the window out or falls back to a configured cross-provider model, then retries the same round from where it stopped, bounded by hard wait and restart caps so it can never spin forever.</p>\n<p>This is the update that made unattended runs feel real rather than aspirational. The same day I also taught the exerciser about macOS apps, driving them through an XCUITest spine instead of the simulator path, so the judge can run a Mac app the way it already runs an iOS one. Resilience and reach are the two things that separate a demo that runs for ten minutes from a harness you can actually walk away from.</p>",
-      "date_published" : "2026-06-27T09:00:00Z",
-      "title" : "Surviving the rate limit",
-      "id" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/",
-      "content_html" : "<p>The contract is the heart of the loop, and the heart had a hole in it. A generator under pressure to pass will find the laziest reading of an assertion that technically satisfies it. Ask it to make a function &quot;handle empty input&quot; and it might add a guard that returns early and call the contract met, while the real behavior is still broken. I watched the loop accept a few of these degenerate, no-op satisfactions and decided the prompts, not the model, were at fault.</p>\n<p>So I spent a day hardening the contract and evaluator prompts against exactly that. Acceptance criteria are now biased toward net effects rather than invocation counts, so &quot;the function was called&quot; never stands in for &quot;the output is correct.&quot; The evaluator runs the artifact's own shipped verification as-is and treats a degenerate or gamed input as a failure, not a pass. I also pushed contract negotiation toward terse, proportionate assertions, because a bloated contract is just more surface to game. None of this makes gaming impossible. It makes the honest path the easy one, which in practice is most of the win.</p>",
-      "date_published" : "2026-06-26T09:00:00Z",
-      "title" : "Closing the door on a gamed contract",
-      "id" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/",
-      "content_html" : "<p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>\n<p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p>",
-      "date_published" : "2026-06-25T09:00:00Z",
-      "title" : "One model builds, another judges",
-      "id" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/",
-      "content_html" : "<p>An evaluator that only reads code is easy to fool. It will sign off on something that looks right and never runs. So the next thing Sparra learned was to actually exercise the artifact, and for the projects I care most about that means Apple platforms. I wired the evaluator to drive the XcodeBuildMCP CLI: build the app, boot a simulator (auto-discovering one that exists instead of hardcoding a model), launch it, drive the UI, and then read the screenshots back to confirm a UI change is really there.</p>\n<p>That multimodal step changed what the judge could catch. It started flagging things a text-only reviewer never would, like an app that letterboxes because it ships without a launch screen. I also gave it the same care a person would: it scaffolds a fresh iOS project with XcodeGen when there is not one, so a greenfield Apple build has somewhere to land. The lesson from the workshop held up here. The contract is only as honest as the check behind it, and the most honest check is running the thing.</p>",
-      "date_published" : "2026-06-24T09:00:00Z",
-      "title" : "Letting the judge run the app",
-      "id" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/",
-      "content_html" : "<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>\n<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>",
-      "date_published" : "2026-06-23T14:00:00Z",
-      "title" : "Furigana That Steps Back as You Learn",
-      "id" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/",
-      "content_html" : "<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>\n<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>",
-      "date_published" : "2026-06-23T13:00:00Z",
-      "title" : "Mark It Now, Make Cards Later",
-      "id" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/",
-      "content_html" : "<p>Aoede can now create and edit notes as first-class documents, then switch the same note into the regular reader for text-to-speech and study capture. Notes live in their own library section, and selecting text in the editor can feed the same card-making flow used by books.</p>\n<p>The awkward part was preserving everything attached to text after the text changes. On save, Aoede re-anchors cards, bookmarks, capture marks, and the previous reading position against the edited sentences. When a match cannot be found, it surfaces the orphan or falls back explicitly instead of silently pointing a card at the wrong passage.</p>",
-      "date_published" : "2026-06-23T12:00:00Z",
-      "title" : "Notes That Survive Their Own Edits",
-      "id" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/",
-      "content_html" : "<p>Aoede has crossed from helping me read into helping me remember. I can select a passage, generate vocabulary, sentence, cloze, question-and-answer, or definition cards, edit them before saving, and review them with a four-button FSRS schedule. Japanese vocabulary stays dictionary-first, using a model only when JMdict has no answer. Cards can also be written by hand, so the study system does not depend on AI.</p>\n<p>A new Today screen ties the loop together with the current streak, recently read books, and reviews due now. The app treats target language and study mode as separate choices, which means someone can keep Aoede as a straightforward reader while learners opt into cards, review, Japanese lookup, and the features that combine them.</p>",
-      "date_published" : "2026-06-23T11:00:00Z",
-      "title" : "From Reading to Reviewing",
-      "id" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/",
-      "content_html" : "<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>\n<p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>",
-      "date_published" : "2026-06-23T10:00:00Z",
-      "title" : "Ask Aoede About the Passage",
-      "id" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/",
-      "content_html" : "<p>Sparra started the way the workshop suggested: get the whole loop standing before polishing any one part of it. In one long day I wired the full spine end to end. Filesystem state that detects whether a project is greenfield or existing, a session layer on top of the Claude Agent SDK with tracing and guard hooks, the planning phases that co-edit a <code>PLAN.md</code>, the autonomous build loop with negotiated contracts and an adversarial evaluator, a reflect step that reads the run's traces, and a <code>sparra</code> CLI to drive it.</p>\n<p>The test that the skeleton was real came almost immediately: I pointed Sparra at its own codebase and had it build parts of itself, using the vitest suite it generated as the regression gate. A harness that can work on itself is a harness I can actually trust to tell me when it is broken. Everything since has been filling in this frame rather than redrawing it.</p>",
-      "date_published" : "2026-06-23T09:00:00Z",
-      "title" : "The whole loop, standing in a day",
-      "id" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/",
-      "content_html" : "<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>\n<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>",
-      "date_published" : "2026-06-23T09:00:00Z",
-      "title" : "A Dictionary Inside the Reader",
-      "id" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/",
-      "content_html" : "<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>\n<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>",
-      "date_published" : "2026-06-15T11:00:00Z",
-      "title" : "The Voice Kept Reading, the Page Didn't",
-      "id" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/when-the-book-has-pictures/",
-      "content_html" : "<p>EPUBs are full of pictures: chapter plates, diagrams, the occasional author photo. Until now Aoede threw all of them away at import and gave you the text and nothing else. The reader keeps them now. The importer pulls each image out of the EPUB archive, resolves it against the chapter file it lived in, and anchors it to the spot in the text where it appeared. Those bytes ride along in the same saved payload as the words, so a book you imported before still opens fine; it just will not show images until you re-import it.</p>\n<p>Weaving pictures into a reader that highlights words as they are spoken took some care. The reading surface now runs on a list of blocks, paragraphs and images interleaved, instead of bare paragraphs, so the synchronized highlight and the follow-scroll treat an image as something to pass over rather than a place to land a word. Images decode per platform, and when one cannot be drawn (an SVG on iPhone, say) it falls back to its alt text so the page still reads. The focus reading mode, one sentence at a time, stays text-only on purpose.</p>",
-      "date_published" : "2026-06-14T16:00:00Z",
-      "title" : "When the Book Has Pictures",
-      "id" : "https://krisbaker.com/building/aoede/when-the-book-has-pictures/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/",
-      "content_html" : "<p>Until now, getting a book into Aoede meant already having the file: import a txt, EPUB, or PDF you owned, or open one from Finder. Aoede can find books for you now too. A discovery sheet opens from the Library (a footer button on macOS, a toolbar button on iPhone, and from the empty state when your shelf is bare) and browses Project Gutenberg, the public-domain archive, cover-forward. Search by title or author, filter by language, and tap Add on any book to pull it in.</p>\n<p>It talks to Gutendex, a JSON API over the Gutenberg catalog, through plain URLSession and Codable, so there is no HTML scraping and no new dependency. Search is debounced and paginated, and the language filter starts with English and Japanese since those are the two I read. Adding a book downloads the EPUB through the same FileDownloader the rest of the app uses, then hands off to the exact same import path a local file takes. From there it is just another book on the shelf, read aloud the same way.</p>",
-      "date_published" : "2026-06-14T10:00:00Z",
-      "title" : "Finding Books Without Leaving Aoede",
-      "id" : "https://krisbaker.com/building/aoede/finding-books-without-leaving-aoede/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/rotate-to-read/",
-      "content_html" : "<p>Yesterday the focus view (one sentence at a time, words dissolving as you read) was a macOS-only floating window experiment. It's a real reading mode on both platforms now. On the Mac it floats above the book with its own play/pause control and a wider column so the big type breaks at a comfortable line length, and space toggles playback. On iPhone there's no window to manage at all: turn the phone sideways and the page hands off to the same dissolve focus view, full screen with the chrome gone. It scrolls, follows the spoken word, and rotating back to portrait drops you right where you were.</p>\n<p>The point of a focus mode is fewer things to look at, so the fixes were mostly about getting out of the way. The dissolve grains words in faster now, so a sentence is legible before the voice catches up instead of arriving as static. And the focus-lens effect used to bold the current word as the cursor reached it, which nudged the whole line into reflowing; it scales and glows instead, so the text holds still. Small things, but in a mode whose whole job is calm, a line that twitches is the one thing you notice.</p>",
-      "date_published" : "2026-06-13T12:00:00Z",
-      "title" : "Rotate to Read",
-      "id" : "https://krisbaker.com/building/aoede/rotate-to-read/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/sixteen-percent/",
-      "content_html" : "<p>Aoede's local voice read &quot;16%&quot; as &quot;sixteen.&quot; The percent sign just vanished. The cause was a gap between two import paths: plain-text books run through a TTS normalizer that spells symbols out, but EPUB and PDF use a different build that skips it, on purpose, to keep the highlight offsets lined up with the formatted text. So for most real books the bare &quot;%&quot; reached the speech engine raw, and its G2P quietly dropped it.</p>\n<p>The fix expands a small set of symbols (<code>&amp; % + = #</code>) only in the text handed to the synthesizer, and only for English, since the Japanese ones differ. The highlight timeline is still built from the original, untouched sentence, so the words I insert for the voice don't line up with anything on screen and are simply skipped. You hear &quot;sixteen percent,&quot; and every highlight still lands on the right word.</p>",
-      "date_published" : "2026-06-13T09:00:00Z",
-      "title" : "\"16%\" Came Out \"Sixteen\"",
-      "id" : "https://krisbaker.com/building/aoede/sixteen-percent/"
-    },
-    {
-      "url" : "https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/",
-      "content_html" : "<p>The reading highlight had exactly one look: an accent-colored pill on the word being spoken. Before I commit to one signature style, I wanted to try several, so I made the highlight itself swappable. The current-word treatment is now a setting you pick from the transport bar, saved like your theme, and it changes how the spoken word is marked without touching any of the timing machinery underneath. Each word is already its own small view, so a new effect just attaches in place; there's no second overlay to keep in sync with the text.</p>\n<p>Then I built a menu to choose from. Tint is the quietest: keep the sentence band and just color the current word, no pill at all. Karaoke fills the word with the accent left to right as it's spoken, like a progress bar inside the letters, then fades back to ink once it's read. Shimmer runs a bright sheen across the word, and Wave gives it a tiny travelling ripple. The last two are Metal shaders.</p>\n<p>What I cared about under all of it was that none of this should cost frame rate. The fills and the shimmer run off a sub-word progress value the playback driver already computes each tick (rate-independent, so it's honest at any speed), and only the current word redraws each frame, never the page. The Metal shaders are the stitchable kind that compile into the package itself, so they build the same under plain <code>swift build</code> and Xcode and the fast per-package test loop stays green. The point wasn't to ship five highlights. It was to feel each one in a real book before deciding which one is Aoede's.</p>",
-      "date_published" : "2026-06-12T23:55:00Z",
-      "title" : "Shimmer, Wave, or Just a Tint",
-      "id" : "https://krisbaker.com/building/aoede/shimmer-wave-or-just-a-tint/"
-    }
-  ],
-  "home_page_url" : "https://krisbaker.com/"
+  "feed_url" : "https://krisbaker.com/building/feed.json",
+  "home_page_url" : "https://krisbaker.com/",
+  "title" : "Kristopher Baker · Updates"
 }
