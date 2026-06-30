@@ -79,7 +79,7 @@
   --accent-2: #14502f;   /* forest, darker */
   --accent-soft: rgba(31, 111, 67, 0.12); /* forest/12 — matches gradient stop */
   --accent-ink: #f4faf6;
-  --success: #1f6f43;
+  --success: #0f766e; /* teal — complements the forest accent without reading as a second green */
   --selection: #c2e6cf;
   --shadow-card: 0 12px 44px -24px rgba(20, 40, 28, 0.45);
   --shadow-card-hover: 0 20px 56px -26px rgba(31, 111, 67, 0.32);
@@ -107,7 +107,7 @@
   --accent-2: #7ed79f;   /* spring green, lighter */
   --accent-soft: rgba(95, 197, 133, 0.10);
   --accent-ink: #0d120f;
-  --success: #84cc16;
+  --success: #2dd4bf; /* teal — complements the spring-green accent (was lime #84cc16, which clashed) */
   --selection: rgba(95, 197, 133, 0.3);
   --shadow-card: 0 16px 42px -28px rgba(0, 0, 0, 0.8);
   --shadow-card-hover: 0 22px 60px -28px rgba(31, 111, 67, 0.4);
