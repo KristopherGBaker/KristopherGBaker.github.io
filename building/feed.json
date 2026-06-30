@@ -1,155 +1,155 @@
 {
-  "feed_url" : "https://krisbaker.com/building/feed.json",
   "version" : "https://jsonfeed.org/version/1.1",
+  "language" : "en",
+  "feed_url" : "https://krisbaker.com/building/feed.json",
+  "home_page_url" : "https://krisbaker.com/",
+  "description" : "Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.",
+  "title" : "Kristopher Baker · Updates",
   "authors" : [
     {
       "name" : "Kristopher Baker"
     }
   ],
-  "title" : "Kristopher Baker · Updates",
-  "description" : "Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.",
-  "home_page_url" : "https://krisbaker.com/",
-  "language" : "en",
   "items" : [
     {
+      "id" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
       "content_html" : "<p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>\n<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>\n<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p>",
-      "title" : "KiFinder becomes an app",
       "url" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
-      "date_published" : "2026-06-30T11:00:00Z",
-      "id" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/"
+      "title" : "KiFinder becomes an app",
+      "date_published" : "2026-06-30T11:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/aoede/one-cell-per-paragraph/",
       "content_html" : "<p>Last time I wrote about moving Aoede's reader onto TextKit 2, and the version I described rendered the whole book as one long attributed string. It looked clean and it was fine for a short document, but it did not scale. A long book meant laying the entire thing out before I could show the first page, and on iOS that was slow and heavy enough to feel broken. The structural bet from last time was half right. TextKit was the correct tool, but rendering the book as a single object was the wrong shape.</p>\n<p>What surprised me was how hard it was to get from there to the right shape. When I asked the AI doing the work to fix the scaling, it kept reaching for architectures that did not hold up. It would rebuild the single whole-document attributed string a different way, or quietly pull the old SwiftUI reader components back into the TextKit path, which dragged the per-word-view cost right back in with them. It could execute almost any approach cleanly. It just kept choosing ones that fell over on a real 400-page book. The unlock was an architectural call I had to make and then insist on: stop rendering the book as one thing. Put it in a list, one cell per paragraph, each cell laid out with TextKit. On iOS that is a UICollectionView, on macOS an NSCollectionView with a custom layout for per-paragraph heights. The list only realizes the paragraphs near the screen, so a long book opens as fast as a short one because it never lays out more than a screenful at a time.</p>\n<p>Resume took its own pass to get right. To reopen a book exactly where I left off, down to the current word inside a long paragraph, the list has to know each cell's height before it scrolls there, so I size the items up front instead of letting them self-size lazily as they appear. Image-heavy books needed a little more, since the height of a picture is not known until it loads, so the resume re-asserts its target until the layout settles. The cell-list reader is now the default on both platforms, the whole-document version is gone, and the original SwiftUI reader stays behind a Labs toggle for comparison. Long books finally load fast, including on iPhone and iPad, and they come back to the exact spot I stopped. The lesson I keep relearning is that the model is very good at building an architecture and not always at picking the one that survives contact with a real book. That part still needed me.</p>",
-      "title" : "One cell per paragraph",
       "url" : "https://krisbaker.com/building/aoede/one-cell-per-paragraph/",
-      "date_published" : "2026-06-30T10:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/one-cell-per-paragraph/"
+      "title" : "One cell per paragraph",
+      "date_published" : "2026-06-30T10:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/kifinder/a-window-to-review-the-maybes/",
       "content_html" : "<p>The engine learns from my confirms and rejects, but right now I deliver those corrections by typing photo ids into a <code>feedback</code> command. That is fine for me and wrong for the workflow. The whole point of a monthly chore is that it should take a couple of minutes, and a command line is not where you want to be while glancing at thumbnails deciding which blurry kid is yours. So the next piece is a small SwiftUI review window for the Mac, and I started it as a throwaway prototype to feel the shape before committing to it.</p>\n<p>A few things settled quickly once I had it on screen. The manifest the engine already writes decodes cleanly into the UI with no extra format, so the window is just a view onto a scan. A flat keep-or-not split hides the signal, so the grid groups photos into strong, moderate, borderline, and weak, which lets me start where the doubt is and skip the obvious ones. Each card needs exactly three states (pending, decided with an undo, and a greyed no-face), and saving has to be an explicit button rather than firing on every tap, because a fat-fingered reject I can't take back is worse than an extra click. It is still a prototype, not wired to the live engine yet, but it already answered the questions I built it to answer. The plan is to grow it into the actual front door: scan, glance, confirm, done.</p>",
-      "title" : "A window to review the maybes",
       "url" : "https://krisbaker.com/building/kifinder/a-window-to-review-the-maybes/",
-      "date_published" : "2026-06-29T10:00:00Z",
-      "id" : "https://krisbaker.com/building/kifinder/a-window-to-review-the-maybes/"
+      "title" : "A window to review the maybes",
+      "date_published" : "2026-06-29T10:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/",
       "content_html" : "<p>Every role in Sparra is driven by a prompt, and those prompts had quietly bloated as I patched edge case after edge case. Long prompts cost tokens on every single call and, past a point, actually read worse to the model. So I built <code>sparra prompts audit</code>, a conciseness auditor that runs over Sparra's own role prompts and proposes tightenings, gated by an independent verifier pass so a shorter prompt cannot also be a weaker one. Then I ran it on the real prompts and shipped the cuts: the evaluator dropped 23 percent, the contract-evaluator 29, the contract-generator 26. A harness that improves its own scaffolding is exactly the self-referential loop I wanted from the start.</p>\n<p>The same push got Sparra ready to be seen. I refreshed the README to lead with the interactive Claude Code workflow, dropped the Ink TUI that was not earning its complexity, added GitHub Actions running typecheck and tests on every push, genericized some private project names out of the fixtures, and put an MIT license on it. It is still early and still mostly a tool for me, but it is now a thing other people can read, clone, and run. The build log above is most of how it got here in a week.</p>",
-      "title" : "Sparra audits its own prompts",
       "url" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/",
-      "date_published" : "2026-06-29T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/sparra-audits-its-own-prompts/"
+      "title" : "Sparra audits its own prompts",
+      "date_published" : "2026-06-29T09:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/",
       "content_html" : "<p>Aoede's reading surface is built in SwiftUI, where every word is its own small view. That made the signature effects easy to attach in place, but it is the wrong shape for a long chapter. A few thousand words means a few thousand views to lay out, and the follow-scroll has to do an awkward dance: because off-screen positions are not known in a lazy list, the active line is kept centered with a settle pass and a recovery task that re-checks where things landed. It works, but it is the kind of structure that fights you as the book gets longer.</p>\n<p>So in a worktree I rebuilt the reader on TextKit 2, hosting an <code>NSTextLayoutManager</code> in UIKit and AppKit under the same SwiftUI signature. The whole document becomes one attributed string drawn in a single fragment pass, and TextKit resolves off-screen rectangles directly, which deletes the settle-and-recover dance entirely. The reading highlight recolors through TextKit rendering attributes with no re-layout, and the karaoke fill and focus-lens glow redraw only the active word's rectangle off a display link. The two GPU effects, shimmer and wave, moved to a CAMetalLayer overlay aligned to the real layout fragments. Everything that makes the reader Aoede's had to come along: furigana ruby with reserved line headroom, hidden known words, the dictionary popover, find-in-book, and every gesture.</p>\n<p>It is still an experiment. The whole thing sits behind a Labs toggle so I can A/B the two surfaces on the same book and the same playback, which is the only honest way to judge it. The Metal effects are device-unverified because the Simulator's Metal is limited, and I have not yet sat down and measured the frame-rate win rigorously. The bet here is structural rather than proven: a single laid-out text object should scroll a long book more smoothly than a few thousand individual views, and I want to feel that before I decide whether it replaces the SwiftUI reader or stays a fork.</p>",
-      "title" : "A TextKit 2 reader, for the scroll",
       "url" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/",
-      "date_published" : "2026-06-29T09:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/a-textkit-2-reader-for-the-scroll/"
+      "title" : "A TextKit 2 reader, for the scroll",
+      "date_published" : "2026-06-29T09:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/",
       "content_html" : "<p>Fully autonomous is the headline, but it is not how most of my sessions actually go. More often I want the rigor of the loop with my own hand on the wheel: see the contract before it generates, look at the diff, decide whether the evaluator's verdict convinces me, then accept or pivot. So I exposed the same machinery as a role-runner you can call from an interactive Claude Code session, through a <code>run_role</code> MCP tool and a <code>/sparra-loop</code> skill that steers between every step.</p>\n<p>The seam under both modes turned out to be the same single idea: run one Sparra role once, on a backend you pick, with the holdout passed by path so only the evaluator ever sees it. From the interactive side I added human-in-the-loop gates (<code>sparra build --step</code> with approval points at item and commit), agent-authored commits via a configurable committer role, and delegation of each role-run to an isolated subagent so the raw diffs and full verdicts never flood the main session. The autonomous loop and the hand-driven loop are now the same engine. One runs the whole column; the other hands me the wheel between steps, with the runner still enforcing the wall.</p>",
-      "title" : "Driving it by hand from Claude Code",
       "url" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/",
-      "date_published" : "2026-06-28T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/driving-it-by-hand-from-claude-code/"
+      "title" : "Driving it by hand from Claude Code",
+      "date_published" : "2026-06-28T09:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/",
       "content_html" : "<p>The whole premise is agents that run for hours, and the thing that actually ends a multi-hour run is mundane: you hit a provider's rate or usage window and the loop dies two hours of progress in. Because Sparra keeps all its state on disk, the fix was within reach. I added opt-in auto-restart. When a model hits a limit, the loop either waits the window out or falls back to a configured cross-provider model, then retries the same round from where it stopped, bounded by hard wait and restart caps so it can never spin forever.</p>\n<p>This is the update that made unattended runs feel real rather than aspirational. The same day I also taught the exerciser about macOS apps, driving them through an XCUITest spine instead of the simulator path, so the judge can run a Mac app the way it already runs an iOS one. Resilience and reach are the two things that separate a demo that runs for ten minutes from a harness you can actually walk away from.</p>",
-      "title" : "Surviving the rate limit",
       "url" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/",
-      "date_published" : "2026-06-27T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/surviving-the-rate-limit/"
+      "title" : "Surviving the rate limit",
+      "date_published" : "2026-06-27T09:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/kifinder/learning-from-my-corrections/",
       "content_html" : "<p>A single averaged face works until it doesn't. Kion at one is not Kion turned away under a hat, and a hard shot like that scores low no matter how good the reference photos are. The fix in the second cycle was to let the tool learn from me without ever re-running the model. The trick is that <code>scan</code> now caches each photo's face embedding directly in the manifest. So when I confirm a real match or reject a look-alike, that decision is just an append to the profile, never a recompute.</p>\n<p>The profile grew from one averaged vector into an exemplar bundle: the stable enrolled core, plus confirmed positives and rejected negatives that I add over time. A face now scores as its best match across all of those, so the moment I confirm one hard low-scoring shot, every similar shot in future albums gets lifted with it. Two new commands do the work. <code>feedback</code> folds a manifest's confirms and rejects into the profile, quality-gated so a tiny blurry crop can't poison it and idempotent so I can't double-count. <code>rescore</code> re-buckets an old scan against the improved profile with no image loading and no model calls at all, which makes re-running last month after a few corrections nearly instant. The references I enrolled stay untouched as the trusted core; everything I teach it lives alongside them.</p>",
-      "title" : "Learning from my corrections",
       "url" : "https://krisbaker.com/building/kifinder/learning-from-my-corrections/",
-      "date_published" : "2026-06-26T17:00:00Z",
-      "id" : "https://krisbaker.com/building/kifinder/learning-from-my-corrections/"
+      "title" : "Learning from my corrections",
+      "date_published" : "2026-06-26T17:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/kifinder/finding-kion-in-a-crowd/",
       "content_html" : "<p>The first cycle was the finder itself, end to end. You run <code>enroll</code> on a few reference photos of one person, which detects the largest face in each and averages their ArcFace embeddings into a profile. Then <code>scan</code> takes an album, a directory, or the preschool's zip files straight as they arrive, finds every face in every photo, and scores it by cosine similarity against the profile. Anything close enough lands in <code>keep</code>, the borderline ones in <code>maybe</code>, and the rest in <code>no</code>. It writes thumbnails and a <code>manifest.json</code> recording what it decided and at what score, so I can see its reasoning instead of trusting a black box.</p>\n<p>The defaults matter more than they look. Set the threshold too high and you miss the candid shot where Kion is half-turned at the edge of the frame; too low and you are back to scrolling through everyone else's kids. So I added <code>calibrate</code>, which walks a small labeled set of yes and no photos and recommends the highest threshold that still catches every real match while keeping the false matches manageable. It prints the number but never applies it on its own, because the call about missing a real photo of my daughter should be mine. HEIC was non-negotiable since that is what the photos arrive as, so that went in too. By the end of the day it could take a month's albums and hand me back a folder that was mostly Kion.</p>",
-      "title" : "Finding Kion in a crowd",
       "url" : "https://krisbaker.com/building/kifinder/finding-kion-in-a-crowd/",
-      "date_published" : "2026-06-26T10:00:00Z",
-      "id" : "https://krisbaker.com/building/kifinder/finding-kion-in-a-crowd/"
+      "title" : "Finding Kion in a crowd",
+      "date_published" : "2026-06-26T10:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/",
       "content_html" : "<p>The contract is the heart of the loop, and the heart had a hole in it. A generator under pressure to pass will find the laziest reading of an assertion that technically satisfies it. Ask it to make a function &quot;handle empty input&quot; and it might add a guard that returns early and call the contract met, while the real behavior is still broken. I watched the loop accept a few of these degenerate, no-op satisfactions and decided the prompts, not the model, were at fault.</p>\n<p>So I spent a day hardening the contract and evaluator prompts against exactly that. Acceptance criteria are now biased toward net effects rather than invocation counts, so &quot;the function was called&quot; never stands in for &quot;the output is correct.&quot; The evaluator runs the artifact's own shipped verification as-is and treats a degenerate or gamed input as a failure, not a pass. I also pushed contract negotiation toward terse, proportionate assertions, because a bloated contract is just more surface to game. None of this makes gaming impossible. It makes the honest path the easy one, which in practice is most of the win.</p>",
-      "title" : "Closing the door on a gamed contract",
       "url" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/",
-      "date_published" : "2026-06-26T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/"
+      "title" : "Closing the door on a gamed contract",
+      "date_published" : "2026-06-26T09:00:00Z"
     },
     {
+      "id" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/",
       "content_html" : "<p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>\n<p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p>",
-      "title" : "One model builds, another judges",
       "url" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/",
-      "date_published" : "2026-06-25T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/one-model-builds-another-judges/"
+      "title" : "One model builds, another judges",
+      "date_published" : "2026-06-25T09:00:00Z"
     },
     {
-      "content_html" : "<p>An evaluator that only reads code is easy to fool. It will sign off on something that looks right and never runs. So the next thing Sparra learned was to actually exercise the artifact, and for the projects I care most about that means Apple platforms. I wired the evaluator to drive the XcodeBuildMCP CLI: build the app, boot a simulator (auto-discovering one that exists instead of hardcoding a model), launch it, drive the UI, and then read the screenshots back to confirm a UI change is really there.</p>\n<p>That multimodal step changed what the judge could catch. It started flagging things a text-only reviewer never would, like an app that letterboxes because it ships without a launch screen. I also gave it the same care a person would: it scaffolds a fresh iOS project with XcodeGen when there is not one, so a greenfield Apple build has somewhere to land. The lesson from the workshop held up here. The contract is only as honest as the check behind it, and the most honest check is running the thing.</p>",
-      "title" : "Letting the judge run the app",
       "url" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/",
-      "date_published" : "2026-06-24T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/"
+      "title" : "Letting the judge run the app",
+      "id" : "https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/",
+      "content_html" : "<p>An evaluator that only reads code is easy to fool. It will sign off on something that looks right and never runs. So the next thing Sparra learned was to actually exercise the artifact, and for the projects I care most about that means Apple platforms. I wired the evaluator to drive the XcodeBuildMCP CLI: build the app, boot a simulator (auto-discovering one that exists instead of hardcoding a model), launch it, drive the UI, and then read the screenshots back to confirm a UI change is really there.</p>\n<p>That multimodal step changed what the judge could catch. It started flagging things a text-only reviewer never would, like an app that letterboxes because it ships without a launch screen. I also gave it the same care a person would: it scaffolds a fresh iOS project with XcodeGen when there is not one, so a greenfield Apple build has somewhere to land. The lesson from the workshop held up here. The contract is only as honest as the check behind it, and the most honest check is running the thing.</p>",
+      "date_published" : "2026-06-24T09:00:00Z"
     },
     {
-      "content_html" : "<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>\n<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>",
-      "title" : "Furigana That Steps Back as You Learn",
       "url" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/",
-      "date_published" : "2026-06-23T14:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/"
+      "title" : "Furigana That Steps Back as You Learn",
+      "id" : "https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/",
+      "content_html" : "<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>\n<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>",
+      "date_published" : "2026-06-23T14:00:00Z"
     },
     {
-      "content_html" : "<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>\n<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>",
-      "title" : "Mark It Now, Make Cards Later",
       "url" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/",
-      "date_published" : "2026-06-23T13:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/"
+      "title" : "Mark It Now, Make Cards Later",
+      "id" : "https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/",
+      "content_html" : "<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>\n<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>",
+      "date_published" : "2026-06-23T13:00:00Z"
     },
     {
-      "content_html" : "<p>Aoede can now create and edit notes as first-class documents, then switch the same note into the regular reader for text-to-speech and study capture. Notes live in their own library section, and selecting text in the editor can feed the same card-making flow used by books.</p>\n<p>The awkward part was preserving everything attached to text after the text changes. On save, Aoede re-anchors cards, bookmarks, capture marks, and the previous reading position against the edited sentences. When a match cannot be found, it surfaces the orphan or falls back explicitly instead of silently pointing a card at the wrong passage.</p>",
-      "title" : "Notes That Survive Their Own Edits",
       "url" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/",
-      "date_published" : "2026-06-23T12:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/"
+      "title" : "Notes That Survive Their Own Edits",
+      "id" : "https://krisbaker.com/building/aoede/notes-that-survive-their-own-edits/",
+      "content_html" : "<p>Aoede can now create and edit notes as first-class documents, then switch the same note into the regular reader for text-to-speech and study capture. Notes live in their own library section, and selecting text in the editor can feed the same card-making flow used by books.</p>\n<p>The awkward part was preserving everything attached to text after the text changes. On save, Aoede re-anchors cards, bookmarks, capture marks, and the previous reading position against the edited sentences. When a match cannot be found, it surfaces the orphan or falls back explicitly instead of silently pointing a card at the wrong passage.</p>",
+      "date_published" : "2026-06-23T12:00:00Z"
     },
     {
-      "content_html" : "<p>Aoede has crossed from helping me read into helping me remember. I can select a passage, generate vocabulary, sentence, cloze, question-and-answer, or definition cards, edit them before saving, and review them with a four-button FSRS schedule. Japanese vocabulary stays dictionary-first, using a model only when JMdict has no answer. Cards can also be written by hand, so the study system does not depend on AI.</p>\n<p>A new Today screen ties the loop together with the current streak, recently read books, and reviews due now. The app treats target language and study mode as separate choices, which means someone can keep Aoede as a straightforward reader while learners opt into cards, review, Japanese lookup, and the features that combine them.</p>",
-      "title" : "From Reading to Reviewing",
       "url" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/",
-      "date_published" : "2026-06-23T11:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/"
+      "title" : "From Reading to Reviewing",
+      "id" : "https://krisbaker.com/building/aoede/from-reading-to-reviewing/",
+      "content_html" : "<p>Aoede has crossed from helping me read into helping me remember. I can select a passage, generate vocabulary, sentence, cloze, question-and-answer, or definition cards, edit them before saving, and review them with a four-button FSRS schedule. Japanese vocabulary stays dictionary-first, using a model only when JMdict has no answer. Cards can also be written by hand, so the study system does not depend on AI.</p>\n<p>A new Today screen ties the loop together with the current streak, recently read books, and reviews due now. The app treats target language and study mode as separate choices, which means someone can keep Aoede as a straightforward reader while learners opt into cards, review, Japanese lookup, and the features that combine them.</p>",
+      "date_published" : "2026-06-23T11:00:00Z"
     },
     {
-      "content_html" : "<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>\n<p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>",
-      "title" : "Ask Aoede About the Passage",
       "url" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/",
-      "date_published" : "2026-06-23T10:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/"
+      "title" : "Ask Aoede About the Passage",
+      "id" : "https://krisbaker.com/building/aoede/ask-aoede-about-the-passage/",
+      "content_html" : "<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>\n<p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>",
+      "date_published" : "2026-06-23T10:00:00Z"
     },
     {
-      "content_html" : "<p>Sparra started the way the workshop suggested: get the whole loop standing before polishing any one part of it. In one long day I wired the full spine end to end. Filesystem state that detects whether a project is greenfield or existing, a session layer on top of the Claude Agent SDK with tracing and guard hooks, the planning phases that co-edit a <code>PLAN.md</code>, the autonomous build loop with negotiated contracts and an adversarial evaluator, a reflect step that reads the run's traces, and a <code>sparra</code> CLI to drive it.</p>\n<p>The test that the skeleton was real came almost immediately: I pointed Sparra at its own codebase and had it build parts of itself, using the vitest suite it generated as the regression gate. A harness that can work on itself is a harness I can actually trust to tell me when it is broken. Everything since has been filling in this frame rather than redrawing it.</p>",
-      "title" : "The whole loop, standing in a day",
       "url" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/",
-      "date_published" : "2026-06-23T09:00:00Z",
-      "id" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/"
+      "title" : "The whole loop, standing in a day",
+      "id" : "https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/",
+      "content_html" : "<p>Sparra started the way the workshop suggested: get the whole loop standing before polishing any one part of it. In one long day I wired the full spine end to end. Filesystem state that detects whether a project is greenfield or existing, a session layer on top of the Claude Agent SDK with tracing and guard hooks, the planning phases that co-edit a <code>PLAN.md</code>, the autonomous build loop with negotiated contracts and an adversarial evaluator, a reflect step that reads the run's traces, and a <code>sparra</code> CLI to drive it.</p>\n<p>The test that the skeleton was real came almost immediately: I pointed Sparra at its own codebase and had it build parts of itself, using the vitest suite it generated as the regression gate. A harness that can work on itself is a harness I can actually trust to tell me when it is broken. Everything since has been filling in this frame rather than redrawing it.</p>",
+      "date_published" : "2026-06-23T09:00:00Z"
     },
     {
-      "content_html" : "<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>\n<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>",
-      "title" : "A Dictionary Inside the Reader",
       "url" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/",
-      "date_published" : "2026-06-23T09:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/"
+      "title" : "A Dictionary Inside the Reader",
+      "id" : "https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/",
+      "content_html" : "<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>\n<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>",
+      "date_published" : "2026-06-23T09:00:00Z"
     },
     {
-      "content_html" : "<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>\n<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>",
-      "title" : "The Voice Kept Reading, the Page Didn't",
       "url" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/",
-      "date_published" : "2026-06-15T11:00:00Z",
-      "id" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/"
+      "title" : "The Voice Kept Reading, the Page Didn't",
+      "id" : "https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/",
+      "content_html" : "<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>\n<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>",
+      "date_published" : "2026-06-15T11:00:00Z"
     }
   ]
 }
