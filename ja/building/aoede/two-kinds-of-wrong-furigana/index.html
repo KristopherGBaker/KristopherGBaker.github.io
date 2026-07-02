@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Sparraが自分のプロンプトを監査する</title>
-    <meta name="description" content="Sparraが自分のプロンプトを監査する">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <meta property="og:title" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:description" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
+    <title>二種類の間違ったふりがな</title>
+    <meta name="description" content="二種類の間違ったふりがな">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/">
+    <meta property="og:title" content="二種類の間違ったふりがな">
+    <meta property="og:description" content="二種類の間違ったふりがな">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/sparra-audits-its-own-prompts/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/two-kinds-of-wrong-furigana/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/two-kinds-of-wrong-furigana/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/two-kinds-of-wrong-furigana/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/sparra/sparra-audits-its-own-prompts/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/aoede/two-kinds-of-wrong-furigana/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,27 +106,26 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/ja/building/sparra/" class="post-back">← Sparra</a>
+  <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.29</span>
-     · <span>約2分</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">Sparraが自分のプロンプトを監査する</h1>
+  <h1 class="h1 post-title update-title">二種類の間違ったふりがな</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparraのどのロールもプロンプトで動いていて、エッジケースを一つずつ手当てするうちに、そのプロンプトは静かに膨らんでいました。長いプロンプトは一回ごとの呼び出しでトークンを食い、ある点を超えるとモデルにとってかえって読みにくくなります。そこで<code>sparra prompts audit</code>を作りました。Sparra自身のロールプロンプトを走査して切り詰めを提案する簡潔さの監査ツールで、独立した検証パスでゲートしてあるので、短いプロンプトが弱いプロンプトにもなってしまうことはありません。それを実際のプロンプトに走らせ、削りを反映しました。エバリュエーターは23パーセント、コントラクト・エバリュエーターは29、コントラクト・ジェネレーターは26。自分の足場を自分で良くしていくハーネス。これこそ最初から欲しかった自己参照のループです。</p>
-<p>同じ流れで、Sparraを人に見せられる状態にもしました。READMEを刷新して対話的なClaude Codeのワークフローを先頭に置き、複雑さに見合っていなかったInkのTUIを落とし、プッシュごとに型チェックとテストを走らせるGitHub Actionsを足し、フィクスチャから個人プロジェクト名を一般化し、MITライセンスを付けました。まだ初期段階で、まだほとんど自分のためのツールですが、いまは他の人が読んで、クローンして、動かせるものになっています。上の制作ログが、一週間でここまで来た道のりのほとんどです。</p></article>
+    <article class="prose"><p>ふりがなは、読み方がわかるようにAoedeが漢字の上に振る小さなかなのことですが、私のふりがなは目に見える形で間違っていました。厄介なのは、その「間違い」が実はまったく別の二つの問題だったことで、両者を区別できるようになるまで、どちらも直せませんでした。そこでリーダーに手を入れる前に、FuriganaQAという検証ハーネスを作りました。Aoedeの本物のふりがなパイプラインを青空文庫の作品コーパスに対して走らせ、すべての読みを、作者自身が付けたルビと突き合わせます。食い違いは二つの山のどちらかに振り分けられます。私が直すべきバグか、どんな解析器にも当てられない読みか。</p>
+<p>一つ目の山はジェネレーターです。Aoedeは漢字をOpenJTalkで読んでいて、避けられるはずの間違いをしていました。長音が、表記どおりではなく音のとおりに出ていたのです（方がほうではなくほおと出る）。読みを音声用のフィールドから取っていたためで、正書法どおりの読みに切り替えると、話す音声はそのままに、表記だけが直りました。位置もずれていました。木の葉のような並びで、こを木に、はを葉に振る代わりに、かなを語全体の上にひとかたまりで置いていたのです。いまは既定でモノルビ、それぞれの読みをその漢字の上に中央寄せし、実際にぶつかるときだけ二つの読みを一つのグループにまとめます。さらに辞書の層を足しました。JmdictFuriganaデータセットが漢字ごとの配置と、あり得ない読みを捕まえてJMdictから修復するバリデーターを与えてくれるので、這入るははいる、行衛はゆくえに解決します。</p>
+<p>二つ目の山が面白いところで、こちらはどれだけ工夫しても直せません。日本語には、作者がただそう決めた読みが溢れています。地球にほしと振って「地球」を表したり、硝子をがらすと読ませたり、本気をマジと読ませたり。どんな解析器もそれらを生み出せません。文字ではなく、作者の意図の中にあるからです。唯一の正しい出どころは作者なので、Aoedeはいま、本に同梱されたルビを保存します。青空文庫の《》記法やEPUBの<code>&lt;ruby&gt;</code>タグから直接ふりがなを読み取り、OpenJTalkが推測するどんな読みよりも優先して漢字の上に描き、そして最終フェーズでは、それを話します。本気《マジ》は紙面では本気と見せて、声ではマジと言い、硝子《がらす》はがらすと発音されます。</p>
+<p>このアップデートで気に入っているのは、QAハーネスが単に直しを測っただけでなく、やるべき仕事そのものを定義したことです。その役割は、「ジェネレーターが当てるべきだった」ものと「ジェネレーターには知りようがない、作者が意図したもの」との線を引くことで、その線こそが上の二つの山です。いまAoedeで語の上に見える読みは、作者がそう言ったときは作者から、決定的な答えがあるときは辞書から、そして他の誰にもより良い答えがないときにだけOpenJTalkから来ています。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">ビルドが実行できるものを締める</span>
-      </a>
-      <a href="/ja/building/sparra/driving-it-by-hand-from-claude-code/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/aoede/one-cell-per-paragraph/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">Claude Codeから手で回す</span>
+        <span class="update-nav-title">段落ごとに1セル</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/ja/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

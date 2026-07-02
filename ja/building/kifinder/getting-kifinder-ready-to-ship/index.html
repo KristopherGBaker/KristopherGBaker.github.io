@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Sparraが自分のプロンプトを監査する</title>
-    <meta name="description" content="Sparraが自分のプロンプトを監査する">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <meta property="og:title" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:description" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
+    <title>KiFinderを世に出す準備</title>
+    <meta name="description" content="KiFinderを世に出す準備">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/getting-kifinder-ready-to-ship/">
+    <meta property="og:title" content="KiFinderを世に出す準備">
+    <meta property="og:description" content="KiFinderを世に出す準備">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/getting-kifinder-ready-to-ship/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/sparra-audits-its-own-prompts/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/getting-kifinder-ready-to-ship/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/getting-kifinder-ready-to-ship/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/getting-kifinder-ready-to-ship/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/sparra/sparra-audits-its-own-prompts/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,27 +106,25 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/ja/building/sparra/" class="post-back">← Sparra</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.29</span>
-     · <span>約2分</span>
+  <a href="/ja/building/kifinder/" class="post-back">← KiFinder</a>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.01</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">Sparraが自分のプロンプトを監査する</h1>
+  <h1 class="h1 post-title update-title">KiFinderを世に出す準備</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparraのどのロールもプロンプトで動いていて、エッジケースを一つずつ手当てするうちに、そのプロンプトは静かに膨らんでいました。長いプロンプトは一回ごとの呼び出しでトークンを食い、ある点を超えるとモデルにとってかえって読みにくくなります。そこで<code>sparra prompts audit</code>を作りました。Sparra自身のロールプロンプトを走査して切り詰めを提案する簡潔さの監査ツールで、独立した検証パスでゲートしてあるので、短いプロンプトが弱いプロンプトにもなってしまうことはありません。それを実際のプロンプトに走らせ、削りを反映しました。エバリュエーターは23パーセント、コントラクト・エバリュエーターは29、コントラクト・ジェネレーターは26。自分の足場を自分で良くしていくハーネス。これこそ最初から欲しかった自己参照のループです。</p>
-<p>同じ流れで、Sparraを人に見せられる状態にもしました。READMEを刷新して対話的なClaude Codeのワークフローを先頭に置き、複雑さに見合っていなかったInkのTUIを落とし、プッシュごとに型チェックとテストを走らせるGitHub Actionsを足し、フィクスチャから個人プロジェクト名を一般化し、MITライセンスを付けました。まだ初期段階で、まだほとんど自分のためのツールですが、いまは他の人が読んで、クローンして、動かせるものになっています。上の制作ログが、一週間でここまで来た道のりのほとんどです。</p></article>
+    <article class="prose"><p>KiFinderは、自分のMacでひとつの用事をこなすためのツールとして始まりました。ここ最近やっているのは、それを他の人がインストールできるものに変える、地味な作業です。つまりApp Store。そしてApp Storeは、App Sandboxを意味します。サンドボックス化されたアプリは<code>~/Pictures</code>をただ読むことはできないので、ファイルまわりの話を丸ごと組み直す必要がありました。いまのKiFinderは、必要なものだけをきっちり要求します。スキャン対象に指定したフォルダ・zip・ファイルへの読み書き、モデルを取得するためだけのネットワーク、そして書き出すときだけのPhotosライブラリ。ライブラリは既定でアプリ自身のコンテナに置かれ、カスタムのフォルダを選んだ場合は、次の起動でサンドボックスが見失う素のパスではなく、セキュリティスコープ付きブックマークとして覚えます。</p>
+<p>残りは、世に出すための事務手続きです。App Storeのカテゴリ、非適用の暗号を使っていないという申告（通信はHTTPSだけ）、デバッグビルドと配布用アーカイブがそれぞれ正しい署名を選ぶための設定、そしてテスト用のフックがリリースビルドに漏れていないかの確認。最後のは、聞こえ以上に大事でした。アプリはUIテスト用に<code>KION_*</code>という一群の起動変数を尊重していて、そのうちの一つは、ダウンロードしたモデルが本物かどうかのチェックを迂回できたのです。リリースビルドはいまそれらをすべて取り除くので、出荷されたアプリは自分の信頼できる既定値だけを見ます。</p>
+<p>本腰を入れる中で、小さなことも二つ付いてきました。エンロールの案内文が、子どもを追加する前提になっていました（「赤ちゃん、幼児、そして最近の写真を入れて、成長しても認識できるように」）。私の使い方はまさにそれですが、アプリ自体はそうではないので、いまは年齢に中立な文言にしてあります。KiFinderは誰でも見つけるからです。そして日本語ローカライズを仕上げました。48文字列すべて。そのうえで、翻訳を<a href="/ja/building/sparra/">Sparra</a>経由でCodexにレビューさせました。私の「描いた顔」が、手動で指定した領域ではなくイラストの顔に読めることなどを、指摘してくれました。どれもアプリづくりの楽しい部分ではありません。でも、他の誰かが使えるようになるかどうかを決めるのは、この部分なのです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">ビルドが実行できるものを締める</span>
-      </a>
-      <a href="/ja/building/sparra/driving-it-by-hand-from-claude-code/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">Claude Codeから手で回す</span>
+        <span class="update-nav-title">KiFinderがアプリになる</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/ja/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

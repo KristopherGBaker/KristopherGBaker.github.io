@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>KiFinder becomes an app</title>
-    <meta name="description" content="KiFinder becomes an app">
-    <link rel="canonical" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
-    <meta property="og:title" content="KiFinder becomes an app">
-    <meta property="og:description" content="KiFinder becomes an app">
-    <meta property="og:url" content="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
+    <title>Two kinds of wrong furigana</title>
+    <meta name="description" content="Two kinds of wrong furigana">
+    <link rel="canonical" href="https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/">
+    <meta property="og:title" content="Two kinds of wrong furigana">
+    <meta property="og:description" content="Two kinds of wrong furigana">
+    <meta property="og:url" content="https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/kifinder-becomes-an-app/">
+    <link rel="alternate" hreflang="en" href="/building/aoede/two-kinds-of-wrong-furigana/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/aoede/two-kinds-of-wrong-furigana/">
+    <link rel="alternate" hreflang="x-default" href="/building/aoede/two-kinds-of-wrong-furigana/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/aoede/two-kinds-of-wrong-furigana/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,28 +106,26 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/building/kifinder/" class="post-back">← KiFinder</a>
+  <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
-     · <span>2 min read</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
+     · <span>3 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">KiFinder becomes an app</h1>
+  <h1 class="h1 post-title update-title">Two kinds of wrong furigana</h1>
   
   <div class="post-body">
-    <article class="prose"><p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>
-<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
-<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p></article>
+    <article class="prose"><p>Furigana is the small kana Aoede prints over kanji so you know how to read them, and mine were wrong in visible ways. The trouble is that &quot;wrong&quot; turned out to be two completely different problems, and I could not fix either until I could tell them apart. So before touching the reader I built a harness, FuriganaQA, that runs Aoede's real furigana pipeline over a corpus of Aozora books and diffs every reading against the ruby the authors themselves marked up. Each mismatch gets sorted into one of two piles: my bug to fix, or a reading no analyzer was ever going to guess.</p>
+<p>The first pile is the generator. Aoede reads kanji with OpenJTalk, and it was making avoidable mistakes. Long vowels came out spelled the way they sound instead of the way they are written (方 showed ほお instead of ほう) because the reading was pulled from the phonetic field; switching to the orthographic reading fixed the spelling while leaving the spoken audio untouched. Placement was off too: a run like 木の葉 grouped its kana into one blob over the whole word instead of こ over 木 and は over 葉. That is now mono-ruby by default, each reading centered over its own kanji, merging two readings into a group only when they would actually collide. And I added a dictionary tier: the JmdictFurigana dataset gives per-kanji placement and a validator that catches impossible readings and repairs them from JMdict, so 這入る resolves to はいる and 行衛 to ゆくえ.</p>
+<p>The second pile is the interesting one, because it is not fixable by any amount of cleverness. Japanese is full of readings the author simply assigns: 地球 printed with ほし (&quot;star&quot;) over it to mean Earth, 硝子 read がらす, 本気 read マジ. No analyzer will ever produce those, because they live in the author's intent, not in the characters. The only correct source for them is the author, so Aoede now preserves the ruby that ships in the book. It reads furigana straight out of Aozora's 《》 markup and EPUB's <code>&lt;ruby&gt;</code> tags, renders it over the kanji with precedence over anything OpenJTalk would guess, and, in the last phase, speaks it: 本気《マジ》 shows 本気 on the page but says マジ out loud, and 硝子《がらす》 is voiced がらす.</p>
+<p>What I like about this one is that the QA harness did not just measure the fix, it defined the work. Its whole job is to draw the line between &quot;the generator should have gotten this&quot; and &quot;the author meant something the generator can't know,&quot; and that line is exactly the two piles above. The reading you see over a word in Aoede now comes from the author when they said so, from a dictionary when there is a definitive answer, and from OpenJTalk only when nobody else has a better one.</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Getting KiFinder ready to ship</span>
-      </a>
-      <a href="/building/kifinder/a-window-to-review-the-maybes/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/aoede/one-cell-per-paragraph/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A window to review the maybes</span>
+        <span class="update-nav-title">One cell per paragraph</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

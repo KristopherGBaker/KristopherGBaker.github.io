@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>KiFinder becomes an app</title>
-    <meta name="description" content="KiFinder becomes an app">
-    <link rel="canonical" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
-    <meta property="og:title" content="KiFinder becomes an app">
-    <meta property="og:description" content="KiFinder becomes an app">
-    <meta property="og:url" content="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
+    <title>Locking down what the build can run</title>
+    <meta name="description" content="Locking down what the build can run">
+    <link rel="canonical" href="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
+    <meta property="og:title" content="Locking down what the build can run">
+    <meta property="og:description" content="Locking down what the build can run">
+    <meta property="og:url" content="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/kifinder-becomes-an-app/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/locking-down-what-the-build-can-run/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,28 +106,25 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/building/kifinder/" class="post-back">← KiFinder</a>
+  <a href="/building/sparra/" class="post-back">← Sparra</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
      · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">KiFinder becomes an app</h1>
+  <h1 class="h1 post-title update-title">Locking down what the build can run</h1>
   
   <div class="post-body">
-    <article class="prose"><p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>
-<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
-<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p></article>
+    <article class="prose"><p>Sparra's evaluator earns its keep by actually running the artifact, which means running commands a model chose. That is also a security surface, and Sparra's own adversarial evaluator kept finding ways through it. I started the safe way I think most people would, by deny-listing dangerous binaries like <code>rm</code>. The evaluator's probe walked straight around it. <code>find -delete</code> and <code>perl -e</code> mutate the filesystem without ever naming a blocked command, and shell expansion like <code>rm${IFS}victim.txt</code> slipped past every substring check because it never spells <code>rm</code> out. Even allowlisting a build tool was not enough on its own, since <code>npm version patch</code> is an allowed binary running a subcommand that quietly rewrites <code>package.json</code>.</p>
+<p>So I inverted the whole posture to allowlist-by-default. Instead of blocking known-bad commands, the executor now runs only known build and test runners, and only their safe subcommands: <code>test</code>, <code>run &lt;script&gt;</code>, and the like. Interpreter-eval flags are rejected, mutating verbs like <code>cargo publish</code> or <code>npm version</code> are refused, any shell metacharacter or expansion token is rejected before spawn, and the command is tokenized and launched with no shell at all. What used to be &quot;everything runs unless it looks dangerous&quot; is now &quot;nothing runs unless it is a shape I recognize as safe.&quot;</p>
+<p>The subtler fix was closing a laundering hole the evaluator caught. A verify command the executor refuses to run could previously just be skipped while the verdict stayed green, which means an artifact could &quot;pass&quot; a check that never happened. Now an unsafe verify command bounces back into contract negotiation at probe time, exactly like a command with a typo would, and at rerun it carries a dedicated unsafe status that demotes the pass and names the command. The executor still only vets the shape of a command, not the contents of a project's own recipe like <code>make test</code>, and that residual stays inside the worktree boundary. The part I keep enjoying about Sparra is that none of this came from me imagining attacks. It came from the tool's own evaluator attacking its own executor, round after round, and me hardening it until the attacks stopped landing.</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Getting KiFinder ready to ship</span>
-      </a>
-      <a href="/building/kifinder/a-window-to-review-the-maybes/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A window to review the maybes</span>
+        <span class="update-nav-title">Sparra audits its own prompts</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

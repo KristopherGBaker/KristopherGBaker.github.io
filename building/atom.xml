@@ -6,11 +6,42 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.1">Inkwell</generator>
-  <updated>2026-06-30T11:00:00Z</updated>
+  <updated>2026-07-02T11:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Locking down what the build can run</title>
+    <link href="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/" rel="alternate"/>
+    <id>https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/</id>
+    <updated>2026-07-02T11:00:00Z</updated>
+    <published>2026-07-02T11:00:00Z</published>
+    <content type="html"><![CDATA[<p>Sparra's evaluator earns its keep by actually running the artifact, which means running commands a model chose. That is also a security surface, and Sparra's own adversarial evaluator kept finding ways through it. I started the safe way I think most people would, by deny-listing dangerous binaries like <code>rm</code>. The evaluator's probe walked straight around it. <code>find -delete</code> and <code>perl -e</code> mutate the filesystem without ever naming a blocked command, and shell expansion like <code>rm${IFS}victim.txt</code> slipped past every substring check because it never spells <code>rm</code> out. Even allowlisting a build tool was not enough on its own, since <code>npm version patch</code> is an allowed binary running a subcommand that quietly rewrites <code>package.json</code>.</p>
+<p>So I inverted the whole posture to allowlist-by-default. Instead of blocking known-bad commands, the executor now runs only known build and test runners, and only their safe subcommands: <code>test</code>, <code>run &lt;script&gt;</code>, and the like. Interpreter-eval flags are rejected, mutating verbs like <code>cargo publish</code> or <code>npm version</code> are refused, any shell metacharacter or expansion token is rejected before spawn, and the command is tokenized and launched with no shell at all. What used to be &quot;everything runs unless it looks dangerous&quot; is now &quot;nothing runs unless it is a shape I recognize as safe.&quot;</p>
+<p>The subtler fix was closing a laundering hole the evaluator caught. A verify command the executor refuses to run could previously just be skipped while the verdict stayed green, which means an artifact could &quot;pass&quot; a check that never happened. Now an unsafe verify command bounces back into contract negotiation at probe time, exactly like a command with a typo would, and at rerun it carries a dedicated unsafe status that demotes the pass and names the command. The executor still only vets the shape of a command, not the contents of a project's own recipe like <code>make test</code>, and that residual stays inside the worktree boundary. The part I keep enjoying about Sparra is that none of this came from me imagining attacks. It came from the tool's own evaluator attacking its own executor, round after round, and me hardening it until the attacks stopped landing.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Two kinds of wrong furigana</title>
+    <link href="https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/" rel="alternate"/>
+    <id>https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/</id>
+    <updated>2026-07-02T10:00:00Z</updated>
+    <published>2026-07-02T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>Furigana is the small kana Aoede prints over kanji so you know how to read them, and mine were wrong in visible ways. The trouble is that &quot;wrong&quot; turned out to be two completely different problems, and I could not fix either until I could tell them apart. So before touching the reader I built a harness, FuriganaQA, that runs Aoede's real furigana pipeline over a corpus of Aozora books and diffs every reading against the ruby the authors themselves marked up. Each mismatch gets sorted into one of two piles: my bug to fix, or a reading no analyzer was ever going to guess.</p>
+<p>The first pile is the generator. Aoede reads kanji with OpenJTalk, and it was making avoidable mistakes. Long vowels came out spelled the way they sound instead of the way they are written (方 showed ほお instead of ほう) because the reading was pulled from the phonetic field; switching to the orthographic reading fixed the spelling while leaving the spoken audio untouched. Placement was off too: a run like 木の葉 grouped its kana into one blob over the whole word instead of こ over 木 and は over 葉. That is now mono-ruby by default, each reading centered over its own kanji, merging two readings into a group only when they would actually collide. And I added a dictionary tier: the JmdictFurigana dataset gives per-kanji placement and a validator that catches impossible readings and repairs them from JMdict, so 這入る resolves to はいる and 行衛 to ゆくえ.</p>
+<p>The second pile is the interesting one, because it is not fixable by any amount of cleverness. Japanese is full of readings the author simply assigns: 地球 printed with ほし (&quot;star&quot;) over it to mean Earth, 硝子 read がらす, 本気 read マジ. No analyzer will ever produce those, because they live in the author's intent, not in the characters. The only correct source for them is the author, so Aoede now preserves the ruby that ships in the book. It reads furigana straight out of Aozora's 《》 markup and EPUB's <code>&lt;ruby&gt;</code> tags, renders it over the kanji with precedence over anything OpenJTalk would guess, and, in the last phase, speaks it: 本気《マジ》 shows 本気 on the page but says マジ out loud, and 硝子《がらす》 is voiced がらす.</p>
+<p>What I like about this one is that the QA harness did not just measure the fix, it defined the work. Its whole job is to draw the line between &quot;the generator should have gotten this&quot; and &quot;the author meant something the generator can't know,&quot; and that line is exactly the two piles above. The reading you see over a word in Aoede now comes from the author when they said so, from a dictionary when there is a definitive answer, and from OpenJTalk only when nobody else has a better one.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Getting KiFinder ready to ship</title>
+    <link href="https://krisbaker.com/building/kifinder/getting-kifinder-ready-to-ship/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/getting-kifinder-ready-to-ship/</id>
+    <updated>2026-07-01T10:00:00Z</updated>
+    <published>2026-07-01T10:00:00Z</published>
+    <content type="html"><![CDATA[<p>KiFinder started as a tool for one job on my own Mac, and lately I have been doing the unglamorous work of turning it into something another person could install. That means the App Store, and the App Store means the App Sandbox. A sandboxed app cannot just read <code>~/Pictures</code>, so the whole file story had to change. KiFinder now asks for exactly what it needs and nothing more: read-write access to the folders, zips, and files you point it at, the network only to fetch the face model, and the Photos library only when you export. Its library lives in the app's own container by default, and if you pick a custom folder it is remembered as a security-scoped bookmark rather than a bare path the sandbox would lose on the next launch.</p>
+<p>The rest was the paperwork of shipping. An App Store category, a declaration that the app uses no non-exempt encryption (it only speaks HTTPS), signing set up so a debug build and a distribution archive each pick the right identity, and a pass to make sure none of my test hooks leak into a release build. That last one mattered more than it sounds. The app honored a set of <code>KION_*</code> launch variables for UI testing, and one of them could bypass the check that the downloaded model is the real one. A release build now strips all of them, so a shipped app sees only its own trusted defaults.</p>
+<p>Two smaller things came with getting serious. The enrollment copy assumed you were adding a child (&quot;baby, toddler, and recent shots so they're recognized as they grow&quot;), which is how I use it but not what the app is, so it now reads age-neutrally, because KiFinder finds anyone. And I finished the Japanese localization, all 48 strings, then had Codex review the translations through <a href="https://krisbaker.com/building/sparra/">Sparra</a>. It caught that my &quot;描いた顔&quot; read as an illustrated face rather than a manually drawn region, among other fixes. None of this is the fun part of building an app. It is the part that decides whether anyone else ever gets to use it.</p>]]></content>
+  </entry>
   <entry>
     <title>KiFinder becomes an app</title>
     <link href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/" rel="alternate"/>
@@ -166,32 +197,5 @@
     <published>2026-06-23T10:00:00Z</published>
     <content type="html"><![CDATA[<p>Sometimes every word is familiar and the sentence still does not make sense. Aoede now lets me ask about the current passage from inside the reader. It can translate, explain the grammar or vocabulary, or take a free-form question, then stream the answer beside the text while keeping the original passage in view. Playback pauses automatically while I ask, with a setting to turn that behavior off.</p>
 <p>The assistant is local-first. It can use Apple's on-device model or a local OpenAI-compatible server, with Shikisha providing the shared backend layer and native Anthropic support when I deliberately choose a cloud model. The useful change is not adding a chatbot. It is removing the copy, switch apps, paste, and find-my-place-again loop from reading.</p>]]></content>
-  </entry>
-  <entry>
-    <title>The whole loop, standing in a day</title>
-    <link href="https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/" rel="alternate"/>
-    <id>https://krisbaker.com/building/sparra/the-whole-loop-standing-in-a-day/</id>
-    <updated>2026-06-23T09:00:00Z</updated>
-    <published>2026-06-23T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Sparra started the way the workshop suggested: get the whole loop standing before polishing any one part of it. In one long day I wired the full spine end to end. Filesystem state that detects whether a project is greenfield or existing, a session layer on top of the Claude Agent SDK with tracing and guard hooks, the planning phases that co-edit a <code>PLAN.md</code>, the autonomous build loop with negotiated contracts and an adversarial evaluator, a reflect step that reads the run's traces, and a <code>sparra</code> CLI to drive it.</p>
-<p>The test that the skeleton was real came almost immediately: I pointed Sparra at its own codebase and had it build parts of itself, using the vitest suite it generated as the regression gate. A harness that can work on itself is a harness I can actually trust to tell me when it is broken. Everything since has been filling in this frame rather than redrawing it.</p>]]></content>
-  </entry>
-  <entry>
-    <title>A Dictionary Inside the Reader</title>
-    <link href="https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/a-dictionary-inside-the-reader/</id>
-    <updated>2026-06-23T09:00:00Z</updated>
-    <published>2026-06-23T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>Aoede can now answer the small question that interrupts almost every Japanese reading session: what does this word mean? A word or kanji opens a local JMdict lookup with its reading and English senses, without leaving the page or sending the text anywhere. Inflected words resolve through their base form first, so a form like 食べました can still find 食べる.</p>
-<p>The same dictionary also powers an optional reading aid for katakana loanwords. When the match is confident, Aoede can place the English source word above the katakana, much like furigana over kanji. It stays deliberately conservative around wasei-eigo and non-English loans. A missing gloss is better than a misleading one.</p>]]></content>
-  </entry>
-  <entry>
-    <title>The Voice Kept Reading, the Page Didn&apos;t</title>
-    <link href="https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/" rel="alternate"/>
-    <id>https://krisbaker.com/building/aoede/the-voice-kept-reading-the-page-didnt/</id>
-    <updated>2026-06-15T11:00:00Z</updated>
-    <published>2026-06-15T11:00:00Z</published>
-    <content type="html"><![CDATA[<p>Adding images to the reader surfaced a bug that turned out to be older than the images themselves. When the highlight crossed into a paragraph sitting below a tall image, the page would freeze in place while the voice read on without it. The cause was in how the page follows along. Aoede scrolls to keep the spoken word on a fixed line, and it does that by watching where the active word reports its position on screen. But a word on a row that has not been drawn yet, which is exactly what a paragraph pushed below a tall image is, never reports a position at all. The signal the scroll was waiting on simply never arrived, so it stalled while playback kept going.</p>
-<p>The fix stops trusting that one signal. Instead of waiting for the word to announce its frame, the reader watches which word is active and, if the scroll has not caught up a beat later, jumps to that word's paragraph directly and lets the layout settle before fine-tuning. Words already on screen report their frame within a single layout pass, so they never trigger a needless jump; only the off-screen ones, the ones that were getting stranded, take the recovery path. The voice and the page move together again, image or no image.</p>]]></content>
   </entry>
 </feed>

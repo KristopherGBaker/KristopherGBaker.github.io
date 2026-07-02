@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Sparraが自分のプロンプトを監査する</title>
-    <meta name="description" content="Sparraが自分のプロンプトを監査する">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <meta property="og:title" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:description" content="Sparraが自分のプロンプトを監査する">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/sparra-audits-its-own-prompts/">
+    <title>ビルドが実行できるものを締める</title>
+    <meta name="description" content="ビルドが実行できるものを締める">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/locking-down-what-the-build-can-run/">
+    <meta property="og:title" content="ビルドが実行できるものを締める">
+    <meta property="og:description" content="ビルドが実行できるものを締める">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/locking-down-what-the-build-can-run/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/sparra-audits-its-own-prompts/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/sparra-audits-its-own-prompts/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/locking-down-what-the-build-can-run/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/sparra/sparra-audits-its-own-prompts/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/sparra/locking-down-what-the-build-can-run/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,22 +108,20 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/sparra/" class="post-back">← Sparra</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.29</span>
-     · <span>約2分</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">Sparraが自分のプロンプトを監査する</h1>
+  <h1 class="h1 post-title update-title">ビルドが実行できるものを締める</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparraのどのロールもプロンプトで動いていて、エッジケースを一つずつ手当てするうちに、そのプロンプトは静かに膨らんでいました。長いプロンプトは一回ごとの呼び出しでトークンを食い、ある点を超えるとモデルにとってかえって読みにくくなります。そこで<code>sparra prompts audit</code>を作りました。Sparra自身のロールプロンプトを走査して切り詰めを提案する簡潔さの監査ツールで、独立した検証パスでゲートしてあるので、短いプロンプトが弱いプロンプトにもなってしまうことはありません。それを実際のプロンプトに走らせ、削りを反映しました。エバリュエーターは23パーセント、コントラクト・エバリュエーターは29、コントラクト・ジェネレーターは26。自分の足場を自分で良くしていくハーネス。これこそ最初から欲しかった自己参照のループです。</p>
-<p>同じ流れで、Sparraを人に見せられる状態にもしました。READMEを刷新して対話的なClaude Codeのワークフローを先頭に置き、複雑さに見合っていなかったInkのTUIを落とし、プッシュごとに型チェックとテストを走らせるGitHub Actionsを足し、フィクスチャから個人プロジェクト名を一般化し、MITライセンスを付けました。まだ初期段階で、まだほとんど自分のためのツールですが、いまは他の人が読んで、クローンして、動かせるものになっています。上の制作ログが、一週間でここまで来た道のりのほとんどです。</p></article>
+    <article class="prose"><p>Sparraのエバリュエーターは、成果物を実際に動かすことで役割を果たします。つまり、モデルが選んだコマンドを実行するということ。それはセキュリティの面でもあり、Sparra自身の敵対的なエバリュエーターは、そこを何度もすり抜けてきました。最初は、たぶん多くの人がやるであろう安全なやり方、<code>rm</code>のような危険なバイナリのdeny-listから始めました。エバリュエーターのプローブは、その真横を通り抜けました。<code>find -delete</code>や<code>perl -e</code>は、ブロックされたコマンドを一度も名指しせずにファイルシステムを書き換えますし、<code>rm${IFS}victim.txt</code>のようなシェル展開は、<code>rm</code>と綴らないので、どのサブストリング判定もすり抜けます。ビルドツールをallowlistするだけでも足りませんでした。<code>npm version patch</code>は、許可されたバイナリが、こっそり<code>package.json</code>を書き換えるサブコマンドを走らせているのです。</p>
+<p>そこで、姿勢を丸ごとallowlist-by-defaultに反転させました。既知の危険なコマンドをブロックする代わりに、エグゼキューターはいまや既知のビルド／テストランナーだけを、しかもその安全なサブコマンド（<code>test</code>、<code>run &lt;script&gt;</code>など）だけを実行します。インタプリタのeval系フラグは拒否し、<code>cargo publish</code>や<code>npm version</code>のような書き換え系の動詞は却下し、シェルのメタ文字や展開トークンはspawn前に弾き、コマンドはトークン化してシェルなしで起動します。かつての「危険に見えなければ何でも動く」は、いまは「安全だと認識できる形でなければ何も動かない」になりました。</p>
+<p>もっと微妙な修正は、エバリュエーターが見つけた「ロンダリング」の穴を塞いだことです。エグゼキューターが実行を拒むverifyコマンドは、以前は単にスキップされたまま、評決は緑のままでいられました。つまり、一度も実行されなかったチェックに成果物が「合格」できたのです。いまは、安全でないverifyコマンドは、タイプミスのあるコマンドとまったく同じように、プローブの時点でコントラクトの交渉に差し戻され、再実行時には専用のunsafeステータスを帯びて、合格を降格させ、コマンド名を挙げます。エグゼキューターが検めるのは依然としてコマンドの「形」であって、<code>make test</code>のようなプロジェクト自身のレシピの中身ではありません。その残りはworktreeの境界の内側に収まります。Sparraで何度も楽しいと感じるのは、これらのどれも、私が攻撃を想像して生まれたものではないことです。ツール自身のエバリュエーターが、自分自身のエグゼキューターを、ラウンドを重ねて攻撃し、攻撃が通らなくなるまで私が固めていった。そこから生まれたのです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">ビルドが実行できるものを締める</span>
-      </a>
-      <a href="/ja/building/sparra/driving-it-by-hand-from-claude-code/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">Claude Codeから手で回す</span>
+        <span class="update-nav-title">Sparraが自分のプロンプトを監査する</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>

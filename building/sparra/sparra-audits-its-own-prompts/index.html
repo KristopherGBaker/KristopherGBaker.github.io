@@ -117,7 +117,10 @@
     <article class="prose"><p>Every role in Sparra is driven by a prompt, and those prompts had quietly bloated as I patched edge case after edge case. Long prompts cost tokens on every single call and, past a point, actually read worse to the model. So I built <code>sparra prompts audit</code>, a conciseness auditor that runs over Sparra's own role prompts and proposes tightenings, gated by an independent verifier pass so a shorter prompt cannot also be a weaker one. Then I ran it on the real prompts and shipped the cuts: the evaluator dropped 23 percent, the contract-evaluator 29, the contract-generator 26. A harness that improves its own scaffolding is exactly the self-referential loop I wanted from the start.</p>
 <p>The same push got Sparra ready to be seen. I refreshed the README to lead with the interactive Claude Code workflow, dropped the Ink TUI that was not earning its complexity, added GitHub Actions running typecheck and tests on every push, genericized some private project names out of the fixtures, and put an MIT license on it. It is still early and still mostly a tool for me, but it is now a thing other people can read, clone, and run. The build log above is most of how it got here in a week.</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Locking down what the build can run</span>
+      </a>
       <a href="/building/sparra/driving-it-by-hand-from-claude-code/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
         <span class="update-nav-title">Driving it by hand from Claude Code</span>

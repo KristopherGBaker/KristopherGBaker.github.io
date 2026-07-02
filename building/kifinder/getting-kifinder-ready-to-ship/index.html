@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>KiFinder becomes an app</title>
-    <meta name="description" content="KiFinder becomes an app">
-    <link rel="canonical" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
-    <meta property="og:title" content="KiFinder becomes an app">
-    <meta property="og:description" content="KiFinder becomes an app">
-    <meta property="og:url" content="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
+    <title>Getting KiFinder ready to ship</title>
+    <meta name="description" content="Getting KiFinder ready to ship">
+    <link rel="canonical" href="https://krisbaker.com/building/kifinder/getting-kifinder-ready-to-ship/">
+    <meta property="og:title" content="Getting KiFinder ready to ship">
+    <meta property="og:description" content="Getting KiFinder ready to ship">
+    <meta property="og:url" content="https://krisbaker.com/building/kifinder/getting-kifinder-ready-to-ship/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/kifinder-becomes-an-app/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/kifinder-becomes-an-app/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/getting-kifinder-ready-to-ship/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/getting-kifinder-ready-to-ship/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/getting-kifinder-ready-to-ship/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,24 +107,21 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/kifinder/" class="post-back">← KiFinder</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.01</span>
      · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">KiFinder becomes an app</h1>
+  <h1 class="h1 post-title update-title">Getting KiFinder ready to ship</h1>
   
   <div class="post-body">
-    <article class="prose"><p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>
-<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
-<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p></article>
+    <article class="prose"><p>KiFinder started as a tool for one job on my own Mac, and lately I have been doing the unglamorous work of turning it into something another person could install. That means the App Store, and the App Store means the App Sandbox. A sandboxed app cannot just read <code>~/Pictures</code>, so the whole file story had to change. KiFinder now asks for exactly what it needs and nothing more: read-write access to the folders, zips, and files you point it at, the network only to fetch the face model, and the Photos library only when you export. Its library lives in the app's own container by default, and if you pick a custom folder it is remembered as a security-scoped bookmark rather than a bare path the sandbox would lose on the next launch.</p>
+<p>The rest was the paperwork of shipping. An App Store category, a declaration that the app uses no non-exempt encryption (it only speaks HTTPS), signing set up so a debug build and a distribution archive each pick the right identity, and a pass to make sure none of my test hooks leak into a release build. That last one mattered more than it sounds. The app honored a set of <code>KION_*</code> launch variables for UI testing, and one of them could bypass the check that the downloaded model is the real one. A release build now strips all of them, so a shipped app sees only its own trusted defaults.</p>
+<p>Two smaller things came with getting serious. The enrollment copy assumed you were adding a child (&quot;baby, toddler, and recent shots so they're recognized as they grow&quot;), which is how I use it but not what the app is, so it now reads age-neutrally, because KiFinder finds anyone. And I finished the Japanese localization, all 48 strings, then had Codex review the translations through <a href="/building/sparra/">Sparra</a>. It caught that my &quot;描いた顔&quot; read as an illustrated face rather than a manually drawn region, among other fixes. None of this is the fun part of building an app. It is the part that decides whether anyone else ever gets to use it.</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Getting KiFinder ready to ship</span>
-      </a>
-      <a href="/building/kifinder/a-window-to-review-the-maybes/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A window to review the maybes</span>
+        <span class="update-nav-title">KiFinder becomes an app</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
