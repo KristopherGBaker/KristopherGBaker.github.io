@@ -118,7 +118,10 @@
 <p>The rest was the paperwork of shipping. An App Store category, a declaration that the app uses no non-exempt encryption (it only speaks HTTPS), signing set up so a debug build and a distribution archive each pick the right identity, and a pass to make sure none of my test hooks leak into a release build. That last one mattered more than it sounds. The app honored a set of <code>KION_*</code> launch variables for UI testing, and one of them could bypass the check that the downloaded model is the real one. A release build now strips all of them, so a shipped app sees only its own trusted defaults.</p>
 <p>Two smaller things came with getting serious. The enrollment copy assumed you were adding a child (&quot;baby, toddler, and recent shots so they're recognized as they grow&quot;), which is how I use it but not what the app is, so it now reads age-neutrally, because KiFinder finds anyone. And I finished the Japanese localization, all 48 strings, then had Codex review the translations through <a href="/building/sparra/">Sparra</a>. It caught that my &quot;描いた顔&quot; read as an illustrated face rather than a manually drawn region, among other fixes. None of this is the fun part of building an app. It is the part that decides whether anyone else ever gets to use it.</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">The sandbox quietly turned off the faces</span>
+      </a>
       <a href="/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
         <span class="update-nav-title">KiFinder becomes an app</span>

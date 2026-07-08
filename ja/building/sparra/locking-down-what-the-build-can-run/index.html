@@ -118,7 +118,10 @@
 <p>そこで、姿勢を丸ごとallowlist-by-defaultに反転させました。既知の危険なコマンドをブロックする代わりに、エグゼキューターはいまや既知のビルド／テストランナーだけを、しかもその安全なサブコマンド（<code>test</code>、<code>run &lt;script&gt;</code>など）だけを実行します。インタプリタのeval系フラグは拒否し、<code>cargo publish</code>や<code>npm version</code>のような書き換え系の動詞は却下し、シェルのメタ文字や展開トークンはspawn前に弾き、コマンドはトークン化してシェルなしで起動します。かつての「危険に見えなければ何でも動く」は、いまは「安全だと認識できる形でなければ何も動かない」になりました。</p>
 <p>もっと微妙な修正は、エバリュエーターが見つけた「ロンダリング」の穴を塞いだことです。エグゼキューターが実行を拒むverifyコマンドは、以前は単にスキップされたまま、評決は緑のままでいられました。つまり、一度も実行されなかったチェックに成果物が「合格」できたのです。いまは、安全でないverifyコマンドは、タイプミスのあるコマンドとまったく同じように、プローブの時点でコントラクトの交渉に差し戻され、再実行時には専用のunsafeステータスを帯びて、合格を降格させ、コマンド名を挙げます。エグゼキューターが検めるのは依然としてコマンドの「形」であって、<code>make test</code>のようなプロジェクト自身のレシピの中身ではありません。その残りはworktreeの境界の内側に収まります。Sparraで何度も楽しいと感じるのは、これらのどれも、私が攻撃を想像して生まれたものではないことです。ツール自身のエバリュエーターが、自分自身のエグゼキューターを、ラウンドを重ねて攻撃し、攻撃が通らなくなるまで私が固めていった。そこから生まれたのです。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">SparraがSparraを採点するとき</span>
+      </a>
       <a href="/ja/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">Sparraが自分のプロンプトを監査する</span>

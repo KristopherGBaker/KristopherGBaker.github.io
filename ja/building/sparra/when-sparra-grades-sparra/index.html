@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>二つの言語、二つの単位系</title>
-    <meta name="description" content="二つの言語、二つの単位系">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
-    <meta property="og:title" content="二つの言語、二つの単位系">
-    <meta property="og:description" content="二つの言語、二つの単位系">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
+    <title>SparraがSparraを採点するとき</title>
+    <meta name="description" content="SparraがSparraを採点するとき">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/when-sparra-grades-sparra/">
+    <meta property="og:title" content="SparraがSparraを採点するとき">
+    <meta property="og:description" content="SparraがSparraを採点するとき">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/when-sparra-grades-sparra/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="x-default" href="/building/domestique/domestique-bilingual-units/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/when-sparra-grades-sparra/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/when-sparra-grades-sparra/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/when-sparra-grades-sparra/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/domestique/domestique-bilingual-units/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/sparra/when-sparra-grades-sparra/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,29 +106,25 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/ja/building/domestique/" class="post-back">← Domestique</a>
+  <a href="/ja/building/sparra/" class="post-back">← Sparra</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.05.25</span>
-     · <span>約2分</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.07</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">二つの言語、二つの単位系</h1>
+  <h1 class="h1 post-title update-title">SparraがSparraを採点するとき</h1>
   
   <div class="post-body">
-    <article class="prose"><p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>
-<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>
-<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>
-<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p></article>
+    <article class="prose"><p>前回はSparraのビルドが何を実行してよいかを締める話を書いた。それ以降の作業はもっと地味で、もっと奇妙だ。ループに自分自身を改善させることに取り組んでいる。ビルドの各runは最後のreflectフェーズで終わり、そこでモデルはそのサイクルで実際に何がまずかったかを書き出す。無駄になったラウンド、間違った採点、自分の修正を禁じてしまうコントラクト、といった具合に。そのfindingsをSparra組み込みのロールプロンプトにrunごとに畳み込んでいるので、次のビルドは前回の教訓を学び直すのではなく、そこから始められる。</p>
+<p>それ自体が問題を生んだ。reflectのinboxが溜まっていくのだ。各runはfindingsを新しいファイルとして落とすだけで、すでに何があるかを覚えていない。だから既知の再発する問題が、サイクルごとに新しい重複として入り直してしまう。inboxは小さいままにできず、ゼロを目指すのは終わりのないトレッドミルだった。直し方は、再発をノイズとして扱うのをやめ、優先度として扱うことだった。再び観測された問題は、重複を積み上げる代わりに既存のfindingのカウンタを増やし、inboxは「何回戻ってきたか」で並ぶ。抑えようとしていたシグナルが、実は役に立つシグナルだった。</p>
+<p>今でもニヤッとするのは、SparraをSparraに向けたとき、つまり一方のモデルがビルドし、もう一方が採点するときに起きたことだ。ツールが自分自身を検査しているからこそ存在するバグが出てきた。5つのテストが「durableなキャッシュのパスは使い捨てのスクラッチディレクトリではない」ことを、スクラッチディレクトリ名（<code>sprj-</code> のあとに16進）のパターンマッチで確認していた。ところがSparraがSparraを採点すると、judgeはまさにその名前のtmpディレクトリを持つサンドボックスで動く。だから本物のキャッシュパスがそのトークンを引き継ぎ、採点ラウンドのたびにアサーションが誤って落ちた。ツールのテストスイートが、ツールが自分を採点することで汚染されていたわけだ。直し方は、脆いsubstringではなくパスの構造（親ディレクトリ名）でアサートすることだった。ついでに小さいものもいくつか直した。orientフェーズはコードベースのマップを書くよう指示されているのに読み取り専用のガードで動いていて保存する手段がなかったし、worktreeで作業するビルダーがmainのチェックアウトにしか存在しないパスを読もうとしてターンを浪費し続けていた。どれも私が失敗を想像して見つけたものではない。ツールが自分のrunを観察して、リストにして渡してきたものだ。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/domestique/riding-your-own-route-in-3d/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">自分のルートを3Dで走る</span>
-      </a>
-      <a href="/ja/building/domestique/domestique-mont-ventoux/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">トレーナーの上のモンヴァントゥ</span>
+        <span class="update-nav-title">ビルドが実行できるものを締める</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/ja/building/domestique/" class="read-link">Domestique <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/ja/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

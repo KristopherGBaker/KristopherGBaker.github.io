@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>二つの言語、二つの単位系</title>
-    <meta name="description" content="二つの言語、二つの単位系">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
-    <meta property="og:title" content="二つの言語、二つの単位系">
-    <meta property="og:description" content="二つの言語、二つの単位系">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
+    <title>自分のルートを3Dで走る</title>
+    <meta name="description" content="自分のルートを3Dで走る">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/domestique/riding-your-own-route-in-3d/">
+    <meta property="og:title" content="自分のルートを3Dで走る">
+    <meta property="og:description" content="自分のルートを3Dで走る">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/domestique/riding-your-own-route-in-3d/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="x-default" href="/building/domestique/domestique-bilingual-units/">
+    <link rel="alternate" hreflang="en" href="/building/domestique/riding-your-own-route-in-3d/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/riding-your-own-route-in-3d/">
+    <link rel="alternate" hreflang="x-default" href="/building/domestique/riding-your-own-route-in-3d/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/domestique/domestique-bilingual-units/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/domestique/riding-your-own-route-in-3d/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,25 +107,24 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/domestique/" class="post-back">← Domestique</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.05.25</span>
-     · <span>約2分</span>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">二つの言語、二つの単位系</h1>
+  <h1 class="h1 post-title update-title">自分のルートを3Dで走る</h1>
   
   <div class="post-body">
-    <article class="prose"><p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>
-<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>
-<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>
-<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p></article>
+    <article class="prose"><p>Domestiqueはもともとルートをつらくする方法を知っていた。ルートを指定すればトレーナーが勾配をシミュレートするので、藤沢の部屋にいながら脚はしまなみ海道を感じる。でも画面に並ぶ数字を眺めているだけだった。実際に3Dで、しかも本物の地形の上でルートを走りたかった。見えている景色が脚の感覚と一致するように。</p>
+<p>そこでこの数日、ほとんどを<a href="/building/sparra/">Sparra</a>の敵対的ループ（Codexが成果を採点する構成）で作った。中心になるのは新しいpure-Swiftの地形パッケージだ。GPSをローカルな平面座標に投影し、ルートがどの標高タイルにかかるかを求め、terrariumエンコードの標高タイルをAWSのオープンなデータセットから取得し、ハイトマップにデコードして、ディスクにキャッシュする。一度走ったルートならオフラインで準備できる。もう一段のパイプラインがルートと地形をジオメトリに変える。地形メッシュ、ルートに沿って掃引したロードリボン、そして道が斜面に埋まるように道の下の地形を平らにならす処理だ。RealityKitがそれをレンダリングし、手続き的に生成したライダーがトレーナーの報告する距離に沿って進み、追従カメラが後ろから追いかける。いちばんこだわった不変条件はこれだ。道の標高は地形データではなくルートプロファイルから取る。だから見えている勾配は、脚で感じる勾配とぴったり一致する。</p>
+<p>正直なところ、その多くは目に見えないバグを追いかける作業だった。3Dで道が見えない状態が、認めたくないくらい長く続いた。三角形のワインディングが時計回りなのに法線は上を向いていると主張していたので、RealityKitがロードリボン全体をバックフェースカリングで静かに消していた。次に、実際のルートでは地形が粗すぎて、フラット化の処理が届く頂点がゼロになり、何もせず素通りしていた。結果として道は地面から浮くか、地中にもぐった。さらに、たった一つの悪い標高サンプル（サイコンの気圧計が走り出しの数秒で落ち着くまでの値で、周囲が+5.7m前後なのに-7.2mを指していた）が、ライダーがスポーンするまさにその位置に壁を作った。どれも一行で直りそうに見えて、自信ありげなシーンの裏に隠れていた。</p>
+<p>これがどれだけ初期段階かは、はっきり書いておきたい。まだブランチ上の粗いプロトタイプでmainには入れていないし、どうすれば走っていて気持ちよくなるかを模索している最中だ。本物のテクスチャやモデルはまだ使っていない。地形はフラットシェーディングで、道はテクスチャなしのただのリボン、ライダーはルートに沿って滑るだけのプレースホルダーだ。今の時点で本物なのは地面そのものだ。ハイトマップは実際の標高データから来ているので、登る地形の形は本物の丘の形になっている。その形の上に乗っているものは、まだどれもスケッチにすぎない。</p>
+<p><img src="/assets/building/domestique/ride-3d-prototype.png" alt="Ride 3Dプロトタイプでしまなみ海道を走っている様子。フラットシェーディングのグレーの地形の上を、シャルトリューズの線が入ったテクスチャなしの道が一人称視点で伸び、前方にプレースホルダーのライダー、HUDには151W、ケイデンス85、勾配+26.0%、0.04kmと表示されている。" />
+<em>サイドバーでPROTOとタグ付けされたRide 3Dプロトタイプ。しまなみ海道の車輪の下にあるのは本物の標高で、その上に乗っているものはまだすべて仮のものだ。</em></p></article>
     <nav class="update-nav">
-      <a href="/ja/building/domestique/riding-your-own-route-in-3d/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">自分のルートを3Dで走る</span>
-      </a>
-      <a href="/ja/building/domestique/domestique-mont-ventoux/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/domestique/domestique-bilingual-units/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">トレーナーの上のモンヴァントゥ</span>
+        <span class="update-nav-title">二つの言語、二つの単位系</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/domestique/" class="read-link">Domestique <span class="arrow" aria-hidden="true">→</span></a></div>

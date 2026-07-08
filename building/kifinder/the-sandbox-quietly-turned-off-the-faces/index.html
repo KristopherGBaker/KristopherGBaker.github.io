@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Locking down what the build can run</title>
-    <meta name="description" content="Locking down what the build can run">
-    <link rel="canonical" href="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
-    <meta property="og:title" content="Locking down what the build can run">
-    <meta property="og:description" content="Locking down what the build can run">
-    <meta property="og:url" content="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
+    <title>The sandbox quietly turned off the faces</title>
+    <meta name="description" content="The sandbox quietly turned off the faces">
+    <link rel="canonical" href="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <meta property="og:title" content="The sandbox quietly turned off the faces">
+    <meta property="og:description" content="The sandbox quietly turned off the faces">
+    <meta property="og:url" content="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,28 +106,25 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/building/sparra/" class="post-back">← Sparra</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
-     · <span>2 min read</span>
+  <a href="/building/kifinder/" class="post-back">← KiFinder</a>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+     · <span>3 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Locking down what the build can run</h1>
+  <h1 class="h1 post-title update-title">The sandbox quietly turned off the faces</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparra's evaluator earns its keep by actually running the artifact, which means running commands a model chose. That is also a security surface, and Sparra's own adversarial evaluator kept finding ways through it. I started the safe way I think most people would, by deny-listing dangerous binaries like <code>rm</code>. The evaluator's probe walked straight around it. <code>find -delete</code> and <code>perl -e</code> mutate the filesystem without ever naming a blocked command, and shell expansion like <code>rm${IFS}victim.txt</code> slipped past every substring check because it never spells <code>rm</code> out. Even allowlisting a build tool was not enough on its own, since <code>npm version patch</code> is an allowed binary running a subcommand that quietly rewrites <code>package.json</code>.</p>
-<p>So I inverted the whole posture to allowlist-by-default. Instead of blocking known-bad commands, the executor now runs only known build and test runners, and only their safe subcommands: <code>test</code>, <code>run &lt;script&gt;</code>, and the like. Interpreter-eval flags are rejected, mutating verbs like <code>cargo publish</code> or <code>npm version</code> are refused, any shell metacharacter or expansion token is rejected before spawn, and the command is tokenized and launched with no shell at all. What used to be &quot;everything runs unless it looks dangerous&quot; is now &quot;nothing runs unless it is a shape I recognize as safe.&quot;</p>
-<p>The subtler fix was closing a laundering hole the evaluator caught. A verify command the executor refuses to run could previously just be skipped while the verdict stayed green, which means an artifact could &quot;pass&quot; a check that never happened. Now an unsafe verify command bounces back into contract negotiation at probe time, exactly like a command with a typo would, and at rerun it carries a dedicated unsafe status that demotes the pass and names the command. The executor still only vets the shape of a command, not the contents of a project's own recipe like <code>make test</code>, and that residual stays inside the worktree boundary. The part I keep enjoying about Sparra is that none of this came from me imagining attacks. It came from the tool's own evaluator attacking its own executor, round after round, and me hardening it until the attacks stopped landing.</p></article>
+    <article class="prose"><p>Getting KiFinder ready for the App Store meant turning on the App Sandbox, which I wrote about last time as mostly paperwork. It was not. After the sandbox went on, a scan would finish and find nothing: no faces detected, no photos scored, an empty grid where my daughters' matches used to be. Everything still looked like it was working, which is the worst kind of broken.</p>
+<p>The cause was one hardcoded path. KiFinder's face model runs through CoreML, which compiles the model into a temporary directory before it can run, and I had pointed that directory at <code>/private/tmp/kifinder-coreml</code>, outside the app's sandbox container. Before the sandbox, that was fine. After, the directory was not writable, the CoreML session failed to build, and because the failure was swallowed by a <code>try?</code>, every embedding call quietly returned nil and the scan produced a manifest with zero faces. It had worked right up until the sandbox landed, and the on-device smoke test that would have caught it had been deferred. The fix was small, deriving the scratch directory from the system temp dir so it lands inside the container, but I only trusted it after a throwaway live-engine test over my own kept photos showed embeddings going from zero before to five and six after. The lesson I keep relearning: the check you defer is exactly the one that would have caught the regression.</p>
+<p>The rest of the stretch was making the engine calmer and more legible, all through <a href="/building/sparra/">Sparra</a>. Re-scoring the whole album after every keep or skip was spinning the fans, so that moved behind a manual &quot;Find new matches&quot; button instead of running on every decision. And the re-scoring itself, which used to be a scalar cosine loop over every face against every reference, became a single batched matrix multiply per album. The one I am most curious about is Face Space, a 2D scatter of the active person's embeddings projected down to two principal components: the reference and kept faces, the skip-taught negatives, and the review candidates, all plotted so I can see why a photo matches and spot a reference that is dragging the rest off course. It is gated behind an internal flag and not yet validated on device, more a way to see what the matcher sees than a shipped feature. But being able to look at the embedding space instead of just trusting the scores feels like the right direction.</p></article>
     <nav class="update-nav">
-      <a href="/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">When Sparra grades Sparra</span>
-      </a>
-      <a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Sparra audits its own prompts</span>
+        <span class="update-nav-title">Getting KiFinder ready to ship</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

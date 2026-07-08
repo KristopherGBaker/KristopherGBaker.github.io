@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Locking down what the build can run</title>
-    <meta name="description" content="Locking down what the build can run">
-    <link rel="canonical" href="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
-    <meta property="og:title" content="Locking down what the build can run">
-    <meta property="og:description" content="Locking down what the build can run">
-    <meta property="og:url" content="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
+    <title>When Sparra grades Sparra</title>
+    <meta name="description" content="When Sparra grades Sparra">
+    <link rel="canonical" href="https://krisbaker.com/building/sparra/when-sparra-grades-sparra/">
+    <meta property="og:title" content="When Sparra grades Sparra">
+    <meta property="og:description" content="When Sparra grades Sparra">
+    <meta property="og:url" content="https://krisbaker.com/building/sparra/when-sparra-grades-sparra/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/when-sparra-grades-sparra/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/when-sparra-grades-sparra/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/when-sparra-grades-sparra/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/when-sparra-grades-sparra/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -108,23 +108,20 @@
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/sparra/" class="post-back">← Sparra</a>
   <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.07</span>
      · <span>2 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Locking down what the build can run</h1>
+  <h1 class="h1 post-title update-title">When Sparra grades Sparra</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparra's evaluator earns its keep by actually running the artifact, which means running commands a model chose. That is also a security surface, and Sparra's own adversarial evaluator kept finding ways through it. I started the safe way I think most people would, by deny-listing dangerous binaries like <code>rm</code>. The evaluator's probe walked straight around it. <code>find -delete</code> and <code>perl -e</code> mutate the filesystem without ever naming a blocked command, and shell expansion like <code>rm${IFS}victim.txt</code> slipped past every substring check because it never spells <code>rm</code> out. Even allowlisting a build tool was not enough on its own, since <code>npm version patch</code> is an allowed binary running a subcommand that quietly rewrites <code>package.json</code>.</p>
-<p>So I inverted the whole posture to allowlist-by-default. Instead of blocking known-bad commands, the executor now runs only known build and test runners, and only their safe subcommands: <code>test</code>, <code>run &lt;script&gt;</code>, and the like. Interpreter-eval flags are rejected, mutating verbs like <code>cargo publish</code> or <code>npm version</code> are refused, any shell metacharacter or expansion token is rejected before spawn, and the command is tokenized and launched with no shell at all. What used to be &quot;everything runs unless it looks dangerous&quot; is now &quot;nothing runs unless it is a shape I recognize as safe.&quot;</p>
-<p>The subtler fix was closing a laundering hole the evaluator caught. A verify command the executor refuses to run could previously just be skipped while the verdict stayed green, which means an artifact could &quot;pass&quot; a check that never happened. Now an unsafe verify command bounces back into contract negotiation at probe time, exactly like a command with a typo would, and at rerun it carries a dedicated unsafe status that demotes the pass and names the command. The executor still only vets the shape of a command, not the contents of a project's own recipe like <code>make test</code>, and that residual stays inside the worktree boundary. The part I keep enjoying about Sparra is that none of this came from me imagining attacks. It came from the tool's own evaluator attacking its own executor, round after round, and me hardening it until the attacks stopped landing.</p></article>
+    <article class="prose"><p>Last time I wrote about locking down what a Sparra build is allowed to run. Since then the work has been quieter and stranger: teaching the loop to improve itself. Every build run ends with a reflect phase where the model writes down what actually went wrong that cycle, a wasted round, a wrong grade, a contract that outlawed its own fix. I have been folding those findings back into Sparra's built-in role prompts, run after run, so the next build starts from the last one's lessons instead of relearning them.</p>
+<p>That created its own problem. The reflect inbox accumulated. Every run dropped its findings as new files with no memory of what was already there, so a known recurring issue re-entered as a fresh duplicate each cycle. The inbox could never stay small, and chasing zero was a treadmill. The fix was to stop treating recurrence as churn and start treating it as priority. A re-observed issue now bumps a counter on the existing finding instead of piling up a duplicate, and the inbox ranks by how often something has come back. The signal I was trying to suppress turned out to be the useful one.</p>
+<p>The part that still makes me grin is what happened when I pointed Sparra at Sparra, one model building while another grades. It surfaced a bug that only exists because the tool was inspecting itself. Five tests asserted that a durable cache path was not the throwaway scratch directory, and they checked that by pattern-matching the scratch dir's name, <code>sprj-</code> followed by hex. But when Sparra grades Sparra, the judge runs in a sandbox whose own temp dir is named exactly that way, so the real cache path inherited the token and the assertion false-failed every single grading round. The tool's own test suite was being poisoned by the tool grading itself. The fix was to assert the path's structure, its parent directory name, instead of a fragile substring. A few smaller things came along the way: the orient phase was asked to write a codebase map but ran under a read-only guard with no way to save it, and a builder working in a worktree kept burning turns reading paths that only existed in the main checkout. None of these came from me imagining failures. They came from the tool watching its own runs and handing me the list.</p></article>
     <nav class="update-nav">
-      <a href="/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">When Sparra grades Sparra</span>
-      </a>
-      <a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Sparra audits its own prompts</span>
+        <span class="update-nav-title">Locking down what the build can run</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>

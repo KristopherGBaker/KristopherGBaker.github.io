@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>二つの言語、二つの単位系</title>
-    <meta name="description" content="二つの言語、二つの単位系">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
-    <meta property="og:title" content="二つの言語、二つの単位系">
-    <meta property="og:description" content="二つの言語、二つの単位系">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/domestique/domestique-bilingual-units/">
+    <title>サンドボックスが顔認識をこっそり止めていた</title>
+    <meta name="description" content="サンドボックスが顔認識をこっそり止めていた">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <meta property="og:title" content="サンドボックスが顔認識をこっそり止めていた">
+    <meta property="og:description" content="サンドボックスが顔認識をこっそり止めていた">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/domestique-bilingual-units/">
-    <link rel="alternate" hreflang="x-default" href="/building/domestique/domestique-bilingual-units/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/domestique/domestique-bilingual-units/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,29 +106,25 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/ja/building/domestique/" class="post-back">← Domestique</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.05.25</span>
-     · <span>約2分</span>
+  <a href="/ja/building/kifinder/" class="post-back">← KiFinder</a>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+     · <span>約3分</span>
   </p>
-  <h1 class="h1 post-title update-title">二つの言語、二つの単位系</h1>
+  <h1 class="h1 post-title update-title">サンドボックスが顔認識をこっそり止めていた</h1>
   
   <div class="post-body">
-    <article class="prose"><p>自分のマシンの上で動くツールなら、自分の言語と単位を話すべきです。しかも、その両方を。</p>
-<p>そこで数日かけて、Domestiqueをバイリンガルかつ単位対応にしました。アプリの文字列はすべてxcstringsカタログに移しました。各ビュー、ステータスとエラーのメッセージ、enumのラベル、ワークアウトとプランとアドヒアランスの文章、さらにはSpriteKitのゲーム内のラベルまで。そして単位系のプリファレンスを追加し、距離・標高・速度・体重をメートル法かヤード・ポンド法で表示できるようにしました。エネルギーのkJとkcalは別のトグルです。kJからkcalの換算も、これまで通していた1:1のスタブではなく、ちゃんと4.184で割る本物の計算になりました。</p>
-<p>同じ期間に、いくつかの必須条件もゆるめました。ガーミンのサインインは玄関ではなく任意になり、Stravaだけでもアプリを使えます。ツールバーの同期とステータスのピルもそれを尊重します。ランプテストも賢くなり、ステップを維持できなくなると自動で終了し、推定FTPをそのままクールダウンに表示します。ステップごとのコーチングのキューも、もう重なりません。</p>
-<p>どれも派手ではありません。けれどここは、アプリが「自分のために作られた」と感じるか、「自分に合わせられただけ」と感じるかを分ける層です。二つの国のあいだで暮らしていると、その違いに気づきます。</p></article>
+    <article class="prose"><p>KiFinderをApp Storeに出す準備は、App Sandboxを有効にすることを意味した。前回はそれをほとんど事務作業のように書いた。そんなことはなかった。サンドボックスをオンにしたあと、スキャンは終わるのに何も見つけなくなった。顔は検出されず、写真にスコアも付かず、娘たちのマッチが並んでいたはずのグリッドが空になった。それでいて全部が動いているように見える。いちばんたちの悪い壊れ方だ。</p>
+<p>原因はハードコードされた一つのパスだった。KiFinderの顔モデルはCoreMLで動き、CoreMLは実行前にモデルを一時ディレクトリにコンパイルする。私はそのディレクトリを <code>/private/tmp/kifinder-coreml</code>、つまりアプリのサンドボックスコンテナの外に向けていた。サンドボックスの前ならそれで問題なかった。オンにしたあとはそのディレクトリに書き込めず、CoreMLセッションの生成が失敗し、しかもその失敗が <code>try?</code> に飲み込まれるので、あらゆるembeddingの呼び出しが静かにnilを返し、スキャンは顔ゼロのマニフェストを生んだ。サンドボックスが入る直前まで動いていたし、それを捕まえられたはずのオンデバイスのスモークテストは後回しにしていた。修正自体は小さく、スクラッチディレクトリをシステムのtmpから導出してコンテナの中に収めるだけだ。ただ、信用できたのは、自分のkeep済みの写真で使い捨てのライブエンジンテストを回して、embeddingが修正前のゼロから修正後の5や6に変わるのを見てからだった。何度も学び直す教訓がある。後回しにしたチェックこそ、そのリグレッションを捕まえたはずのものだ。</p>
+<p>残りの期間は、エンジンをより静かに、より読み取りやすくする作業で、すべて<a href="/building/sparra/">Sparra</a>を通した。keepやskipのたびにアルバム全体を再スコアするのはファンを回していたので、毎回の判断で走らせるのをやめ、手動の「Find new matches」ボタンの裏に移した。再スコアそのものも、すべての顔をすべての参照に対して回すスカラーのコサイン計算から、アルバムごとに一回のバッチ行列積に変えた。いちばん気になっているのはFace Spaceだ。アクティブな人物のembeddingを主成分二つに落とした2Dの散布図で、参照とkeepした顔、skipで教えたネガティブ、レビュー候補を一緒にプロットする。なぜある写真がマッチするのかが見え、他を引っ張っている外れ値の参照に気づける。まだ内部フラグの裏にあってオンデバイスでは未検証で、出荷した機能というよりマッチャーが見ているものを見るための手段だ。それでも、スコアを信じるだけでなくembedding空間そのものを眺められるのは、正しい方向に思える。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/domestique/riding-your-own-route-in-3d/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">自分のルートを3Dで走る</span>
-      </a>
-      <a href="/ja/building/domestique/domestique-mont-ventoux/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">トレーナーの上のモンヴァントゥ</span>
+        <span class="update-nav-title">KiFinderを世に出す準備</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/ja/building/domestique/" class="read-link">Domestique <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 

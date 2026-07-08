@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Locking down what the build can run</title>
-    <meta name="description" content="Locking down what the build can run">
-    <link rel="canonical" href="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
-    <meta property="og:title" content="Locking down what the build can run">
-    <meta property="og:description" content="Locking down what the build can run">
-    <meta property="og:url" content="https://krisbaker.com/building/sparra/locking-down-what-the-build-can-run/">
+    <title>Riding your own route in 3D</title>
+    <meta name="description" content="Riding your own route in 3D">
+    <link rel="canonical" href="https://krisbaker.com/building/domestique/riding-your-own-route-in-3d/">
+    <meta property="og:title" content="Riding your own route in 3D">
+    <meta property="og:description" content="Riding your own route in 3D">
+    <meta property="og:url" content="https://krisbaker.com/building/domestique/riding-your-own-route-in-3d/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/locking-down-what-the-build-can-run/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/locking-down-what-the-build-can-run/">
+    <link rel="alternate" hreflang="en" href="/building/domestique/riding-your-own-route-in-3d/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/domestique/riding-your-own-route-in-3d/">
+    <link rel="alternate" hreflang="x-default" href="/building/domestique/riding-your-own-route-in-3d/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/domestique/riding-your-own-route-in-3d/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -106,28 +106,28 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/building/sparra/" class="post-back">← Sparra</a>
-  <p class="post-meta update-meta is-shipped">
-    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
-     · <span>2 min read</span>
+  <a href="/building/domestique/" class="post-back">← Domestique</a>
+  <p class="post-meta update-meta is-wip">
+    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+     · <span>3 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Locking down what the build can run</h1>
+  <h1 class="h1 post-title update-title">Riding your own route in 3D</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparra's evaluator earns its keep by actually running the artifact, which means running commands a model chose. That is also a security surface, and Sparra's own adversarial evaluator kept finding ways through it. I started the safe way I think most people would, by deny-listing dangerous binaries like <code>rm</code>. The evaluator's probe walked straight around it. <code>find -delete</code> and <code>perl -e</code> mutate the filesystem without ever naming a blocked command, and shell expansion like <code>rm${IFS}victim.txt</code> slipped past every substring check because it never spells <code>rm</code> out. Even allowlisting a build tool was not enough on its own, since <code>npm version patch</code> is an allowed binary running a subcommand that quietly rewrites <code>package.json</code>.</p>
-<p>So I inverted the whole posture to allowlist-by-default. Instead of blocking known-bad commands, the executor now runs only known build and test runners, and only their safe subcommands: <code>test</code>, <code>run &lt;script&gt;</code>, and the like. Interpreter-eval flags are rejected, mutating verbs like <code>cargo publish</code> or <code>npm version</code> are refused, any shell metacharacter or expansion token is rejected before spawn, and the command is tokenized and launched with no shell at all. What used to be &quot;everything runs unless it looks dangerous&quot; is now &quot;nothing runs unless it is a shape I recognize as safe.&quot;</p>
-<p>The subtler fix was closing a laundering hole the evaluator caught. A verify command the executor refuses to run could previously just be skipped while the verdict stayed green, which means an artifact could &quot;pass&quot; a check that never happened. Now an unsafe verify command bounces back into contract negotiation at probe time, exactly like a command with a typo would, and at rerun it carries a dedicated unsafe status that demotes the pass and names the command. The executor still only vets the shape of a command, not the contents of a project's own recipe like <code>make test</code>, and that residual stays inside the worktree boundary. The part I keep enjoying about Sparra is that none of this came from me imagining attacks. It came from the tool's own evaluator attacking its own executor, round after round, and me hardening it until the attacks stopped landing.</p></article>
+    <article class="prose"><p>Domestique already knew how to make a route hurt. Point it at a route and the trainer simulates the gradient, so my legs feel the Shimanami Kaido even though I am in a room in Fujisawa. But I was still staring at numbers on a flat screen. I wanted to actually ride the route in 3D, over the real shape of the land, with the picture matching what my legs feel.</p>
+<p>So over the last few days I built that, mostly through <a href="/building/sparra/">Sparra</a>'s adversarial loop with Codex grading the work. The core is a new pure-Swift terrain package. It projects GPS into a local flat frame, works out which elevation tiles a route touches, pulls terrarium-encoded height tiles from an open AWS dataset, decodes them to heightmaps, and caches them on disk so a route I have ridden once prepares offline. A second pipeline turns the route and terrain into geometry: a terrain mesh, a road ribbon swept along the route, and the terrain flattened underneath so the road sits in the hillside instead of hovering over it. RealityKit renders it, a procedural rider follows the trainer's reported distance, and a follow camera rides behind. The one invariant I cared about most: the road's elevation comes from the route profile, not the terrain data, so the grade you see is exactly the grade you feel.</p>
+<p>The honest part is how much of this was chasing bugs I could not see. The road was invisible in 3D for longer than I want to admit. Its triangles were wound clockwise while their normals claimed to face up, so RealityKit quietly back-face-culled the entire ribbon. Then on real routes the terrain came in so coarse that the flatten pass reached zero vertices and silently did nothing, leaving the road floating above the ground or tunneling under it. And a single bad elevation sample, a head unit's barometer settling over the first seconds of a ride and reading -7.2 m against neighbors around +5.7 m, built a wall right where the rider spawns. Each of these looked like a one-line fix hiding behind a confident-looking scene.</p>
+<p>I want to be clear about how early this is. It is a rough prototype on a branch, not merged, and I am still working out how to make it feel good to ride. There are no real textures or models yet: the terrain is flat-shaded, the road is a plain untextured ribbon, and the rider is a placeholder that slides along the route. What is real now is the ground itself. The heightmaps come from actual elevation data, so the shape you climb is the shape of the hill. Everything on top of that shape is still a sketch.</p>
+<p><img src="/assets/building/domestique/ride-3d-prototype.png" alt="The Ride 3D prototype riding the Shimanami Kaido: a first-person view down a chartreuse-lined untextured road over flat-shaded grey terrain, a placeholder rider ahead, with a HUD reading 151 W, 85 rpm, +26.0% grade, and 0.04 km." />
+<em>The Ride 3D prototype, tagged PROTO in the sidebar. Real elevation under the wheels on the Shimanami Kaido, and everything above it still a placeholder.</em></p></article>
     <nav class="update-nav">
-      <a href="/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">When Sparra grades Sparra</span>
-      </a>
-      <a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/domestique/domestique-bilingual-units/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Sparra audits its own prompts</span>
+        <span class="update-nav-title">Two languages, two unit systems</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/building/domestique/" class="read-link">Domestique <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 
