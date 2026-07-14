@@ -5,10 +5,36 @@
     <link>https://krisbaker.com/ja/</link>
     <atom:link href="https://krisbaker.com/ja/rss.xml" rel="self" type="application/rss+xml"/>
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
-    <generator>Inkwell 0.15.1</generator>
+    <generator>Inkwell 0.15.2</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 08 Jul 2026 11:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 11:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Sparraを動かすのに、もうノートパソコンはいらない</title>
+      <link>https://krisbaker.com/ja/building/sparra/sparra-runs-without-my-laptop/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/sparra/sparra-runs-without-my-laptop/</guid>
+      <pubDate>Tue, 14 Jul 2026 11:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Sparraにはすでに二つの動かし方があった。Claude Codeのセッションからその場で操縦するか、<code>plan → freeze → build → reflect</code> を丸ごと任せて放置しておくかだ。ただ、どちらの方法でも、実際に処理を回しているのは結局自分のノートパソコンだった。今回、その前提を二つの方向から崩した。<code>sparra conduct &quot;&lt;プロンプト&gt;&quot;</code> は新しいヘッドレスのコンダクターで、プロンプトをひとつ渡すとそれをいくつかのユニットに分解し、それぞれを contract-negotiate → generate → cross-model evaluate → decide というループに通す。<code>/sparra-loop</code> で自分が手動でやっているのと同じ流れだが、今度はハンドルを握るのが自分ではない。デフォルトは hybrid ブレインモードで動く。基本のループは決まった手順通りに進み、LLMのコンダクター役が呼ばれるのは、合格ラインぎりぎりの判定や契約がなかなか収束しないときなど、本当に判断が要る数か所だけだ。<code>--auto</code> を渡せば、その判断もすべてブレインに任せられる。</p>
+<p>二つ目のピースは、家にいないときにこそ効いてくる。小さなHTTPブリッジをMac上でlaunchdサービスとして動かし、Tailscaleでつながったデバイス、スマホでも別のノートパソコンでも、そこからネットワーク越しに実行をトリガーして様子を見られるようにした。実装で時間をかけたのは「できること」より「絶対にしないこと」の方だ。どんな設定でも公開アドレスにはバインドしない。ヘルスチェック以外の全ルートはbearerトークンを一定時間で検証する。呼び出し元が渡すパスはすべて、許可されたルートの内側に解決されない限りファイルシステムに触れる前に弾かれる。そしてどのエンドポイントも生のロール出力やホールドアウトのテキストを返すことは決してなく、対話型のコンダクターがすでに見ているのと同じ、伏せた要約だけを返す。インストールはコマンド一つで、ランダムなトークンを生成し、ランチエージェントを書き込み、そのトークンを一度だけ表示する。今では判定待ちの状態になっても、自分を待たせているのは端末ではない。スマホから開けるダッシュボードのページだ。</p>
+<p>すんなりとはいかなかった。ブリッジがどうにも起動しなくて、しばらく理由が分からなかった。launchdがサービスを起動する環境は、シェルのプロファイルもPATHも普段の対話的なターミナルとは違う、削ぎ落とされたものだと思い出すまでは。だから自分のシェルから手で動かせば普通に動くスクリプトが、バックグラウンドサービスとしては黙って失敗していた。こういうバグは、実際に無人稼働をやらせてみて初めて表に出てくる。そしてそれこそが、今回作ったものの狙いそのものだった。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>InkwellがLinux上でもビルドできるようになった</title>
+      <link>https://krisbaker.com/ja/building/inkwell/inkwell-builds-on-linux/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/inkwell/inkwell-builds-on-linux/</guid>
+      <pubDate>Tue, 14 Jul 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Inkwellはこれまでずっと、Homebrew経由でインストールしたmacOSの上でしか動かしたことがなかった。好奇心もあって、Debian 12(aarch64)にSwift 6ツールチェーンを入れ、ソースから直接ビルドしてみた。壊れた箇所は三つあり、どれも机上の空論ではなく実際に踏んだ問題だった。CryptoKitはApple専用のフレームワークなので、それを使っていた一箇所だけをswift-cryptoの互換APIであるCryptoモジュールに切り替え、<code>#if canImport(CryptoKit)</code> で条件分岐した。GlibcのstderrはDarwinのものと違って該当のアノテーションが付いておらず、Swift 6の厳格な並行性チェックが <code>fputs(_, stderr)</code> の呼び出しをすべて弾いてしまうので、<code>FileHandle.standardError.write</code> に置き換えた。厄介だったのはリソースバンドルの方だ。SwiftPMが生成するバンドルディレクトリの名前は、Appleのプラットフォームでは <code>.bundle</code> だが、Linuxでは <code>&lt;パッケージ名&gt;_&lt;ターゲット名&gt;.resources</code> になる。ビルド自体はどちらでも成功するのに、Linux側だけテーマの読み込みが実行時に静かに失敗し、ビルドは通っているのにスタイルの当たっていないサイトができ、ビルドログを見てもその理由は分からなかった。</p>
+<p>修正の確認は正攻法でやった。<code>swift build</code> を通したあと、まっさらな状態から <code>inkwell init</code> と <code>inkwell build</code> を実行し、HTML、フィード、サイトマップ、アセットが全部きちんと出ているか確かめた。CIは今もmacOS限定なので、これはグリーンのチェックマークが保証してくれるものではなく、自分の手でひとつずつ確認したに過ぎない。それが気になったので、次にやったのはLinux用のビルド・テストジョブをCIに追加することだった。次に似たような移植性の問題が起きたときは、誰かのDebian環境で静かに壊れるのではなく、プルリクエストの時点で派手に落ちてくれるはずだ。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>うっかりキャンセルできない登録フローに</title>
+      <link>https://krisbaker.com/ja/building/kifinder/kifinder-onboarding-cant-be-skipped/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/kifinder/kifinder-onboarding-cant-be-skipped/</guid>
+      <pubDate>Mon, 13 Jul 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>顔認識モデルのダウンロードが終わると、KiFinderは登録用のシートを表示していた。でも、それを閉じることを止めるものは何もなかった。キャンセルでも、Escapeキーでも、シートの外をクリックしても、誰も登録されていない、照合対象が何もない状態のままReviewに放り出されてしまい、そもそも何のためのオンボーディングなのか分からなくなっていた。修正はシンプルな条件でシートをゲートするというもので、登録済みの人が誰もいないかどうかを見て、いなければCancelボタンを隠し、システムの「タップで閉じる」も無効にする。登録を完了する以外に抜け道はなくなる。すでに登録済みの人を登録し直す場合や、一人目が残っている状態で二人目を追加する場合は、これまで通り自由にキャンセルできる。そちらは必須の最初の一歩ではなく、本当の意味での任意の操作だからだ。</p>
+<p>同じロジックが、想定していなかった角度からもう一度顔を出した。登録した最後の一人を削除したらどうなるか、という話だ。これまでは、名簿が空になった状態でReviewに戻され、アプリを再起動する以外に登録画面へ戻る手段がなかった。今回の修正で、最後の一人を削除すると同じ必須の登録シートが自動的に開き直るようになった。人が一人もいないライブラリは、そこに至った経緯がどうであれ、実質的に初回起動と同じ状態だからだ。</p>
+<p>そのコードを触っているついでに、最初のオンボーディング実装のときから気になっていたことも直した。ウィンドウが起動時にとんでもなく縦長に開いてしまう問題で、高さにして3576ポイントほどにもなっていた。原因はオンボーディングのビューが有限の高さを持たず、フレームを際限なく埋めようとしていたことで、ウィンドウシステムが基準にできる高さがなかった。ルートのビューに明確な基準サイズを与えつつ、リサイズや最大化はこれまで通りできるようにしたことで直った。保存されるウィンドウサイズは今では1000×640という常識的な値に落ち着いている。</p>]]></content:encoded>
+    </item>
     <item>
       <title>サンドボックスが顔認識をこっそり止めていた</title>
       <link>https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/</link>
@@ -157,30 +183,6 @@
       <pubDate>Thu, 25 Jun 2026 09:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>モデルが自分の仕事を採点するのは、弱いチェックです。二つの役割で同じ盲点を共有するので、書くときに見えないバグは、レビューするときにも捕まえられません。解決策は、バックエンドを一つのシームの裏から引き出すことでした。セッションランナーを差し替え可能な<code>AgentBackend</code>に切り出し、Claudeの隣にCodexのアダプターを足し、バックエンドをロールごとに選べるようにしました。これでClaudeがビルドしてCodexが判定する、あるいはその逆ができ、セカンドオピニオンは本当に独立したものになります。</p>
 <p>同じ週に、任せても安心だと思えるようにするガードレールも入れました。ビルド側が決して見ないエバリュエーター専用のチェックからなるホールドアウトの壁。これはパスで渡すので、そこに過適合できません。受け入れの前に差分へもう一つの視点を加える、オプトインのコードレビューゲート。そして自動コミット。小さなモデルが、受け入れた変更を原子的なConventional CommitsにしてSparraのブランチに乗せます。私のmainには決して触れません。さらに全体をClaude Codeのプラグインとしてパッケージし、編集セッションを離れずに呼び出せるようにしました。何度も立ち返るのはクロスモデルの部分です。モデルが自分の評判を真に受けるのを止める、いちばん安上がりな方法でした。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>ジャッジにアプリを動かさせる</title>
-      <link>https://krisbaker.com/ja/building/sparra/letting-the-judge-run-the-app/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/sparra/letting-the-judge-run-the-app/</guid>
-      <pubDate>Wed, 24 Jun 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>コードを読むだけのエバリュエーターは簡単に騙せます。正しそうに見えて一度も動かないものに合格を出してしまう。だから次にSparraが覚えたのは、成果物を実際に動かすこと。そして私がいちばん気にかけるプロジェクトでは、それはAppleプラットフォームを意味します。エバリュエーターにXcodeBuildMCP CLIを操作させました。アプリをビルドし、シミュレータを起動し（機種をハードコードせず、存在するものを自動で見つけ）、立ち上げ、UIを操作し、そしてスクリーンショットを読み返してUIの変更が本当に入っているかを確認する。</p>
-<p>このマルチモーダルなステップで、ジャッジが捕まえられるものが変わりました。テキストだけのレビューアーなら見逃すもの、たとえばローンチスクリーンを同梱せずにレターボックス表示になってしまうアプリなどを指摘しはじめたのです。人がやるのと同じ気配りも持たせました。iOSプロジェクトが無ければXcodeGenで新しく足場を組むので、新規のAppleビルドにも着地点ができます。ワークショップの教訓はここでも生きました。コントラクトはその裏のチェックと同じだけしか正直になれず、いちばん正直なチェックは、現物を動かすことです。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>学ぶほど、ふりがなが減っていく</title>
-      <link>https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/furigana-that-steps-back-as-you-learn/</guid>
-      <pubDate>Tue, 23 Jun 2026 14:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>ふりがなは、まだ知らない単語には役立ちますが、覚えたあとには見なくなります。Aoedeでは、復習を重ねて定着した単語や、自分で既知にした単語の読みを隠せるようになりました。テキストにはうっすら目印が残り、タップすると読みが出て、助けが必要だったことも記録されます。長押しすれば、忘れた単語として戻せます。表示するかどうかは単語の基本形ごとに決めるので、同じ本の中では一貫した動きになります。</p>
-<p>既知と判断する期間は7日、30日、90日から選べ、本ごとに上書きもできます。単語カードにはJLPTレベルのバッジが付き、学習モードの<code>Today</code>画面では日本語の復習を優先します。ふりがなは、全体でオンかオフにするだけの設定ではなく、実際に何を覚えたかに合わせて変わるようになりました。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>いま印をつけて、カードはあとで作る</title>
-      <link>https://krisbaker.com/ja/building/aoede/mark-it-now-make-cards-later/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/aoede/mark-it-now-make-cards-later/</guid>
-      <pubDate>Tue, 23 Jun 2026 13:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>カード生成が速くても、面白い段落の途中でカード作りを始めると読書は止まります。そこで、文章に印だけつけて、そのまま読み続けられる流れをAoedeに追加しました。セクションの終わりに一括画面を開くと、保留中の印がまとまって表示されます。そこからまとめてカードにすることも、あとで必要ないと思ったものを外すこともできます。</p>
-<p>一括生成でも、個別のカードと同じローカル優先の境界を守ります。オンデバイス生成なら、そのまま実行できます。選んだバックエンドがクラウドへテキストを送る場合は、何が端末の外へ出るのかを表示し、そのリクエストごとに同意を求めます。どちらを選んでも、復習履歴と既知の単語リストは端末内に残ります。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

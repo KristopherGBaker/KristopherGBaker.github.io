@@ -118,7 +118,10 @@
 <p>原因はハードコードされた一つのパスだった。KiFinderの顔モデルはCoreMLで動き、CoreMLは実行前にモデルを一時ディレクトリにコンパイルする。私はそのディレクトリを <code>/private/tmp/kifinder-coreml</code>、つまりアプリのサンドボックスコンテナの外に向けていた。サンドボックスの前ならそれで問題なかった。オンにしたあとはそのディレクトリに書き込めず、CoreMLセッションの生成が失敗し、しかもその失敗が <code>try?</code> に飲み込まれるので、あらゆるembeddingの呼び出しが静かにnilを返し、スキャンは顔ゼロのマニフェストを生んだ。サンドボックスが入る直前まで動いていたし、それを捕まえられたはずのオンデバイスのスモークテストは後回しにしていた。修正自体は小さく、スクラッチディレクトリをシステムのtmpから導出してコンテナの中に収めるだけだ。ただ、信用できたのは、自分のkeep済みの写真で使い捨てのライブエンジンテストを回して、embeddingが修正前のゼロから修正後の5や6に変わるのを見てからだった。何度も学び直す教訓がある。後回しにしたチェックこそ、そのリグレッションを捕まえたはずのものだ。</p>
 <p>残りの期間は、エンジンをより静かに、より読み取りやすくする作業で、すべて<a href="/building/sparra/">Sparra</a>を通した。keepやskipのたびにアルバム全体を再スコアするのはファンを回していたので、毎回の判断で走らせるのをやめ、手動の「Find new matches」ボタンの裏に移した。再スコアそのものも、すべての顔をすべての参照に対して回すスカラーのコサイン計算から、アルバムごとに一回のバッチ行列積に変えた。いちばん気になっているのはFace Spaceだ。アクティブな人物のembeddingを主成分二つに落とした2Dの散布図で、参照とkeepした顔、skipで教えたネガティブ、レビュー候補を一緒にプロットする。なぜある写真がマッチするのかが見え、他を引っ張っている外れ値の参照に気づける。まだ内部フラグの裏にあってオンデバイスでは未検証で、出荷した機能というよりマッチャーが見ているものを見るための手段だ。それでも、スコアを信じるだけでなくembedding空間そのものを眺められるのは、正しい方向に思える。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/kifinder/kifinder-onboarding-cant-be-skipped/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">うっかりキャンセルできない登録フローに</span>
+      </a>
       <a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">KiFinderを世に出す準備</span>

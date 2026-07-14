@@ -5,10 +5,36 @@
     <link>https://krisbaker.com/</link>
     <atom:link href="https://krisbaker.com/building/rss.xml" rel="self" type="application/rss+xml"/>
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
-    <generator>Inkwell 0.15.1</generator>
+    <generator>Inkwell 0.15.2</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Jul 2026 11:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 11:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Sparra runs without my laptop now</title>
+      <link>https://krisbaker.com/building/sparra/sparra-runs-without-my-laptop/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/sparra/sparra-runs-without-my-laptop/</guid>
+      <pubDate>Tue, 14 Jul 2026 11:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Sparra already had two ways to work: steer it live from a Claude Code session, or hand off a <code>plan → freeze → build → reflect</code> run and let it work unattended. Both still needed my laptop to be the machine doing the running. This week I closed that gap from two directions. <code>sparra conduct &quot;&lt;prompt&gt;&quot;</code> is a new headless conductor that takes one prompt, breaks it into units, and drives each one through contract-negotiate, generate, cross-model evaluate, and decide, the same loop I steer by hand in <code>/sparra-loop</code>, but without me at the wheel. By default it runs in a hybrid brain mode: the deterministic loop does the driving, and an LLM conductor role only gets consulted at the handful of judgment points that actually need a call, like a borderline pass or a contract that will not converge. Hand it <code>--auto</code> and the brain decides everything.</p>
+<p>The second piece is what makes that useful when I am not home. A small HTTP bridge runs as a launchd service on my Mac and lets a Tailscale-connected device, my phone, another laptop, trigger and watch a run over the network. I spent more time on what it refuses to do than on what it does: it will not bind a public address under any configuration, every route but the health check needs a bearer token checked in constant time, every path a caller sends has to resolve inside an allowlisted root before anything touches the filesystem, and no endpoint ever returns raw role output or holdout text, only the same redacted summary the interactive conductor already sees. Installing it is one command that generates a random token, writes the launch agent, and prints the token exactly once. When a run parks a decision now, it is not a terminal waiting for me. It is a dashboard page I can open from my phone.</p>
+<p>It was not clean the whole way. The bridge kept failing to start in a way that made no sense until I remembered that launchd runs services under a stripped environment, no shell profile, no PATH the way an interactive terminal has one, so a script that worked fine by hand from my own shell failed silently as a background service. That is the kind of bug that only shows up once you actually try to run something unattended, which was the entire point of building this.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Inkwell builds on Linux now</title>
+      <link>https://krisbaker.com/building/inkwell/inkwell-builds-on-linux/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/inkwell/inkwell-builds-on-linux/</guid>
+      <pubDate>Tue, 14 Jul 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Inkwell has only ever run on macOS for me, installed through Homebrew. I finally tried building it straight from source on a Debian 12 box (aarch64) with the Swift 6 toolchain, mostly out of curiosity about what would break. Three things did, and none of them were hypothetical. CryptoKit is Apple-only, so I moved the one place that needed it over to swift-crypto's API-compatible Crypto module, gated behind <code>#if canImport(CryptoKit)</code>. Glibc's <code>stderr</code> is not annotated the way Darwin's is, so Swift 6's strict concurrency checking rejected every <code>fputs(_, stderr)</code> call outright, replaced now with <code>FileHandle.standardError.write</code>. The sneaky one was resource bundles: SwiftPM names the generated bundle directory <code>&lt;pkg&gt;_&lt;target&gt;.resources</code> on Linux instead of the <code>.bundle</code> Apple platforms use. The build succeeded either way, but on Linux the theme silently failed to load at runtime, so a working build produced a site with no styling and no way to tell why from the build log alone.</p>
+<p>I verified the fix the honest way, <code>swift build</code>, then <code>inkwell init</code> and <code>inkwell build</code> on a fresh scaffold, checking that the HTML, feeds, sitemap, and assets all came out right. CI is still macOS-only, so this was a manual pass rather than something a green checkmark can vouch for going forward. That bothered me enough that the next thing I did was add a Linux build-and-test job to CI, so the next portability regression fails loudly in a pull request instead of quietly on someone's Debian box.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Onboarding you can&apos;t accidentally skip</title>
+      <link>https://krisbaker.com/building/kifinder/kifinder-onboarding-cant-be-skipped/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/kifinder/kifinder-onboarding-cant-be-skipped/</guid>
+      <pubDate>Mon, 13 Jul 2026 09:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>Once the face model finished downloading, KiFinder showed you an enrollment sheet, but nothing stopped you from dismissing it. Cancel, Escape, or a click outside the sheet all dropped you straight into Review with nobody enrolled and nothing to match against, which defeated the entire point of the onboarding flow it was supposed to be. The fix gates the sheet on a simple condition, whether the person list is empty, and when it is, the sheet hides its Cancel button and disables the system's interactive dismiss, so completing enrollment is the only way out. Re-enrolling someone who already exists, or adding a second person while the first stays around, is still freely cancelable, since that is a real choice rather than a required first step.</p>
+<p>The same logic showed up again from an angle I had not planned for: what happens if you delete the last person you enrolled? Before this, you would land back in Review with an empty roster and no way back into enrollment short of relaunching. Now deleting the last person re-opens the same mandatory sheet automatically, since a library with zero people in it is first-run again in every way that matters, regardless of how it got there.</p>
+<p>While I was in that code I also fixed something that had been bothering me since the first onboarding pass: the window opened absurdly tall, something like 3576 points, because the onboarding view greedily filled its frame with no finite height for the window system to size around. Giving the root view an explicit ideal frame, while still leaving room to resize or maximize, fixed it. The persisted window now opens at a sane 1000 by 640 and stays there.</p>]]></content:encoded>
+    </item>
     <item>
       <title>The sandbox quietly turned off the faces</title>
       <link>https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/</link>
@@ -157,30 +183,6 @@
       <pubDate>Thu, 25 Jun 2026 09:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>
 <p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Letting the judge run the app</title>
-      <link>https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/sparra/letting-the-judge-run-the-app/</guid>
-      <pubDate>Wed, 24 Jun 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>An evaluator that only reads code is easy to fool. It will sign off on something that looks right and never runs. So the next thing Sparra learned was to actually exercise the artifact, and for the projects I care most about that means Apple platforms. I wired the evaluator to drive the XcodeBuildMCP CLI: build the app, boot a simulator (auto-discovering one that exists instead of hardcoding a model), launch it, drive the UI, and then read the screenshots back to confirm a UI change is really there.</p>
-<p>That multimodal step changed what the judge could catch. It started flagging things a text-only reviewer never would, like an app that letterboxes because it ships without a launch screen. I also gave it the same care a person would: it scaffolds a fresh iOS project with XcodeGen when there is not one, so a greenfield Apple build has somewhere to land. The lesson from the workshop held up here. The contract is only as honest as the check behind it, and the most honest check is running the thing.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Furigana That Steps Back as You Learn</title>
-      <link>https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/aoede/furigana-that-steps-back-as-you-learn/</guid>
-      <pubDate>Tue, 23 Jun 2026 14:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Furigana is most useful before I know a word and easiest to ignore after I do. Aoede can now hide readings for vocabulary that has matured through review or that I have marked as known. A faint tell remains in the text; tapping reveals the reading and records that I needed help, while a long press can mark the word as forgotten. The decision is made per lemma, so the same word behaves consistently throughout the book.</p>
-<p>The threshold is adjustable to 7, 30, or 90 days, with an override for each document. Vocabulary cards also show JLPT level badges, and learner mode uses that information to prioritize Japanese review on Today. Furigana has stopped being a single global switch and started responding to what I am actually learning.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>Mark It Now, Make Cards Later</title>
-      <link>https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/aoede/mark-it-now-make-cards-later/</guid>
-      <pubDate>Tue, 23 Jun 2026 13:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>Making a card in the middle of a good paragraph is still an interruption, even when generation is fast. Aoede now has a lighter capture path: mark a passage and keep reading. At the end of the section, a batch screen collects the pending marks so I can turn them into cards together, or dismiss the ones that no longer seem worth keeping.</p>
-<p>That batch path follows the same local-first boundary as individual cards. On-device generation can run directly. If the selected backend sends text to a cloud service, Aoede shows what will leave the device and requires consent for that request. Review history and the set of known words remain local either way.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

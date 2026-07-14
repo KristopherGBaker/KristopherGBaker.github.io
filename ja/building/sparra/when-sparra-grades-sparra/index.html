@@ -118,7 +118,10 @@
 <p>それ自体が問題を生んだ。reflectのinboxが溜まっていくのだ。各runはfindingsを新しいファイルとして落とすだけで、すでに何があるかを覚えていない。だから既知の再発する問題が、サイクルごとに新しい重複として入り直してしまう。inboxは小さいままにできず、ゼロを目指すのは終わりのないトレッドミルだった。直し方は、再発をノイズとして扱うのをやめ、優先度として扱うことだった。再び観測された問題は、重複を積み上げる代わりに既存のfindingのカウンタを増やし、inboxは「何回戻ってきたか」で並ぶ。抑えようとしていたシグナルが、実は役に立つシグナルだった。</p>
 <p>今でもニヤッとするのは、SparraをSparraに向けたとき、つまり一方のモデルがビルドし、もう一方が採点するときに起きたことだ。ツールが自分自身を検査しているからこそ存在するバグが出てきた。5つのテストが「durableなキャッシュのパスは使い捨てのスクラッチディレクトリではない」ことを、スクラッチディレクトリ名（<code>sprj-</code> のあとに16進）のパターンマッチで確認していた。ところがSparraがSparraを採点すると、judgeはまさにその名前のtmpディレクトリを持つサンドボックスで動く。だから本物のキャッシュパスがそのトークンを引き継ぎ、採点ラウンドのたびにアサーションが誤って落ちた。ツールのテストスイートが、ツールが自分を採点することで汚染されていたわけだ。直し方は、脆いsubstringではなくパスの構造（親ディレクトリ名）でアサートすることだった。ついでに小さいものもいくつか直した。orientフェーズはコードベースのマップを書くよう指示されているのに読み取り専用のガードで動いていて保存する手段がなかったし、worktreeで作業するビルダーがmainのチェックアウトにしか存在しないパスを読もうとしてターンを浪費し続けていた。どれも私が失敗を想像して見つけたものではない。ツールが自分のrunを観察して、リストにして渡してきたものだ。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/sparra/sparra-runs-without-my-laptop/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">Sparraを動かすのに、もうノートパソコンはいらない</span>
+      </a>
       <a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">ビルドが実行できるものを締める</span>

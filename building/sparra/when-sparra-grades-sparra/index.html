@@ -118,7 +118,10 @@
 <p>That created its own problem. The reflect inbox accumulated. Every run dropped its findings as new files with no memory of what was already there, so a known recurring issue re-entered as a fresh duplicate each cycle. The inbox could never stay small, and chasing zero was a treadmill. The fix was to stop treating recurrence as churn and start treating it as priority. A re-observed issue now bumps a counter on the existing finding instead of piling up a duplicate, and the inbox ranks by how often something has come back. The signal I was trying to suppress turned out to be the useful one.</p>
 <p>The part that still makes me grin is what happened when I pointed Sparra at Sparra, one model building while another grades. It surfaced a bug that only exists because the tool was inspecting itself. Five tests asserted that a durable cache path was not the throwaway scratch directory, and they checked that by pattern-matching the scratch dir's name, <code>sprj-</code> followed by hex. But when Sparra grades Sparra, the judge runs in a sandbox whose own temp dir is named exactly that way, so the real cache path inherited the token and the assertion false-failed every single grading round. The tool's own test suite was being poisoned by the tool grading itself. The fix was to assert the path's structure, its parent directory name, instead of a fragile substring. A few smaller things came along the way: the orient phase was asked to write a codebase map but ran under a read-only guard with no way to save it, and a builder working in a worktree kept burning turns reading paths that only existed in the main checkout. None of these came from me imagining failures. They came from the tool watching its own runs and handing me the list.</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/building/sparra/sparra-runs-without-my-laptop/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">Newer</span>
+        <span class="update-nav-title">Sparra runs without my laptop now</span>
+      </a>
       <a href="/building/sparra/locking-down-what-the-build-can-run/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
         <span class="update-nav-title">Locking down what the build can run</span>
