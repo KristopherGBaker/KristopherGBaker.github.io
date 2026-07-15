@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Sparraを動かすのに、もうノートパソコンはいらない</title>
-    <meta name="description" content="Sparraを動かすのに、もうノートパソコンはいらない">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/sparra-runs-without-my-laptop/">
-    <meta property="og:title" content="Sparraを動かすのに、もうノートパソコンはいらない">
-    <meta property="og:description" content="Sparraを動かすのに、もうノートパソコンはいらない">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/sparra-runs-without-my-laptop/">
+    <title>見ていなくてもSparraを信頼して動かせるように</title>
+    <meta name="description" content="見ていなくてもSparraを信頼して動かせるように">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <meta property="og:title" content="見ていなくてもSparraを信頼して動かせるように">
+    <meta property="og:description" content="見ていなくてもSparraを信頼して動かせるように">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/trusting-sparra-to-run-without-me-watching/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/sparra-runs-without-my-laptop/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/sparra-runs-without-my-laptop/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/sparra-runs-without-my-laptop/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/trusting-sparra-to-run-without-me-watching/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/sparra/sparra-runs-without-my-laptop/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/sparra/trusting-sparra-to-run-without-me-watching/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -109,22 +109,19 @@
   <a href="/ja/building/sparra/" class="post-back">← Sparra</a>
   <p class="post-meta update-meta is-shipped">
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.14</span>
-     · <span>約3分</span>
+     · <span>約4分</span>
   </p>
-  <h1 class="h1 post-title update-title">Sparraを動かすのに、もうノートパソコンはいらない</h1>
+  <h1 class="h1 post-title update-title">見ていなくてもSparraを信頼して動かせるように</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparraにはすでに二つの動かし方があった。Claude Codeのセッションからその場で操縦するか、<code>plan → freeze → build → reflect</code> を丸ごと任せて放置しておくかだ。ただ、どちらの方法でも、実際に処理を回しているのは結局自分のノートパソコンだった。今回、その前提を二つの方向から崩した。<code>sparra conduct &quot;&lt;プロンプト&gt;&quot;</code> は新しいヘッドレスのコンダクターで、プロンプトをひとつ渡すとそれをいくつかのユニットに分解し、それぞれを contract-negotiate → generate → cross-model evaluate → decide というループに通す。<code>/sparra-loop</code> で自分が手動でやっているのと同じ流れだが、今度はハンドルを握るのが自分ではない。デフォルトは hybrid ブレインモードで動く。基本のループは決まった手順通りに進み、LLMのコンダクター役が呼ばれるのは、合格ラインぎりぎりの判定や契約がなかなか収束しないときなど、本当に判断が要る数か所だけだ。<code>--auto</code> を渡せば、その判断もすべてブレインに任せられる。</p>
-<p>二つ目のピースは、家にいないときにこそ効いてくる。小さなHTTPブリッジをMac上でlaunchdサービスとして動かし、Tailscaleでつながったデバイス、スマホでも別のノートパソコンでも、そこからネットワーク越しに実行をトリガーして様子を見られるようにした。実装で時間をかけたのは「できること」より「絶対にしないこと」の方だ。どんな設定でも公開アドレスにはバインドしない。ヘルスチェック以外の全ルートはbearerトークンを一定時間で検証する。呼び出し元が渡すパスはすべて、許可されたルートの内側に解決されない限りファイルシステムに触れる前に弾かれる。そしてどのエンドポイントも生のロール出力やホールドアウトのテキストを返すことは決してなく、対話型のコンダクターがすでに見ているのと同じ、伏せた要約だけを返す。インストールはコマンド一つで、ランダムなトークンを生成し、ランチエージェントを書き込み、そのトークンを一度だけ表示する。今では判定待ちの状態になっても、自分を待たせているのは端末ではない。スマホから開けるダッシュボードのページだ。</p>
-<p>すんなりとはいかなかった。ブリッジがどうにも起動しなくて、しばらく理由が分からなかった。launchdがサービスを起動する環境は、シェルのプロファイルもPATHも普段の対話的なターミナルとは違う、削ぎ落とされたものだと思い出すまでは。だから自分のシェルから手で動かせば普通に動くスクリプトが、バックグラウンドサービスとしては黙って失敗していた。こういうバグは、実際に無人稼働をやらせてみて初めて表に出てくる。そしてそれこそが、今回作ったものの狙いそのものだった。</p></article>
+    <article class="prose"><p>ヘッドレスのコンダクターとHTTPブリッジを出した後、その日の残りの時間は、実際に無人で動かしてみて初めて見えてくる隙間を埋めることに使った。まず、Sparraはソースコードを直接いじる以外に、動いている最中に自分の側から何かを呼び出す手段がなかった。そこで<code>scriptHooks</code>を追加した。フェーズの開始・終了、実行の開始・終了、ユニットの開始・終了、そして判断待ちで一時停止する瞬間、この7つのライフサイクルイベントそれぞれに、設定でシェルコマンドを紐づけられる。開始イベントに登録したフックはゲートで、失敗やタイムアウトがあればそのフェーズ・実行・ユニットはそこで中断し、悪い前提のまま突き進むことはない。終了イベントのフックはベストエフォートにしてあるので、通知用のスクリプトが壊れていても、すでに成功した実行まで巻き添えにはならない。環境変数の名前空間は呼び出しごとにクリアされるので、あるフックへの回答が次のフックに漏れることもなく、判断待ちで一時停止したときに発火する境界は、スクリプトフックとブリッジのダッシュボードイベントの両方を同時に鳴らすようにしたので、結局同じ出来事のために通知の経路を二つ作らずに済んだ。</p>
+<p>次に手を付けたのは、ブリッジのダッシュボードそのものだった。実際に想定していた使い方、つまりノートパソコンから流した実行、電車でスマホからトリガーした別の実行、そのどちらも開始していないブラウザのタブでダッシュボードを見る、という状況になった途端に立ち行かなくなった。ダッシュボードがジョブの存在を知る手段は、そのジョブ自身のステータスを毎ティック個別にポーリングすることだけで、動いているジョブの数だけリクエストが増え、どこか他所で始まったジョブはそもそも見えていなかった。これを、ブリッジ側に追記専用のイベントログを持たせ<code>GET /events?since=&lt;cursor&gt;</code>で置き換えた。1ティックにつき1リクエストで、全ジョブ分の変化がまとめて返ってくる。今どのジョブを開いているかに応じたログのストリーミングだけは引き続き個別のエンドポイントを使っているが、ジョブの発見とステータス表示は共有のフィードに乗せた。ポーリングのループはバッチを適用する瞬間に最新のカーソル値を読み直すようにしてあるので、遅れて届いた古いレスポンスのせいで画面上のジョブの状態が巻き戻ることもない。</p>
+<p>最後の隙間はもっと小さいが、見落としやすいものだった。生成したコードを契約と照らして採点するクロスモデルの評価役が、たまに自分自身のターン数や予算の上限に達して途中で強制終了させられ、パース可能なJSONを一度も返せずに終わることがあった。ループ側には、これを本当にレビューで落ちた場合と区別する手段がなく、どちらも一律で失格扱いにしていた。そこでwriterロールですでに使っていたのと同じ回復処理を評価役にも入れた。もう一ターンだけ、テキストのみで、二回続けて時間切れになれないくらいきつく上限を絞り、ループが期待する形の判定だけを求め直す。それでもパースできない答えが返ってきたときにはじめて、本当の失格として扱う。この3つはどれも、自分が端末を見ながら手で動かしている間は問題にならなかった。実際にSparraを、自分がその場にいなくても信頼して動かせるようにしてみて、初めて表に出てきたものばかりで、それこそがヘッドレスのコンダクターを作った理由そのものだった。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/sparra/trusting-sparra-to-run-without-me-watching/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">見ていなくてもSparraを信頼して動かせるように</span>
-      </a>
-      <a href="/ja/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/sparra/sparra-runs-without-my-laptop/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">SparraがSparraを採点するとき</span>
+        <span class="update-nav-title">Sparraを動かすのに、もうノートパソコンはいらない</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>

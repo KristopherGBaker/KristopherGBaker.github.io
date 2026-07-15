@@ -7,8 +7,17 @@
     <description>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</description>
     <generator>Inkwell 0.15.2</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Jul 2026 11:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 13:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>Trusting Sparra to Run Without Me Watching</title>
+      <link>https://krisbaker.com/building/sparra/trusting-sparra-to-run-without-me-watching/</link>
+      <guid isPermaLink="true">https://krisbaker.com/building/sparra/trusting-sparra-to-run-without-me-watching/</guid>
+      <pubDate>Tue, 14 Jul 2026 13:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>After I shipped the headless conductor and the HTTP bridge, the rest of the day was closing the gaps that only show up once a run is actually unattended. First, Sparra had no way to call out to anything of mine while it worked, short of editing its source, so I added <code>scriptHooks</code>: seven lifecycle events (phase start/end, run start/end, unit start/end, and a run parking on a decision) each mapped to a shell command in config. A hook on a start event is a gate, if it fails or times out the phase, run, or unit aborts rather than pushing ahead on a bad assumption, while a hook on an end event is best-effort so a broken notification script can never take down a run that already succeeded. The env namespace is reserved and cleared between calls so nothing from one hook leaks into the next, and the same seam that fires the script hook on a parked decision now also fires a bridge dashboard event, so I did not end up building two notification paths for one moment.</p>
+<p>Second, the bridge dashboard itself stopped scaling the moment I actually used it the way I built it for: a run kicked off from my laptop, another triggered from my phone on the train, and a browser tab that started neither. It only knew a job existed if it polled that job's own status endpoint, one request per running job per tick, so anything started elsewhere simply did not show up. I replaced that with an append-only events log on the bridge, <code>GET /events?since=&lt;cursor&gt;</code>, so one request per tick tells the dashboard everything new across every job instead of asking each one individually. The dashboard still hits the per-job endpoint for whichever run is open, since that is the only place that needs a streaming log, but discovery and status now ride the shared feed, with the poll loop reading the live cursor at apply-time so a slow, out-of-order response can never regress a job's state on screen.</p>
+<p>The last gap was smaller but easy to miss: the cross-model evaluator that grades generated code against its contract would occasionally hit its own turn or budget cap mid-thought and get killed before returning parseable JSON, and the loop had no way to tell that apart from an honest failed review, so it counted both as a hard fail. I gave the evaluator the same recovery already in place for the writer role, one more turn, text-only, capped tight enough that it cannot run the clock out twice, asking for nothing but the verdict in the expected shape. Only if that second, narrower attempt still comes back unparseable does it count as a real fail. None of these three problems mattered while I was watching the terminal by hand. They only surfaced once I started actually trusting Sparra to run without me in the room, which was the entire point of building the headless conductor in the first place.</p>]]></content:encoded>
+    </item>
     <item>
       <title>Sparra runs without my laptop now</title>
       <link>https://krisbaker.com/building/sparra/sparra-runs-without-my-laptop/</link>
@@ -175,14 +184,6 @@
       <pubDate>Fri, 26 Jun 2026 09:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>The contract is the heart of the loop, and the heart had a hole in it. A generator under pressure to pass will find the laziest reading of an assertion that technically satisfies it. Ask it to make a function &quot;handle empty input&quot; and it might add a guard that returns early and call the contract met, while the real behavior is still broken. I watched the loop accept a few of these degenerate, no-op satisfactions and decided the prompts, not the model, were at fault.</p>
 <p>So I spent a day hardening the contract and evaluator prompts against exactly that. Acceptance criteria are now biased toward net effects rather than invocation counts, so &quot;the function was called&quot; never stands in for &quot;the output is correct.&quot; The evaluator runs the artifact's own shipped verification as-is and treats a degenerate or gamed input as a failure, not a pass. I also pushed contract negotiation toward terse, proportionate assertions, because a bloated contract is just more surface to game. None of this makes gaming impossible. It makes the honest path the easy one, which in practice is most of the win.</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>One model builds, another judges</title>
-      <link>https://krisbaker.com/building/sparra/one-model-builds-another-judges/</link>
-      <guid isPermaLink="true">https://krisbaker.com/building/sparra/one-model-builds-another-judges/</guid>
-      <pubDate>Thu, 25 Jun 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>A model grading its own work is a weak check. It shares the same blind spots in both roles, so the bugs it cannot see when writing are the ones it will not catch when reviewing. The fix was to pull the backend out from behind a single seam. I extracted the session runner into a pluggable <code>AgentBackend</code>, added a Codex adapter beside the Claude one, and made the backend selectable per role. Now Claude can build while Codex judges, or the reverse, and the second opinion is genuinely independent.</p>
-<p>The same week added the guardrails that make handing off feel safe. A holdout wall of evaluator-only checks the builder never sees, passed by path so it cannot overfit to them. An opt-in code-review gate that adds a second lens on the diff before acceptance. And auto-commit, where a small model splits an accepted change into atomic conventional commits onto the Sparra branch, never my main. I also packaged the whole thing as a Claude Code plugin so I could reach for it without leaving an editing session. The cross-model part is the one I keep coming back to. It is the cheapest way I have found to stop a model from believing its own press.</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

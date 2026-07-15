@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sparra runs without my laptop now</title>
-    <meta name="description" content="Sparra runs without my laptop now">
-    <link rel="canonical" href="https://krisbaker.com/building/sparra/sparra-runs-without-my-laptop/">
-    <meta property="og:title" content="Sparra runs without my laptop now">
-    <meta property="og:description" content="Sparra runs without my laptop now">
-    <meta property="og:url" content="https://krisbaker.com/building/sparra/sparra-runs-without-my-laptop/">
+    <title>Trusting Sparra to Run Without Me Watching</title>
+    <meta name="description" content="Trusting Sparra to Run Without Me Watching">
+    <link rel="canonical" href="https://krisbaker.com/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <meta property="og:title" content="Trusting Sparra to Run Without Me Watching">
+    <meta property="og:description" content="Trusting Sparra to Run Without Me Watching">
+    <meta property="og:url" content="https://krisbaker.com/building/sparra/trusting-sparra-to-run-without-me-watching/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/sparra/sparra-runs-without-my-laptop/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/sparra-runs-without-my-laptop/">
-    <link rel="alternate" hreflang="x-default" href="/building/sparra/sparra-runs-without-my-laptop/">
+    <link rel="alternate" hreflang="en" href="/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/sparra/trusting-sparra-to-run-without-me-watching/">
+    <link rel="alternate" hreflang="x-default" href="/building/sparra/trusting-sparra-to-run-without-me-watching/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/sparra-runs-without-my-laptop/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/sparra/trusting-sparra-to-run-without-me-watching/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -111,20 +111,17 @@
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.14</span>
      · <span>3 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Sparra runs without my laptop now</h1>
+  <h1 class="h1 post-title update-title">Trusting Sparra to Run Without Me Watching</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sparra already had two ways to work: steer it live from a Claude Code session, or hand off a <code>plan → freeze → build → reflect</code> run and let it work unattended. Both still needed my laptop to be the machine doing the running. This week I closed that gap from two directions. <code>sparra conduct &quot;&lt;prompt&gt;&quot;</code> is a new headless conductor that takes one prompt, breaks it into units, and drives each one through contract-negotiate, generate, cross-model evaluate, and decide, the same loop I steer by hand in <code>/sparra-loop</code>, but without me at the wheel. By default it runs in a hybrid brain mode: the deterministic loop does the driving, and an LLM conductor role only gets consulted at the handful of judgment points that actually need a call, like a borderline pass or a contract that will not converge. Hand it <code>--auto</code> and the brain decides everything.</p>
-<p>The second piece is what makes that useful when I am not home. A small HTTP bridge runs as a launchd service on my Mac and lets a Tailscale-connected device, my phone, another laptop, trigger and watch a run over the network. I spent more time on what it refuses to do than on what it does: it will not bind a public address under any configuration, every route but the health check needs a bearer token checked in constant time, every path a caller sends has to resolve inside an allowlisted root before anything touches the filesystem, and no endpoint ever returns raw role output or holdout text, only the same redacted summary the interactive conductor already sees. Installing it is one command that generates a random token, writes the launch agent, and prints the token exactly once. When a run parks a decision now, it is not a terminal waiting for me. It is a dashboard page I can open from my phone.</p>
-<p>It was not clean the whole way. The bridge kept failing to start in a way that made no sense until I remembered that launchd runs services under a stripped environment, no shell profile, no PATH the way an interactive terminal has one, so a script that worked fine by hand from my own shell failed silently as a background service. That is the kind of bug that only shows up once you actually try to run something unattended, which was the entire point of building this.</p></article>
+    <article class="prose"><p>After I shipped the headless conductor and the HTTP bridge, the rest of the day was closing the gaps that only show up once a run is actually unattended. First, Sparra had no way to call out to anything of mine while it worked, short of editing its source, so I added <code>scriptHooks</code>: seven lifecycle events (phase start/end, run start/end, unit start/end, and a run parking on a decision) each mapped to a shell command in config. A hook on a start event is a gate, if it fails or times out the phase, run, or unit aborts rather than pushing ahead on a bad assumption, while a hook on an end event is best-effort so a broken notification script can never take down a run that already succeeded. The env namespace is reserved and cleared between calls so nothing from one hook leaks into the next, and the same seam that fires the script hook on a parked decision now also fires a bridge dashboard event, so I did not end up building two notification paths for one moment.</p>
+<p>Second, the bridge dashboard itself stopped scaling the moment I actually used it the way I built it for: a run kicked off from my laptop, another triggered from my phone on the train, and a browser tab that started neither. It only knew a job existed if it polled that job's own status endpoint, one request per running job per tick, so anything started elsewhere simply did not show up. I replaced that with an append-only events log on the bridge, <code>GET /events?since=&lt;cursor&gt;</code>, so one request per tick tells the dashboard everything new across every job instead of asking each one individually. The dashboard still hits the per-job endpoint for whichever run is open, since that is the only place that needs a streaming log, but discovery and status now ride the shared feed, with the poll loop reading the live cursor at apply-time so a slow, out-of-order response can never regress a job's state on screen.</p>
+<p>The last gap was smaller but easy to miss: the cross-model evaluator that grades generated code against its contract would occasionally hit its own turn or budget cap mid-thought and get killed before returning parseable JSON, and the loop had no way to tell that apart from an honest failed review, so it counted both as a hard fail. I gave the evaluator the same recovery already in place for the writer role, one more turn, text-only, capped tight enough that it cannot run the clock out twice, asking for nothing but the verdict in the expected shape. Only if that second, narrower attempt still comes back unparseable does it count as a real fail. None of these three problems mattered while I was watching the terminal by hand. They only surfaced once I started actually trusting Sparra to run without me in the room, which was the entire point of building the headless conductor in the first place.</p></article>
     <nav class="update-nav">
-      <a href="/building/sparra/trusting-sparra-to-run-without-me-watching/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Trusting Sparra to Run Without Me Watching</span>
-      </a>
-      <a href="/building/sparra/when-sparra-grades-sparra/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/sparra/sparra-runs-without-my-laptop/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">When Sparra grades Sparra</span>
+        <span class="update-nav-title">Sparra runs without my laptop now</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/sparra/" class="read-link">Sparra <span class="arrow" aria-hidden="true">→</span></a></div>
