@@ -7,8 +7,16 @@
     <description>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</description>
     <generator>Inkwell 0.15.2</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 14 Jul 2026 13:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 14:00:00 +0000</lastBuildDate>
     <managingEditor>hello@krisbaker.com (Kristopher Baker)</managingEditor>
+    <item>
+      <title>KiFinderをGPLv3・ソースのみで公開することにした</title>
+      <link>https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/</link>
+      <guid isPermaLink="true">https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/</guid>
+      <pubDate>Thu, 16 Jul 2026 14:00:00 +0000</pubDate>
+      <content:encoded><![CDATA[<p>KiFinderの公開方法を決めた。ソースコードのみ、ライセンスはGPLv3。署名・公証済みのビルドを配布するつもりはない。使いたい人は、リポジトリをcloneしてXcodeで自分でビルドすることになる。</p>
+<p>これは時間切れで妥協した話ではなく、意図して選んだ形だ。KiFinderはもともと娘の保育園から届く写真アルバムを自分でさばくために作ったツールで、今ではSparraで開発するときの恰好の題材にもなっている。パッケージ化してサポートし、見たこともないMacや写真ライブラリを持つ人たちに届ける製品にするより、他のエンジニアが読んで、学んで、自分のコードのベースにできるポートフォリオの一部として残しておきたい。GPLv3ならコードは開いたままだし、そこから派生したコードも同じように開かれる。ダウンロード数を増やしたいわけではなく、このアプローチをもっと多くの人に見てもらいたい、それが公開する動機そのものに合っている。</p>]]></content:encoded>
+    </item>
     <item>
       <title>見ていなくてもSparraを信頼して動かせるように</title>
       <link>https://krisbaker.com/ja/building/sparra/trusting-sparra-to-run-without-me-watching/</link>
@@ -176,14 +184,6 @@
       <pubDate>Fri, 26 Jun 2026 10:00:00 +0000</pubDate>
       <content:encoded><![CDATA[<p>最初のサイクルは、ファインダー本体をエンドツーエンドで作ることでした。一人ぶんの参照写真を数枚使って<code>enroll</code>を実行すると、各写真で最大の顔を検出し、そのArcFaceエンベディングを平均してプロファイルにします。次に<code>scan</code>が、アルバムでもフォルダでも、保育園のzipファイルを届いたままでも受け取り、すべての写真のすべての顔を見つけ、プロファイルとのコサイン類似度でスコアを付けます。十分に近いものは<code>keep</code>、際どいものは<code>maybe</code>、残りは<code>no</code>へ。サムネイルと、何をどのスコアで判断したかを記録した<code>manifest.json</code>を書き出すので、ブラックボックスを信じる代わりに、その判断の根拠を見られます。</p>
 <p>デフォルトは見た目以上に効いてきます。しきい値を高くしすぎると、フレームの端で半分振り向いている希穏のスナップを取りこぼし、低くしすぎると、またよその子たちをスクロールする羽目になります。そこで<code>calibrate</code>を足しました。yesとnoのラベルを付けた小さなセットを歩き、本物の一致をすべて捕まえつつ、誤検出を扱える範囲に保てる、いちばん高いしきい値を提案します。数値は表示しますが、自分では適用しません。娘の本物の写真を取りこぼすかどうかの判断は、自分の手にあるべきだからです。写真はHEICで届くので、HEIC対応は譲れず、これも入れました。その日の終わりには、ひと月ぶんのアルバムを渡すと、ほとんど希穏だけのフォルダを返してくれるようになっていました。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>出し抜けるコントラクトの穴をふさぐ</title>
-      <link>https://krisbaker.com/ja/building/sparra/closing-the-door-on-a-gamed-contract/</link>
-      <guid isPermaLink="true">https://krisbaker.com/ja/building/sparra/closing-the-door-on-a-gamed-contract/</guid>
-      <pubDate>Fri, 26 Jun 2026 09:00:00 +0000</pubDate>
-      <content:encoded><![CDATA[<p>コントラクトはループの心臓で、その心臓に穴が空いていました。合格しろという圧力の下にいるジェネレーターは、アサーションを技術的には満たす、いちばん怠けた読み方を見つけます。ある関数に「空の入力を扱え」と求めると、早期リターンするガードを足してコントラクトは満たしたと言い張る一方で、本来の振る舞いは壊れたまま、ということが起こります。ループがこうした退化した、実質何もしていない充足をいくつか受け入れるのを見て、悪いのはモデルではなくプロンプトだと判断しました。</p>
-<p>そこで一日かけて、まさにそれに対してコントラクトとエバリュエーターのプロンプトを固めました。受け入れ基準は、呼び出し回数ではなく正味の効果へ寄せたので、「関数が呼ばれた」が「出力が正しい」の代わりになることはもうありません。エバリュエーターは成果物に同梱された検証をそのまま走らせ、退化した入力や出し抜いた入力を、合格ではなく不合格として扱います。コントラクトの交渉も、簡潔で釣り合いの取れたアサーションへ押し進めました。膨らんだコントラクトは、出し抜く余地が増えるだけだからです。これで出し抜きが不可能になるわけではありません。正直な道をいちばん簡単な道にするだけ。実際には、それがほとんどの勝ちなのです。</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

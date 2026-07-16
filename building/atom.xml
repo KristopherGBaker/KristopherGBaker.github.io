@@ -6,11 +6,20 @@
   <link href="https://krisbaker.com/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.2">Inkwell</generator>
-  <updated>2026-07-14T13:00:00Z</updated>
+  <updated>2026-07-16T14:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>Choosing GPLv3, Source-Only, for KiFinder</title>
+    <link href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/</id>
+    <updated>2026-07-16T14:00:00Z</updated>
+    <published>2026-07-16T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>I have decided how I am releasing KiFinder: source-only, under GPLv3. There will not be a signed, notarized build you can download and run. If you want it, you clone the repo and build it yourself in Xcode.</p>
+<p>That is a deliberate choice, not a limitation I ran out of time to fix. KiFinder started as something I built to solve my own problem, filtering my daughter's preschool photo albums, and it has become one of the better test subjects for how I build software with Sparra. I want it to keep living as a portfolio piece, something other engineers can read, learn from, and build on, rather than turn it into a product I have to package, support, and ship to people whose Macs and photo libraries I have never seen. GPLv3 keeps the code open and keeps anyone's derivative work open too, which fits what I actually want out of sharing it: more people looking at the approach, not a download count.</p>]]></content>
+  </entry>
   <entry>
     <title>Trusting Sparra to Run Without Me Watching</title>
     <link href="https://krisbaker.com/building/sparra/trusting-sparra-to-run-without-me-watching/" rel="alternate"/>
@@ -197,14 +206,5 @@
     <published>2026-06-26T10:00:00Z</published>
     <content type="html"><![CDATA[<p>The first cycle was the finder itself, end to end. You run <code>enroll</code> on a few reference photos of one person, which detects the largest face in each and averages their ArcFace embeddings into a profile. Then <code>scan</code> takes an album, a directory, or the preschool's zip files straight as they arrive, finds every face in every photo, and scores it by cosine similarity against the profile. Anything close enough lands in <code>keep</code>, the borderline ones in <code>maybe</code>, and the rest in <code>no</code>. It writes thumbnails and a <code>manifest.json</code> recording what it decided and at what score, so I can see its reasoning instead of trusting a black box.</p>
 <p>The defaults matter more than they look. Set the threshold too high and you miss the candid shot where Kion is half-turned at the edge of the frame; too low and you are back to scrolling through everyone else's kids. So I added <code>calibrate</code>, which walks a small labeled set of yes and no photos and recommends the highest threshold that still catches every real match while keeping the false matches manageable. It prints the number but never applies it on its own, because the call about missing a real photo of my daughter should be mine. HEIC was non-negotiable since that is what the photos arrive as, so that went in too. By the end of the day it could take a month's albums and hand me back a folder that was mostly Kion.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Closing the door on a gamed contract</title>
-    <link href="https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/" rel="alternate"/>
-    <id>https://krisbaker.com/building/sparra/closing-the-door-on-a-gamed-contract/</id>
-    <updated>2026-06-26T09:00:00Z</updated>
-    <published>2026-06-26T09:00:00Z</published>
-    <content type="html"><![CDATA[<p>The contract is the heart of the loop, and the heart had a hole in it. A generator under pressure to pass will find the laziest reading of an assertion that technically satisfies it. Ask it to make a function &quot;handle empty input&quot; and it might add a guard that returns early and call the contract met, while the real behavior is still broken. I watched the loop accept a few of these degenerate, no-op satisfactions and decided the prompts, not the model, were at fault.</p>
-<p>So I spent a day hardening the contract and evaluator prompts against exactly that. Acceptance criteria are now biased toward net effects rather than invocation counts, so &quot;the function was called&quot; never stands in for &quot;the output is correct.&quot; The evaluator runs the artifact's own shipped verification as-is and treats a degenerate or gamed input as a failure, not a pass. I also pushed contract negotiation toward terse, proportionate assertions, because a bloated contract is just more surface to game. None of this makes gaming impossible. It makes the honest path the easy one, which in practice is most of the win.</p>]]></content>
   </entry>
 </feed>

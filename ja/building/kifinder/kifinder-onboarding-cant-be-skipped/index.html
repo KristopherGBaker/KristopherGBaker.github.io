@@ -118,7 +118,10 @@
 <p>同じロジックが、想定していなかった角度からもう一度顔を出した。登録した最後の一人を削除したらどうなるか、という話だ。これまでは、名簿が空になった状態でReviewに戻され、アプリを再起動する以外に登録画面へ戻る手段がなかった。今回の修正で、最後の一人を削除すると同じ必須の登録シートが自動的に開き直るようになった。人が一人もいないライブラリは、そこに至った経緯がどうであれ、実質的に初回起動と同じ状態だからだ。</p>
 <p>そのコードを触っているついでに、最初のオンボーディング実装のときから気になっていたことも直した。ウィンドウが起動時にとんでもなく縦長に開いてしまう問題で、高さにして3576ポイントほどにもなっていた。原因はオンボーディングのビューが有限の高さを持たず、フレームを際限なく埋めようとしていたことで、ウィンドウシステムが基準にできる高さがなかった。ルートのビューに明確な基準サイズを与えつつ、リサイズや最大化はこれまで通りできるようにしたことで直った。保存されるウィンドウサイズは今では1000×640という常識的な値に落ち着いている。</p></article>
     <nav class="update-nav">
-      <span></span>
+      <a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-newer">
+        <span class="update-nav-label">新しい</span>
+        <span class="update-nav-title">KiFinderをGPLv3・ソースのみで公開することにした</span>
+      </a>
       <a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
         <span class="update-nav-title">サンドボックスが顔認識をこっそり止めていた</span>
