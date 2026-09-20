@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Link test</title>
+
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <script defer src="/assets/js/theme-toggle.js"></script>
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+
+    <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style>
+
+    <style>
+      /* Local to this page — not part of the quiet theme. */
+
+      /* The theme's top bar is sticky; the group headers below want that slot,
+         so this page pins the group heads instead and lets the bar scroll away. */
+      .top-bar { position: static; }
+
+      .lt-main { padding-top: var(--space-6); padding-bottom: var(--space-10); }
+
+      .lt-intro { max-width: var(--reading-max); margin: 0 0 var(--space-5); }
+
+      /* Jump nav — horizontally scrollable on narrow screens. */
+      .jumps {
+        display: flex;
+        gap: var(--space-2);
+        overflow-x: auto;
+        margin: 0 0 var(--space-6);
+        padding-bottom: var(--space-2);
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .jumps::-webkit-scrollbar { display: none; }
+      .jump {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        min-height: 40px;
+        padding: 0 var(--space-4);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-sm);
+        color: var(--ink-2);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: border-color var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft);
+      }
+      .jump span { color: var(--ink-4); }
+      .jump:hover, .jump:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+      .group { margin: 0 0 var(--space-7); scroll-margin-top: 56px; }
+
+      .group-head {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        margin: 0 0 var(--space-2);
+        padding: var(--space-3) 0;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-strong);
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-sm);
+        font-weight: 500;
+        letter-spacing: var(--tracking-caps);
+        text-transform: uppercase;
+        color: var(--ink-2);
+      }
+      .group-n { color: var(--ink-4); }
+
+      .rows { list-style: none; margin: 0; padding: 0; }
+      .rows li + li .row { border-top: 1px solid var(--border); }
+
+      /* Whole row is the tap target — 56px min on touch. */
+      .row {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr) auto;
+        align-items: baseline;
+        gap: 0 var(--space-3);
+        min-height: 56px;
+        padding: var(--space-4) var(--space-2);
+        margin: 0 calc(var(--space-2) * -1);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        -webkit-tap-highlight-color: transparent;
+        transition: background var(--dur-fast) var(--ease-soft);
+      }
+      .row:hover { background: var(--accent-soft); }
+      .row:active { background: var(--accent-soft); }
+      .row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      .row-n {
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-xs);
+        font-variant-numeric: tabular-nums;
+        color: var(--ink-4);
+      }
+      .row-url {
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-sm);
+        line-height: 1.65;
+        color: var(--ink);
+        overflow-wrap: anywhere;
+      }
+      .row-scheme { color: var(--accent); }
+      .row-tag {
+        justify-self: end;
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-xs);
+        letter-spacing: 0.08em;
+        color: var(--ink-4);
+        white-space: nowrap;
+      }
+
+      @media (min-width: 640px) {
+        .row { grid-template-columns: 2.5rem minmax(0, 1fr) auto; }
+        .row-url { font-size: var(--fs-body); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .row, .jump { transition: none; }
+      }
+    </style>
+  </head>
+  <body class="grain-bg">
+    <header class="top-bar">
+      <div class="container top-bar-row">
+        <a href="/" class="top-brand">
+          <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
+          <span class="top-brand-text">
+            <span class="top-brand-name">Kristopher Baker</span>
+            <span class="top-brand-sub">Link test</span>
+          </span>
+        </a>
+        <button type="button" onclick="toggleTheme()" class="chip" aria-label="Toggle theme">☼</button>
+      </div>
+    </header>
+
+    <main class="container lt-main">
+      <p class="eyebrow" style="margin-bottom: 14px;">Scratch · 71 links</p>
+      <h1 class="h3" style="margin: 0 0 16px;">Link test</h1>
+      <p class="lt-intro" style="color: var(--ink-2);">
+        A fixed set of links used as a test target. Not linked from anywhere on the site,
+        and excluded from the sitemap and search indexing.
+      </p>
+
+      <nav class="jumps" aria-label="Jump to group">
+        <a class="jump" href="#sites">Sites <span>11</span></a><a class="jump" href="#paths">Paths &amp; queries <span>12</span></a><a class="jump" href="#subdomains">Subdomains <span>12</span></a><a class="jump" href="#downloads">Downloads <span>11</span></a><a class="jump" href="#schemes">Schemes <span>25</span></a>
+      </nav>
+
+      <section class="group" id="sites">
+        <h2 class="group-head"><span>Sites</span><span class="group-n">11</span></h2>
+        <ul class="rows">
+        <li><a class="row" href="https://www.apple.com">
+          <span class="row-n">01</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.apple.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://maps.apple.com">
+          <span class="row-n">02</span>
+          <span class="row-url"><span class="row-scheme">https://</span>maps.apple.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="http://www.google.com">
+          <span class="row-n">03</span>
+          <span class="row-url"><span class="row-scheme">http://</span>www.google.com</span>
+          <span class="row-tag">HTTP</span>
+        </a></li>
+        <li><a class="row" href="https://www.hennge.com">
+          <span class="row-n">04</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.hennge.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.yahoo.com">
+          <span class="row-n">05</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.yahoo.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.github.com">
+          <span class="row-n">06</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.github.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.reddit.com">
+          <span class="row-n">07</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.reddit.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.instagram.com">
+          <span class="row-n">08</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.instagram.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://news.ycombinator.com">
+          <span class="row-n">09</span>
+          <span class="row-url"><span class="row-scheme">https://</span>news.ycombinator.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.krisbaker.com">
+          <span class="row-n">10</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.krisbaker.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://hennge.com/global/info/henka/interview/202403-crafting-the-perfect-cover-letter/">
+          <span class="row-n">11</span>
+          <span class="row-url"><span class="row-scheme">https://</span>hennge.com/global/info/henka/interview/202403-crafting-the-perfect-cover-letter/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        </ul>
+      </section>
+      <section class="group" id="paths">
+        <h2 class="group-head"><span>Paths &amp; queries</span><span class="group-n">12</span></h2>
+        <ul class="rows">
+        <li><a class="row" href="https://www.google.com/search?q=static+site+generator">
+          <span class="row-n">12</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.google.com/search?q=static+site+generator</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.google.com/maps/place/Tokyo">
+          <span class="row-n">13</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.google.com/maps/place/Tokyo</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.google.com/about/">
+          <span class="row-n">14</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.google.com/about/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://claude.ai/chat">
+          <span class="row-n">15</span>
+          <span class="row-url"><span class="row-scheme">https://</span>claude.ai/chat</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://claude.ai/code">
+          <span class="row-n">16</span>
+          <span class="row-url"><span class="row-scheme">https://</span>claude.ai/code</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://claude.ai/settings/profile">
+          <span class="row-n">17</span>
+          <span class="row-url"><span class="row-scheme">https://</span>claude.ai/settings/profile</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://developer.android.com/develop/ui/compose">
+          <span class="row-n">18</span>
+          <span class="row-url"><span class="row-scheme">https://</span>developer.android.com/develop/ui/compose</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary">
+          <span class="row-n">19</span>
+          <span class="row-url"><span class="row-scheme">https://</span>developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://developer.android.com/guide/components/activities/activity-lifecycle#onstart">
+          <span class="row-n">20</span>
+          <span class="row-url"><span class="row-scheme">https://</span>developer.android.com/guide/components/activities/activity-lifecycle#onstart</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/us/smartphones/galaxy-s25/">
+          <span class="row-n">21</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/us/smartphones/galaxy-s25/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/jp/support/">
+          <span class="row-n">22</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/jp/support/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/global/galaxy/galaxy-s25/specs/">
+          <span class="row-n">23</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/global/galaxy/galaxy-s25/specs/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        </ul>
+      </section>
+      <section class="group" id="subdomains">
+        <h2 class="group-head"><span>Subdomains</span><span class="group-n">12</span></h2>
+        <ul class="rows">
+        <li><a class="row" href="https://test.www.google.com">
+          <span class="row-n">24</span>
+          <span class="row-url"><span class="row-scheme">https://</span>test.www.google.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://staging.www.google.com/search?q=hello">
+          <span class="row-n">25</span>
+          <span class="row-url"><span class="row-scheme">https://</span>staging.www.google.com/search?q=hello</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.www.google.com/static/logo.png">
+          <span class="row-n">26</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.www.google.com/static/logo.png</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://api.claude.ai">
+          <span class="row-n">27</span>
+          <span class="row-url"><span class="row-scheme">https://</span>api.claude.ai</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://docs.claude.ai/getting-started">
+          <span class="row-n">28</span>
+          <span class="row-url"><span class="row-scheme">https://</span>docs.claude.ai/getting-started</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://test.api.claude.ai/v1/messages">
+          <span class="row-n">29</span>
+          <span class="row-url"><span class="row-scheme">https://</span>test.api.claude.ai/v1/messages</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://test.developer.android.com">
+          <span class="row-n">30</span>
+          <span class="row-url"><span class="row-scheme">https://</span>test.developer.android.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://beta.developer.android.com/develop/ui/compose">
+          <span class="row-n">31</span>
+          <span class="row-url"><span class="row-scheme">https://</span>beta.developer.android.com/develop/ui/compose</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.test.developer.android.com/tools/sdk.zip">
+          <span class="row-n">32</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.test.developer.android.com/tools/sdk.zip</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://test.www.samsung.com">
+          <span class="row-n">33</span>
+          <span class="row-url"><span class="row-scheme">https://</span>test.www.samsung.com</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://shop.www.samsung.com/us/galaxy-s25/">
+          <span class="row-n">34</span>
+          <span class="row-url"><span class="row-scheme">https://</span>shop.www.samsung.com/us/galaxy-s25/</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="https://downloads.test.www.samsung.com/firmware/update.exe">
+          <span class="row-n">35</span>
+          <span class="row-url"><span class="row-scheme">https://</span>downloads.test.www.samsung.com/firmware/update.exe</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        </ul>
+      </section>
+      <section class="group" id="downloads">
+        <h2 class="group-head"><span>Downloads</span><span class="group-n">11</span></h2>
+        <ul class="rows">
+        <li><a class="row" href="https://developer.android.com/tools/platform-tools-latest-windows.zip">
+          <span class="row-n">36</span>
+          <span class="row-url"><span class="row-scheme">https://</span>developer.android.com/tools/platform-tools-latest-windows.zip</span>
+          <span class="row-tag">ZIP</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/downloads/galaxy-s25-firmware.zip">
+          <span class="row-n">37</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/downloads/galaxy-s25-firmware.zip</span>
+          <span class="row-tag">ZIP</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.example.com/releases/v2.4.1/toolkit-win64.zip">
+          <span class="row-n">38</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.example.com/releases/v2.4.1/toolkit-win64.zip</span>
+          <span class="row-tag">ZIP</span>
+        </a></li>
+        <li><a class="row" href="https://files.example.org/archive.zip?token=abc123">
+          <span class="row-n">39</span>
+          <span class="row-url"><span class="row-scheme">https://</span>files.example.org/archive.zip?token=abc123</span>
+          <span class="row-tag">ZIP</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.example.com/dl?file=bundle.zip">
+          <span class="row-n">40</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.example.com/dl?file=bundle.zip</span>
+          <span class="row-tag">ZIP</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.example.com/scripts/install-deps.bat">
+          <span class="row-n">41</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.example.com/scripts/install-deps.bat</span>
+          <span class="row-tag">BAT</span>
+        </a></li>
+        <li><a class="row" href="https://files.example.org/tools/setup/run-build.bat">
+          <span class="row-n">42</span>
+          <span class="row-url"><span class="row-scheme">https://</span>files.example.org/tools/setup/run-build.bat</span>
+          <span class="row-tag">BAT</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/support/tools/reset-adb.bat">
+          <span class="row-n">43</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/support/tools/reset-adb.bat</span>
+          <span class="row-tag">BAT</span>
+        </a></li>
+        <li><a class="row" href="https://cdn.example.com/releases/v2.4.1/installer-win64.exe">
+          <span class="row-n">44</span>
+          <span class="row-url"><span class="row-scheme">https://</span>cdn.example.com/releases/v2.4.1/installer-win64.exe</span>
+          <span class="row-tag">EXE</span>
+        </a></li>
+        <li><a class="row" href="https://download.example.net/apps/viewer-setup.exe">
+          <span class="row-n">45</span>
+          <span class="row-url"><span class="row-scheme">https://</span>download.example.net/apps/viewer-setup.exe</span>
+          <span class="row-tag">EXE</span>
+        </a></li>
+        <li><a class="row" href="https://www.samsung.com/support/downloads/smart-switch-setup.exe">
+          <span class="row-n">46</span>
+          <span class="row-url"><span class="row-scheme">https://</span>www.samsung.com/support/downloads/smart-switch-setup.exe</span>
+          <span class="row-tag">EXE</span>
+        </a></li>
+        </ul>
+      </section>
+      <section class="group" id="schemes">
+        <h2 class="group-head"><span>Schemes</span><span class="group-n">25</span></h2>
+        <ul class="rows">
+        <li><a class="row" href="tel:+81312345678">
+          <span class="row-n">47</span>
+          <span class="row-url"><span class="row-scheme">tel:</span>+81312345678</span>
+          <span class="row-tag">TEL</span>
+        </a></li>
+        <li><a class="row" href="tel:+81-3-1234-5678">
+          <span class="row-n">48</span>
+          <span class="row-url"><span class="row-scheme">tel:</span>+81-3-1234-5678</span>
+          <span class="row-tag">TEL</span>
+        </a></li>
+        <li><a class="row" href="tel:+15550109999,1234">
+          <span class="row-n">49</span>
+          <span class="row-url"><span class="row-scheme">tel:</span>+15550109999,1234</span>
+          <span class="row-tag">TEL</span>
+        </a></li>
+        <li><a class="row" href="sms:+81312345678">
+          <span class="row-n">50</span>
+          <span class="row-url"><span class="row-scheme">sms:</span>+81312345678</span>
+          <span class="row-tag">SMS</span>
+        </a></li>
+        <li><a class="row" href="sms:+15550109999?body=Testing%20links">
+          <span class="row-n">51</span>
+          <span class="row-url"><span class="row-scheme">sms:</span>+15550109999?body=Testing%20links</span>
+          <span class="row-tag">SMS</span>
+        </a></li>
+        <li><a class="row" href="sms:+15550109999,+15550108888">
+          <span class="row-n">52</span>
+          <span class="row-url"><span class="row-scheme">sms:</span>+15550109999,+15550108888</span>
+          <span class="row-tag">SMS</span>
+        </a></li>
+        <li><a class="row" href="mailto:hello@krisbaker.com">
+          <span class="row-n">53</span>
+          <span class="row-url"><span class="row-scheme">mailto:</span>hello@krisbaker.com</span>
+          <span class="row-tag">MAILTO</span>
+        </a></li>
+        <li><a class="row" href="mailto:hello@krisbaker.com?subject=Link%20test&amp;body=Hello%20there">
+          <span class="row-n">54</span>
+          <span class="row-url"><span class="row-scheme">mailto:</span>hello@krisbaker.com?subject=Link%20test&amp;body=Hello%20there</span>
+          <span class="row-tag">MAILTO</span>
+        </a></li>
+        <li><a class="row" href="mailto:one@example.com,two@example.com?cc=three@example.com">
+          <span class="row-n">55</span>
+          <span class="row-url"><span class="row-scheme">mailto:</span>one@example.com,two@example.com?cc=three@example.com</span>
+          <span class="row-tag">MAILTO</span>
+        </a></li>
+        <li><a class="row" href="maps://?q=Tokyo+Station">
+          <span class="row-n">56</span>
+          <span class="row-url"><span class="row-scheme">maps://</span>?q=Tokyo+Station</span>
+          <span class="row-tag">MAPS</span>
+        </a></li>
+        <li><a class="row" href="https://maps.apple.com/?q=Tokyo+Station&amp;ll=35.6812,139.7671">
+          <span class="row-n">57</span>
+          <span class="row-url"><span class="row-scheme">https://</span>maps.apple.com/?q=Tokyo+Station&amp;ll=35.6812,139.7671</span>
+          <span class="row-tag">HTTPS</span>
+        </a></li>
+        <li><a class="row" href="geo:35.6812,139.7671">
+          <span class="row-n">58</span>
+          <span class="row-url"><span class="row-scheme">geo:</span>35.6812,139.7671</span>
+          <span class="row-tag">GEO</span>
+        </a></li>
+        <li><a class="row" href="geo:0,0?q=Tokyo+Station">
+          <span class="row-n">59</span>
+          <span class="row-url"><span class="row-scheme">geo:</span>0,0?q=Tokyo+Station</span>
+          <span class="row-tag">GEO</span>
+        </a></li>
+        <li><a class="row" href="comgooglemaps://?q=Tokyo+Station">
+          <span class="row-n">60</span>
+          <span class="row-url"><span class="row-scheme">comgooglemaps://</span>?q=Tokyo+Station</span>
+          <span class="row-tag">COMGOOGLEMAPS</span>
+        </a></li>
+        <li><a class="row" href="facetime:+15550109999">
+          <span class="row-n">61</span>
+          <span class="row-url"><span class="row-scheme">facetime:</span>+15550109999</span>
+          <span class="row-tag">FACETIME</span>
+        </a></li>
+        <li><a class="row" href="facetime-audio:hello@krisbaker.com">
+          <span class="row-n">62</span>
+          <span class="row-url"><span class="row-scheme">facetime-audio:</span>hello@krisbaker.com</span>
+          <span class="row-tag">FACETIME-AUDIO</span>
+        </a></li>
+        <li><a class="row" href="itms-apps://apps.apple.com/app/id310633997">
+          <span class="row-n">63</span>
+          <span class="row-url"><span class="row-scheme">itms-apps://</span>apps.apple.com/app/id310633997</span>
+          <span class="row-tag">ITMS-APPS</span>
+        </a></li>
+        <li><a class="row" href="market://details?id=com.example.app">
+          <span class="row-n">64</span>
+          <span class="row-url"><span class="row-scheme">market://</span>details?id=com.example.app</span>
+          <span class="row-tag">MARKET</span>
+        </a></li>
+        <li><a class="row" href="slack://open?team=T0123456789">
+          <span class="row-n">65</span>
+          <span class="row-url"><span class="row-scheme">slack://</span>open?team=T0123456789</span>
+          <span class="row-tag">SLACK</span>
+        </a></li>
+        <li><a class="row" href="whatsapp://send?phone=15550109999&amp;text=Hello">
+          <span class="row-n">66</span>
+          <span class="row-url"><span class="row-scheme">whatsapp://</span>send?phone=15550109999&amp;text=Hello</span>
+          <span class="row-tag">WHATSAPP</span>
+        </a></li>
+        <li><a class="row" href="webcal://example.com/calendar.ics">
+          <span class="row-n">67</span>
+          <span class="row-url"><span class="row-scheme">webcal://</span>example.com/calendar.ics</span>
+          <span class="row-tag">WEBCAL</span>
+        </a></li>
+        <li><a class="row" href="ftp://ftp.example.com/pub/toolkit.zip">
+          <span class="row-n">68</span>
+          <span class="row-url"><span class="row-scheme">ftp://</span>ftp.example.com/pub/toolkit.zip</span>
+          <span class="row-tag">FTP</span>
+        </a></li>
+        <li><a class="row" href="file:///Users/Shared/notes.txt">
+          <span class="row-n">69</span>
+          <span class="row-url"><span class="row-scheme">file://</span>/Users/Shared/notes.txt</span>
+          <span class="row-tag">FILE</span>
+        </a></li>
+        <li><a class="row" href="data:text/plain;base64,SGVsbG8gZnJvbSBhIGRhdGEgVVJM">
+          <span class="row-n">70</span>
+          <span class="row-url"><span class="row-scheme">data:</span>text/plain;base64,SGVsbG8gZnJvbSBhIGRhdGEgVVJM</span>
+          <span class="row-tag">DATA</span>
+        </a></li>
+        <li><a class="row" href="javascript:void(0)">
+          <span class="row-n">71</span>
+          <span class="row-url"><span class="row-scheme">javascript:</span>void(0)</span>
+          <span class="row-tag">JAVASCRIPT</span>
+        </a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
