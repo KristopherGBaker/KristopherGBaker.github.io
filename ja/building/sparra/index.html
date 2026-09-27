@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Sparra</title>
-    <meta name="description" content="長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。">
+    <meta name="description" content="一つのモデルにチェック可能なコントラクトを渡し、別のモデルが成果物を実行して評価するビルドハーネスです。対話的に操作することも、キューを任せることもできます。">
     <link rel="canonical" href="https://krisbaker.com/ja/building/sparra/">
     <meta property="og:title" content="Sparra">
-    <meta property="og:description" content="長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。">
+    <meta property="og:description" content="一つのモデルにチェック可能なコントラクトを渡し、別のモデルが成果物を実行して評価するビルドハーネスです。対話的に操作することも、キューを任せることもできます。">
     <meta property="og:url" content="https://krisbaker.com/ja/building/sparra/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/sparra/">
@@ -110,112 +110,34 @@
 
   <div class="building-detail-head is-active">
     <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2mo ago</span>
+    
     <a href="https://github.com/KristopherGBaker/Sparra" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
   <h1 class="h1 building-detail-title">Sparra</h1>
-  <p class="body-lg building-detail-blurb">長時間動き続ける、敵対的なビルドハーネス。ソフトウェアを一つの作業項目ずつ作ります。各項目をチェック可能な「完了」のコントラクトに落とし込み、ジェネレーターが実装し、それを実際に動かして採点する敵対的なエバリュエーターが評価する。しかもクロスモデル判定で、片方のモデルがビルドし、もう片方が判定します。Claude Codeのセッションから手で回すことも、丸ごと任せて無人で走らせることもできます。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/ja/building/tags/ai/" class="tag-chip">AIエージェント</a><a href="/ja/building/tags/claude/" class="tag-chip">Claude</a><a href="/ja/building/tags/codex/" class="tag-chip">Codex</a><a href="/ja/building/tags/cli/" class="tag-chip">CLI</a><a href="/ja/building/tags//" class="tag-chip">オープンソース</a></div>
+  <p class="body-lg building-detail-blurb">一つのモデルにチェック可能なコントラクトを渡し、別のモデルが成果物を実行して評価するビルドハーネスです。対話的に操作することも、キューを任せることもできます。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/ja/building/tags/ai-agents/" class="tag-chip">AI agents</a><a href="/ja/building/tags/testing/" class="tag-chip">Testing</a><a href="/ja/building/tags/automation/" class="tag-chip">Automation</a><a href="/ja/building/tags/claude/" class="tag-chip">Claude</a><a href="/ja/building/tags/codex/" class="tag-chip">Codex</a><a href="/ja/building/tags/open-source/" class="tag-chip">Open source</a></div>
 
-  <article class="prose building-detail-prose"><p>Sparraは、AshPrabakerとAndrewWilsonによるAnthropicのワークショップ「<a href="https://youtu.be/mR-WAvEPRwE?si=wd97P5XHDPJZXsDB">Build Agents That Run for Hours</a>」を見たあと、頭から離れなくなった一つのアイデアから生まれました。要点は、適切な足場さえ用意すれば、エージェントは長い時間まともな仕事をこなせる、というもの。「完了」の明確なコントラクト、自分の出力をチェックする手段、そして中断を生き延びるためにディスク上に置かれた状態。それを自分のプロジェクトで体感したくて、まわりにハーネスを組みました。</p>
-<p>形はループです。各作業項目を小さなチェック可能なコントラクト（ウィッシュリストではなく、ひと握りのアサーション）に落とし込み、それを実装するジェネレーターに渡し、ジェネレーターの言い分を一切鵜呑みにしない敵対的なエバリュエーターに渡す。エバリュエーターは成果物を実際に動かし、証拠を読み、退化した入力でしか動かないものや、届いた時点で自分のテストがクラッシュするものを通しません。詰まった項目は手当てして延命させるのではなく、捨ててゼロからやり直します。いちばん大事にしているのはクロスモデル判定です。ClaudeがビルドしてCodexが判定する、あるいはその逆。モデルが自分の宿題を採点するのではなく、本当に独立したセカンドオピニオンが得られます。</p>
-<p><img src="/assets/building/sparra/cross-model-loop.png" alt="Claude Codeのセッションで、複数のSparraロール実行を並行して走らせている様子。Codexが作業項目を生成し、Fableモデルが評価する。U1からU6までの項目キューと、5つのバックグラウンドエージェントが動いている。" />
-<em>Claude Codeのセッションから、複数の作業項目を同時に回しているところ。これはSparraが自分自身を良くしている最中の様子です。ここではクロスモデルの組み合わせが逆向きで、Codexが各項目を生成し、Claude系のモデルであるFableが判定します。5つのロール実行が同時に走っていて、U1（9ファイル、774テストのセルフverifyが緑）は、評価が始まる前にチェックポイントをコミットしています。</em></p>
-<p>指針は、ファイルシステムが真実の源であり、唯一の共有状態だということ。すべてのステップが入力をディスクから読み、出力をディスクへ書き戻すので、実行は検査でき、差分で追え、どの地点からでも再開できます。この一つの決定こそが、長時間動き続ける部分を実際に成り立たせています。2時間目にモデルがレート制限に当たっても、ループはその枠が空くのを待つか、別のプロバイダにフォールバックして、止まった場所からちょうど続けられます。</p>
-<p>回し方は二つあります。私のセッションはたいてい対話的です。<code>/sparra-loop</code>スキルがClaude Codeの中で私をハンドルに座らせ、コントラクト、生成、評価、受け入れの間を操縦させます。ビルド側からは見えないホールドアウトの壁はランナーが守ります。もう一つは丸ごと任せて、CLIに<code>plan → freeze → build → reflect</code>を無人で走らせるやり方。どちらのモードも、同じディスク上の状態と、その下にある同じロールランナーを共有します。</p>
-<p><img src="/assets/building/sparra/evaluator-pushback.png" alt="Claude Codeのセッションから動かしているSparraの状態テーブル。Codexの評価ステップがジェネレーターの最初の試みを75点中72点で不合格にし、2件の本物の指摘を挙げ、それを直すために2ラウンド目のジェネレーターが走っている。" />
-<em>別の実行から。敵対的なゲートが、まさにそのために存在する仕事をしている瞬間です。Codexがジェネレーターの最初の試みを評価し、75点中72点で不合格にしました。2件の本物の問題、実際のスコープの抜けと、不十分なドキュメント反映です。だから作業は、素通りさせるのではなく2ラウンド目に戻されます。そしてループ全体が自分の現在地を報告できるのは、すべてのステップの状態がディスク上にあるからです。</em></p>
-<p>まだ初期段階で、あくまで個人的なものですが、すでに実際のものを作っています。自分自身の大部分を含めて。下のアップデートが制作ログです。ループ全体が一日で立ち上がった日、iOSアプリを動かしてスクリーンショットを読むことをジャッジに教えた話、クロスモデル判定、ジェネレーターが出し抜けるコントラクトの穴をふさいだ話、実行中のプロバイダのレート制限を生き延びた話、Claude Codeから手で回す話、そしてSparraが自分のプロンプトを監査しはじめた日。</p></article>
+  <article class="prose building-detail-prose"><p>Sparraは、長時間のソフトウェア開発を進めるためのビルドハーネスです。エージェントにプロンプトを渡すだけでは足りず、作業ごとにチェック可能なコントラクト、保存された状態、成果物を実行する評価役が必要だと考えて作りました。編集セッションから操作することも、キューを渡して無人で続けることもできます。</p>
+<h2 id="section">仕組み</h2>
+<p>計画役が作業を単位ごとに分けます。各作業では、実装を始める前にコントラクト作成役と評価役が少数の検証項目に合意します。実装役がそのコントラクトに沿って作り、別の評価役が差分を読み、検証コマンドと弱い入力を試して、証拠付きの判定を返します。Claudeが実装してCodexが判定する構成も、その逆も使えます。モデルの系統を分けることで、実装時と同じ見落としを評価側も持つ可能性を下げます。</p>
+<p><img src="/assets/building/sparra/cross-model-loop.png" alt="Codexが変更を生成し、Claude系モデルが評価している複数のSparra作業項目。" />
+<em>Sparra自身のリポジトリで複数の役割が動いています。各項目のコントラクト、レポート、判定はディスクに保存されます。</em></p>
+<p>共有状態はファイルシステムに置きます。各フェーズがディスクから入力を読み、結果を書き戻すので、モデル提供元の制限で止まっても、確認、差分表示、再開ができます。実装役にはコントラクトを渡しますが、評価役だけが使う非公開の確認項目は見せません。通過した変更は、対象プロジェクトのmainブランチではなくSparra用ブランチへコミットします。</p>
+<p>成果物を実行する部分は、重要なセキュリティ境界でもあります。コマンド実行部は、既知のビルド・テストランナーと安全な引数の形を許可リストで管理します。シェルのメタ文字、インタープリターの評価フラグ、変更を加えるサブコマンド、タスク名だけを受け付ける場所に渡されたファイル名を拒否します。コマンドはシェルを使わずに起動します。危険な実行ファイルをすべて拒否リストへ追加する方法は、評価役が別のツールで同じ操作を試せば回避できるため採用しませんでした。</p>
+<h2 id="section-2">検証</h2>
+<p>評価役は、読みやすいコードだけを証拠にせず、届いた成果物を実行します。Appleプラットフォームのプロジェクトでは、アプリをビルドし、シミュレータを起動し、UIを操作してスクリーンショットを確認できます。ある実行では、起動画面がなくレターボックス表示になる問題を見つけました。別の実行では、実際のスコープ漏れと不完全な文書更新を見つけ、最初の実装を75点中72点で不合格にしました。</p>
+<p><img src="/assets/building/sparra/evaluator-pushback.png" alt="最初の実装を2件の指摘で不合格にし、修正ラウンドが動いているSparraの評価画面。" />
+<em>評価に失敗すると、作業は次の実装ラウンドへ戻ります。各フェーズが状態を記録するため、現在地を復元できます。</em></p>
+<h2 id="section-3">現在</h2>
+<p>Sparraには、対話的な役割実行と無人実行用のコンダクターがあります。非公開のHTTPブリッジを使うと、モデルの生出力や評価役専用の確認項目を公開せず、Tailscale経由でジョブを開始して監視できます。Sparra自身と、私のほかのプロジェクトも実際に作っています。評価役が、弱い検証項目を満たしながら意図した結果を出さない方法を見つけるたび、コントラクトとコマンドポリシーを更新しています。</p></article>
 
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">11</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/ja/building/sparra/trusting-sparra-to-run-without-me-watching/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">見ていなくてもSparraを信頼して動かせるように</span>
-</a>
-<a href="/ja/building/sparra/sparra-runs-without-my-laptop/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Sparraを動かすのに、もうノートパソコンはいらない</span>
-</a>
-<a href="/ja/building/sparra/when-sparra-grades-sparra/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">SparraがSparraを採点するとき</span>
-</a>
-<a href="/ja/building/sparra/locking-down-what-the-build-can-run/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.02</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">ビルドが実行できるものを締める</span>
-</a>
-<a href="/ja/building/sparra/sparra-audits-its-own-prompts/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Sparraが自分のプロンプトを監査する</span>
-</a>
-<a href="/ja/building/sparra/driving-it-by-hand-from-claude-code/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.28</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Claude Codeから手で回す</span>
-</a>
-<a href="/ja/building/sparra/surviving-the-rate-limit/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.27</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">レート制限を生き延びる</span>
-</a>
-<a href="/ja/building/sparra/closing-the-door-on-a-gamed-contract/" class="update-entry is-decision">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">decision</span>
-  </span>
-  <span class="update-entry-title">出し抜けるコントラクトの穴をふさぐ</span>
-</a>
-<a href="/ja/building/sparra/one-model-builds-another-judges/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.25</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">片方がビルドし、もう片方が判定する</span>
-</a>
-<a href="/ja/building/sparra/letting-the-judge-run-the-app/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.24</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">ジャッジにアプリを動かさせる</span>
-</a>
-<a href="/ja/building/sparra/the-whole-loop-standing-in-a-day/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">ループ全体が一日で立ち上がった</span>
-</a>
-</div>
-  </section>
+  
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/building/inkwell/" class="case-study-next-row">
-      <span class="case-study-next-title">Inkwell</span>
+    <a href="/ja/building/aoede/" class="case-study-next-row">
+      <span class="case-study-next-title">Aoede</span>
       <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

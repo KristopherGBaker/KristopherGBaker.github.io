@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Sparra</title>
-    <meta name="description" content="A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.">
+    <meta name="description" content="A build harness that gives one model a checkable contract, then has another run and evaluate the result. It can be steered interactively or left to work through a queue.">
     <link rel="canonical" href="https://krisbaker.com/building/sparra/">
     <meta property="og:title" content="Sparra">
-    <meta property="og:description" content="A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.">
+    <meta property="og:description" content="A build harness that gives one model a checkable contract, then has another run and evaluate the result. It can be steered interactively or left to work through a queue.">
     <meta property="og:url" content="https://krisbaker.com/building/sparra/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/sparra/">
@@ -110,112 +110,34 @@
 
   <div class="building-detail-head is-active">
     <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2mo ago</span>
+    
     <a href="https://github.com/KristopherGBaker/Sparra" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
   <h1 class="h1 building-detail-title">Sparra</h1>
-  <p class="body-lg building-detail-blurb">A long-running, adversarial build harness. It builds software one work item at a time, each negotiated into a checkable &quot;done&quot; contract, implemented by a generator, then graded by an adversarial evaluator that actually runs the result, with cross-model judging so one model builds while another judges. Drive it by hand from a Claude Code session, or hand it off and let it run unattended.</p>
-  <div class="case-study-tags"><a href="/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/building/tags/ai-agents/" class="tag-chip">AI agents</a><a href="/building/tags/claude/" class="tag-chip">Claude</a><a href="/building/tags/codex/" class="tag-chip">Codex</a><a href="/building/tags/cli/" class="tag-chip">CLI</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
+  <p class="body-lg building-detail-blurb">A build harness that gives one model a checkable contract, then has another run and evaluate the result. It can be steered interactively or left to work through a queue.</p>
+  <div class="case-study-tags"><a href="/building/tags/typescript/" class="tag-chip">TypeScript</a><a href="/building/tags/ai-agents/" class="tag-chip">AI agents</a><a href="/building/tags/testing/" class="tag-chip">Testing</a><a href="/building/tags/automation/" class="tag-chip">Automation</a><a href="/building/tags/claude/" class="tag-chip">Claude</a><a href="/building/tags/codex/" class="tag-chip">Codex</a><a href="/building/tags/open-source/" class="tag-chip">Open source</a></div>
 
-  <article class="prose building-detail-prose"><p>Sparra came out of a single idea I could not stop turning over after watching <a href="https://youtu.be/mR-WAvEPRwE?si=wd97P5XHDPJZXsDB">Build Agents That Run for Hours</a>, an Anthropic workshop by Ash Prabaker and Andrew Wilson. The pitch was that an agent can do real work for a long stretch if you give it the right scaffolding: a clear contract for &quot;done,&quot; a way to check its own output, and state that lives on disk so the whole thing survives interruptions. I wanted to feel that for myself, on my own projects, so I built a harness around it.</p>
-<p>The shape is a loop. Each work item gets negotiated into a small, checkable contract (a handful of assertions, not a wishlist), handed to a generator that implements it, then handed to an adversarial evaluator that does not take the generator's word for anything. The evaluator actually runs the artifact, reads the evidence, and refuses to pass something that only works on a degenerate input or whose own tests crash as delivered. Stuck items get discarded and restarted from scratch rather than nursed along. The part I care about most is the cross-model judging: Claude can build while Codex judges, or the reverse, which gives a genuinely independent second opinion instead of a model grading its own homework.</p>
-<p><img src="/assets/building/sparra/cross-model-loop.png" alt="A Claude Code session running several Sparra role-runs in parallel: Codex generating work items while a Fable model evaluates them, with a queue of items U1 through U6 and five background agents in flight." />
-<em>Driving the loop from a Claude Code session, several work items at once, here while Sparra improves itself. It runs the cross-model pairing in reverse: Codex generates each item while Fable, a Claude model, judges it. Five role-runs are in flight, and U1 (nine files, self-verify green across 774 tests) is committing its checkpoint before its evaluation begins.</em></p>
-<p>The guiding principle is that the filesystem is the source of truth and the only shared state. Every step reads its inputs from disk and writes its outputs back, so a run is inspectable, diffable, and resumable from any point. That one decision is what makes the long-running part actually work. When a model hits a rate limit at hour two, the loop can wait the window out or fall back to another provider and pick up exactly where it left off.</p>
-<p>There are two ways to drive it. Most of my sessions are interactive: a <code>/sparra-loop</code> skill puts me on the wheel inside Claude Code, steering between contract, generate, evaluate, and accept, with a holdout wall the builder cannot see enforced by the runner. The other way is to hand off entirely and let the CLI run <code>plan → freeze → build → reflect</code> unattended. Both modes share the same on-disk state and the same role-runner underneath.</p>
-<p><img src="/assets/building/sparra/evaluator-pushback.png" alt="A Sparra status table from a Claude Code session showing the Codex evaluation step failing the first generator attempt 72 of 75 with two real findings, while a second generator round runs to fix them." />
-<em>Another run, and the adversarial gate doing the exact job it exists for. Codex evaluated the generator's first attempt and failed it, 72 of 75, on two real problems: a genuine scope hole and an incomplete docs pass. So the work goes back for a second round instead of being waved through. The whole loop can report where it is because every step's state lives on disk.</em></p>
-<p>It is early and it is personal, but it has already built real things, including large parts of itself. The updates below are the build log: the whole loop standing in a day, teaching the judge to run an iOS app and read its screenshots, cross-model judging, closing the door on contracts the generator could game, surviving provider rate limits mid-run, driving it by hand from Claude Code, and the day it started auditing its own prompts.</p></article>
+  <article class="prose building-detail-prose"><p>Sparra is a build harness for long-running software work. I built it because I wanted to leave an agent with more than a prompt and hope: each work item needed a checkable contract, persistent state, and an evaluator that would run the result. I can steer the loop from an editing session or give it a queue and let it continue unattended.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>A planner divides the work into units. For each unit, a contract generator and evaluator agree on a small set of assertions before the builder starts. The generator implements that contract, and a separate evaluator reads the diff, runs the artifact's own checks, probes weak inputs, and returns a verdict with evidence. Claude can build while Codex judges, or the roles can be reversed. Using different model families is useful because the evaluator does not begin with exactly the same blind spots as the builder.</p>
+<p><img src="/assets/building/sparra/cross-model-loop.png" alt="A Sparra session running several work items with Codex generating changes and a Claude model evaluating them." />
+<em>Several role runs in progress while Sparra works on its own repository. Each item keeps its contract, report, and verdict on disk.</em></p>
+<p>The filesystem is the shared state. Every phase reads its input from disk and writes its result back, so a run can be inspected, diffed, or resumed after a provider limit. The builder receives the contract but not evaluator-only holdouts. Accepted changes are committed to a Sparra branch rather than the project's main branch.</p>
+<p>Running an artifact is also the main security boundary. The command executor uses an allowlist of known build and test runners with safe operand shapes. It rejects shell metacharacters, interpreter evaluation flags, mutating subcommands, and filenames passed where only a named task is allowed. Commands launch without a shell. This is narrower than trying to list every dangerous binary, which failed as soon as the evaluator tried equivalent operations through another tool.</p>
+<h2 id="verification">Verification</h2>
+<p>The evaluator must run the delivered artifact rather than treat readable code as proof. For Apple-platform projects, it can build an app, start a simulator, drive the UI, and inspect screenshots. One run caught an app that letterboxed because it had no launch screen. Another failed a generator at 72 out of 75 after finding a scope hole and an incomplete documentation pass.</p>
+<p><img src="/assets/building/sparra/evaluator-pushback.png" alt="A Sparra evaluation rejecting a first attempt with two findings while a repair round runs." />
+<em>A failed evaluation returns the work to a new generator round. The status can be reconstructed because each phase records its state.</em></p>
+<h2 id="current-state">Current state</h2>
+<p>Sparra supports interactive role runs and a headless conductor for unattended work. A private HTTP bridge can trigger and monitor jobs over Tailscale without exposing raw model output or holdout text. It has built parts of itself and several of my other projects. I am still tightening its contracts and command policy as evaluators find new ways to satisfy a weak assertion without delivering the intended behavior.</p></article>
 
-  <section class="building-updates">
-    <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">11</span></h2>
-    </div>
-    <div class="update-timeline"><a href="/building/sparra/trusting-sparra-to-run-without-me-watching/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Trusting Sparra to Run Without Me Watching</span>
-</a>
-<a href="/building/sparra/sparra-runs-without-my-laptop/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Sparra runs without my laptop now</span>
-</a>
-<a href="/building/sparra/when-sparra-grades-sparra/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">When Sparra grades Sparra</span>
-</a>
-<a href="/building/sparra/locking-down-what-the-build-can-run/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.02</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Locking down what the build can run</span>
-</a>
-<a href="/building/sparra/sparra-audits-its-own-prompts/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.29</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Sparra audits its own prompts</span>
-</a>
-<a href="/building/sparra/driving-it-by-hand-from-claude-code/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.28</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Driving it by hand from Claude Code</span>
-</a>
-<a href="/building/sparra/surviving-the-rate-limit/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.27</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Surviving the rate limit</span>
-</a>
-<a href="/building/sparra/closing-the-door-on-a-gamed-contract/" class="update-entry is-decision">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">decision</span>
-  </span>
-  <span class="update-entry-title">Closing the door on a gamed contract</span>
-</a>
-<a href="/building/sparra/one-model-builds-another-judges/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.25</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">One model builds, another judges</span>
-</a>
-<a href="/building/sparra/letting-the-judge-run-the-app/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.24</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Letting the judge run the app</span>
-</a>
-<a href="/building/sparra/the-whole-loop-standing-in-a-day/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">The whole loop, standing in a day</span>
-</a>
-</div>
-  </section>
+  
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
-    <a href="/building/inkwell/" class="case-study-next-row">
-      <span class="case-study-next-title">Inkwell</span>
+    <a href="/building/aoede/" class="case-study-next-row">
+      <span class="case-study-next-title">Aoede</span>
       <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

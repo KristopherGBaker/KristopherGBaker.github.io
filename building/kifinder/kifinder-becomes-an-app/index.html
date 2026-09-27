@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>KiFinder becomes an app</title>
-    <meta name="description" content="KiFinder becomes an app">
+    <title>Adding the KiFinder review app</title>
+    <meta name="description" content="Adding the KiFinder review app">
     <link rel="canonical" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
-    <meta property="og:title" content="KiFinder becomes an app">
-    <meta property="og:description" content="KiFinder becomes an app">
+    <meta property="og:title" content="Adding the KiFinder review app">
+    <meta property="og:description" content="Adding the KiFinder review app">
     <meta property="og:url" content="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-becomes-an-app/">
@@ -109,23 +109,21 @@
   <a href="/building/kifinder/" class="post-back">← KiFinder</a>
   <p class="post-meta update-meta is-shipped">
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
-     · <span>2 min read</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">KiFinder becomes an app</h1>
+  <h1 class="h1 post-title update-title">Adding the KiFinder review app</h1>
   
   <div class="post-body">
-    <article class="prose"><p>The review window I prototyped last time is now a real Mac app wired to the live engine. There is a sidebar of the people I have enrolled, each with a face and a reference count. Enrolling someone is dropping five to a dozen reference photos into a panel that crops the faces on-device and tells you, plainly, that they never leave the Mac. Then you point it at an album and scan. What used to be a <code>feedback</code> command taking photo ids by hand is now a window I skim.</p>
-<p>The review screen is the part I care about most, and it is not a flat keep-or-not. KiFinder splits a scan into three tiers: the confident matches it auto-selects for a quick confirm, a smaller &quot;worth a look&quot; set for the borderline scores, and the rest, every choice reversible. It is keyboard-driven, so a month of albums is a minute of Return-to-keep and arrow-to-move rather than a mouse hunt. The piece I am happiest with is group photos. A class photo has a dozen faces in it, so the inspector boxes every detected face and I tap the one that is actually my kid before keeping it, instead of the app guessing. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
-<p>It is early, and I found a few rough edges taking these very screenshots, like some library thumbnails not loading, which I am chasing in a separate pass. But the shape is right. The confirm-and-reject step that started life as ids typed into a terminal is now a window you glance through: scan, skim, keep, export. For the demo I enrolled myself rather than my daughter, which is its own small reminder of what the app is actually for.</p></article>
+    <article class="prose"><p>KiFinder now has a Mac app around the matching engine. I can enroll a person by dropping in five to twelve reference photos, choose an album or the preschool's zip files, and review the scan without typing photo identifiers into a command.</p>
+<p>The review is split into three groups. Confident matches start selected, borderline scores appear under “Worth a look,” and the remaining photos stay out of the main path. Every decision can be changed before saving. In a group photo, the inspector draws a box around each detected face and lets me choose the intended person. That avoids treating the highest-scoring face as the answer when several people are in the photo.</p>
+<p>The kept photos go into a library grouped by person and month, ready to export to Photos. The app still writes the same manifest as the command-line engine, so the UI did not need a second data format. It is a view over decisions the engine already records.</p>
+<p>For the screenshots I enrolled myself and used synthetic faces for everyone else. That kept the demo useful without putting a preschool album on a public page.</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-newer">
+      <a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Getting KiFinder ready to ship</span>
+        <span class="update-nav-title">Fixing the sandboxed Core ML path</span>
       </a>
-      <a href="/building/kifinder/a-window-to-review-the-maybes/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">A window to review the maybes</span>
-      </a>
+      <span></span>
     </nav>
     <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>

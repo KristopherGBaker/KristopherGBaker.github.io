@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>固定期限の中で構築した、政治的バランスを考慮した選挙体験</title>
-    <meta name="description" content="SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。">
+    <title>SmartNewsの2020年米国大統領選機能</title>
+    <meta name="description" content="SmartNewsの2020年米国大統領選向けに、政治的視点を選ぶUI、候補者と結果のウィジェット、エディション別の動作を実装しました。選挙日という固定期限に合わせて開発しました。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/smartnews-us-election-2020/">
-    <meta property="og:title" content="固定期限の中で構築した、政治的バランスを考慮した選挙体験">
-    <meta property="og:description" content="SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。">
+    <meta property="og:title" content="SmartNewsの2020年米国大統領選機能">
+    <meta property="og:description" content="SmartNewsの2020年米国大統領選向けに、政治的視点を選ぶUI、候補者と結果のウィジェット、エディション別の動作を実装しました。選挙日という固定期限に合わせて開発しました。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/smartnews-us-election-2020/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/smartnews-us-election-2020/">
@@ -111,95 +111,52 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark smartnews"></span>
-      SmartNews · iOS Engineer · 2019
+      SmartNews · 選挙関連機能のiOS実装 · 2020
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">固定期限の中で構築した、政治的バランスを考慮した選挙体験</h1>
-  <p class="body-lg case-study-blurb">SmartNewsの米国大統領選2020向け機能のiOS実装を担当。政治的バランスを意識したUI、候補者ウィジェット、選挙結果表示などを、時間制御やエディション別仕様に対応しながら開発。</p>
-  <p class="case-study-meta">約2分</p>
+  <h1 class="h1 case-study-title">SmartNewsの2020年米国大統領選機能</h1>
+  <p class="body-lg case-study-blurb">SmartNewsの2020年米国大統領選向けに、政治的視点を選ぶUI、候補者と結果のウィジェット、エディション別の動作を実装しました。選挙日という固定期限に合わせて開発しました。</p>
+  <p class="case-study-meta">約3分</p>
 
   <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/product/" class="tag-chip">Product</a><a href="/ja/work/tags/ux/" class="tag-chip">UX</a><a href="/ja/work/tags/localization/" class="tag-chip">Localization</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
       <p class="case-study-metric-value">選挙関連機能</p>
-      <p class="case-study-metric-label">対象範囲</p>
+      <p class="case-study-metric-label">対象</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">選挙日固定</p>
-      <p class="case-study-metric-label">制約</p>
+      <p class="case-study-metric-value">選挙日</p>
+      <p class="case-study-metric-label">期限</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">複数サーフェス</p>
-      <p class="case-study-metric-label">対応画面</p>
+      <p class="case-study-metric-value">東京 + サンフランシスコ</p>
+      <p class="case-study-metric-label">チーム</p>
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/smartnews-us-election-2020/cover.jpg" alt="固定期限の中で構築した、政治的バランスを考慮した選挙体験"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/smartnews-us-election-2020/cover.jpg" alt="SmartNewsの2020年米国大統領選機能"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a><ol class="toc-sublist"><li class="toc-item toc-level-3"><a href="#section-4">政治的バランス体験</a></li><li class="toc-item toc-level-3"><a href="#section-5">候補者・選挙結果機能</a></li><li class="toc-item toc-level-3"><a href="#section-6">基盤・運用面</a></li></ol></li><li class="toc-item toc-level-2"><a href="#section-7">成果</a></li><li class="toc-item toc-level-2"><a href="#section-8">この事例で示せること</a></li>
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#news-from-all-sides">News From All Sides</a></li><li class="toc-item toc-level-2"><a href="#section-2">候補者と選挙結果</a></li><li class="toc-item toc-level-2"><a href="#section-3">リリース</a></li><li class="toc-item toc-level-2"><a href="#section-4">次に取り組むこと</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="section">背景</h2>
-<p>SmartNewsは、選挙報道において大きな役割を担っています。2020年の米国大統領選では、政治的な視点の偏りを抑え、異なる立場の記事を比較しながら読める体験を提供することが重要なテーマのひとつでした。</p>
-<p>また、選挙という性質上、リリース期限は完全に固定されており、すべてを選挙日までに間に合わせる必要がありました。</p>
-<h2 id="section-2">課題</h2>
-<p>求められていたのは、以下を満たす機能群でした。</p>
-<ul>
-<li>異なる政治的視点の記事を分かりやすく提示すること</li>
-<li>既存UIの流用ではなく、新しい体験を設計・実装すること</li>
-<li>リアルタイムの選挙結果表示に対応すること</li>
-<li>US版・JP版それぞれの挙動差異を正しく扱うこと</li>
-</ul>
-<h2 id="section-3">アプローチ</h2>
-<p>複数の選挙関連機能に横断的に関わりました。</p>
-<h3 id="section-4">政治的バランス体験</h3>
-<ul>
-<li>カスタムUISliderを用いた News Event View を実装
-<ul>
-<li>3段階 / 5段階の視点切り替えに対応</li>
-</ul>
-</li>
-<li>オンボーディング、ディープリンク、行動ログ計測を追加</li>
-<li>“News from all sides” への導線を複数サーフェスに展開</li>
-</ul>
-<h3 id="section-5">候補者・選挙結果機能</h3>
-<p>以下を実装：</p>
-<ul>
-<li>候補者ウィジェット・候補者リスト</li>
-<li>時間制御付きの選挙結果ウィジェット</li>
-</ul>
-<p>さらに：</p>
-<ul>
-<li>表示開始・終了時刻によるタイムスタンプ制御</li>
-<li>エディション別言語ルール
-<ul>
-<li>例：JP版ではシステム言語に関係なく日本語を表示</li>
-</ul>
-</li>
-</ul>
-<h3 id="section-6">基盤・運用面</h3>
-<ul>
-<li>フォールバックを含むAPI連携を実装</li>
-<li>クライアント条件による段階的ロールアウト制御</li>
-<li>主要インタラクションのTelemetry計測を整備</li>
-</ul>
-<h2 id="section-7">成果</h2>
-<ul>
-<li>固定期限の中で複数の選挙関連機能をリリース</li>
-<li>ユーザーが異なる政治的視点を比較しながら読める体験を実現</li>
-<li>時間制御・ローカライズ・データ可用性など複雑な要件を安定運用</li>
-</ul>
-<h2 id="section-8">この事例で示せること</h2>
-<ul>
-<li>動かせない期限の中での開発・リリース遂行力</li>
-<li>センシティブなプロダクト領域におけるUI設計・実装</li>
-<li>マルチエディション・多言語環境での仕様設計</li>
-<li>複数サーフェスにまたがる一貫した体験設計</li>
-</ul></article>
+<p>SmartNewsの2020年米国大統領選向け開発には、変更できない期限がありました。東京とサンフランシスコのチームがUS版に向けて、政治記事を比較する機能、候補者情報、選挙結果など、複数の関連機能を開発していました。</p>
+<p>私は各画面のiOS実装を担当しました。UI、APIデータ、表示期間、言語ルール、ディープリンク、テレメトリを選挙日までに揃える必要がありました。</p>
+<h2 id="news-from-all-sides">News From All Sides</h2>
+<p>News From All Sidesでは、カスタム<code>UISlider</code>を使ったNews Event画面を作りました。コントロールは、データに応じて3段階または5段階の視点を表示しました。</p>
+<p>オンボーディング、ディープリンク、操作ログ、アプリ内の複数画面からの導線も追加しました。政治的に注意が必要な内容を扱うため、データにない意味を追加せず、利用できる視点を分かりやすく見せる必要がありました。</p>
+<h2 id="section-2">候補者と選挙結果</h2>
+<p>候補者ウィジェットと一覧に加え、選挙結果ウィジェットを実装しました。開始と終了のタイムスタンプで、結果を表示する期間を制御しました。</p>
+<p>言語は端末のロケールだけでなく、SmartNewsのエディションにも依存しました。日本版では必要な場所に日本語を表示するよう、エディション別のルールを追加しました。</p>
+<p>API連携にはフォールバックを用意し、クライアント条件でロールアウトを制御しました。</p>
+<h2 id="section-3">リリース</h2>
+<p>選挙関連機能は、予定していたアプリ内の画面で選挙日までにリリースされました。ユーザーは異なる政治的視点の記事を切り替え、候補者情報を読み、設定した時間になると結果を確認できました。新しい導線とコントロールの使われ方を確認するため、操作ログも記録しました。</p>
+<h2 id="section-4">次に取り組むこと</h2>
+<p>時間で表示を切り替えるUIは、表示期間の途中では確認しやすい一方、境界で問題が起きやすいです。同じプロダクトで次の選挙向け機能を出すなら、共通の時計を注入できる設計にし、開始時刻、終了時刻、タイムスタンプがない場合、エディション変更のテストを追加します。両方のエディションで同じケースを実行し、各時刻で期待する画面の状態も記録します。APIから応答がない場合とクライアント条件が無効な場合も同じテスト計画に含めれば、次の固定期限が近づいてからリリース条件を調べ直さずに済みます。また、API、クライアント条件、選挙スケジュールが一致しない場合に、どのフォールバックを優先するかを文書にします。</p></article>
 
   <section class="case-study-shots">
     <figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/politics-channel.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/news-from-all-sides.png" alt=""></figure>
@@ -208,7 +165,7 @@
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
     <a href="/ja/work/wolt-telemetry-viewer/" class="case-study-next-row">
-      <span class="case-study-next-title">プロダクト改善を速く、確信を持って進めるためのテレメトリツール</span>
+      <span class="case-study-next-title">iOS開発用のデスクトップ・テレメトリビューア</span>
       <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

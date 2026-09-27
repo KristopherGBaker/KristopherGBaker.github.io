@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>プロダクト改善を速く、確信を持って進めるためのテレメトリツール</title>
-    <meta name="description" content="プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。">
+    <title>iOS開発用のデスクトップ・テレメトリビューア</title>
+    <meta name="description" content="iOSのテレメトリをローカルWebSocketで受信するmacOSクライアントを作り、検索とフィルタを追加しました。エンジニアがテスト中の画面を閉じずにイベントを確認できるようにしました。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
-    <meta property="og:title" content="プロダクト改善を速く、確信を持って進めるためのテレメトリツール">
-    <meta property="og:description" content="プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。">
+    <meta property="og:title" content="iOS開発用のデスクトップ・テレメトリビューア">
+    <meta property="og:description" content="iOSのテレメトリをローカルWebSocketで受信するmacOSクライアントを作り、検索とフィルタを追加しました。エンジニアがテスト中の画面を閉じずにイベントを確認できるようにしました。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-telemetry-viewer/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-telemetry-viewer/">
@@ -111,76 +111,61 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · 単独開発 · 2023
+      Wolt / DoorDash · 自分から提案して開発 · 2025
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">プロダクト改善を速く、確信を持って進めるためのテレメトリツール</h1>
-  <p class="body-lg case-study-blurb">プロダクト改善のための小さなレバレッジシステムとして、iOSアプリからのイベントをWebSocket経由でローカルのデスクトップクライアントへストリーミングし、検索・フィルタ可能にしたテレメトリツールを開発。従来のアプリ内ビューアを置き換え、計測作業をより速く、信頼できるものにした。</p>
-  <p class="case-study-meta">約2分</p>
+  <h1 class="h1 case-study-title">iOS開発用のデスクトップ・テレメトリビューア</h1>
+  <p class="body-lg case-study-blurb">iOSのテレメトリをローカルWebSocketで受信するmacOSクライアントを作り、検索とフィルタを追加しました。エンジニアがテスト中の画面を閉じずにイベントを確認できるようにしました。</p>
+  <p class="case-study-meta">約3分</p>
 
-  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/macos/" class="tag-chip">macOS</a><a href="/ja/work/tags//" class="tag-chip">内製ツール</a><a href="/ja/work/tags//" class="tag-chip">テレメトリ</a><a href="/ja/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/macos/" class="tag-chip">macOS</a><a href="/ja/work/tags/internal-tooling/" class="tag-chip">Internal tooling</a><a href="/ja/work/tags/telemetry/" class="tag-chip">Telemetry</a><a href="/ja/work/tags/websocket/" class="tag-chip">WebSocket</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
-      <p class="case-study-metric-value">自発的に起案</p>
-      <p class="case-study-metric-label">発端</p>
+      <p class="case-study-metric-value">自分から提案</p>
+      <p class="case-study-metric-label">きっかけ</p>
     </div><div class="case-study-metric">
       <p class="case-study-metric-value">iOS + macOS</p>
-      <p class="case-study-metric-label">プラットフォーム</p>
+      <p class="case-study-metric-label">対応環境</p>
     </div><div class="case-study-metric">
       <p class="case-study-metric-value">複数チーム</p>
-      <p class="case-study-metric-label">利用状況</p>
+      <p class="case-study-metric-label">利用範囲</p>
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="プロダクト改善を速く、確信を持って進めるためのテレメトリツール"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-telemetry-viewer/cover.jpg" alt="iOS開発用のデスクトップ・テレメトリビューア"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">担当</a></li>
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">作ったもの</a></li><li class="toc-item toc-level-2"><a href="#section-3">展開</a></li><li class="toc-item toc-level-2"><a href="#section-4">結果</a></li><li class="toc-item toc-level-2"><a href="#section-5">次に取り組むこと</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="section">背景</h2>
-<p>Woltでは、開発中に分析イベント（テレメトリ）を確認する手段が限られており、アプリ内のフルスクリーンビューアに依存していました。検索やフィルタ機能がなく、計測が正しいかどうかを確信するまでに時間がかかっていました。</p>
-<h2 id="section-2">課題</h2>
-<p>この状況では、エンジニアやプロダクトチームが以下の作業を効率的に行うことが難しくなっていました。</p>
-<ul>
-<li>新しいイベントの検証</li>
-<li>不具合のデバッグ</li>
-<li>計測を伴う機能を安心してリリースし、評価すること</li>
-</ul>
-<h2 id="section-3">アプローチ</h2>
-<p>iOSアプリからイベントをローカルのデスクトップクライアントへストリーミングする、テレメトリビューアを設計・開発しました。目的は単に見やすいビューアを作ることではなく、プロダクトの意図、計測、リリース判断の間にあるループを短くすることでした。</p>
-<p>主な構成要素は以下です。</p>
-<ul>
-<li>iOSアプリからのWebSocketによるローカルストリーミング</li>
-<li>検索・フィルタが可能なデスクトップアプリのイベントビュー</li>
-<li>バックエンドへ送信されるペイロードを、人がすばやく確認できる形で完全に可視化</li>
-</ul>
-<p>導入は段階的に進めました。</p>
-<ul>
-<li>まず少人数のエンジニアで検証</li>
-<li>デモや社内共有を通じて利用範囲を拡大</li>
-</ul>
-<p>また、Androidエンジニアと連携し、同様の仕組みを他プラットフォームにも展開しました。</p>
-<h2 id="section-4">成果</h2>
-<ul>
-<li>テレメトリ検証にかかる時間と不確実性を大幅に削減</li>
-<li>複数チームのエンジニアに採用</li>
-<li>プライバシー関連のテレメトリ対応など、他の取り組みの基盤としても活用</li>
-</ul>
-<h2 id="section-5">担当</h2>
-<p>コンセプト設計から実装、チームへの展開までを単独で担当。</p></article>
+<p>Woltでは、iOSアプリ内のフルスクリーン画面で分析イベントを確認していました。確認はできましたが、機能開発中に使うには時間がかかりました。検索もフィルタもなく、ビューアを開くとテスト中の画面が隠れます。イベントが多いセッションでは、目的の1件を見つけるために前後のデータを順番に読む必要がありました。そのため、新しいイベントの検証、想定外のデータの調査、リリース前の計測確認に時間がかかっていました。ペイロードは見えていても、調べたいイベントや項目へすぐ絞り込めませんでした。</p>
+<p>そこで、確認作業を短くするため、Telemetry Viewerを自分から立ち上げ、単独で開発しました。アプリを通常どおり操作しながら、Mac側でイベントを見られる状態が目標でした。</p>
+<h2 id="section-2">作ったもの</h2>
+<video autoplay muted playsinline controls style="display: block; width: 880px; max-width: 100%; margin: 0 auto;">
+  <source src="/work/wolt-telemetry-viewer/telemetry-viewer-demo.mp4" type="video/mp4">
+</video>
+<p>iOSアプリからローカルWebSocket経由でmacOSクライアントへテレメトリイベントを送ります。デスクトップアプリでは、バックエンドに送るイベント名とペイロードを表示し、検索とフィルタで調査対象のデータに絞り込めます。バックエンドへ送るペイロード全体を表示するため、イベント名だけでなく各項目も確認できます。</p>
+<p>ビューアをmacOS側に置くことで、iPhoneにはテスト中の機能を表示したままにできます。</p>
+<h2 id="section-3">展開</h2>
+<p>最初は少人数のエンジニアに共有し、その後デモを通じて利用者を増やしました。最初の構想から、複数チームへ展開するところまで担当しました。</p>
+<p>Androidエンジニアが同じ考え方のツールを作るときにも協力しました。また、アプリが送信するデータを確認する、プライバシー関連のテレメトリ作業にも使われました。</p>
+<h2 id="section-4">結果</h2>
+<p>Telemetry Viewerは、分析イベントの検証、想定外のイベントのデバッグ、実験用計測の確認に使われました。確認画面をMacに移したことで作業が速くなり、iPhoneにはテスト中の機能を表示したままにできました。リリース確認でも使われ、ロールアウト前に計測が意図した動作と一致しているかを確認しやすくなりました。</p>
+<h2 id="section-5">次に取り組むこと</h2>
+<p>続けるなら、繰り返し使われる検索やペイロード確認を調べ、その作業を自動化します。また、iOS版とAndroid版の動作をそろえるため、小さな互換性ルールを文書にします。</p></article>
 
   
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/work/wolt-cart-entry-points/" class="case-study-next-row">
-      <span class="case-study-next-title">カート・チェックアウト導線の改善でサブスク転換率を高める</span>
+    <a href="/ja/work/wolt-test-automation/" class="case-study-next-row">
+      <span class="case-study-next-title">毎週のiOS回帰テストを支える自動化</span>
       <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

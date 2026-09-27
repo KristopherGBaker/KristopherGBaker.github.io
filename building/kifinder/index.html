@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>KiFinder</title>
-    <meta name="description" content="A local, privacy-first Mac app that finds photos of one specific person in a big mixed album. I built it because my daughter Kion's preschool sends a monthly photo drop, several zip files of hundreds of pictures of every kid in the class, and I was filtering them by hand to find the ones with her before adding them to Photos. Enroll a person, scan an album, keep the real matches, and export them to Photos. Everything runs on-device.">
+    <meta name="description" content="A Mac app that finds one person in a large photo album without uploading the photos. I built it to sort my daughter's monthly preschool albums.">
     <link rel="canonical" href="https://krisbaker.com/building/kifinder/">
     <meta property="og:title" content="KiFinder">
-    <meta property="og:description" content="A local, privacy-first Mac app that finds photos of one specific person in a big mixed album. I built it because my daughter Kion's preschool sends a monthly photo drop, several zip files of hundreds of pictures of every kid in the class, and I was filtering them by hand to find the ones with her before adding them to Photos. Enroll a person, scan an album, keep the real matches, and export them to Photos. Everything runs on-device.">
+    <meta property="og:description" content="A Mac app that finds one person in a large photo album without uploading the photos. I built it to sort my daughter's monthly preschool albums.">
     <meta property="og:url" content="https://krisbaker.com/building/kifinder/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/kifinder/">
@@ -115,88 +115,50 @@
   </div>
 
   <h1 class="h1 building-detail-title">KiFinder</h1>
-  <p class="body-lg building-detail-blurb">A local, privacy-first Mac app that finds photos of one specific person in a big mixed album. I built it because my daughter Kion's preschool sends a monthly photo drop, several zip files of hundreds of pictures of every kid in the class, and I was filtering them by hand to find the ones with her before adding them to Photos. Enroll a person, scan an album, keep the real matches, and export them to Photos. Everything runs on-device.</p>
-  <div class="case-study-tags"><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/python/" class="tag-chip">Python</a><a href="/building/tags/face-recognition/" class="tag-chip">Face recognition</a><a href="/building/tags/insightface/" class="tag-chip">InsightFace</a><a href="/building/tags/local-first/" class="tag-chip">Local-first</a><a href="/building/tags/privacy/" class="tag-chip">Privacy</a></div>
+  <p class="body-lg building-detail-blurb">A Mac app that finds one person in a large photo album without uploading the photos. I built it to sort my daughter's monthly preschool albums.</p>
+  <div class="case-study-tags"><a href="/building/tags/swift/" class="tag-chip">Swift</a><a href="/building/tags/macos/" class="tag-chip">macOS</a><a href="/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/building/tags/core-ml/" class="tag-chip">Core ML</a><a href="/building/tags/face-recognition/" class="tag-chip">Face recognition</a><a href="/building/tags/local-first/" class="tag-chip">Local-first</a><a href="/building/tags/gplv3/" class="tag-chip">GPLv3</a></div>
 
-  <article class="prose building-detail-prose"><p>Every month my daughter Kion's preschool sends home a photo album. In practice that means several zip files, each with hundreds of pictures of the whole class, and somewhere in there are the dozen or so of Kion. The job was always the same: unzip everything, scroll through hundreds of photos of other people's children, pick out mine, and add those to the Photos app. It is a sweet problem to have and a tedious one to do, every single month.</p>
-<p>So I built KiFinder, a small Mac app to do the picking. You enroll a person by dropping in a handful of reference photos, point it at an album (a folder, loose images, or the preschool's zip files as they arrive), and it sorts every photo into three piles: the matches it is confident about, the ones worth a second look, and the rest. You skim the confident ones, glance at the maybes, keep what is right, and export the keepers straight to Photos. Group shots get their own handling, since a class photo has a dozen faces in it, so it shows every detected face and you tap the one you mean. Under the hood it scores each face with on-device embeddings from InsightFace's ArcFace model, by how close it is to the person you enrolled, and tunes its own threshold so it catches the real photos without burying you in false ones.</p>
-<p><img src="/assets/building/kifinder/review-candidates.png" alt="KiFinder's review screen: a grid of found matches marked Keep with similarity scores, a worth-a-look row beneath, and an inspector showing a group photo with each detected face boxed for selection." />
-<em>Reviewing a scan. KiFinder auto-selects the matches it is confident about, sets the borderline ones aside as worth a look, and drops the rest. For a group shot it shows every detected face so I can tap the right one. For the demo I enrolled myself rather than my daughter, with synthetic faces standing in for everyone else.</em></p>
-<p>On-device is the whole point, not a nice-to-have. These albums are full of other families' children. Uploading hundreds of photos of someone else's kids to a cloud service to find my own would be exactly the wrong trade. KiFinder never sends a photo anywhere. The model runs locally, the originals are never modified, and the only thing that leaves the machine is the handful of photos I choose to keep.</p>
-<p><img src="/assets/building/kifinder/enroll.png" alt="KiFinder's Enroll a person dialog with a LOCAL-ONLY badge, a drop zone reading &quot;they never leave this Mac&quot;, and a row of reference photo thumbnails." />
-<em>Enrolling a person is just dropping in five to a dozen reference photos. The faces are cropped on the Mac and never leave it, which is the whole posture of the app.</em></p>
-<p>It also learns from me. After a scan I can keep the real matches and skip the look-alikes, and those corrections fold back into the person's profile so next month's albums rank better, all without re-running the model on a single pixel. The keepers collect in a library grouped by person and month, ready to hand to Photos.</p>
-<p><img src="/assets/building/kifinder/library.png" alt="KiFinder's Library view showing the saved photos for one person, grouped by month." />
-<em>The keepers, gathered in a library grouped by person and month, ready to export to Photos.</em></p>
-<p>I built the whole thing by driving <a href="/building/sparra/">Sparra</a>, my adversarial build harness, which made KiFinder one of its first real test subjects. The updates below are the build log: the matching engine, teaching it to learn from my corrections, and the Mac app that grew up around them.</p></article>
+  <article class="prose building-detail-prose"><p>KiFinder is a Mac app that finds photos of one person in a large mixed album. I built it because my daughter's preschool sends several zip files with hundreds of class photos each month, and I was finding her pictures by hand. The albums include other families' children, so the matching runs on the Mac and does not upload their photos.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>I enroll a person with several reference photos. KiFinder detects the faces, builds an ArcFace embedding profile, and scans a folder, loose images, or the original zip files. It sorts the results into three piles: confident matches, photos worth another look, and the rest. Group photos show every detected face so I can select the person I meant rather than accepting the app's first guess.</p>
+<p><img src="/assets/building/kifinder/review-candidates.png" alt="KiFinder's review screen with confident matches, a separate row for borderline results, and detected faces boxed in a group photo." />
+<em>The review flow keeps borderline results visible without mixing them into the confident matches. For these demo images I enrolled myself and used synthetic faces for the other people.</em></p>
+<p>The similarity threshold is a product decision, not a fixed property of the model. A high value misses side profiles and blurry candid shots. A low value fills the review with other children. The calibration command takes labeled positive and negative examples and recommends the highest threshold that still catches every known real match, but it does not apply the value for me. Missing a real photo is a choice I want to make explicitly.</p>
+<p>Each scan writes its scores and face embeddings to a manifest. When I keep a real match or reject a look-alike, KiFinder adds that correction to an exemplar bundle beside the original references. It can then re-score an old album without loading the images or running the model again.</p>
+<p><img src="/assets/building/kifinder/enroll.png" alt="KiFinder's enrollment screen with local-only guidance and reference-photo thumbnails." />
+<em>Enrollment crops the reference faces on the Mac. The app asks for five to twelve photos so the profile includes more than one angle.</em></p>
+<h2 id="verification">Verification</h2>
+<p>The review screen makes the model's decision inspectable instead of presenting a final folder with no explanation. I found one important regression only by running the real engine after enabling the App Sandbox. Core ML was compiling its model under a hard-coded path in <code>/private/tmp</code>, which the sandbox could not write. A swallowed error turned every embedding into <code>nil</code>, so the scan completed with zero faces. Moving the scratch directory into the container fixed it, and a live-engine check over saved photos produced five and six embeddings where the broken build produced none.</p>
+<p><img src="/assets/building/kifinder/library.png" alt="KiFinder's library with saved photos grouped by person and month." />
+<em>Kept photos are grouped by person and month before export to Photos.</em></p>
+<h2 id="current-state">Current state</h2>
+<p>KiFinder remains an active personal tool, but I decided not to distribute a signed build. The source is available under GPLv3 so others can inspect and build it, while derivative work stays open. That keeps the project focused on the engineering and avoids taking on support for unknown Macs and photo libraries. Next I want more repeatable on-device coverage around model setup and sandbox permissions.</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">8</span></h2>
+      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">2</span></h2>
     </div>
-    <div class="update-timeline"><a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-entry is-decision">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.16</span>
-    <span class="update-entry-status">decision</span>
-  </span>
-  <span class="update-entry-title">Choosing GPLv3, Source-Only, for KiFinder</span>
-</a>
-<a href="/building/kifinder/kifinder-onboarding-cant-be-skipped/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.13</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Onboarding you can't accidentally skip</span>
-</a>
-<a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
+    <div class="update-timeline"><a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.07.08</span>
     <span class="update-entry-status">wip</span>
   </span>
-  <span class="update-entry-title">The sandbox quietly turned off the faces</span>
-</a>
-<a href="/building/kifinder/getting-kifinder-ready-to-ship/" class="update-entry is-wip">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.01</span>
-    <span class="update-entry-status">wip</span>
-  </span>
-  <span class="update-entry-title">Getting KiFinder ready to ship</span>
+  <span class="update-entry-title">Fixing the sandboxed Core ML path</span>
 </a>
 <a href="/building/kifinder/kifinder-becomes-an-app/" class="update-entry is-shipped">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.06.30</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">KiFinder becomes an app</span>
-</a>
-<a href="/building/kifinder/a-window-to-review-the-maybes/" class="update-entry is-wip">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.29</span>
-    <span class="update-entry-status">wip</span>
-  </span>
-  <span class="update-entry-title">A window to review the maybes</span>
-</a>
-<a href="/building/kifinder/learning-from-my-corrections/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Learning from my corrections</span>
-</a>
-<a href="/building/kifinder/finding-kion-in-a-crowd/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Finding Kion in a crowd</span>
+  <span class="update-entry-title">Adding the KiFinder review app</span>
 </a>
 </div>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
-    <a href="/building/domestique/" class="case-study-next-row">
-      <span class="case-study-next-title">Domestique</span>
+    <a href="/building/sparra/" class="case-study-next-row">
+      <span class="case-study-next-title">Sparra</span>
       <span class="read-link">See the build log <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

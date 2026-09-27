@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>カート・チェックアウト導線の改善でサブスク転換率を高める</title>
-    <meta name="description" content="Wolt+成長の中核実験2件（カート導入口とエクスプレス登録）のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。">
+    <title>登録導線と配達料金を通じたWolt+の改善</title>
+    <meta name="description" content="iOS、Android、webを横断し、Wolt+の登録導線と長距離配達に関するクライアント開発をリードしました。カートとチェックアウトの実験は、会員登録数の約30%増加に貢献しました。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/">
-    <meta property="og:title" content="カート・チェックアウト導線の改善でサブスク転換率を高める">
-    <meta property="og:description" content="Wolt+成長の中核実験2件（カート導入口とエクスプレス登録）のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。">
+    <meta property="og:title" content="登録導線と配達料金を通じたWolt+の改善">
+    <meta property="og:description" content="iOS、Android、webを横断し、Wolt+の登録導線と長距離配達に関するクライアント開発をリードしました。カートとチェックアウトの実験は、会員登録数の約30%増加に貢献しました。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/wolt-cart-entry-points/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-cart-entry-points/">
@@ -111,79 +111,64 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · シニアソフトウェアエンジニア · メンバーシップ成長 · 2024
+      Wolt / DoorDash · クライアントDRI兼iOS実装担当 · 2025
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">カート・チェックアウト導線の改善でサブスク転換率を高める</h1>
-  <p class="body-lg case-study-blurb">Wolt+成長の中核実験2件（カート導入口とエクスプレス登録）のクライアント側責任者。クロスプラットフォームのRFCを主導し、単一リリースに詰め込まず独立した実験として段階的に検証する流れを推進した。</p>
-  <p class="case-study-meta">約2分</p>
+  <h1 class="h1 case-study-title">登録導線と配達料金を通じたWolt+の改善</h1>
+  <p class="body-lg case-study-blurb">iOS、Android、webを横断し、Wolt+の登録導線と長距離配達に関するクライアント開発をリードしました。カートとチェックアウトの実験は、会員登録数の約30%増加に貢献しました。</p>
+  <p class="case-study-meta">約3分</p>
 
-  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/growth/" class="tag-chip">Growth</a><a href="/ja/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/ja/work/tags/a-b-testing/" class="tag-chip">A/B testing</a></div>
+  <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/growth/" class="tag-chip">Growth</a><a href="/ja/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/ja/work/tags/a-b-testing/" class="tag-chip">A/B testing</a><a href="/ja/work/tags/api-design/" class="tag-chip">API design</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
-      <p class="case-study-metric-value">DRI</p>
-      <p class="case-study-metric-label">役割</p>
+      <p class="case-study-metric-value">約30%増加</p>
+      <p class="case-study-metric-label">会員登録数</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">2</p>
-      <p class="case-study-metric-label">分割した実験</p>
-    </div><div class="case-study-metric">
-      <p class="case-study-metric-value">本番展開済</p>
-      <p class="case-study-metric-label">ステータス</p>
+      <p class="case-study-metric-value">iOS + Android + web</p>
+      <p class="case-study-metric-label">クライアント範囲</p>
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="カート・チェックアウト導線の改善でサブスク転換率を高める"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="登録導線と配達料金を通じたWolt+の改善"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">役割</a></li>
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">登録導線の実験</a></li><li class="toc-item toc-level-2"><a href="#section-3">長距離配達</a></li><li class="toc-item toc-level-2"><a href="#section-4">結果</a></li><li class="toc-item toc-level-2"><a href="#section-5">次に取り組むこと</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="section">背景</h2>
-<p>Wolt+はWoltのサブスクリプションサービスで、Uber OneやDashPassに近い位置付けです。注文フロー中で「いつ」「どのように」加入を促すかは、成長の重要なレバーになっています。</p>
-<h2 id="section-2">課題</h2>
-<p>既存の加入導線は限定的で、注文フローを離れて遷移する必要がありました。カートとチェックアウトに新しい接点を作り、より速い「エクスプレス」登録体験も検証したかったのですが、最初の設計はそれらをすべて1リリースに詰め込もうとしており、複雑性とリスクが膨らんでいました。</p>
-<h2 id="section-3">アプローチ</h2>
+<p>2024年から2025年にかけて、複数のWolt+会員向け施策を担当しました。注文中の登録を簡単にすることと、無料配達エリア外でも会員向けの配達割引を提供することの2つが主なテーマでした。</p>
+<p>私はiOS、Android、webを横断するクライアントDRIとして、バックエンド、プロダクト、デザイン、QA、データの各チームと連携し、iOS実装も担当しました。変更はDiscovery、店舗、カート、チェックアウトにまたがるため、1つの画面での判断が別の画面にも影響しました。</p>
+<h2 id="section-2">登録導線の実験</h2>
 <video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
   <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
-  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="カート導入口とエクスプレス登録のフロー">
+  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+のカート導線とエクスプレス登録フロー">
 </video>
-<p>クライアント側のDRIとしてiOS・Web・Androidを横断的に率い、プロダクト・デザイン・バックエンド・データサイエンスの整合を取りつつ、iOS実装をリードしました。</p>
-<p>早い段階で、私はこの作業を独立した2つの実験に分けることを推しました:</p>
-<ul>
-<li>まずカート導入口を出して検証する</li>
-<li>その後、エクスプレス登録を別の反復として続ける</li>
-</ul>
-<p>これにより、複雑な実装を待たずに段階的に効果を検証できるようになりました。</p>
-<p>エクスプレス登録では、いくつかのUX・技術的制約に取り組みました:</p>
-<ul>
-<li>ボトムシート内でのナビゲーションフロー（従来未対応）</li>
-<li>「エクスプレス」と通常登録の遷移を簡素化し、混乱を減らす</li>
-<li>支払い・バックエンドとの連携で、支払方法変更などのエッジケースをすり合わせる</li>
-</ul>
-<p>データサイエンスとも密に連携し、計装の検証や、誤解を招くA/Bテスト結果のデバッグまで踏み込みました。</p>
-<h2 id="section-4">成果</h2>
-<ul>
-<li>Wolt+登録と下流の注文ボリュームに有意な押し上げ</li>
-<li>両機能ともA/Bテストに合格し、本番100%展開済</li>
-<li>カート導入口は今もサブスク成長の中核サーフェス</li>
-</ul>
-<h2 id="section-5">役割</h2>
-<p>iOS・Web・Androidを横断するクライアント側DRI。RFC、ステークホルダー調整、実験戦略を主導しつつ、iOS実装にも手を動かしました。</p></article>
+<p>最初の案では、新しいカート導線とエクスプレス登録を1つのリリースにまとめていました。私はそれぞれを独立した実験に分けることを提案しました。先にカート導線を出せば、複雑な登録フローの完成を待たずに配置の効果を確認できます。</p>
+<p>エクスプレス登録には、当時クライアントが対応していなかった複数ステップのボトムシートを使いました。また、エクスプレス登録と通常登録の切り替えを簡単にし、決済とバックエンドのエッジケースを調整しました。</p>
+<p>初期のA/Bテストには誤解しやすい結果もありました。データサイエンスと一緒に計測を確認し、実験が何を測っているかを整理してから次のリリース判断に使いました。カートとチェックアウトの取り組みは、最終的に会員登録数の約30%増加に貢献しました。</p>
+<h2 id="section-3">長距離配達</h2>
+<p>Wolt+は決められた距離内で無料配達を提供していました。長距離配達では、その範囲外でも会員向けの割引料金を提供しました。クライアント側の課題は、Discoveryの一覧、店舗画面、チェックアウトで料金と適用条件を一致させることでした。</p>
+<p>同じ概念を複数の画面とクライアントで扱うため、フロントエンドとバックエンドのチームでAPIの構造と名前を検討しました。</p>
+<p>配達料金とWolt+の割引を各導線で説明できる、再利用可能なボトムシートも設計しました。</p>
+<h2 id="section-4">結果</h2>
+<p>2つの登録実験はどちらもA/Bテストを経てロールアウトされ、カート導線はその後も登録画面への入口として使われました。長距離配達も良いA/Bテスト結果を得て、アプリ内の複数画面へ展開されました。注文中にWolt+を見つけやすくなり、無料配達エリア外の会員にも分かりやすい特典を提供できました。</p>
+<h2 id="section-5">次に取り組むこと</h2>
+<p>この開発では、複数チームの用語と分析イベントを揃える必要がありました。もう一度取り組むなら、共通の料金用語と実験イベントを、各画面の例と一緒にクライアントRFCへ早めに記載します。実装や分析の前に、デザイン、バックエンド、データサイエンス、クライアントの前提を同じ場所で確認できるようにします。</p></article>
 
   <section class="case-study-shots">
-    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure>
+    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/venue-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/delivery-fee-sheet.png" alt=""></figure>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/work/wolt-long-distance-delivery/" class="case-study-next-row">
-      <span class="case-study-next-title">長距離配達によるサブスクリプション価値の拡張</span>
-      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    <a href="/ja/work/smartnews-smartview-v2/" class="case-study-next-row">
+      <span class="case-study-next-title">記事抽出パイプラインの安全な置き換え</span>
+      <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>
 </main>

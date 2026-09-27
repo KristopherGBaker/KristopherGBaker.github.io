@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Building politically balanced election experiences under a fixed deadline</title>
-    <meta name="description" content="Built key iOS features for SmartNews’ US Election 2020 coverage, including political balancing UI, candidate widgets, and election results surfaces with strict time-based and edition-aware behavior.">
+    <title>Building SmartNews's 2020 election coverage</title>
+    <meta name="description" content="I built iOS features for SmartNews's 2020 US election coverage, including perspective controls, candidate and results widgets, and edition-aware behavior under a fixed election-day deadline.">
     <link rel="canonical" href="https://krisbaker.com/work/smartnews-us-election-2020/">
-    <meta property="og:title" content="Building politically balanced election experiences under a fixed deadline">
-    <meta property="og:description" content="Built key iOS features for SmartNews’ US Election 2020 coverage, including political balancing UI, candidate widgets, and election results surfaces with strict time-based and edition-aware behavior.">
+    <meta property="og:title" content="Building SmartNews's 2020 election coverage">
+    <meta property="og:description" content="I built iOS features for SmartNews's 2020 US election coverage, including perspective controls, candidate and results widgets, and edition-aware behavior under a fixed election-day deadline.">
     <meta property="og:url" content="https://krisbaker.com/work/smartnews-us-election-2020/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/smartnews-us-election-2020/">
@@ -111,12 +111,12 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark smartnews"></span>
-      SmartNews · iOS Engineer · 2019
+      SmartNews · iOS implementation across election features · 2020
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Building politically balanced election experiences under a fixed deadline</h1>
-  <p class="body-lg case-study-blurb">Built key iOS features for SmartNews’ US Election 2020 coverage, including political balancing UI, candidate widgets, and election results surfaces with strict time-based and edition-aware behavior.</p>
+  <h1 class="h1 case-study-title">Building SmartNews's 2020 election coverage</h1>
+  <p class="body-lg case-study-blurb">I built iOS features for SmartNews's 2020 US election coverage, including perspective controls, candidate and results widgets, and edition-aware behavior under a fixed election-day deadline.</p>
   <p class="case-study-meta">2 min read</p>
 
   <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/product/" class="tag-chip">Product</a><a href="/work/tags/ux/" class="tag-chip">UX</a><a href="/work/tags/localization/" class="tag-chip">Localization</a></div>
@@ -129,77 +129,34 @@
       <p class="case-study-metric-value">Election day</p>
       <p class="case-study-metric-label">deadline</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">Multi-surface</p>
-      <p class="case-study-metric-label">surfaces</p>
+      <p class="case-study-metric-value">Tokyo + San Francisco</p>
+      <p class="case-study-metric-label">teams</p>
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/smartnews-us-election-2020/cover.jpg" alt="Building politically balanced election experiences under a fixed deadline"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/smartnews-us-election-2020/cover.jpg" alt="Building SmartNews's 2020 election coverage"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#the-problem">The problem</a></li><li class="toc-item toc-level-2"><a href="#approach">Approach</a><ol class="toc-sublist"><li class="toc-item toc-level-3"><a href="#political-balancing-experience">Political balancing experience</a></li><li class="toc-item toc-level-3"><a href="#candidate-and-results-features">Candidate and results features</a></li><li class="toc-item toc-level-3"><a href="#infrastructure">Infrastructure</a></li></ol></li><li class="toc-item toc-level-2"><a href="#outcome">Outcome</a></li><li class="toc-item toc-level-2"><a href="#what-this-demonstrates">What this demonstrates</a></li>
+    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#news-from-all-sides">News From All Sides</a></li><li class="toc-item toc-level-2"><a href="#candidates-and-results">Candidates and results</a></li><li class="toc-item toc-level-2"><a href="#delivery">Delivery</a></li><li class="toc-item toc-level-2"><a href="#what-i-d-do-next">What I'd do next</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>SmartNews plays a major role in delivering election coverage. For the 2020 US election, the product included features aimed at presenting balanced perspectives across political content.</p>
-<p>The timeline was fixed. Everything had to be ready for election day.</p>
-<h2 id="the-problem">The problem</h2>
-<p>We needed to:</p>
-<ul>
-<li>present content from multiple political perspectives clearly</li>
-<li>build new UI patterns (not just reuse existing ones)</li>
-<li>support real-time election results</li>
-<li>handle US/JP edition differences correctly</li>
-</ul>
-<h2 id="approach">Approach</h2>
-<p>I worked across several election-related features:</p>
-<h3 id="political-balancing-experience">Political balancing experience</h3>
-<ul>
-<li>Built a News Event view with a custom UISlider:
-<ul>
-<li>3- or 5-position support for perspective selection</li>
-</ul>
-</li>
-<li>Added onboarding, deep links, and action logging</li>
-<li>Enabled “News from all sides” entry points across surfaces</li>
-</ul>
-<h3 id="candidate-and-results-features">Candidate and results features</h3>
-<ul>
-<li>Implemented:
-<ul>
-<li>candidate widgets and lists</li>
-<li>election results widget with time-based visibility</li>
-</ul>
-</li>
-<li>Added:
-<ul>
-<li>timestamp gating (start/end times)</li>
-<li>edition-aware language rules (e.g. JP edition shows Japanese regardless of system locale)</li>
-</ul>
-</li>
-</ul>
-<h3 id="infrastructure">Infrastructure</h3>
-<ul>
-<li>Built API integrations with fallback behavior</li>
-<li>Used client conditions for controlled rollout</li>
-<li>Ensured telemetry coverage across interactions</li>
-</ul>
-<h2 id="outcome">Outcome</h2>
-<ul>
-<li>Delivered multiple election features on a fixed deadline</li>
-<li>Enabled users to explore balanced political perspectives</li>
-<li>Handled complex requirements around time, localization, and data availability</li>
-</ul>
-<h2 id="what-this-demonstrates">What this demonstrates</h2>
-<ul>
-<li>Shipping under non-negotiable deadlines</li>
-<li>Building custom UI for sensitive product areas</li>
-<li>Handling multi-edition, multi-locale product logic</li>
-<li>Delivering across multiple surfaces with consistent behavior</li>
-</ul></article>
+<p>SmartNews's 2020 US election work had a deadline that could not move. Teams in Tokyo and San Francisco were building several connected features for the US edition, including ways to compare political coverage, follow candidates, and see election results.</p>
+<p>I worked on the iOS implementation across those surfaces. The UI, API data, visibility windows, language rules, deep links, and telemetry all had to be ready before election day.</p>
+<h2 id="news-from-all-sides">News From All Sides</h2>
+<p>For News From All Sides, I built a News Event view around a custom <code>UISlider</code>. The control supported either three or five positions depending on the available perspectives.</p>
+<p>I also added onboarding, deep links, action logging, and entry points from multiple parts of the app. The feature dealt with politically sensitive material, so the control had to make the available perspectives clear without assigning meaning beyond the data.</p>
+<h2 id="candidates-and-results">Candidates and results</h2>
+<p>I implemented candidate widgets and lists, along with an election-results widget. Start and end timestamps controlled when the results surface appeared.</p>
+<p>Language also depended on the SmartNews edition, not only the device locale. I added edition-aware rules so the Japanese edition displayed Japanese where required even when the system language differed.</p>
+<p>The API integrations included fallback behavior, and client conditions controlled rollout.</p>
+<h2 id="delivery">Delivery</h2>
+<p>The election features shipped by election day across the intended app surfaces. Users could move among different political perspectives, browse candidate information, and see results when the configured time window opened. The implementation also recorded interactions so the teams could understand how the new entry points and controls were used.</p>
+<h2 id="what-i-d-do-next">What I'd do next</h2>
+<p>Time-based UI is easy to test in the middle of its valid window and easy to get wrong at the boundaries. For a future election release in the same product, I would add a shared clock abstraction and focused tests for the start time, end time, missing timestamps, and edition changes. I would run those cases against both editions and record the expected screen state beside each timestamp. The same test plan would cover an unavailable API response and a disabled client condition, so the team could see which rule controlled the screen without reconstructing the release logic near another fixed deadline. I would also document which fallback should win when API availability, client conditions, and the election schedule disagree.</p></article>
 
   <section class="case-study-shots">
     <figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/politics-channel.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/smartnews-us-election-2020/news-from-all-sides.png" alt=""></figure>
@@ -208,7 +165,7 @@
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
     <a href="/work/wolt-telemetry-viewer/" class="case-study-next-row">
-      <span class="case-study-next-title">Building a telemetry tool for faster, more confident product iteration</span>
+      <span class="case-study-next-title">A desktop telemetry viewer for iOS development</span>
       <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

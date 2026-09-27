@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>KokoroをCoreMLからMLXへ</title>
-    <meta name="description" content="KokoroをCoreMLからMLXへ">
+    <title>KokoroをCore MLからMLXへ切り替え</title>
+    <meta name="description" content="KokoroをCore MLからMLXへ切り替え">
     <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/">
-    <meta property="og:title" content="KokoroをCoreMLからMLXへ">
-    <meta property="og:description" content="KokoroをCoreMLからMLXへ">
+    <meta property="og:title" content="KokoroをCore MLからMLXへ切り替え">
+    <meta property="og:description" content="KokoroをCore MLからMLXへ切り替え">
     <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/switching-kokoro-from-coreml-to-mlx/">
@@ -109,24 +109,20 @@
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-decision">
     <span class="update-meta-status"><span class="status-dot"></span>decision</span> · <span>2026.06.07</span>
-     · <span>約2分</span>
+     · <span>約1分</span>
   </p>
-  <h1 class="h1 post-title update-title">KokoroをCoreMLからMLXへ</h1>
+  <h1 class="h1 post-title update-title">KokoroをCore MLからMLXへ切り替え</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoedeの高音質の声はKokoro、小さなオープンソースのニューラル音声合成モデルです。最初の統合では、FluidAudioのCoreMLとApple Neural Engineのパイプラインで動かしていました。これは自然な選択で、たいていのMacで動きます。</p>
-<p>ところが自分のMacでは動きませんでした。このApple M5では、FluidAudioのKokoroチェーンが、試したすべての計算ユニットでクラッシュしたのです。GPUではMetalの「JIT not supported」エラー、CPUとANEでは低レベルのBNNSセグフォルト。同じライブラリが古いApple siliconでは問題なく動くので、これは新しいハードウェアが依存ライブラリを追い越した格好でした。古いFluidAudioを使った自分の別アプリは今も喋れたので、モデルは無事でランタイムが問題だとわかりました。</p>
-<p>そこでKokoroを別のランタイムに移しました。CoreMLの代わりにAppleのMLXフレームワークでモデルを動かす、MLX移植版です。こちらはこちらで面倒もありました。MLXのMetalシェーダーは素の<code>swift build</code>ではコンパイルできず、本物のXcodeビルドが必要なので、プロバイダはアプリのターゲットに置かねばならず、Metal Toolchainのインストールも要ります。でも、これはM5で動きます。そしてトークンごとのタイムスタンプを露出します。結果はシンプルでした。Kokoroが動き、声はより良く聞こえ、カラオケのハイライトを推定ではなく正確にする、単語レベルのタイムスタンプが手に入ったのです。ハードウェアの事情が変わったときのために、FluidAudioの作業はブランチに残しておきました。</p>
-<p>この乗り換えが、次のアップデートのデバッグの夜の下地にもなりました。ランタイムの移行はクラッシュを解決し、そしてもっと微妙な問題をひそかに持ち込んだのです。</p></article>
+    <article class="prose"><p>Aoedeの最初のKokoro実装は、FluidAudioとCore MLを使っていました。端末上で動かすには自然な選択でしたが、M5 Macでは試したすべての実行構成でクラッシュしました。GPUではMetal JITのエラーが出て、CPUとNeural EngineではBNNSの内部で失敗しました。同じライブラリが古いApple siliconでは動いたため、モデル自体の問題ではなさそうでした。</p>
+<p>そこでKokoroの実行基盤をMLX版へ置き換えました。MLXはM5で動き、各トークンの時刻も取得できるため、同期する単語ハイライトの精度も上がりました。一方でMetalツールチェーンと実際のGPUが必要です。そのため音声プロバイダーは、<code>swift build</code>でビルドするパッケージではなくアプリターゲットに置いています。iOS Simulatorでは動かないので、Apple音声へ切り替えます。</p>
+<p>Core ML版は、ハードウェア対応が変わった場合に戻せるようブランチへ残しました。今のところ、実際に使うMacで動き、リーダーへより正確な時刻を渡せるMLXの方が合っています。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/aoede/keeping-bold-and-italic-from-the-source/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/aoede/two-kinds-of-wrong-furigana/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">本は、本らしく見えるべき</span>
+        <span class="update-nav-title">生成したふりがなと作者のルビを分ける</span>
       </a>
-      <a href="/ja/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">ロボットのような声は、自分のコードではなく依存ライブラリのせいだった</span>
-      </a>
+      <span></span>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>

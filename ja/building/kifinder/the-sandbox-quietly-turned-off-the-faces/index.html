@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>サンドボックスが顔認識をこっそり止めていた</title>
-    <meta name="description" content="サンドボックスが顔認識をこっそり止めていた">
+    <title>Sandbox内でCore MLの一時pathを修正</title>
+    <meta name="description" content="Sandbox内でCore MLの一時pathを修正">
     <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <meta property="og:title" content="サンドボックスが顔認識をこっそり止めていた">
-    <meta property="og:description" content="サンドボックスが顔認識をこっそり止めていた">
+    <meta property="og:title" content="Sandbox内でCore MLの一時pathを修正">
+    <meta property="og:description" content="Sandbox内でCore MLの一時pathを修正">
     <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
@@ -109,22 +109,20 @@
   <a href="/ja/building/kifinder/" class="post-back">← KiFinder</a>
   <p class="post-meta update-meta is-wip">
     <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
-     · <span>約3分</span>
+     · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">サンドボックスが顔認識をこっそり止めていた</h1>
+  <h1 class="h1 post-title update-title">Sandbox内でCore MLの一時pathを修正</h1>
   
   <div class="post-body">
-    <article class="prose"><p>KiFinderをApp Storeに出す準備は、App Sandboxを有効にすることを意味した。前回はそれをほとんど事務作業のように書いた。そんなことはなかった。サンドボックスをオンにしたあと、スキャンは終わるのに何も見つけなくなった。顔は検出されず、写真にスコアも付かず、娘たちのマッチが並んでいたはずのグリッドが空になった。それでいて全部が動いているように見える。いちばんたちの悪い壊れ方だ。</p>
-<p>原因はハードコードされた一つのパスだった。KiFinderの顔モデルはCoreMLで動き、CoreMLは実行前にモデルを一時ディレクトリにコンパイルする。私はそのディレクトリを <code>/private/tmp/kifinder-coreml</code>、つまりアプリのサンドボックスコンテナの外に向けていた。サンドボックスの前ならそれで問題なかった。オンにしたあとはそのディレクトリに書き込めず、CoreMLセッションの生成が失敗し、しかもその失敗が <code>try?</code> に飲み込まれるので、あらゆるembeddingの呼び出しが静かにnilを返し、スキャンは顔ゼロのマニフェストを生んだ。サンドボックスが入る直前まで動いていたし、それを捕まえられたはずのオンデバイスのスモークテストは後回しにしていた。修正自体は小さく、スクラッチディレクトリをシステムのtmpから導出してコンテナの中に収めるだけだ。ただ、信用できたのは、自分のkeep済みの写真で使い捨てのライブエンジンテストを回して、embeddingが修正前のゼロから修正後の5や6に変わるのを見てからだった。何度も学び直す教訓がある。後回しにしたチェックこそ、そのリグレッションを捕まえたはずのものだ。</p>
-<p>残りの期間は、エンジンをより静かに、より読み取りやすくする作業で、すべて<a href="/building/sparra/">Sparra</a>を通した。keepやskipのたびにアルバム全体を再スコアするのはファンを回していたので、毎回の判断で走らせるのをやめ、手動の「Find new matches」ボタンの裏に移した。再スコアそのものも、すべての顔をすべての参照に対して回すスカラーのコサイン計算から、アルバムごとに一回のバッチ行列積に変えた。いちばん気になっているのはFace Spaceだ。アクティブな人物のembeddingを主成分二つに落とした2Dの散布図で、参照とkeepした顔、skipで教えたネガティブ、レビュー候補を一緒にプロットする。なぜある写真がマッチするのかが見え、他を引っ張っている外れ値の参照に気づける。まだ内部フラグの裏にあってオンデバイスでは未検証で、出荷した機能というよりマッチャーが見ているものを見るための手段だ。それでも、スコアを信じるだけでなくembedding空間そのものを眺められるのは、正しい方向に思える。</p></article>
+    <article class="prose"><p>App Sandboxを有効にしたあと、KiFinderのスキャンが検出した顔0件で完了するようになりました。進捗画面は最後まで進むため、顔が一致しない正常なアルバムのように見えました。</p>
+<p>Core MLの準備では、モデルを<code>/private/tmp</code>以下の固定ディレクトリへコンパイルしていました。サンドボックス化したアプリからは書き込めず、セッションの初期化が失敗し、<code>try?</code>がそのエラーをすべての埋め込みで<code>nil</code>へ変えていました。システムの一時ディレクトリを使って、アプリのコンテナ内に置くことで修正しました。</p>
+<p>保存していた写真を実際のエンジンへ通して確認しました。壊れたビルドでは埋め込みが0件でしたが、修正後は同じ入力から5件と6件を取得できました。また、写真を保存または除外するたびにアルバム全体を再評価する処理もやめました。再評価は明示的な「Find new matches」から実行し、アルバムごとに一回のバッチ行列乗算を使います。</p>
+<p>エラー処理にはまだ改善が必要です。モデルを初期化できない場合はスキャンを止め、成功したように見える空の結果ではなく、原因を説明するべきです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/kifinder/kifinder-onboarding-cant-be-skipped/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">うっかりキャンセルできない登録フローに</span>
-      </a>
-      <a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">KiFinderを世に出す準備</span>
+        <span class="update-nav-title">KiFinderにレビュー用Macアプリを追加</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>

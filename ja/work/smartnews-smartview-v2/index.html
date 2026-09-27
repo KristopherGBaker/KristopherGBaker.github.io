@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>フィーチャーフラグを用いた記事抽出システムの安全な再構築</title>
-    <meta name="description" content="第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。">
+    <title>記事抽出パイプラインの安全な置き換え</title>
+    <meta name="description" content="数百万人が使うアプリに対して、既存実装と並行してSmartViewの第2世代抽出パイプラインを構築しました。クライアント側でロールアウトを制御し、問題があれば以前の処理へ戻せる構成にしました。">
     <link rel="canonical" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/">
-    <meta property="og:title" content="フィーチャーフラグを用いた記事抽出システムの安全な再構築">
-    <meta property="og:description" content="第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。">
+    <meta property="og:title" content="記事抽出パイプラインの安全な置き換え">
+    <meta property="og:description" content="数百万人が使うアプリに対して、既存実装と並行してSmartViewの第2世代抽出パイプラインを構築しました。クライアント側でロールアウトを制御し、問題があれば以前の処理へ戻せる構成にしました。">
     <meta property="og:url" content="https://krisbaker.com/ja/work/smartnews-smartview-v2/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/work/smartnews-smartview-v2/">
@@ -111,26 +111,26 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark smartnews"></span>
-      SmartNews · iOS Engineer · 2022
+      SmartNews · iOS実装リード · 2022
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">フィーチャーフラグを用いた記事抽出システムの安全な再構築</h1>
-  <p class="body-lg case-study-blurb">第二世代の記事抽出システム（SmartHTMLExtractorV2）のiOS実装を担当。既存レンダラーと並行稼働させつつ、クライアント制御のフィーチャーフラグを用いて段階的に展開し、重要なコンテンツ表示基盤のリスクを抑えながら移行を実現。</p>
-  <p class="case-study-meta">約2分</p>
+  <h1 class="h1 case-study-title">記事抽出パイプラインの安全な置き換え</h1>
+  <p class="body-lg case-study-blurb">数百万人が使うアプリに対して、既存実装と並行してSmartViewの第2世代抽出パイプラインを構築しました。クライアント側でロールアウトを制御し、問題があれば以前の処理へ戻せる構成にしました。</p>
+  <p class="case-study-meta">約3分</p>
 
   <div class="case-study-tags"><a href="/ja/work/tags/ios/" class="tag-chip">iOS</a><a href="/ja/work/tags/swift/" class="tag-chip">Swift</a><a href="/ja/work/tags/architecture/" class="tag-chip">Architecture</a><a href="/ja/work/tags/feature-flags/" class="tag-chip">Feature Flags</a><a href="/ja/work/tags/rendering/" class="tag-chip">Rendering</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
       <p class="case-study-metric-value">記事レンダリング</p>
-      <p class="case-study-metric-label">対象範囲</p>
+      <p class="case-study-metric-label">対象</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">v1/v2並行運用</p>
+      <p class="case-study-metric-value">v1/v2を切り替え</p>
       <p class="case-study-metric-label">ロールアウト</p>
     </div><div class="case-study-metric">
       <p class="case-study-metric-value">新規Swiftモジュール</p>
-      <p class="case-study-metric-label">実装</p>
+      <p class="case-study-metric-label">コード</p>
     </div>
   </section>
 
@@ -138,63 +138,32 @@
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">課題</a></li><li class="toc-item toc-level-2"><a href="#section-3">アプローチ</a></li><li class="toc-item toc-level-2"><a href="#section-4">成果</a></li><li class="toc-item toc-level-2"><a href="#section-5">この事例で示せること</a></li>
+    <li class="toc-item toc-level-2"><a href="#section">背景</a></li><li class="toc-item toc-level-2"><a href="#section-2">並行実装</a></li><li class="toc-item toc-level-2"><a href="#section-3">ロールアウトとフォールバック</a></li><li class="toc-item toc-level-2"><a href="#section-4">結果</a></li><li class="toc-item toc-level-2"><a href="#section-5">次に取り組むこと</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="section">背景</h2>
-<p>SmartNewsでは、SmartViewシステムを通じて数百万規模の記事をレンダリングしています。既存の抽出パイプラインは長年の運用の中で技術的負債が蓄積しており、媒体ごとの挙動の不整合も増えていました。</p>
-<p>しかし、レンダリング基盤を全面的に置き換えることは大きなリスクを伴います。わずかな不具合でも、記事の可読性やユーザー体験に直接影響してしまうためです。</p>
-<h2 id="section-2">課題</h2>
-<p>求められていたのは、以下を満たす新しい抽出基盤の導入でした。</p>
-<ul>
-<li>新しい記事抽出パイプラインの構築</li>
-<li>HTML解析・整形の信頼性向上</li>
-<li>バックエンド配信ルール（CSS・変換処理）との統合</li>
-<li>既存レンダリング体験を壊さない安全な移行</li>
-</ul>
-<p>重要なプロダクト基盤を止めることなく、段階的に刷新する必要がありました。</p>
-<h2 id="section-3">アプローチ</h2>
-<p>SmartHTMLExtractorV2 を既存システムと並行して動作する構成として実装しました。</p>
-<p>具体的には：</p>
-<ul>
-<li>SwiftSoupをラップした新規Swiftモジュール（SmartHTML）を作成し、安定した内部APIを提供</li>
-<li>新しい抽出パイプラインを実装
-<ul>
-<li>HTML解析とクリーンアップ</li>
-<li>バックエンド配信CSSルールとの統合</li>
-<li>内部モデルを用いた構造化フォーマット処理</li>
-</ul>
-</li>
-<li>クライアント条件分岐による制御を導入し、v1/v2を安全に共存可能に</li>
-</ul>
-<p>また、運用面のリスクを下げるために：</p>
-<ul>
-<li>クライアント条件判定失敗時のフォールバック処理（stage/prod URL切り替え）を追加</li>
-<li>エディション別プロキシ制御（US版 / JP版差異）に対応</li>
-<li>iOSバージョンごとの差異（JPEG / WebP画像選択など）も吸収</li>
-</ul>
-<h2 id="section-4">成果</h2>
-<ul>
-<li>コア体験に影響を与えることなく、並行レンダリングシステムを安全にリリース</li>
-<li>一括切り替えではなく、段階的な検証・ロールアウトを可能に</li>
-<li>将来的な改善を進めやすい、Swiftベースのレンダリング基盤を整備</li>
-</ul>
-<h2 id="section-5">この事例で示せること</h2>
-<ul>
-<li>高リスク・高影響システムにおける安全なロールアウト設計</li>
-<li>サードパーティライブラリを安定した内部抽象へラップする設計力</li>
-<li>大規模なObjective-C / Swift混在環境でのモジュール設計</li>
-<li>実装だけでなく、運用安全性やフォールバックまで含めた設計思考</li>
-</ul></article>
+<p>SmartViewは、配信元の記事を抽出し、SmartNewsアプリ内で読みやすい形式に変換する仕組みでした。数百万人が使うアプリの主要な閲覧画面であり、既存パイプラインには配信元ごとの処理が長年にわたって追加されていました。一度に置き換えると、HTML解析の小さな差でもリリース上のリスクになります。</p>
+<p>私はSmartView v2のiOS実装をリードしました。抽出処理を改善しつつ、ページや設定が想定どおりに動かない場合には既存レンダラーへ戻せる必要がありました。</p>
+<h2 id="section-2">並行実装</h2>
+<p>既存パイプラインを直接変更せず、<code>SmartHTMLExtractorV2</code>を別の実装として作りました。2つの実装を比較しながら、少しずつ利用範囲を広げられる構成です。</p>
+<p>新しい抽出処理は<code>SmartHTML</code>というSwiftモジュールに置きました。SwiftSoupの型をアプリ全体で直接使わず、内部APIでラップしました。HTMLの解析と整理を1か所にまとめ、サードパーティのパーサーが他のレンダリングコードの設計を決めないようにするためです。</p>
+<p>パイプラインはバックエンドから配信されるCSSルールを適用し、結果を内部のフォーマットモデルへ変換しました。</p>
+<h2 id="section-3">ロールアウトとフォールバック</h2>
+<p>クライアント条件でv1とv2を切り替え、ロールアウト中は両方の抽出処理を使えるようにしました。全ユーザーを一度に新しい処理へ移さず、実際の記事を確認しながら対象を増やせます。</p>
+<p>クライアント条件の設定に問題がある場合に備え、stageとproductionのURL選択を含むフォールバックも追加しました。US版と日本版がそれぞれ正しい経路を使うよう、エディションごとのプロキシ処理にも対応しました。画像形式はiOSバージョンを考慮し、条件に応じてJPEGとWebPを選びました。</p>
+<h2 id="section-4">結果</h2>
+<p>SmartView v2は、フィーチャーフラグとフォールバックを持つ並行レンダリングシステムとしてリリースされました。既存実装を残したまま、新しい抽出処理を段階的に確認できました。移行中も、既存の記事閲覧機能に不具合を出さずにロールアウトを完了しました。新しいSwiftモジュールによって、Objective-CとSwiftが混在するコードベース内に、今後の解析とフォーマット改善を行うための小さな境界もできました。</p>
+<h2 id="section-5">次に取り組むこと</h2>
+<p>次は、v1を削除するために必要な確認項目を先に決めます。代表的な配信元のHTML、各エディション、設定エラー、対応iOSバージョンを確認し、条件を満たしたら旧実装と移行専用の分岐を削除します。</p></article>
 
   
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
     <a href="/ja/work/smartnews-us-election-2020/" class="case-study-next-row">
-      <span class="case-study-next-title">固定期限の中で構築した、政治的バランスを考慮した選挙体験</span>
+      <span class="case-study-next-title">SmartNewsの2020年米国大統領選機能</span>
       <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

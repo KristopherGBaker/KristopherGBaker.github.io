@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rebuilding article extraction safely behind feature flags</title>
-    <meta name="description" content="Led the iOS implementation of a second-generation article extraction system (SmartHTMLExtractorV2), shipping it in parallel with the existing renderer behind client-controlled feature flags to de-risk rollout of a critical content surface.">
+    <title>Replacing an article extraction pipeline safely</title>
+    <meta name="description" content="I built SmartView's second article extraction pipeline beside the existing implementation, with client-controlled rollout and fallback behavior for an app used by millions of people.">
     <link rel="canonical" href="https://krisbaker.com/work/smartnews-smartview-v2/">
-    <meta property="og:title" content="Rebuilding article extraction safely behind feature flags">
-    <meta property="og:description" content="Led the iOS implementation of a second-generation article extraction system (SmartHTMLExtractorV2), shipping it in parallel with the existing renderer behind client-controlled feature flags to de-risk rollout of a critical content surface.">
+    <meta property="og:title" content="Replacing an article extraction pipeline safely">
+    <meta property="og:description" content="I built SmartView's second article extraction pipeline beside the existing implementation, with client-controlled rollout and fallback behavior for an app used by millions of people.">
     <meta property="og:url" content="https://krisbaker.com/work/smartnews-smartview-v2/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/work/smartnews-smartview-v2/">
@@ -111,12 +111,12 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark smartnews"></span>
-      SmartNews · iOS Engineer · 2022
+      SmartNews · iOS implementation lead · 2022
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Rebuilding article extraction safely behind feature flags</h1>
-  <p class="body-lg case-study-blurb">Led the iOS implementation of a second-generation article extraction system (SmartHTMLExtractorV2), shipping it in parallel with the existing renderer behind client-controlled feature flags to de-risk rollout of a critical content surface.</p>
+  <h1 class="h1 case-study-title">Replacing an article extraction pipeline safely</h1>
+  <p class="body-lg case-study-blurb">I built SmartView's second article extraction pipeline beside the existing implementation, with client-controlled rollout and fallback behavior for an app used by millions of people.</p>
   <p class="case-study-meta">2 min read</p>
 
   <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/swift/" class="tag-chip">Swift</a><a href="/work/tags/architecture/" class="tag-chip">Architecture</a><a href="/work/tags/feature-flags/" class="tag-chip">Feature Flags</a><a href="/work/tags/rendering/" class="tag-chip">Rendering</a></div>
@@ -138,62 +138,32 @@
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#the-problem">The problem</a></li><li class="toc-item toc-level-2"><a href="#approach">Approach</a></li><li class="toc-item toc-level-2"><a href="#outcome">Outcome</a></li><li class="toc-item toc-level-2"><a href="#what-this-demonstrates">What this demonstrates</a></li>
+    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#parallel-implementation">Parallel implementation</a></li><li class="toc-item toc-level-2"><a href="#rollout-and-fallback">Rollout and fallback</a></li><li class="toc-item toc-level-2"><a href="#results">Results</a></li><li class="toc-item toc-level-2"><a href="#what-i-d-do-next">What I'd do next</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>SmartNews renders millions of articles through its SmartView system. The existing extraction pipeline had accumulated technical debt and inconsistencies across publishers.</p>
-<p>Replacing it outright was too risky. Any regression would directly impact content readability and user trust.</p>
-<h2 id="the-problem">The problem</h2>
-<p>We needed to:</p>
-<ul>
-<li>introduce a new extraction pipeline</li>
-<li>improve HTML parsing and formatting reliability</li>
-<li>integrate with backend-driven rules (CSS, transformations)</li>
-<li>avoid breaking the existing rendering experience</li>
-</ul>
-<p>All without disrupting a core product surface.</p>
-<h2 id="approach">Approach</h2>
-<p>I built SmartHTMLExtractorV2 as a parallel implementation:</p>
-<ul>
-<li>Created a new Swift module (SmartHTML) wrapping SwiftSoup with a stable internal API</li>
-<li>Implemented a new extractor pipeline with:
-<ul>
-<li>HTML parsing and cleanup</li>
-<li>CSS rule integration from backend services</li>
-<li>structured formatting via internal models</li>
-</ul>
-</li>
-<li>Introduced client-condition gating so v1 and v2 could coexist safely</li>
-</ul>
-<p>To reduce operational risk:</p>
-<ul>
-<li>Added fallback logic (stage/prod URLs if client conditions failed)</li>
-<li>Ensured edition-aware proxying (US vs JP behavior)</li>
-<li>Handled iOS-version-specific behavior (e.g. image format selection like JPEG vs WebP)</li>
-</ul>
-<h2 id="outcome">Outcome</h2>
-<ul>
-<li>Successfully shipped a parallel rendering system without regressions to the core experience</li>
-<li>Enabled incremental rollout and validation instead of a risky full switch</li>
-<li>Established a clean Swift-based foundation for future rendering improvements</li>
-</ul>
-<h2 id="what-this-demonstrates">What this demonstrates</h2>
-<ul>
-<li>Designing safe rollouts for high-risk, high-impact systems</li>
-<li>Wrapping third-party libraries into stable internal abstractions</li>
-<li>Building modular architecture inside a legacy mixed Obj-C/Swift codebase</li>
-<li>Thinking beyond implementation, including operational safety and fallback behavior</li>
-</ul></article>
+<p>SmartView extracted and formatted publisher articles inside the SmartNews app. It was a core reading surface for a product used by millions of people, and the existing pipeline had accumulated publisher-specific behavior over time. Replacing it in one switch would have made every parsing difference a release risk.</p>
+<p>I led the iOS implementation of SmartView v2. The work had to improve the extraction code while preserving the existing renderer as a way back when a page or configuration did not behave as expected.</p>
+<h2 id="parallel-implementation">Parallel implementation</h2>
+<p>I built <code>SmartHTMLExtractorV2</code> beside the first extractor instead of changing the old pipeline in place. The two implementations let us compare behavior and move traffic incrementally.</p>
+<p>The new extractor lived in a Swift module named <code>SmartHTML</code>. I wrapped SwiftSoup behind an internal API rather than letting its types spread through the app. That boundary gave the extraction pipeline one place for HTML parsing and cleanup, and it kept a third-party parser from defining the rest of our rendering code.</p>
+<p>The pipeline applied CSS rules delivered by backend services and converted the result into internal formatting models.</p>
+<h2 id="rollout-and-fallback">Rollout and fallback</h2>
+<p>Client conditions selected v1 or v2, so the two extractors could coexist during rollout. We could limit exposure while checking production content instead of moving all users to the new path at once.</p>
+<p>I also added fallback behavior for failures in the client-condition configuration, including the stage and production URL choices used by the pipeline. Edition-aware proxy behavior kept the US and Japanese editions on their intended paths. Image selection accounted for iOS version as well, including JPEG and WebP support where appropriate.</p>
+<h2 id="results">Results</h2>
+<p>SmartView v2 shipped as a parallel rendering system with feature flags and fallback behavior. The team could validate the new extractor incrementally while the first implementation remained available. The rollout completed without regressions to the existing article-reading experience during the migration. The new Swift module also provided a smaller boundary for future parsing and formatting work inside a mixed Objective-C and Swift codebase.</p>
+<h2 id="what-i-d-do-next">What I'd do next</h2>
+<p>My next step would be to define the evidence needed to retire v1, including representative publisher samples, edition coverage, configuration failures, and supported iOS versions. Once those checks passed, I would remove the old path and the branching that existed only for migration.</p></article>
 
   
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
     <a href="/work/smartnews-us-election-2020/" class="case-study-next-row">
-      <span class="case-study-next-title">Building politically balanced election experiences under a fixed deadline</span>
+      <span class="case-study-next-title">Building SmartNews's 2020 election coverage</span>
       <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

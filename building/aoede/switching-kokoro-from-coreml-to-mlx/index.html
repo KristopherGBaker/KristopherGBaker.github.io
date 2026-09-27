@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Switching Kokoro From CoreML to MLX</title>
-    <meta name="description" content="Switching Kokoro From CoreML to MLX">
+    <title>Switching Kokoro from Core ML to MLX</title>
+    <meta name="description" content="Switching Kokoro from Core ML to MLX">
     <link rel="canonical" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/">
-    <meta property="og:title" content="Switching Kokoro From CoreML to MLX">
-    <meta property="og:description" content="Switching Kokoro From CoreML to MLX">
+    <meta property="og:title" content="Switching Kokoro from Core ML to MLX">
+    <meta property="og:description" content="Switching Kokoro from Core ML to MLX">
     <meta property="og:url" content="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/switching-kokoro-from-coreml-to-mlx/">
@@ -109,24 +109,20 @@
   <a href="/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-decision">
     <span class="update-meta-status"><span class="status-dot"></span>decision</span> · <span>2026.06.07</span>
-     · <span>2 min read</span>
+     · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Switching Kokoro From CoreML to MLX</h1>
+  <h1 class="h1 post-title update-title">Switching Kokoro from Core ML to MLX</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoede's quality voice is Kokoro, a small open neural text-to-speech model. My first integration ran it through FluidAudio's CoreML and Apple Neural Engine pipeline, which is the obvious on-device path and works on most Macs.</p>
-<p>It did not work on mine. On this Apple M5, FluidAudio's Kokoro chain crashed across every compute unit I tried: a Metal &quot;JIT not supported&quot; error on the GPU, and a low-level BNNS segfault on CPU and ANE. The same library runs fine on older Apple silicon, so this was the new hardware getting ahead of the dependency. An older app of mine on an older FluidAudio build still spoke, which told me the model was fine and the runtime was the problem.</p>
-<p>So I moved Kokoro to a different runtime: the MLX port, which runs the model through Apple's MLX framework instead of CoreML. That brought its own friction. MLX's Metal shaders only compile under a real Xcode build, not plain <code>swift build</code>, so the provider has to live in the app target, and it needs the Metal Toolchain installed. But it runs on the M5, and it exposes per-token timestamps. The result was simple: Kokoro worked, the voices sounded better, and I gained access to word-level timestamps that made the karaoke highlight more accurate instead of estimated. I kept the FluidAudio work on a branch in case the hardware story changes.</p>
-<p>This switch is also what set up the debugging night in the next update. Moving runtimes solved the crash and quietly introduced a subtler problem.</p></article>
+    <article class="prose"><p>Aoede's first Kokoro integration ran through FluidAudio and Core ML. That was the natural on-device path, but it crashed on my M5 Mac with every compute option I tried. The GPU reported a Metal JIT error, while CPU and the Neural Engine failed lower in BNNS. The same library worked on older Apple silicon, so the model itself was probably not the problem.</p>
+<p>I replaced that runtime with an MLX port of Kokoro. MLX runs on the M5 and provides a timestamp for each token, which improved the synchronized word highlight at the same time. It does require the Metal toolchain and a real GPU, so the provider belongs in the app target rather than a package built with plain <code>swift build</code>. The iOS Simulator cannot run it and falls back to Apple speech.</p>
+<p>I kept the Core ML work on a branch in case its hardware support changes. For now, MLX is the better fit because it works on the machines I use and gives the reader more precise timing.</p></article>
     <nav class="update-nav">
-      <a href="/building/aoede/keeping-bold-and-italic-from-the-source/" class="update-nav-item update-nav-newer">
+      <a href="/building/aoede/two-kinds-of-wrong-furigana/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Books Should Look Like Books</span>
+        <span class="update-nav-title">Separating generated and author-provided furigana</span>
       </a>
-      <a href="/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">The Robotic Voice Was a Dependency, Not My Code</span>
-      </a>
+      <span></span>
     </nav>
     <div class="post-footer"><a href="/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>

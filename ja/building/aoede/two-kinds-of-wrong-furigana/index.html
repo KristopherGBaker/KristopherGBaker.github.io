@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>二種類の間違ったふりがな</title>
-    <meta name="description" content="二種類の間違ったふりがな">
+    <title>生成したふりがなと作者のルビを分ける</title>
+    <meta name="description" content="生成したふりがなと作者のルビを分ける">
     <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/">
-    <meta property="og:title" content="二種類の間違ったふりがな">
-    <meta property="og:description" content="二種類の間違ったふりがな">
+    <meta property="og:title" content="生成したふりがなと作者のルビを分ける">
+    <meta property="og:description" content="生成したふりがなと作者のルビを分ける">
     <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/two-kinds-of-wrong-furigana/">
@@ -109,20 +109,20 @@
   <a href="/ja/building/aoede/" class="post-back">← Aoede</a>
   <p class="post-meta update-meta is-shipped">
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.07.02</span>
-     · <span>約3分</span>
+     · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">二種類の間違ったふりがな</h1>
+  <h1 class="h1 post-title update-title">生成したふりがなと作者のルビを分ける</h1>
   
   <div class="post-body">
-    <article class="prose"><p>ふりがなは、読み方がわかるようにAoedeが漢字の上に振る小さなかなのことですが、私のふりがなは目に見える形で間違っていました。厄介なのは、その「間違い」が実はまったく別の二つの問題だったことで、両者を区別できるようになるまで、どちらも直せませんでした。そこでリーダーに手を入れる前に、FuriganaQAという検証ハーネスを作りました。Aoedeの本物のふりがなパイプラインを青空文庫の作品コーパスに対して走らせ、すべての読みを、作者自身が付けたルビと突き合わせます。食い違いは二つの山のどちらかに振り分けられます。私が直すべきバグか、どんな解析器にも当てられない読みか。</p>
-<p>一つ目の山はジェネレーターです。Aoedeは漢字をOpenJTalkで読んでいて、避けられるはずの間違いをしていました。長音が、表記どおりではなく音のとおりに出ていたのです（方がほうではなくほおと出る）。読みを音声用のフィールドから取っていたためで、正書法どおりの読みに切り替えると、話す音声はそのままに、表記だけが直りました。位置もずれていました。木の葉のような並びで、こを木に、はを葉に振る代わりに、かなを語全体の上にひとかたまりで置いていたのです。いまは既定でモノルビ、それぞれの読みをその漢字の上に中央寄せし、実際にぶつかるときだけ二つの読みを一つのグループにまとめます。さらに辞書の層を足しました。JmdictFuriganaデータセットが漢字ごとの配置と、あり得ない読みを捕まえてJMdictから修復するバリデーターを与えてくれるので、這入るははいる、行衛はゆくえに解決します。</p>
-<p>二つ目の山が面白いところで、こちらはどれだけ工夫しても直せません。日本語には、作者がただそう決めた読みが溢れています。地球にほしと振って「地球」を表したり、硝子をがらすと読ませたり、本気をマジと読ませたり。どんな解析器もそれらを生み出せません。文字ではなく、作者の意図の中にあるからです。唯一の正しい出どころは作者なので、Aoedeはいま、本に同梱されたルビを保存します。青空文庫の《》記法やEPUBの<code>&lt;ruby&gt;</code>タグから直接ふりがなを読み取り、OpenJTalkが推測するどんな読みよりも優先して漢字の上に描き、そして最終フェーズでは、それを話します。本気《マジ》は紙面では本気と見せて、声ではマジと言い、硝子《がらす》はがらすと発音されます。</p>
-<p>このアップデートで気に入っているのは、QAハーネスが単に直しを測っただけでなく、やるべき仕事そのものを定義したことです。その役割は、「ジェネレーターが当てるべきだった」ものと「ジェネレーターには知りようがない、作者が意図したもの」との線を引くことで、その線こそが上の二つの山です。いまAoedeで語の上に見える読みは、作者がそう言ったときは作者から、決定的な答えがあるときは辞書から、そして他の誰にもより良い答えがないときにだけOpenJTalkから来ています。</p></article>
+    <article class="prose"><p>Aoedeのふりがなの誤りには二つの原因があったため、リーダーを変更する前に分類する小さな検証ツールを作りました。FuriganaQAは実際の処理系へ青空文庫の作品を通し、結果を本文に付いているルビと比較します。差があれば、生成側で出せるはずの読みか、推測できない読みかに分けます。</p>
+<p>一つ目からは、修正できる問題が見つかりました。OpenJTalkの発音用の形を使っていたため、長音が一般的な表記ではなく音に近い形になっていました。また、複数の漢字を広くまとめすぎていました。表記用の読みへ切り替え、JmdictFuriganaで漢字ごとの配置を取り、JMdictで結果を検証するようにしました。</p>
+<p>二つ目は、本気をマジと読むような、作者が決めた読みです。文字だけからこの選択を復元できる解析器はありません。Aoedeは青空文庫の記法とEPUBの<code>&lt;ruby&gt;</code>からルビを残し、生成したふりがなより優先し、表示だけでなく読み上げにも使うようになりました。</p>
+<p>この検証ツールにより、判断の境界をテストできます。作品にルビがあればそれを優先し、既知の読みは辞書を使い、残りをOpenJTalkで補います。</p></article>
     <nav class="update-nav">
       <span></span>
-      <a href="/ja/building/aoede/one-cell-per-paragraph/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">段落ごとに1セル</span>
+        <span class="update-nav-title">KokoroをCore MLからMLXへ切り替え</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/aoede/" class="read-link">Aoede <span class="arrow" aria-hidden="true">→</span></a></div>

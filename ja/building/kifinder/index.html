@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>KiFinder</title>
-    <meta name="description" content="大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。">
+    <meta name="description" content="大勢が写った写真アルバムから一人を探し、写真をアップロードしないMacアプリです。娘の保育園から毎月届くアルバムを整理するために作りました。">
     <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/">
     <meta property="og:title" content="KiFinder">
-    <meta property="og:description" content="大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。">
+    <meta property="og:description" content="大勢が写った写真アルバムから一人を探し、写真をアップロードしないMacアプリです。娘の保育園から毎月届くアルバムを整理するために作りました。">
     <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/kifinder/">
@@ -115,88 +115,50 @@
   </div>
 
   <h1 class="h1 building-detail-title">KiFinder</h1>
-  <p class="body-lg building-detail-blurb">大きな混在アルバムの中から、特定の一人の写真だけを見つけるローカルでプライバシーファーストのMacアプリ。娘の希穏の保育園が毎月送ってくる写真アルバムがきっかけでした。クラス全員が写った何百枚もの写真が入ったzipファイルが何個も届き、Photosアプリに入れる前に、その中から希穏が写っているものを手で選り分けていたのです。人物をエンロールし、アルバムをスキャンし、本物の一致をkeepして、Photosに書き出す。処理はすべて端末上で動きます。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/python/" class="tag-chip">Python</a><a href="/ja/building/tags//" class="tag-chip">顔認識</a><a href="/ja/building/tags/insightface/" class="tag-chip">InsightFace</a><a href="/ja/building/tags//" class="tag-chip">ローカルファースト</a><a href="/ja/building/tags//" class="tag-chip">プライバシー</a></div>
+  <p class="body-lg building-detail-blurb">大勢が写った写真アルバムから一人を探し、写真をアップロードしないMacアプリです。娘の保育園から毎月届くアルバムを整理するために作りました。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/core-ml/" class="tag-chip">Core ML</a><a href="/ja/building/tags/face-recognition/" class="tag-chip">Face recognition</a><a href="/ja/building/tags/local-first/" class="tag-chip">Local-first</a><a href="/ja/building/tags/gplv3/" class="tag-chip">GPLv3</a></div>
 
-  <article class="prose building-detail-prose"><p>毎月、娘の希穏の保育園から写真アルバムが届きます。実際にはzipファイルが何個か届き、それぞれにクラス全員が写った何百枚もの写真が入っていて、そのどこかに希穏の写った十数枚があります。やることはいつも同じ。全部を解凍し、よその子たちが写った何百枚もの写真をスクロールして、自分の子を選び出し、それをPhotosアプリに入れる。ありがたい悩みではありますが、毎月やるとなると面倒な作業です。</p>
-<p>そこでKiFinderを作りました。その選り分けをやってくれる小さなMacアプリです。人物をエンロールするには参照写真を数枚ドロップし、アルバム（フォルダ、ばらの画像、あるいは届いたままの保育園のzipファイル）に向けると、すべての写真を三つの山に仕分けます。確信のある一致、もう一度見ておきたいもの、そして残り。確信のあるものをざっと確認し、迷うものに目を通し、正しいものをkeepして、keepしたものをそのままPhotosに書き出します。集合写真には専用の扱いがあります。クラス写真には十数個の顔が写っているので、検出した顔をすべて表示し、自分が意図する顔をタップします。中身では、InsightFaceのArcFaceモデルによる端末上のエンベディングで、各顔がエンロールした人物にどれだけ近いかをスコア付けし、本物の写真を取りこぼさず、誤検出に埋もれさせないよう、しきい値を自分で調整します。</p>
-<p><img src="/assets/building/kifinder/review-candidates.png" alt="KiFinderのレビュー画面。類似度スコア付きでKeepと印された一致のグリッド、その下の「もう一度見ておきたい」の列、そして集合写真の各顔を選択用に枠で囲んだインスペクタ。" />
-<em>スキャンの見直し。KiFinderは確信のある一致を自動で選び、際どいものは「もう一度見ておきたい」として脇に置き、残りは外します。集合写真では検出した顔をすべて表示するので、正しい顔をタップできます。デモでは娘ではなく自分をエンロールし、ほかの人物は合成顔で代用しています。</em></p>
-<p>端末上で動くことは、あれば嬉しい機能ではなく、まさに核心です。これらのアルバムには、よその家庭の子どもたちが大勢写っています。自分の子を見つけるために、他人の子の写真を何百枚もクラウドサービスにアップロードするのは、まったく逆の取引です。KiFinderは写真をどこにも送りません。モデルはローカルで動き、オリジナルは一切変更されず、端末から出ていくのは、私がkeepに選んだ数枚だけです。</p>
-<p><img src="/assets/building/kifinder/enroll.png" alt="KiFinderの「人物をエンロール」ダイアログ。LOCAL-ONLYバッジ、「このMacから出ることはありません」と書かれたドロップゾーン、参照写真のサムネイルの列。" />
-<em>人物のエンロールは、参照写真を5枚から十数枚ドロップするだけ。顔はMac上で切り出され、外には出ません。それがこのアプリの基本姿勢です。</em></p>
-<p>そして、私の判断から学びます。スキャンのあと、本物の一致をkeepし、似ているだけの顔をスキップすると、その訂正が人物のプロファイルに反映され、翌月のアルバムでより良くランク付けされます。しかも一ピクセルもモデルにかけ直すことなく。keepしたものは、人物と月でまとめたライブラリに集まり、Photosに渡せる状態になります。</p>
-<p><img src="/assets/building/kifinder/library.png" alt="KiFinderのライブラリ画面。一人の人物の保存済み写真を月ごとにまとめて表示。" />
-<em>keepしたもの。人物と月でまとめたライブラリに集まり、Photosに書き出せる状態です。</em></p>
-<p>これ全体を、私の敵対的ビルドハーネスである<a href="/ja/building/sparra/">Sparra</a>を回して作りました。おかげでKiFinderは、その最初の本物のテスト対象の一つになりました。下のアップデートが制作ログです。マッチングエンジン、私の訂正から学ばせた話、そしてその周りで育っていったMacアプリ。</p></article>
+  <article class="prose building-detail-prose"><p>KiFinderは、大勢が写ったアルバムから一人の写真を探すMacアプリです。娘の保育園から毎月、クラス全員が写った何百枚もの写真が複数のzipファイルで届き、その中から娘を手で探していたので作りました。ほかの家庭の子どもも写っているため、照合はMac上で行い、写真をアップロードしません。</p>
+<h2 id="section">仕組み</h2>
+<p>まず、複数の参照写真で人物を登録します。KiFinderは顔を検出してArcFaceの埋め込みプロファイルを作り、フォルダ、画像ファイル、届いたままのzipファイルをスキャンします。結果は、確度の高い一致、もう一度確認する写真、その他の三つに分けます。集合写真では検出したすべての顔を表示し、アプリの最初の推測をそのまま使わず、自分が探している人物を選べます。</p>
+<p><img src="/assets/building/kifinder/review-candidates.png" alt="KiFinderのレビュー画面。確信のある一致と境界付近の結果が分かれ、集合写真では検出した顔に枠が付いています。" />
+<em>境界付近の結果は確認できるよう残しつつ、確信のある一致とは分けています。デモ画像では自分を登録し、ほかの人物には合成した顔を使いました。</em></p>
+<p>類似度のしきい値は、モデルに固定された値ではなく、アプリ側で決めるものです。高くすると横顔やぼけた写真を見落とします。低くすると、ほかの子どもの写真がレビューに増えます。calibrateコマンドは、正解と不正解を付けた例から、既知の正解をすべて拾える範囲で最も高い値を提案しますが、自動では適用しません。本物の写真を取りこぼす可能性は、自分で判断したいからです。</p>
+<p>各スキャンでは、スコアと顔の埋め込みをmanifestへ保存します。本物の一致を保存するか、似ているだけの顔を除外すると、KiFinderはその修正を最初の参照画像とは別の追加サンプルへ反映します。その後は画像の読み込みやモデルの再実行をせず、以前のアルバムを再評価できます。</p>
+<p><img src="/assets/building/kifinder/enroll.png" alt="KiFinderの人物登録画面。ローカル処理の説明と参照写真のサムネイルが表示されています。" />
+<em>人物登録ではMac上で参照画像から顔を切り出します。複数の角度を含めるため、5枚から12枚の写真を使います。</em></p>
+<h2 id="section-2">検証</h2>
+<p>レビュー画面では、説明のない最終フォルダだけを出すのではなく、モデルの判断を確認できます。App Sandboxを有効にしたときの重要な不具合も、実際のエンジンを動かして見つけました。Core MLがモデルをコンパイルする場所を<code>/private/tmp</code>以下に固定していましたが、サンドボックスからは書き込めませんでした。エラーを<code>try?</code>で無視した結果、すべての埋め込みが<code>nil</code>になり、顔が0件のままスキャンが完了していました。一時ディレクトリをアプリのコンテナ内へ移し、保存済みの写真で実際のエンジンを使うテストを行うと、壊れたビルドでは0件だった埋め込みが5件と6件になりました。</p>
+<p><img src="/assets/building/kifinder/library.png" alt="KiFinderのライブラリ。保存した写真が人物と月ごとにまとまっています。" />
+<em>保存した写真は、Photosへ書き出す前に人物と月ごとにまとまります。</em></p>
+<h2 id="section-3">現在</h2>
+<p>KiFinderは今も自分で使っているプロジェクトですが、署名済みのアプリは配布しないことにしました。ソースはGPLv3で公開し、ほかの人が確認してビルドでき、派生物も公開される形にしています。利用環境の分からないMacや写真ライブラリまでサポートせず、技術面に集中するための判断です。次はモデルの準備とサンドボックス権限について、実機で繰り返せるテストを増やします。</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">8</span></h2>
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">2</span></h2>
     </div>
-    <div class="update-timeline"><a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-entry is-decision">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.16</span>
-    <span class="update-entry-status">decision</span>
-  </span>
-  <span class="update-entry-title">KiFinderをGPLv3・ソースのみで公開することにした</span>
-</a>
-<a href="/ja/building/kifinder/kifinder-onboarding-cant-be-skipped/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.13</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">うっかりキャンセルできない登録フローに</span>
-</a>
-<a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
+    <div class="update-timeline"><a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.07.08</span>
     <span class="update-entry-status">wip</span>
   </span>
-  <span class="update-entry-title">サンドボックスが顔認識をこっそり止めていた</span>
-</a>
-<a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="update-entry is-wip">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.07.01</span>
-    <span class="update-entry-status">wip</span>
-  </span>
-  <span class="update-entry-title">KiFinderを世に出す準備</span>
+  <span class="update-entry-title">Sandbox内でCore MLの一時pathを修正</span>
 </a>
 <a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="update-entry is-shipped">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.06.30</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">KiFinderがアプリになる</span>
-</a>
-<a href="/ja/building/kifinder/a-window-to-review-the-maybes/" class="update-entry is-wip">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.29</span>
-    <span class="update-entry-status">wip</span>
-  </span>
-  <span class="update-entry-title">maybeを見直すためのウィンドウ</span>
-</a>
-<a href="/ja/building/kifinder/learning-from-my-corrections/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">私の訂正から学ばせる</span>
-</a>
-<a href="/ja/building/kifinder/finding-kion-in-a-crowd/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.26</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">人混みの中から希穏を見つける</span>
+  <span class="update-entry-title">KiFinderにレビュー用Macアプリを追加</span>
 </a>
 </div>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/building/domestique/" class="case-study-next-row">
-      <span class="case-study-next-title">Domestique</span>
+    <a href="/ja/building/sparra/" class="case-study-next-row">
+      <span class="case-study-next-title">Sparra</span>
       <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

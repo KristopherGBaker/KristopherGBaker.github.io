@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Improving subscription conversion through cart and checkout entry points</title>
-    <meta name="description" content="Client-side DRI for two flagship Wolt+ growth experiments: cart entry point and express signup. Drove cross-platform RFCs and pushed to split the work into independent rollouts, enabling faster iteration and clearer A/B validation.">
+    <title>Growing Wolt+ across signup and delivery pricing</title>
+    <meta name="description" content="I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.">
     <link rel="canonical" href="https://krisbaker.com/work/wolt-cart-entry-points/">
-    <meta property="og:title" content="Improving subscription conversion through cart and checkout entry points">
-    <meta property="og:description" content="Client-side DRI for two flagship Wolt+ growth experiments: cart entry point and express signup. Drove cross-platform RFCs and pushed to split the work into independent rollouts, enabling faster iteration and clearer A/B validation.">
+    <meta property="og:title" content="Growing Wolt+ across signup and delivery pricing">
+    <meta property="og:description" content="I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.">
     <meta property="og:url" content="https://krisbaker.com/work/wolt-cart-entry-points/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="/work/wolt-cart-entry-points/">
@@ -111,79 +111,64 @@
   <div class="case-study-brand">
     <span class="brand-pill">
       <span class="brand-pill-mark wolt"></span>
-      Wolt / DoorDash · Senior Software Engineer · Membership Growth · 2024
+      Wolt / DoorDash · Client DRI with hands-on iOS implementation · 2025
     </span>
   </div>
 
-  <h1 class="h1 case-study-title">Improving subscription conversion through cart and checkout entry points</h1>
-  <p class="body-lg case-study-blurb">Client-side DRI for two flagship Wolt+ growth experiments: cart entry point and express signup. Drove cross-platform RFCs and pushed to split the work into independent rollouts, enabling faster iteration and clearer A/B validation.</p>
-  <p class="case-study-meta">2 min read</p>
+  <h1 class="h1 case-study-title">Growing Wolt+ across signup and delivery pricing</h1>
+  <p class="body-lg case-study-blurb">I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.</p>
+  <p class="case-study-meta">3 min read</p>
 
-  <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/growth/" class="tag-chip">Growth</a><a href="/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/work/tags/a-b-testing/" class="tag-chip">A/B testing</a></div>
+  <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/growth/" class="tag-chip">Growth</a><a href="/work/tags/subscription/" class="tag-chip">Subscription</a><a href="/work/tags/a-b-testing/" class="tag-chip">A/B testing</a><a href="/work/tags/api-design/" class="tag-chip">API design</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
-      <p class="case-study-metric-value">DRI</p>
-      <p class="case-study-metric-label">role</p>
+      <p class="case-study-metric-value">about 30% growth</p>
+      <p class="case-study-metric-label">membership sign-ups</p>
     </div><div class="case-study-metric">
-      <p class="case-study-metric-value">2</p>
-      <p class="case-study-metric-label">experiments split</p>
-    </div><div class="case-study-metric">
-      <p class="case-study-metric-value">fully released</p>
-      <p class="case-study-metric-label">status</p>
+      <p class="case-study-metric-value">iOS + Android + web</p>
+      <p class="case-study-metric-label">client scope</p>
     </div>
   </section>
 
-  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="Improving subscription conversion through cart and checkout entry points"></figure>
+  <figure class="shot-frame case-study-hero"><img src="/assets/work/wolt-cart-entry-points/cover.png" alt="Growing Wolt+ across signup and delivery pricing"></figure>
 
   <nav class="toc" aria-label="Table of contents">
   <ol class="toc-list">
-    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#the-problem">The problem</a></li><li class="toc-item toc-level-2"><a href="#approach">Approach</a></li><li class="toc-item toc-level-2"><a href="#outcome">Outcome</a></li><li class="toc-item toc-level-2"><a href="#my-role">My role</a></li>
+    <li class="toc-item toc-level-2"><a href="#context">Context</a></li><li class="toc-item toc-level-2"><a href="#signup-experiments">Signup experiments</a></li><li class="toc-item toc-level-2"><a href="#long-distance-delivery">Long-distance delivery</a></li><li class="toc-item toc-level-2"><a href="#results">Results</a></li><li class="toc-item toc-level-2"><a href="#what-i-d-do-next">What I'd do next</a></li>
   </ol>
 </nav>
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>Wolt+ is Wolt’s subscription product, similar to Uber One or DashPass. A key growth lever is how and when users are prompted to subscribe during the ordering flow.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Subscription entry points were limited and required users to leave the order flow. We wanted to introduce new surfaces in cart and checkout, along with a faster “express” signup experience, but the initial plan bundled everything into a single release, increasing complexity and delaying validation.</p>
-<h2 id="approach">Approach</h2>
+<p>I worked on several Wolt+ membership initiatives during 2024 and 2025. The work covered two related problems: making subscription signup easier during an order, and giving members useful delivery discounts outside the free-delivery radius.</p>
+<p>I was the client DRI across iOS, Android, and web, working with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
+<h2 id="signup-experiments">Signup experiments</h2>
 <video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
   <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
-  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Cart entry point + express signup flow">
+  <img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+ cart entry point and express signup flow">
 </video>
-<p>I acted as <strong>client-side DRI across iOS, Web, and Android</strong>, driving RFCs and alignment with product, design, backend, and data science, while leading iOS implementation.</p>
-<p>Early on, I pushed to split the work into independent experiments:</p>
-<ul>
-<li>launch and validate the cart entry point first</li>
-<li>follow with express signup as a separate iteration</li>
-</ul>
-<p>This allowed us to ship sooner and learn faster instead of blocking on a more complex implementation.</p>
-<p>For express signup, I worked through several UX and technical constraints:</p>
-<ul>
-<li>enabling multi-step flows inside a bottom sheet (not previously supported)</li>
-<li>simplifying transitions between “express” and full signup to reduce confusion</li>
-<li>coordinating with payments and backend teams on edge cases</li>
-</ul>
-<p>I also worked closely with data science to validate instrumentation and debug misleading A/B test results, ensuring we were measuring the right signals.</p>
-<h2 id="outcome">Outcome</h2>
-<ul>
-<li>Significant lift in Wolt+ signups and downstream order volume</li>
-<li>Both features successfully A/B tested and fully rolled out</li>
-<li>Cart entry point remains a core subscription growth surface</li>
-</ul>
-<h2 id="my-role">My role</h2>
-<p><strong>Client-side DRI across iOS, Web, and Android, leading RFCs, stakeholder alignment, and experimentation strategy, with hands-on iOS implementation.</strong></p></article>
+<p>The first proposal combined a new cart entry point with an express signup flow. I pushed to run them as independent experiments. Shipping the cart entry point first meant we could learn whether the new placement changed sign-ups without waiting for the more complex signup work.</p>
+<p>Express signup used a multi-step bottom sheet, a pattern the client did not support at the time. I also simplified the transition between express and full signup and coordinated payment and backend edge cases.</p>
+<p>Some early A/B results were misleading. I worked with data science to review the instrumentation and understand what the experiment was measuring before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
+<h2 id="long-distance-delivery">Long-distance delivery</h2>
+<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The challenge on the clients was consistency: the price and eligibility needed to agree in discovery lists, on the venue page, and at checkout.</p>
+<p>I worked with the frontend and backend teams on the API structure and naming because the same concepts had to work across several screens and client implementations.</p>
+<p>I also designed a reusable bottom sheet that explained the delivery price and Wolt+ savings across entry points.</p>
+<h2 id="results">Results</h2>
+<p>Both signup experiments were tested and rolled out, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
+<h2 id="what-i-d-do-next">What I'd do next</h2>
+<p>The projects depended on several teams and analytics definitions. If I revisited the work, I would write the shared pricing terms and experiment events into the client RFC earlier, with examples for each surface. That would give design, backend, data science, and client engineers one place to review assumptions before implementation and analysis diverged.</p></article>
 
   <section class="case-study-shots">
-    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure>
+    <figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/cart-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-cart-entry-points/express-signup.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/venue-banner.png" alt=""></figure><figure class="shot-frame"><img src="/assets/work/wolt-long-distance-delivery/delivery-fee-sheet.png" alt=""></figure>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">Next</p>
-    <a href="/work/wolt-long-distance-delivery/" class="case-study-next-row">
-      <span class="case-study-next-title">Expanding subscription value with long-distance delivery</span>
-      <span class="read-link">Wolt / DoorDash <span class="arrow" aria-hidden="true">→</span></span>
+    <a href="/work/smartnews-smartview-v2/" class="case-study-next-row">
+      <span class="case-study-next-title">Replacing an article extraction pipeline safely</span>
+      <span class="read-link">SmartNews <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>
 </main>

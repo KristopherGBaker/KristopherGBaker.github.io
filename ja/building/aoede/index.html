@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Aoede</title>
-    <meta name="description" content="ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
+    <meta name="description" content="EPUB、PDF、テキストを端末上で読み上げるmacOS・iOS向けの読書アプリです。別のサブスクリプションを契約せずに、読み上げと同期するハイライトが欲しくて作りました。">
     <link rel="canonical" href="https://krisbaker.com/ja/building/aoede/">
     <meta property="og:title" content="Aoede">
-    <meta property="og:description" content="ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。">
+    <meta property="og:description" content="EPUB、PDF、テキストを端末上で読み上げるmacOS・iOS向けの読書アプリです。別のサブスクリプションを契約せずに、読み上げと同期するハイライトが欲しくて作りました。">
     <meta property="og:url" content="https://krisbaker.com/ja/building/aoede/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/aoede/">
@@ -115,288 +115,47 @@
   </div>
 
   <h1 class="h1 building-detail-title">Aoede</h1>
-  <p class="body-lg building-detail-blurb">ローカルファースト・プライバシーファーストの、macOSとiOSのための読書アプリ。txt、EPUB、PDFを取り込み、自分の好きなやり方で読み進められます。単語のハイライトと同期させて読み上げてもいいし、音をまったく出さずに自分のペースで読んでもいい。音声はデバイス上で合成し、ライブラリは自分のマシンに置いたまま。アカウントも、サブスクも、クラウドもありません。</p>
-  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/ios/" class="tag-chip">iOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/tts/" class="tag-chip">TTS</a><a href="/ja/building/tags/mlx/" class="tag-chip">MLX</a><a href="/ja/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
+  <p class="body-lg building-detail-blurb">EPUB、PDF、テキストを端末上で読み上げるmacOS・iOS向けの読書アプリです。別のサブスクリプションを契約せずに、読み上げと同期するハイライトが欲しくて作りました。</p>
+  <div class="case-study-tags"><a href="/ja/building/tags/swift/" class="tag-chip">Swift</a><a href="/ja/building/tags/macos/" class="tag-chip">macOS</a><a href="/ja/building/tags/ios/" class="tag-chip">iOS</a><a href="/ja/building/tags/swiftui/" class="tag-chip">SwiftUI</a><a href="/ja/building/tags/textkit-2/" class="tag-chip">TextKit 2</a><a href="/ja/building/tags/mlx/" class="tag-chip">MLX</a><a href="/ja/building/tags/kokoro/" class="tag-chip">Kokoro</a></div>
 
-  <article class="prose building-detail-prose"><p>自分のMacで、Speechifyのように「読みながら聴く」体験がほしいと思いました。声が読み上げ、進むにつれて単語がハイライトされていく、あの体験です。でも、そのためにまた新しいサブスクリプションを払うのは嫌でした。別のプロジェクトの作業を通じて、Kokoroという小さなオープンソースのニューラルモデルを使えば、本当に良い音質の音声合成をローカルで動かせると最近知ったところでした。だから、それを核にして自分用のリーダーを作りました。</p>
-<p>ほとんどの読み上げ製品は、あなたの本が誰かのクラウドにあること、そして聴くにはサブスクが要ることを前提にしています。Aoedeは逆の発想を取ります。書類を取り込み、音声をローカルで合成し、同期した単語ハイライトで追いかけ、ライブラリは自分のデバイスに置いたまま。アカウントも、サブスクも、クラウドもありません。</p>
-<p><img src="/assets/building/aoede/reader.png" alt="Accelerandoを読み上げるAoede。章の見出しとリストが保持され、アクティブな単語がアンバーのハイライトで灯っている。" />
-<em><a href="https://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando-intro.html">Accelerando</a>を読み上げるAoede。EPUBの構造を保ったまま、単語ハイライトを同期させ、再生コントロールが浮かんでいます。</em></p>
-<p>名前がそのまま狙いです。Aoede（アオイデー）は、声と歌のミューズ。有名人に読んでもらう必要はありません。自分のものだと言える、シンプルで音の良い声がいくつかあれば十分です。内部ではAppleの組み込み音声と、MLX経由でローカルに動くKokoroの両方を使っています。目指すのは何百もの声ではなく、オフラインで動く、本当に良い少数の声です。いつか本当に使いたくなったときのために、ElevenLabsのようなクラウド版の余地も残してあります。</p>
-<p>「聴くための道具」として始まったものが、「読むための道具」になってきました。Aoedeはいまでは英語だけでなく日本語にも対応し、ふりがなと読みの補正も入っています。そしてページを読み進める方法も一つではありません。声で読み上げる方法もあれば、音をまったく出さずにハイライトだけを自分のペースで進めるサイレントなReading Pacerもあります。出発点は声でしたが、いま育っているのは読書体験そのものです。</p>
-<p>動くのは新しめのApple silicon、macOS 26、そしていまはiOS 26です。Macアプリと、iPhone・iPadとで、ひとつのコアを共有しています。いまのところ個人プロジェクトで、関心があれば少人数にTestFlightで配るか、まだ決めかねています。</p>
-<p>下のアップデートが制作ログです。エンドツーエンドで配線した土台、KokoroのランタイムをCoreMLからMLXへ移したこと、ふりがなと読みの補正つきで日本語を読めるようにしたこと、コア全体をパッケージに抽出してiOSで動くようにしたこと、数十ギガバイトのまま居座っていたメモリキャッシュに上限を付けたこと、そして「これは声ではなく読書アプリになりつつある」と気づかせてくれたサイレントな読書ペーサー。</p></article>
+  <article class="prose building-detail-prose"><p>Aoedeは、EPUB、PDF、テキストを読み上げながら、現在の単語をハイライトするmacOS・iOS向けの読書アプリです。自分が持っている本をサービスへ送らず、サブスクリプション型の製品で見た読書体験を使いたくて作りました。ライブラリと音声モデルは端末内に置いたままです。</p>
+<p><img src="/assets/building/aoede/reader.png" alt="AoedeでAccelerandoを読んでいる画面。章の構造を保ったまま、現在の単語がハイライトされています。" />
+<em><a href="https://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando-intro.html">Accelerando</a>をAoedeで読んでいるところ。EPUBの構造、同期ハイライト、再生コントロールが表示されています。</em></p>
+<h2 id="section">仕組み</h2>
+<p>各インポーターは、対応する形式を章、段落、文という共通モデルへ変換します。音声はAppleのシステム音声でもKokoroでも、共通のハイライト用タイムラインを作ります。その境界があるので、リーダー側はどの音声合成器を使ったかを意識せずにタイミングを追えます。</p>
+<p>最初のKokoro実装では、FluidAudio経由でCore MLを使いました。ただしM5 Macでは、試したすべての計算経路でクラッシュしました。同じコードが古いApple siliconでは動いたため、モデルではなくランタイム側の問題だと判断しました。新しいハードウェアで動き、トークンごとの時刻も取得できるMLXへ移行しました。この時刻情報により、単語ハイライトの精度も上がりました。一方、MLXには実際のMetalデバイスが必要なので、iOS SimulatorではApple音声へ切り替えます。</p>
+<p>日本語では、読み上げと生成するふりがなの両方にOpenJTalkを使います。同じ読みの情報を使うことで、画面の読みと音声が食い違うのを防ぎます。EPUBや青空文庫に作者が付けたルビは優先します。本気《マジ》のような意図的な読み方は、解析器から推測できないためです。FuriganaQAというコーパス用ツールで、Aoedeの結果と公開作品のルビを比較し、生成側の不具合と作者にしか分からない読みを分けています。</p>
+<p>現在のリーダーは、段落ごとに一つのコレクションビューセルを使い、その中をTextKit 2で描画します。以前は単語ごとにSwiftUIビューを作っていました。効果を付けるには便利でしたが、長い章では負荷が大きくなります。文書全体を一つのTextKitオブジェクトにした実験では、逆に長い本の最初のページが出るまで時間がかかりました。段落単位なら、TextKitからレイアウト情報を直接取れる利点を残しつつ、画面の近くにある内容だけを生成できます。</p>
+<h2 id="section-2">テスト</h2>
+<p>インポート、音声タイミング、発音、リーダーの動作をテストしています。ふりがなについては、手で選んだ単語だけではなく、実際の処理系にコーパスを通します。TextKit版を実際の本で測定して比較できるよう、以前のSwiftUI版もLabsの切り替えで残しています。</p>
+<h2 id="section-3">現在</h2>
+<p>Mac、iPhone、iPadのアプリは同じコアを共有しています。英語と日本語に対応し、端末内の辞書、学習カード、音声を使わないReading Pacerもあります。今のところ個人プロジェクトとして使っています。次はTextKitリーダーを実機で測定し、少人数のTestFlightから有用なフィードバックが得られそうか判断します。</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">37</span></h2>
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">2</span></h2>
     </div>
     <div class="update-timeline"><a href="/ja/building/aoede/two-kinds-of-wrong-furigana/" class="update-entry is-shipped">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.07.02</span>
     <span class="update-entry-status">shipped</span>
   </span>
-  <span class="update-entry-title">二種類の間違ったふりがな</span>
-</a>
-<a href="/ja/building/aoede/one-cell-per-paragraph/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.30</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">段落ごとに1セル</span>
-</a>
-<a href="/ja/building/aoede/a-textkit-2-reader-for-the-scroll/" class="update-entry is-wip">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.29</span>
-    <span class="update-entry-status">wip</span>
-  </span>
-  <span class="update-entry-title">スクロールのための、TextKit 2リーダー</span>
-</a>
-<a href="/ja/building/aoede/furigana-that-steps-back-as-you-learn/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">学ぶほど、ふりがなが減っていく</span>
-</a>
-<a href="/ja/building/aoede/mark-it-now-make-cards-later/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">いま印をつけて、カードはあとで作る</span>
-</a>
-<a href="/ja/building/aoede/notes-that-survive-their-own-edits/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">編集しても壊れないノート</span>
-</a>
-<a href="/ja/building/aoede/from-reading-to-reviewing/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">読むだけでなく、復習まで</span>
-</a>
-<a href="/ja/building/aoede/ask-aoede-about-the-passage/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">その文章についてAoedeに聞く</span>
-</a>
-<a href="/ja/building/aoede/a-dictionary-inside-the-reader/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.23</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">リーダーの中で辞書を引く</span>
-</a>
-<a href="/ja/building/aoede/the-voice-kept-reading-the-page-didnt/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.15</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">音声は読み続けたのに、ページは止まった</span>
-</a>
-<a href="/ja/building/aoede/when-the-book-has-pictures/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">本に絵があるとき</span>
-</a>
-<a href="/ja/building/aoede/finding-books-without-leaving-aoede/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.14</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Aoedeの中だけで本を見つける</span>
-</a>
-<a href="/ja/building/aoede/rotate-to-read/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.13</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">横にして読む</span>
-</a>
-<a href="/ja/building/aoede/sixteen-percent/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.13</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">「16%」が「sixteen」になっていた</span>
-</a>
-<a href="/ja/building/aoede/shimmer-wave-or-just-a-tint/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.12</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">シマーか、ウェーブか、ただのティントか</span>
-</a>
-<a href="/ja/building/aoede/words-that-dissolve/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.12</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">読むそばから溶けていく単語</span>
-</a>
-<a href="/ja/building/aoede/find-in-book-search-the-library/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.12</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">本の中を探す、ライブラリ全体を探す</span>
-</a>
-<a href="/ja/building/aoede/i-reed-it-yesterday/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.12</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">「I reed it yesterday」と読み上げていたころ</span>
-</a>
-<a href="/ja/building/aoede/following-the-voice-line-by-line/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.11</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">声を追って、一行ずつ</span>
-</a>
-<a href="/ja/building/aoede/what-a-full-code-review-found-in-aoede/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.10</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">コードレビューでAoedeから出てきたもの</span>
-</a>
-<a href="/ja/building/aoede/open-with-aoede/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.09</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Finderから「このアプリケーションで開く」</span>
-</a>
-<a href="/ja/building/aoede/reading-pacer-no-voice/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.08</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">声を出さない読書モード</span>
-</a>
-<a href="/ja/building/aoede/voice-picker-in-the-transport-bar/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">設定を開かずに声を切り替える</span>
-</a>
-<a href="/ja/building/aoede/book-closed-kokoro-kept-going/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">本を閉じても、Kokoroは動き続けていた</span>
-</a>
-<a href="/ja/building/aoede/aoede-comes-to-ios/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">AoedeがiPhoneとiPadで動くようになった</span>
-</a>
-<a href="/ja/building/aoede/furigana-that-matches-the-voice/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">音声と一致するふりがな</span>
-</a>
-<a href="/ja/building/aoede/watashi-not-watakushi/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">「わたくし」ではなく「わたし」と読むようになった</span>
-</a>
-<a href="/ja/building/aoede/the-49gb-was-a-cache/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">49GBはリークではなくキャッシュだった</span>
-</a>
-<a href="/ja/building/aoede/aoede-reads-japanese/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">Aoedeが日本語を読み上げるようになった</span>
-</a>
-<a href="/ja/building/aoede/localizing-aoede-japanese/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">本は翻訳せず、アプリだけをローカライズする</span>
-</a>
-<a href="/ja/building/aoede/first-run-onboarding/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">初回起動で、まず声をそろえる</span>
-</a>
-<a href="/ja/building/aoede/reading-along-end-to-end/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">最初から最後まで、読み上げが動く</span>
-</a>
-<a href="/ja/building/aoede/import-epub-and-pdf-one-model/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">テキストファイルだけでなく、本物の本を読む</span>
-</a>
-<a href="/ja/building/aoede/keeping-bold-and-italic-from-the-source/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">本は、本らしく見えるべき</span>
+  <span class="update-entry-title">生成したふりがなと作者のルビを分ける</span>
 </a>
 <a href="/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/" class="update-entry is-decision">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.06.07</span>
     <span class="update-entry-status">decision</span>
   </span>
-  <span class="update-entry-title">KokoroをCoreMLからMLXへ</span>
-</a>
-<a href="/ja/building/aoede/the-robotic-voice-was-a-dependency-not-my-code/" class="update-entry is-note">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">note</span>
-  </span>
-  <span class="update-entry-title">ロボットのような声は、自分のコードではなく依存ライブラリのせいだった</span>
-</a>
-<a href="/ja/building/aoede/giving-aoede-a-face/" class="update-entry is-shipped">
-  <span class="update-entry-meta">
-    <span class="update-entry-date">2026.06.07</span>
-    <span class="update-entry-status">shipped</span>
-  </span>
-  <span class="update-entry-title">タイポグラフィがインターフェースだ</span>
+  <span class="update-entry-title">KokoroをCore MLからMLXへ切り替え</span>
 </a>
 </div>
   </section>
 
   <div class="case-study-next">
     <p class="case-study-next-label">次へ</p>
-    <a href="/ja/building/kifinder/" class="case-study-next-row">
-      <span class="case-study-next-title">KiFinder</span>
+    <a href="/ja/building/sarukani/" class="case-study-next-row">
+      <span class="case-study-next-title">Sarukani</span>
       <span class="read-link">制作ログを見る <span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </div>

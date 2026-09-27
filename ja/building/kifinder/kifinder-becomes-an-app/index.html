@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>KiFinderがアプリになる</title>
-    <meta name="description" content="KiFinderがアプリになる">
+    <title>KiFinderにレビュー用Macアプリを追加</title>
+    <meta name="description" content="KiFinderにレビュー用Macアプリを追加">
     <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/kifinder-becomes-an-app/">
-    <meta property="og:title" content="KiFinderがアプリになる">
-    <meta property="og:description" content="KiFinderがアプリになる">
+    <meta property="og:title" content="KiFinderにレビュー用Macアプリを追加">
+    <meta property="og:description" content="KiFinderにレビュー用Macアプリを追加">
     <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/kifinder-becomes-an-app/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-becomes-an-app/">
@@ -111,21 +111,19 @@
     <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.06.30</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">KiFinderがアプリになる</h1>
+  <h1 class="h1 post-title update-title">KiFinderにレビュー用Macアプリを追加</h1>
   
   <div class="post-body">
-    <article class="prose"><p>前回プロトタイプにしたレビューウィンドウが、いまでは稼働中のエンジンにつながった本物のMacアプリになりました。サイドバーには、エンロールした人物が顔と参照枚数つきで並びます。誰かをエンロールするのは、参照写真を5枚から十数枚パネルにドロップするだけ。顔は端末上で切り出され、このMacから出ることはない、とはっきり伝えてくれます。あとはアルバムに向けてスキャンする。かつて写真のidを手で渡していた<code>feedback</code>コマンドが、いまはざっと目を通すウィンドウになりました。</p>
-<p>いちばん大事にしているのはレビュー画面で、これはkeepか否かの平らな二択ではありません。KiFinderはスキャンを三つの層に分けます。さっと確認できるよう自動選択された確信のある一致、スコアが際どいものをまとめた少なめの「もう一度見ておきたい」、そして残り。どの選択も取り消せます。キーボードで操作できるので、ひと月ぶんのアルバムも、マウスで探し回るのではなく、Returnでkeep、矢印で移動の一分です。いちばん気に入っているのは集合写真への対応です。クラス写真には十数個の顔が写っているので、インスペクタが検出した顔をすべて枠で囲み、アプリに当てずっぽうさせるのではなく、本当に自分の子の顔をタップしてからkeepします。keepしたものは、人物と月でまとめたライブラリに集まり、Photosに渡せる状態になります。</p>
-<p>まだ初期段階で、このスクリーンショットを撮っている最中にもいくつか粗を見つけました。ライブラリのサムネイルが一部読み込まれない、といったもので、これは別のパスで追っています。それでも、形は正しい。ターミナルに打ち込むidとして始まった承認と却下のステップが、いまはざっと目を通すウィンドウになりました。スキャンして、ざっと見て、keepして、書き出す。デモでは娘ではなく自分をエンロールしました。それ自体が、このアプリが本当は何のためのものかを思い出させてくれます。</p></article>
+    <article class="prose"><p>KiFinderの照合エンジンにMacアプリを追加しました。5枚から12枚の参照写真をドロップして人物を登録し、アルバムや保育園から届いたzipファイルを選ぶと、コマンドで写真IDを入力せずにスキャン結果を確認できます。</p>
+<p>レビューは三つのグループに分けました。確度の高い一致は最初から選択され、境界付近のスコアは「Worth a look」に表示し、残りは主な作業から外します。保存するまでは、すべての判断を変更できます。集合写真では検出した各顔を枠で囲み、目的の人物を選べます。複数の人がいるときに、最もスコアの高い顔をそのまま正解にしないためです。</p>
+<p>保存した写真は、人物と月ごとにライブラリへまとまり、Photosへ書き出せます。アプリもコマンドラインのエンジンと同じmanifestを使うので、UI用に別のデータ形式は作りませんでした。エンジンがすでに記録している判断を画面から操作する形です。</p>
+<p>スクリーンショットでは娘ではなく自分を登録し、ほかの人には合成した顔を使いました。保育園のアルバムを公開せず、操作の流れは確認できるデモにするためです。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/kifinder/getting-kifinder-ready-to-ship/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">KiFinderを世に出す準備</span>
+        <span class="update-nav-title">Sandbox内でCore MLの一時pathを修正</span>
       </a>
-      <a href="/ja/building/kifinder/a-window-to-review-the-maybes/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">maybeを見直すためのウィンドウ</span>
-      </a>
+      <span></span>
     </nav>
     <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
