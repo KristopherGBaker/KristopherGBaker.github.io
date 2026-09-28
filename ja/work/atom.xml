@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <title>Kristopher Baker · Apps, systems, and tools I’ve shipped.</title>
-  <subtitle>iOSに深く根ざしたプロダクトエンジニア。コンシューマ向けのプロダクトシステム、開発者向けツール、実践的なAI支援ワークフローを東京から作っています。</subtitle>
+  <subtitle>iOSを土台に、ユーザー向けの機能からそれを支えるシステムやツールまで作っているプロダクトエンジニアです。東京在住。</subtitle>
   <link href="https://krisbaker.com/ja/" rel="alternate"/>
   <link href="https://krisbaker.com/ja/work/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
@@ -12,7 +12,39 @@
     <email>hello@krisbaker.com</email>
   </author>
   <entry>
-    <title>iOS開発用のデスクトップ・テレメトリビューア</title>
+    <title>登録導線と配達料金を通じたWolt+の改善</title>
+    <link href="https://krisbaker.com/ja/work/wolt-cart-entry-points/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/work/wolt-cart-entry-points/</id>
+    <updated>2025-01-01T00:00:00Z</updated>
+    <published>2025-01-01T00:00:00Z</published>
+    <category term="iOS"/>
+    <category term="Growth"/>
+    <category term="Subscription"/>
+    <category term="A/B testing"/>
+    <category term="API design"/>
+    <summary>iOS、Android、webを横断し、Wolt+の登録導線と長距離配達に関するクライアント開発をリードしました。カートとチェックアウトの実験は、会員登録数の約30%増加に貢献しました。</summary>
+    <content type="html"><![CDATA[<h2>背景</h2>
+<p>2024年から2025年にかけて、複数のWolt+会員向け施策を担当しました。注文中の登録を簡単にすることと、無料配達エリア外でも会員向けの配達割引を提供することの2つが主なテーマでした。</p>
+<p>私はiOS、Android、webを横断するクライアントDRIとして、バックエンド、プロダクト、デザイン、QA、データの各チームと連携し、iOS実装も担当しました。変更はDiscovery、店舗、カート、チェックアウトにまたがるため、1つの画面での判断が別の画面にも影響しました。</p>
+<h2>登録導線の実験</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+のカート導線とエクスプレス登録フロー">
+</video>
+<p>最初の案では、新しいカート導線とエクスプレス登録を1つのリリースにまとめていました。私はそれぞれを独立した実験に分けることを提案しました。先にカート導線を出せば、複雑な登録フローの完成を待たずに配置の効果を確認できます。</p>
+<p>エクスプレス登録には、当時クライアントが対応していなかった複数ステップのボトムシートを使いました。また、エクスプレス登録と通常登録の切り替えを簡単にし、決済とバックエンドのエッジケースを調整しました。</p>
+<p>初期のA/Bテストには誤解しやすい結果もありました。データサイエンスと一緒に計測を確認し、実験が何を測っているかを整理してから次のリリース判断に使いました。カートとチェックアウトの取り組みは、最終的に会員登録数の約30%増加に貢献しました。</p>
+<h2>長距離配達</h2>
+<p>Wolt+は決められた距離内で無料配達を提供していました。長距離配達では、その範囲外でも会員向けの割引料金を提供しました。クライアント側の課題は、Discoveryの一覧、店舗画面、チェックアウトで料金と適用条件を一致させることでした。</p>
+<p>同じ概念を複数の画面とクライアントで扱うため、フロントエンドとバックエンドのチームでAPIの構造と名前を検討しました。</p>
+<p>配達料金とWolt+の割引を各導線で説明できる、再利用可能なボトムシートも設計しました。</p>
+<h2>結果</h2>
+<p>2つの登録実験はどちらもA/Bテストを経てロールアウトされ、カート導線はその後も登録画面への入口として使われました。長距離配達も良いA/Bテスト結果を得て、アプリ内の複数画面へ展開されました。注文中にWolt+を見つけやすくなり、無料配達エリア外の会員にも分かりやすい特典を提供できました。</p>
+<h2>次に取り組むこと</h2>
+<p>この開発では、複数チームの用語と分析イベントを揃える必要がありました。もう一度取り組むなら、共通の料金用語と実験イベントを、各画面の例と一緒にクライアントRFCへ早めに記載します。実装や分析の前に、デザイン、バックエンド、データサイエンス、クライアントの前提を同じ場所で確認できるようにします。</p>]]></content>
+  </entry>
+  <entry>
+    <title>iOSのテレメトリを確認・デバッグしやすくする</title>
     <link href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/" rel="alternate"/>
     <id>https://krisbaker.com/ja/work/wolt-telemetry-viewer/</id>
     <updated>2025-01-01T00:00:00Z</updated>
@@ -68,38 +100,6 @@
 <p>Telemetry Viewerもリリース確認に使いました。iOSアプリから分析イベントをローカルWebSocketでmacOSクライアントへ送り、検索とフィルタで確認できます。機能が送信したデータの検証、想定外のイベントの調査、実験用計測の確認を、従来のフルスクリーン画面でiPhoneを隠さずに行えました。</p>
 <h2>次に取り組むこと</h2>
 <p>この作業を続けるなら、Maestroで確認する項目、手動テストが必要な項目、テレメトリで確認する項目を文書にまとめます。また、準備時間と繰り返し発生する失敗を計測してから、次の自動化対象を決めます。</p>]]></content>
-  </entry>
-  <entry>
-    <title>登録導線と配達料金を通じたWolt+の改善</title>
-    <link href="https://krisbaker.com/ja/work/wolt-cart-entry-points/" rel="alternate"/>
-    <id>https://krisbaker.com/ja/work/wolt-cart-entry-points/</id>
-    <updated>2025-01-01T00:00:00Z</updated>
-    <published>2025-01-01T00:00:00Z</published>
-    <category term="iOS"/>
-    <category term="Growth"/>
-    <category term="Subscription"/>
-    <category term="A/B testing"/>
-    <category term="API design"/>
-    <summary>iOS、Android、webを横断し、Wolt+の登録導線と長距離配達に関するクライアント開発をリードしました。カートとチェックアウトの実験は、会員登録数の約30%増加に貢献しました。</summary>
-    <content type="html"><![CDATA[<h2>背景</h2>
-<p>2024年から2025年にかけて、複数のWolt+会員向け施策を担当しました。注文中の登録を簡単にすることと、無料配達エリア外でも会員向けの配達割引を提供することの2つが主なテーマでした。</p>
-<p>私はiOS、Android、webを横断するクライアントDRIとして、バックエンド、プロダクト、デザイン、QA、データの各チームと連携し、iOS実装も担当しました。変更はDiscovery、店舗、カート、チェックアウトにまたがるため、1つの画面での判断が別の画面にも影響しました。</p>
-<h2>登録導線の実験</h2>
-<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
-  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
-  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+のカート導線とエクスプレス登録フロー">
-</video>
-<p>最初の案では、新しいカート導線とエクスプレス登録を1つのリリースにまとめていました。私はそれぞれを独立した実験に分けることを提案しました。先にカート導線を出せば、複雑な登録フローの完成を待たずに配置の効果を確認できます。</p>
-<p>エクスプレス登録には、当時クライアントが対応していなかった複数ステップのボトムシートを使いました。また、エクスプレス登録と通常登録の切り替えを簡単にし、決済とバックエンドのエッジケースを調整しました。</p>
-<p>初期のA/Bテストには誤解しやすい結果もありました。データサイエンスと一緒に計測を確認し、実験が何を測っているかを整理してから次のリリース判断に使いました。カートとチェックアウトの取り組みは、最終的に会員登録数の約30%増加に貢献しました。</p>
-<h2>長距離配達</h2>
-<p>Wolt+は決められた距離内で無料配達を提供していました。長距離配達では、その範囲外でも会員向けの割引料金を提供しました。クライアント側の課題は、Discoveryの一覧、店舗画面、チェックアウトで料金と適用条件を一致させることでした。</p>
-<p>同じ概念を複数の画面とクライアントで扱うため、フロントエンドとバックエンドのチームでAPIの構造と名前を検討しました。</p>
-<p>配達料金とWolt+の割引を各導線で説明できる、再利用可能なボトムシートも設計しました。</p>
-<h2>結果</h2>
-<p>2つの登録実験はどちらもA/Bテストを経てロールアウトされ、カート導線はその後も登録画面への入口として使われました。長距離配達も良いA/Bテスト結果を得て、アプリ内の複数画面へ展開されました。注文中にWolt+を見つけやすくなり、無料配達エリア外の会員にも分かりやすい特典を提供できました。</p>
-<h2>次に取り組むこと</h2>
-<p>この開発では、複数チームの用語と分析イベントを揃える必要がありました。もう一度取り組むなら、共通の料金用語と実験イベントを、各画面の例と一緒にクライアントRFCへ早めに記載します。実装や分析の前に、デザイン、バックエンド、データサイエンス、クライアントの前提を同じ場所で確認できるようにします。</p>]]></content>
   </entry>
   <entry>
     <title>記事抽出パイプラインの安全な置き換え</title>

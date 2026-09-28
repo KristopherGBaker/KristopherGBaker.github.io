@@ -25,28 +25,28 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/work/wolt-telemetry-viewer/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/work/wolt-test-automation/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-test-automation/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-test-automation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-test-automation/"/>
-  </url>
-  <url>
     <loc>https://krisbaker.com/work/wolt-cart-entry-points/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/work/wolt-telemetry-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/work/smartnews-smartview-v2/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/work/wolt-test-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-test-automation/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-test-automation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-test-automation/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/work/smartnews-us-election-2020/</loc>
@@ -343,12 +343,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
-  </url>
-  <url>
     <loc>https://krisbaker.com/building/kifinder/kifinder-source-is-public/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/"/>
@@ -371,6 +365,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/kifinder-becomes-an-app/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/about/</loc>
@@ -415,28 +415,28 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/"/>
   </url>
   <url>
-    <loc>https://krisbaker.com/ja/work/wolt-telemetry-viewer/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/work/wolt-test-automation/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-test-automation/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-test-automation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-test-automation/"/>
-  </url>
-  <url>
     <loc>https://krisbaker.com/ja/work/wolt-cart-entry-points/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-cart-entry-points/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-cart-entry-points/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/work/wolt-telemetry-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-telemetry-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-telemetry-viewer/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/work/smartnews-smartview-v2/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/smartnews-smartview-v2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/smartnews-smartview-v2/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/work/wolt-test-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/work/wolt-test-automation/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/work/wolt-test-automation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/work/wolt-test-automation/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/work/smartnews-us-election-2020/</loc>

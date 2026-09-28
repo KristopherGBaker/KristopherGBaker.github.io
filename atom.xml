@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <title>Kristopher Baker</title>
-  <subtitle>Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.</subtitle>
+  <subtitle>Product engineer with deep iOS roots, building user-facing features and the systems and tools behind them. Based in Tokyo.</subtitle>
   <link href="https://krisbaker.com/" rel="alternate"/>
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
@@ -186,7 +186,39 @@
 <p>I still use this setup on train rides, and I would start with Remote Control if Claude Code access were my only requirement.</p>]]></content>
   </entry>
   <entry>
-    <title>A desktop telemetry viewer for iOS development</title>
+    <title>Growing Wolt+ across signup and delivery pricing</title>
+    <link href="https://krisbaker.com/work/wolt-cart-entry-points/" rel="alternate"/>
+    <id>https://krisbaker.com/work/wolt-cart-entry-points/</id>
+    <updated>2025-01-01T00:00:00Z</updated>
+    <published>2025-01-01T00:00:00Z</published>
+    <category term="iOS"/>
+    <category term="Growth"/>
+    <category term="Subscription"/>
+    <category term="A/B testing"/>
+    <category term="API design"/>
+    <summary>I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.</summary>
+    <content type="html"><![CDATA[<h2>Context</h2>
+<p>I worked on several Wolt+ membership initiatives during 2024 and 2025. The work covered two related problems: making subscription signup easier during an order, and giving members useful delivery discounts outside the free-delivery radius.</p>
+<p>I was the client DRI across iOS, Android, and web, working with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
+<h2>Signup experiments</h2>
+<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
+  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
+  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+ cart entry point and express signup flow">
+</video>
+<p>The first proposal combined a new cart entry point with an express signup flow. I pushed to run them as independent experiments. Shipping the cart entry point first meant we could learn whether the new placement changed sign-ups without waiting for the more complex signup work.</p>
+<p>Express signup used a multi-step bottom sheet, a pattern the client did not support at the time. I also simplified the transition between express and full signup and coordinated payment and backend edge cases.</p>
+<p>Some early A/B results were misleading. I worked with data science to review the instrumentation and understand what the experiment was measuring before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
+<h2>Long-distance delivery</h2>
+<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The challenge on the clients was consistency: the price and eligibility needed to agree in discovery lists, on the venue page, and at checkout.</p>
+<p>I worked with the frontend and backend teams on the API structure and naming because the same concepts had to work across several screens and client implementations.</p>
+<p>I also designed a reusable bottom sheet that explained the delivery price and Wolt+ savings across entry points.</p>
+<h2>Results</h2>
+<p>Both signup experiments were tested and rolled out, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
+<h2>What I'd do next</h2>
+<p>The projects depended on several teams and analytics definitions. If I revisited the work, I would write the shared pricing terms and experiment events into the client RFC earlier, with examples for each surface. That would give design, backend, data science, and client engineers one place to review assumptions before implementation and analysis diverged.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Making iOS telemetry easier to inspect and debug</title>
     <link href="https://krisbaker.com/work/wolt-telemetry-viewer/" rel="alternate"/>
     <id>https://krisbaker.com/work/wolt-telemetry-viewer/</id>
     <updated>2025-01-01T00:00:00Z</updated>
@@ -242,38 +274,6 @@
 <p>Telemetry Viewer was another part of release validation. The iOS app streamed analytics events over a local WebSocket to a macOS client with search and filtering. I used it to verify what a feature emitted, investigate unexpected events, and check experiment instrumentation without covering the phone with the old full-screen event viewer.</p>
 <h2>What I'd do next</h2>
 <p>If I returned to this work, I would document which regression checks belonged in Maestro, which required a manual session, and which needed telemetry verification. I would also measure setup time and recurring failures before choosing the next task to automate.</p>]]></content>
-  </entry>
-  <entry>
-    <title>Growing Wolt+ across signup and delivery pricing</title>
-    <link href="https://krisbaker.com/work/wolt-cart-entry-points/" rel="alternate"/>
-    <id>https://krisbaker.com/work/wolt-cart-entry-points/</id>
-    <updated>2025-01-01T00:00:00Z</updated>
-    <published>2025-01-01T00:00:00Z</published>
-    <category term="iOS"/>
-    <category term="Growth"/>
-    <category term="Subscription"/>
-    <category term="A/B testing"/>
-    <category term="API design"/>
-    <summary>I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.</summary>
-    <content type="html"><![CDATA[<h2>Context</h2>
-<p>I worked on several Wolt+ membership initiatives during 2024 and 2025. The work covered two related problems: making subscription signup easier during an order, and giving members useful delivery discounts outside the free-delivery radius.</p>
-<p>I was the client DRI across iOS, Android, and web, working with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
-<h2>Signup experiments</h2>
-<video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
-  <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
-  <img src="https://krisbaker.com/assets/work/wolt-cart-entry-points/cart-banner.png" alt="Wolt+ cart entry point and express signup flow">
-</video>
-<p>The first proposal combined a new cart entry point with an express signup flow. I pushed to run them as independent experiments. Shipping the cart entry point first meant we could learn whether the new placement changed sign-ups without waiting for the more complex signup work.</p>
-<p>Express signup used a multi-step bottom sheet, a pattern the client did not support at the time. I also simplified the transition between express and full signup and coordinated payment and backend edge cases.</p>
-<p>Some early A/B results were misleading. I worked with data science to review the instrumentation and understand what the experiment was measuring before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
-<h2>Long-distance delivery</h2>
-<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The challenge on the clients was consistency: the price and eligibility needed to agree in discovery lists, on the venue page, and at checkout.</p>
-<p>I worked with the frontend and backend teams on the API structure and naming because the same concepts had to work across several screens and client implementations.</p>
-<p>I also designed a reusable bottom sheet that explained the delivery price and Wolt+ savings across entry points.</p>
-<h2>Results</h2>
-<p>Both signup experiments were tested and rolled out, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
-<h2>What I'd do next</h2>
-<p>The projects depended on several teams and analytics definitions. If I revisited the work, I would write the shared pricing terms and experiment events into the client RFC earlier, with examples for each surface. That would give design, backend, data science, and client engineers one place to review assumptions before implementation and analysis diverged.</p>]]></content>
   </entry>
   <entry>
     <title>Replacing an article extraction pipeline safely</title>

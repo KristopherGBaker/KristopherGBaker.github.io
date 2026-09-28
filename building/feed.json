@@ -1,64 +1,64 @@
 {
-  "version" : "https://jsonfeed.org/version/1.1",
-  "language" : "en",
+  "feed_url" : "https://krisbaker.com/building/feed.json",
+  "description" : "Product engineer with deep iOS roots, building user-facing features and the systems and tools behind them. Based in Tokyo.",
   "title" : "Kristopher Baker · Updates",
+  "language" : "en",
   "items" : [
     {
-      "id" : "https://krisbaker.com/building/kifinder/kifinder-source-is-public/",
-      "title" : "KiFinder's source is public",
-      "url" : "https://krisbaker.com/building/kifinder/kifinder-source-is-public/",
       "date_published" : "2026-09-28T05:00:00Z",
+      "id" : "https://krisbaker.com/building/kifinder/kifinder-source-is-public/",
+      "url" : "https://krisbaker.com/building/kifinder/kifinder-source-is-public/",
+      "title" : "KiFinder's source is public",
       "content_html" : "<p>The KiFinder source is now <a href=\"https://github.com/KristopherGBaker/KiFinder\">on GitHub</a> under GPLv3, following the <a href=\"https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/\">source-only decision</a> from July.</p>\n<p>There is still no prebuilt app. To try it, you build it yourself with Xcode 26 and XcodeGen on an Apple silicon Mac. The face-model weights are a separate one-time download, and everything after that runs on the Mac. The README covers setup, the model, and how to sign it with your own team.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/",
-      "title" : "Fixing settings titles at the largest text size",
-      "url" : "https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/",
       "date_published" : "2026-09-26T01:08:35Z",
+      "id" : "https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/",
+      "url" : "https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/",
+      "title" : "Fixing settings titles at the largest text size",
       "content_html" : "<p>Sarukani's screenshot tour found four settings titles truncated at the largest Dynamic Type size. The rows measured the explanatory text correctly, but the title labels were free to give their parent a one-line ideal height. When the layout came back at that height, longer titles ended in an ellipsis.</p>\n<p>The shared <code>SettingLabel</code> now fixes its vertical size while still allowing horizontal wrapping. Three standalone rows use the same rule. I added hosted layout tests for the settings page because they render real SwiftUI views in a window and catch the sizing behavior without paying for a full UI launch on every case.</p>\n<p>This fits the verification split I am using in the project. The package suite has 647 tests and runs in about 1.7 seconds. The app unit bundle has 200 tests and takes about 56 seconds because it includes rendered layout cases. The 17 UI tests take about 222 seconds, while the light-and-dark capture tour takes at least four minutes. Captures remain useful, but once one exposes a layout rule, a hosted test is the cheaper regression check.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/",
-      "title" : "Why KiFinder will be source-only",
-      "url" : "https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/",
       "date_published" : "2026-07-16T14:00:00Z",
+      "id" : "https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/",
+      "url" : "https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/",
+      "title" : "Why KiFinder will be source-only",
       "content_html" : "<p>I have decided not to release KiFinder as a signed app, whether free or paid. My main reason is privacy. The preschool albums I use it with contain hundreds of photos of children from many families. Running face matching locally on my Mac to find my own daughter is a use I can judge for myself. Packaging the same capability for any album would be a different decision, and I am not comfortable making it.</p>\n<p>The ArcFace model also sets a condition for any broader release. Its weights were trained on MS-Celeb-1M, which was withdrawn because it was built from people's faces without their consent. I can use that model for a personal tool, but I do not want to distribute it. An app release would first require finding or training a model on consented data. It would also mean taking on the review and support work for a Mac app.</p>\n<p>I still want other engineers to be able to inspect the approach. I plan to publish the source under GPLv3 instead of distributing an app. People will be able to read it or build it for themselves, while derivative work will have to remain open.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/",
-      "title" : "Fixing the sandboxed Core ML path",
-      "url" : "https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/",
       "date_published" : "2026-07-08T11:00:00Z",
+      "id" : "https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/",
+      "url" : "https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/",
+      "title" : "Fixing the sandboxed Core ML path",
       "content_html" : "<p>After I enabled the App Sandbox, KiFinder scans completed with zero detected faces. The progress UI still finished, which made the failure look like a valid album with no matches.</p>\n<p>The Core ML setup compiled its model into a hard-coded directory under <code>/private/tmp</code>. A sandboxed app could not write there, the session failed to initialize, and a <code>try?</code> converted that error into <code>nil</code> for every embedding. The fix was to derive the scratch directory from the system temporary directory, which places it inside the app container.</p>\n<p>I checked the change with the real engine over saved photos. The broken build produced zero embeddings; the fixed build produced five and six for the same inputs. I also stopped re-scoring the full album after every keep or skip. Re-scoring now runs from an explicit “Find new matches” action and uses one batched matrix multiplication per album.</p>\n<p>The missing error handling still needs improvement. A model that cannot initialize should stop the scan and explain the failure instead of returning an empty result that looks successful.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/",
-      "title" : "Separating generated and author-provided furigana",
-      "url" : "https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/",
       "date_published" : "2026-07-02T10:00:00Z",
+      "id" : "https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/",
+      "url" : "https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/",
+      "title" : "Separating generated and author-provided furigana",
       "content_html" : "<p>Aoede's furigana errors came from two different sources, so I built a small harness to separate them before changing the reader. FuriganaQA runs the production pipeline over Aozora books and compares each result with the ruby supplied in the text. A mismatch is either something the generator should have produced or a reading it could not infer.</p>\n<p>The first group exposed fixable problems. Aoede was taking phonetic forms from OpenJTalk, so long vowels were written as they sound instead of the expected spelling. It also grouped mixed kanji runs too broadly. Switching to orthographic readings and using JmdictFurigana for per-kanji placement fixed those cases, with JMdict validating the result.</p>\n<p>The second group includes readings chosen by an author, such as 本気 read as マジ. No analyzer can recover that choice from the characters. Aoede now preserves ruby from Aozora markup and EPUB <code>&lt;ruby&gt;</code> elements, gives it priority over generated furigana, and uses it for speech as well as display.</p>\n<p>The harness made the boundary testable: published ruby wins when it exists, dictionaries handle known readings, and OpenJTalk fills the remaining gaps.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
-      "title" : "Adding the KiFinder review app",
-      "url" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
       "date_published" : "2026-06-30T11:00:00Z",
+      "id" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
+      "url" : "https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/",
+      "title" : "Adding the KiFinder review app",
       "content_html" : "<p>KiFinder now has a Mac app around the matching engine. I can enroll a person by dropping in five to twelve reference photos, choose an album or the preschool's zip files, and review the scan without typing photo identifiers into a command.</p>\n<p>The review is split into three groups. Confident matches start selected, borderline scores appear under “Worth a look,” and the remaining photos stay out of the main path. Every decision can be changed before saving. In a group photo, the inspector draws a box around each detected face and lets me choose the intended person. That avoids treating the highest-scoring face as the answer when several people are in the photo.</p>\n<p>The kept photos go into a library grouped by person and month, ready to export to Photos. The app still writes the same manifest as the command-line engine, so the UI did not need a second data format. It is a view over decisions the engine already records.</p>\n<p>For the screenshots I enrolled myself and used synthetic faces for everyone else. That kept the demo useful without putting a preschool album on a public page.</p>"
     },
     {
-      "id" : "https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/",
-      "title" : "Switching Kokoro from Core ML to MLX",
-      "url" : "https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/",
       "date_published" : "2026-06-07T15:00:00Z",
+      "id" : "https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/",
+      "url" : "https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/",
+      "title" : "Switching Kokoro from Core ML to MLX",
       "content_html" : "<p>Aoede's first Kokoro integration ran through FluidAudio and Core ML. That was the natural on-device path, but it crashed on my M5 Mac with every compute option I tried. The GPU reported a Metal JIT error, while CPU and the Neural Engine failed lower in BNNS. The same library worked on older Apple silicon, so the model itself was probably not the problem.</p>\n<p>I replaced that runtime with an MLX port of Kokoro. MLX runs on the M5 and provides a timestamp for each token, which improved the synchronized word highlight at the same time. It does require the Metal toolchain and a real GPU, so the provider belongs in the app target rather than a package built with plain <code>swift build</code>. The iOS Simulator cannot run it and falls back to Apple speech.</p>\n<p>I kept the Core ML work on a branch in case its hardware support changes. For now, MLX is the better fit because it works on the machines I use and gives the reader more precise timing.</p>"
     }
   ],
+  "version" : "https://jsonfeed.org/version/1.1",
   "authors" : [
     {
       "name" : "Kristopher Baker"
     }
   ],
-  "description" : "Product engineer with deep iOS roots, building consumer product systems, developer tooling, and practical AI-assisted workflows from Tokyo.",
-  "home_page_url" : "https://krisbaker.com/",
-  "feed_url" : "https://krisbaker.com/building/feed.json"
+  "home_page_url" : "https://krisbaker.com/"
 }
