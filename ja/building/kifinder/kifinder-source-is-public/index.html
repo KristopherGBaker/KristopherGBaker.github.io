@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Fixing the sandboxed Core ML path</title>
-    <meta name="description" content="Fixing the sandboxed Core ML path">
-    <link rel="canonical" href="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <meta property="og:title" content="Fixing the sandboxed Core ML path">
-    <meta property="og:description" content="Fixing the sandboxed Core ML path">
-    <meta property="og:url" content="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <title>KiFinderのソースを公開しました</title>
+    <meta name="description" content="KiFinderのソースを公開しました">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/">
+    <meta property="og:title" content="KiFinderのソースを公開しました">
+    <meta property="og:description" content="KiFinderのソースを公開しました">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/posts/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/posts/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/posts/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/work/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/work/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/work/feed.json">
-    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/building/rss.xml">
-    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/building/atom.xml">
-    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/building/feed.json">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-source-is-public/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/kifinder-source-is-public/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/kifinder-source-is-public/">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Notes from a working engineer. (RSS)" href="/ja/posts/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Notes from a working engineer. (Atom)" href="/ja/posts/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Notes from a working engineer. (JSON Feed)" href="/ja/posts/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (RSS)" href="/ja/work/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (Atom)" href="/ja/work/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Apps, systems, and tools I’ve shipped. (JSON Feed)" href="/ja/work/feed.json">
+    <link rel="alternate" type="application/rss+xml" title="Kristopher Baker · Updates (RSS)" href="/ja/building/rss.xml">
+    <link rel="alternate" type="application/atom+xml" title="Kristopher Baker · Updates (Atom)" href="/ja/building/atom.xml">
+    <link rel="alternate" type="application/feed+json" title="Kristopher Baker · Updates (JSON Feed)" href="/ja/building/feed.json">
     <style>:root { --brand-icon-light: url("/assets/icons/kb.png"); --brand-icon-dark: url("/assets/icons/kb-dark.png"); }</style><script defer src="https://analytics.krisbaker.com/script.js" data-website-id="a656a123-b163-41be-8e31-3c4a8c15e3b9" data-domains="krisbaker.com" data-do-not-track="true"></script><script>
       (function(){
         var EXT=["pdf","zip","dmg","csv","xlsx","doc","docx","pptx","mp3","mp4","png","jpg","svg"];
@@ -85,19 +85,19 @@
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <header class="top-bar">
   <div class="container top-bar-row">
-    <a href="/" class="top-brand">
+    <a href="/ja/" class="top-brand">
       <span class="top-brand-mark top-brand-mark-icon" aria-hidden="true"></span>
       <span class="top-brand-text">
         <span class="top-brand-name">Kristopher Baker</span>
-        <span class="top-brand-sub">iOS roots · Product systems · AI-assisted workflows</span>
+        <span class="top-brand-sub">iOSを土台に · プロダクトシステム · AI支援ワークフロー</span>
       </span>
     </a>
     <nav class="top-nav">
       <div class="top-nav-links" id="primary-nav">
-        <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
+        <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
-      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
+      <span class="lang-switch-group"><a href="/building/kifinder/kifinder-source-is-public/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
       </button>
@@ -106,41 +106,36 @@
 </header>
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
-  <a href="/building/kifinder/" class="post-back">← KiFinder</a>
-  <p class="post-meta update-meta is-wip">
-    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
-     · <span>1 min read</span>
+  <a href="/ja/building/kifinder/" class="post-back">← KiFinder</a>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.09.28</span>
+     · <span>約1分</span>
   </p>
-  <h1 class="h1 post-title update-title">Fixing the sandboxed Core ML path</h1>
+  <h1 class="h1 post-title update-title">KiFinderのソースを公開しました</h1>
   
   <div class="post-body">
-    <article class="prose"><p>After I enabled the App Sandbox, KiFinder scans completed with zero detected faces. The progress UI still finished, which made the failure look like a valid album with no matches.</p>
-<p>The Core ML setup compiled its model into a hard-coded directory under <code>/private/tmp</code>. A sandboxed app could not write there, the session failed to initialize, and a <code>try?</code> converted that error into <code>nil</code> for every embedding. The fix was to derive the scratch directory from the system temporary directory, which places it inside the app container.</p>
-<p>I checked the change with the real engine over saved photos. The broken build produced zero embeddings; the fixed build produced five and six for the same inputs. I also stopped re-scoring the full album after every keep or skip. Re-scoring now runs from an explicit “Find new matches” action and uses one batched matrix multiplication per album.</p>
-<p>The missing error handling still needs improvement. A model that cannot initialize should stop the scan and explain the failure instead of returning an empty result that looks successful.</p></article>
+    <article class="prose"><p>7月に決めた<a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/">ソースのみで公開する方針</a>どおり、KiFinderのソースコードをGPLv3で<a href="https://github.com/KristopherGBaker/KiFinder">GitHubに公開</a>しました。</p>
+<p>ビルド済みのアプリは配布していません。試す場合は、Apple silicon搭載のMacでXcode 26とXcodeGenを使って自分でビルドする必要があります。顔認識モデルの重みは初回に別途ダウンロードし、それ以降の処理はすべてMac上で完結します。セットアップ、モデルの準備、自分のチームで署名する方法はREADMEにまとめています。</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Why KiFinder will be source-only</span>
-      </a>
-      <a href="/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
-        <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Adding the KiFinder review app</span>
+      <span></span>
+      <a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-older">
+        <span class="update-nav-label">古い</span>
+        <span class="update-nav-title">KiFinderをソースのみで公開する理由</span>
       </a>
     </nav>
-    <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </main>
 
     <footer class="site-footer no-print">
   <div class="container site-footer-grid">
     <div>
-      <p class="eyebrow site-footer-cta-eyebrow">Get in touch</p>
-      <h2 class="h2 site-footer-cta-h2">Quietly open to good work.</h2>
+      <p class="eyebrow site-footer-cta-eyebrow">お問い合わせ</p>
+      <h2 class="h2 site-footer-cta-h2">良いご縁があれば、静かに検討しています。</h2>
       <a href="mailto:hello@krisbaker.com" class="btn-primary" data-umami-event="email">hello@krisbaker.com →</a>
     </div>
     <div class="site-footer-meta">
-      <p class="site-footer-meta-line">Tokyo, Japan</p>
+      <p class="site-footer-meta-line">東京</p>
       <ul class="site-footer-meta-links"><li><a href="https://github.com/KristopherGBaker" class="nav-link" data-umami-event="social" data-umami-event-network="GitHub">GitHub</a></li><li><a href="https://linkedin.com/in/kristophergbaker" class="nav-link" data-umami-event="social" data-umami-event-network="LinkedIn">LinkedIn</a></li></ul>
       <p class="site-footer-meta-copy">© 2026 · Kristopher Baker</p>
     </div>

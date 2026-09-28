@@ -110,8 +110,8 @@
 
   <div class="building-detail-head is-active">
     <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2mo ago</span>
-    
+    <span class="building-detail-updated">updated today</span>
+    <a href="https://github.com/KristopherGBaker/KiFinder" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
   <h1 class="h1 building-detail-title">KiFinder</h1>
@@ -131,14 +131,32 @@
 <p>The review screen makes the model's decision inspectable instead of presenting a final folder with no explanation. I found one important regression only by running the real engine after enabling the App Sandbox. Core ML was compiling its model under a hard-coded path in <code>/private/tmp</code>, which the sandbox could not write. A swallowed error turned every embedding into <code>nil</code>, so the scan completed with zero faces. Moving the scratch directory into the container fixed it, and a live-engine check over saved photos produced five and six embeddings where the broken build produced none.</p>
 <p><img src="/assets/building/kifinder/library.png" alt="KiFinder's library with saved photos grouped by person and month." />
 <em>Kept photos are grouped by person and month before export to Photos.</em></p>
+<h2 id="why-it-s-source-only">Why it's source-only</h2>
+<p>I decided not to ship KiFinder as an app, free or paid, mostly out of respect for people's right to privacy. The photos it works on are full of other families' children. Running face matching on them on my own Mac for my own daughter is one thing. Handing anyone a signed app that does it to any album is another.</p>
+<p>The model made that harder, too. The ArcFace weights I use were trained on MS-Celeb-1M, a dataset that was withdrawn because it was built from people's faces without their consent. That's workable for a personal tool, but I don't want to distribute it. A real release would mean finding or training a model on consented data, plus the support and review work that comes with an app.</p>
+<p>Instead, the source is <a href="https://github.com/KristopherGBaker/KiFinder">on GitHub</a> under GPLv3. Anyone can read it or build it for themselves, and derivative work has to stay open.</p>
 <h2 id="current-state">Current state</h2>
-<p>KiFinder remains an active personal tool, but I decided not to distribute a signed build. The source is available under GPLv3 so others can inspect and build it, while derivative work stays open. That keeps the project focused on the engineering and avoids taking on support for unknown Macs and photo libraries. Next I want more repeatable on-device coverage around model setup and sandbox permissions.</p></article>
+<p>KiFinder remains an active personal tool. Next I want more repeatable on-device coverage around model setup and sandbox permissions.</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">2</span></h2>
+      <h2 class="h3 building-updates-title">Updates <span class="building-updates-count">4</span></h2>
     </div>
-    <div class="update-timeline"><a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
+    <div class="update-timeline"><a href="/building/kifinder/kifinder-source-is-public/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.09.28</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">KiFinder's source is public</span>
+</a>
+<a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-entry is-decision">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.07.16</span>
+    <span class="update-entry-status">decision</span>
+  </span>
+  <span class="update-entry-title">Why KiFinder will be source-only</span>
+</a>
+<a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.07.08</span>
     <span class="update-entry-status">wip</span>

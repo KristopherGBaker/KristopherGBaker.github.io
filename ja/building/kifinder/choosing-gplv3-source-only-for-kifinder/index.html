@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Sandbox内でCore MLの一時pathを修正</title>
-    <meta name="description" content="Sandbox内でCore MLの一時pathを修正">
-    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <meta property="og:title" content="Sandbox内でCore MLの一時pathを修正">
-    <meta property="og:description" content="Sandbox内でCore MLの一時pathを修正">
-    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <title>KiFinderをソースのみで公開する理由</title>
+    <meta name="description" content="KiFinderをソースのみで公開する理由">
+    <link rel="canonical" href="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/">
+    <meta property="og:title" content="KiFinderをソースのみで公開する理由">
+    <meta property="og:description" content="KiFinderをソースのみで公開する理由">
+    <meta property="og:url" content="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/ja/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/ja/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/ja/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/ja/work/" class="nav-link">事例</a><a href="/ja/building/" class="nav-link">制作中</a><a href="/ja/posts/" class="nav-link">記事</a><a href="/ja/about/" class="nav-link">プロフィール</a><a href="/ja/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><a href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
+      <span class="lang-switch-group"><a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="nav-link lang-switch lang-switch-muted" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a><span class="lang-switch-sep" aria-hidden="true">·</span><span class="nav-link lang-switch" aria-current="true">JP</span></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="テーマを切り替える">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,25 +107,24 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/ja/building/kifinder/" class="post-back">← KiFinder</a>
-  <p class="post-meta update-meta is-wip">
-    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+  <p class="post-meta update-meta is-decision">
+    <span class="update-meta-status"><span class="status-dot"></span>decision</span> · <span>2026.07.16</span>
      · <span>約2分</span>
   </p>
-  <h1 class="h1 post-title update-title">Sandbox内でCore MLの一時pathを修正</h1>
+  <h1 class="h1 post-title update-title">KiFinderをソースのみで公開する理由</h1>
   
   <div class="post-body">
-    <article class="prose"><p>App Sandboxを有効にしたあと、KiFinderのスキャンが検出した顔0件で完了するようになりました。進捗画面は最後まで進むため、顔が一致しない正常なアルバムのように見えました。</p>
-<p>Core MLの準備では、モデルを<code>/private/tmp</code>以下の固定ディレクトリへコンパイルしていました。サンドボックス化したアプリからは書き込めず、セッションの初期化が失敗し、<code>try?</code>がそのエラーをすべての埋め込みで<code>nil</code>へ変えていました。システムの一時ディレクトリを使って、アプリのコンテナ内に置くことで修正しました。</p>
-<p>保存していた写真を実際のエンジンへ通して確認しました。壊れたビルドでは埋め込みが0件でしたが、修正後は同じ入力から5件と6件を取得できました。また、写真を保存または除外するたびにアルバム全体を再評価する処理もやめました。再評価は明示的な「Find new matches」から実行し、アルバムごとに一回のバッチ行列乗算を使います。</p>
-<p>エラー処理にはまだ改善が必要です。モデルを初期化できない場合はスキャンを止め、成功したように見える空の結果ではなく、原因を説明するべきです。</p></article>
+    <article class="prose"><p>KiFinderは、無料でも有料でも、署名済みのアプリとしては配布しないことにしました。一番大きな理由はプライバシーです。KiFinderで扱う保育園のアルバムには、いろいろな家庭の子どもが何百枚もの写真に写っています。自分の娘を探すために、自分のMac上で顔照合を行う用途なら自分で判断できます。同じ機能をどのアルバムにも使えるアプリとして提供することには抵抗があります。</p>
+<p>ArcFaceモデルの学習データも、一般公開するうえでの条件になります。このモデルの重みは、本人の同意なく集めた顔画像から作られ、その後取り下げられたMS-Celeb-1Mで学習されています。個人用のツールでは使えますが、このモデルを配布したくはありません。アプリとして公開するなら、まず同意を得たデータで学習したモデルを探すか、自分で学習する必要があります。Macアプリに伴う審査対応やサポートも必要です。</p>
+<p>一方で、ほかのエンジニアが実装を確認できる形にはしたいと考えています。アプリを配布する代わりに、ソースコードをGPLv3で公開する予定です。公開後は、ほかの人が読んだり、自分でビルドしたりでき、派生したコードもオープンなままにする形です。</p></article>
     <nav class="update-nav">
-      <a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-newer">
+      <a href="/ja/building/kifinder/kifinder-source-is-public/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">新しい</span>
-        <span class="update-nav-title">KiFinderをソースのみで公開する理由</span>
+        <span class="update-nav-title">KiFinderのソースを公開しました</span>
       </a>
-      <a href="/ja/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
+      <a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">古い</span>
-        <span class="update-nav-title">KiFinderにレビュー用Macアプリを追加</span>
+        <span class="update-nav-title">Sandbox内でCore MLの一時pathを修正</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/ja/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>

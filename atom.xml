@@ -6,11 +6,20 @@
   <link href="https://krisbaker.com/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/</id>
   <generator version="0.15.2">Inkwell</generator>
-  <updated>2026-09-26T01:08:35Z</updated>
+  <updated>2026-09-28T05:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>KiFinder&apos;s source is public</title>
+    <link href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/kifinder-source-is-public/</id>
+    <updated>2026-09-28T05:00:00Z</updated>
+    <published>2026-09-28T05:00:00Z</published>
+    <content type="html"><![CDATA[<p>The KiFinder source is now <a href="https://github.com/KristopherGBaker/KiFinder">on GitHub</a> under GPLv3, following the <a href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/">source-only decision</a> from July.</p>
+<p>There is still no prebuilt app. To try it, you build it yourself with Xcode 26 and XcodeGen on an Apple silicon Mac. The face-model weights are a separate one-time download, and everything after that runs on the Mac. The README covers setup, the model, and how to sign it with your own team.</p>]]></content>
+  </entry>
   <entry>
     <title>Fixing settings titles at the largest text size</title>
     <link href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/" rel="alternate"/>
@@ -20,6 +29,16 @@
     <content type="html"><![CDATA[<p>Sarukani's screenshot tour found four settings titles truncated at the largest Dynamic Type size. The rows measured the explanatory text correctly, but the title labels were free to give their parent a one-line ideal height. When the layout came back at that height, longer titles ended in an ellipsis.</p>
 <p>The shared <code>SettingLabel</code> now fixes its vertical size while still allowing horizontal wrapping. Three standalone rows use the same rule. I added hosted layout tests for the settings page because they render real SwiftUI views in a window and catch the sizing behavior without paying for a full UI launch on every case.</p>
 <p>This fits the verification split I am using in the project. The package suite has 647 tests and runs in about 1.7 seconds. The app unit bundle has 200 tests and takes about 56 seconds because it includes rendered layout cases. The 17 UI tests take about 222 seconds, while the light-and-dark capture tour takes at least four minutes. Captures remain useful, but once one exposes a layout rule, a hosted test is the cheaper regression check.</p>]]></content>
+  </entry>
+  <entry>
+    <title>Why KiFinder will be source-only</title>
+    <link href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/" rel="alternate"/>
+    <id>https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/</id>
+    <updated>2026-07-16T14:00:00Z</updated>
+    <published>2026-07-16T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>I have decided not to release KiFinder as a signed app, whether free or paid. My main reason is privacy. The preschool albums I use it with contain hundreds of photos of children from many families. Running face matching locally on my Mac to find my own daughter is a use I can judge for myself. Packaging the same capability for any album would be a different decision, and I am not comfortable making it.</p>
+<p>The ArcFace model also sets a condition for any broader release. Its weights were trained on MS-Celeb-1M, which was withdrawn because it was built from people's faces without their consent. I can use that model for a personal tool, but I do not want to distribute it. An app release would first require finding or training a model on consented data. It would also mean taking on the review and support work for a Mac app.</p>
+<p>I still want other engineers to be able to inspect the approach. I plan to publish the source under GPLv3 instead of distributing an app. People will be able to read it or build it for themselves, while derivative work will have to remain open.</p>]]></content>
   </entry>
   <entry>
     <title>Fixing the sandboxed Core ML path</title>

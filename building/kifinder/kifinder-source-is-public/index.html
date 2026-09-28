@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Fixing the sandboxed Core ML path</title>
-    <meta name="description" content="Fixing the sandboxed Core ML path">
-    <link rel="canonical" href="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <meta property="og:title" content="Fixing the sandboxed Core ML path">
-    <meta property="og:description" content="Fixing the sandboxed Core ML path">
-    <meta property="og:url" content="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <title>KiFinder's source is public</title>
+    <meta name="description" content="KiFinder's source is public">
+    <link rel="canonical" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/">
+    <meta property="og:title" content="KiFinder's source is public">
+    <meta property="og:description" content="KiFinder's source is public">
+    <meta property="og:url" content="https://krisbaker.com/building/kifinder/kifinder-source-is-public/">
     <meta name="twitter:card" content="summary">
-    <link rel="alternate" hreflang="en" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
-    <link rel="alternate" hreflang="x-default" href="/building/kifinder/the-sandbox-quietly-turned-off-the-faces/">
+    <link rel="alternate" hreflang="en" href="/building/kifinder/kifinder-source-is-public/">
+    <link rel="alternate" hreflang="ja" href="/ja/building/kifinder/kifinder-source-is-public/">
+    <link rel="alternate" hreflang="x-default" href="/building/kifinder/kifinder-source-is-public/">
     <link rel="alternate" type="application/rss+xml" title="Kristopher Baker (RSS)" href="/rss.xml">
     <link rel="alternate" type="application/atom+xml" title="Kristopher Baker (Atom)" href="/atom.xml">
     <link rel="alternate" type="application/feed+json" title="Kristopher Baker (JSON Feed)" href="/feed.json">
@@ -96,7 +96,7 @@
       <div class="top-nav-links" id="primary-nav">
         <a href="/work/" class="nav-link">Work</a><a href="/building/" class="nav-link">Building</a><a href="/posts/" class="nav-link">Writing</a><a href="/about/" class="nav-link">About</a><a href="/resume/" class="nav-link">Résumé</a>
       </div>
-      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
+      <span class="lang-switch-group"><span class="nav-link lang-switch" aria-current="true">EN</span><span class="lang-switch-sep" aria-hidden="true">·</span><a href="/ja/building/kifinder/kifinder-source-is-public/" class="nav-link lang-switch lang-switch-muted" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">JP</a></span>
       <button type="button" onclick="toggleTheme()" class="chip no-print" aria-label="Toggle theme">☼</button>
       <button type="button" class="nav-toggle no-print" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav" onclick="toggleNav(this)">
         <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -107,25 +107,20 @@
 
 <main class="container page-shell update-page" style="padding-top: var(--page-padding-top);">
   <a href="/building/kifinder/" class="post-back">← KiFinder</a>
-  <p class="post-meta update-meta is-wip">
-    <span class="update-meta-status"><span class="status-dot"></span>wip</span> · <span>2026.07.08</span>
+  <p class="post-meta update-meta is-shipped">
+    <span class="update-meta-status"><span class="status-dot"></span>shipped</span> · <span>2026.09.28</span>
      · <span>1 min read</span>
   </p>
-  <h1 class="h1 post-title update-title">Fixing the sandboxed Core ML path</h1>
+  <h1 class="h1 post-title update-title">KiFinder's source is public</h1>
   
   <div class="post-body">
-    <article class="prose"><p>After I enabled the App Sandbox, KiFinder scans completed with zero detected faces. The progress UI still finished, which made the failure look like a valid album with no matches.</p>
-<p>The Core ML setup compiled its model into a hard-coded directory under <code>/private/tmp</code>. A sandboxed app could not write there, the session failed to initialize, and a <code>try?</code> converted that error into <code>nil</code> for every embedding. The fix was to derive the scratch directory from the system temporary directory, which places it inside the app container.</p>
-<p>I checked the change with the real engine over saved photos. The broken build produced zero embeddings; the fixed build produced five and six for the same inputs. I also stopped re-scoring the full album after every keep or skip. Re-scoring now runs from an explicit “Find new matches” action and uses one batched matrix multiplication per album.</p>
-<p>The missing error handling still needs improvement. A model that cannot initialize should stop the scan and explain the failure instead of returning an empty result that looks successful.</p></article>
+    <article class="prose"><p>The KiFinder source is now <a href="https://github.com/KristopherGBaker/KiFinder">on GitHub</a> under GPLv3, following the <a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/">source-only decision</a> from July.</p>
+<p>There is still no prebuilt app. To try it, you build it yourself with Xcode 26 and XcodeGen on an Apple silicon Mac. The face-model weights are a separate one-time download, and everything after that runs on the Mac. The README covers setup, the model, and how to sign it with your own team.</p></article>
     <nav class="update-nav">
-      <a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-newer">
-        <span class="update-nav-label">Newer</span>
-        <span class="update-nav-title">Why KiFinder will be source-only</span>
-      </a>
-      <a href="/building/kifinder/kifinder-becomes-an-app/" class="update-nav-item update-nav-older">
+      <span></span>
+      <a href="/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-nav-item update-nav-older">
         <span class="update-nav-label">Older</span>
-        <span class="update-nav-title">Adding the KiFinder review app</span>
+        <span class="update-nav-title">Why KiFinder will be source-only</span>
       </a>
     </nav>
     <div class="post-footer"><a href="/building/kifinder/" class="read-link">KiFinder <span class="arrow" aria-hidden="true">→</span></a></div>

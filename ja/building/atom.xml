@@ -6,11 +6,20 @@
   <link href="https://krisbaker.com/ja/building/atom.xml" rel="self" type="application/atom+xml"/>
   <id>https://krisbaker.com/ja/</id>
   <generator version="0.15.2">Inkwell</generator>
-  <updated>2026-09-26T01:08:35Z</updated>
+  <updated>2026-09-28T05:00:00Z</updated>
   <author>
     <name>Kristopher Baker</name>
     <email>hello@krisbaker.com</email>
   </author>
+  <entry>
+    <title>KiFinderのソースを公開しました</title>
+    <link href="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/</id>
+    <updated>2026-09-28T05:00:00Z</updated>
+    <published>2026-09-28T05:00:00Z</published>
+    <content type="html"><![CDATA[<p>7月に決めた<a href="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/">ソースのみで公開する方針</a>どおり、KiFinderのソースコードをGPLv3で<a href="https://github.com/KristopherGBaker/KiFinder">GitHubに公開</a>しました。</p>
+<p>ビルド済みのアプリは配布していません。試す場合は、Apple silicon搭載のMacでXcode 26とXcodeGenを使って自分でビルドする必要があります。顔認識モデルの重みは初回に別途ダウンロードし、それ以降の処理はすべてMac上で完結します。セットアップ、モデルの準備、自分のチームで署名する方法はREADMEにまとめています。</p>]]></content>
+  </entry>
   <entry>
     <title>最大文字サイズで設定タイトルが切れる問題を修正</title>
     <link href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/" rel="alternate"/>
@@ -20,6 +29,16 @@
     <content type="html"><![CDATA[<p>Sarukaniのスクリーンショット確認で、Dynamic Typeを最大にすると、四つの設定タイトルが途中で切れる問題を見つけました。説明文の高さは正しく測れていましたが、タイトルのラベルが親ビューへ一行分の高さしか返していませんでした。その高さで配置されると、長いタイトルの末尾が省略されます。</p>
 <p>共通の<code>SettingLabel</code>は、横方向の折り返しを許したまま、縦方向のサイズを固定するようにしました。個別に実装している三つの行にも同じ設定を加えました。設定画面には、実際のSwiftUIビューをウインドウ内で描画するレイアウトテストも追加しました。すべてのケースでアプリを起動するより軽く、同じサイズ計算の問題を検出できます。</p>
 <p>これはプロジェクト内で分けている検証方法にも合います。パッケージの647件のテストは約1.7秒、描画を含むアプリの200件のユニットテストは約56秒です。17件のUIテストは約222秒、ライトとダークのスクリーンショット確認は最低でも4分かかります。画像での確認は必要ですが、原因が分かったあとは描画付きテストの方が軽い回帰チェックになります。</p>]]></content>
+  </entry>
+  <entry>
+    <title>KiFinderをソースのみで公開する理由</title>
+    <link href="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" rel="alternate"/>
+    <id>https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/</id>
+    <updated>2026-07-16T14:00:00Z</updated>
+    <published>2026-07-16T14:00:00Z</published>
+    <content type="html"><![CDATA[<p>KiFinderは、無料でも有料でも、署名済みのアプリとしては配布しないことにしました。一番大きな理由はプライバシーです。KiFinderで扱う保育園のアルバムには、いろいろな家庭の子どもが何百枚もの写真に写っています。自分の娘を探すために、自分のMac上で顔照合を行う用途なら自分で判断できます。同じ機能をどのアルバムにも使えるアプリとして提供することには抵抗があります。</p>
+<p>ArcFaceモデルの学習データも、一般公開するうえでの条件になります。このモデルの重みは、本人の同意なく集めた顔画像から作られ、その後取り下げられたMS-Celeb-1Mで学習されています。個人用のツールでは使えますが、このモデルを配布したくはありません。アプリとして公開するなら、まず同意を得たデータで学習したモデルを探すか、自分で学習する必要があります。Macアプリに伴う審査対応やサポートも必要です。</p>
+<p>一方で、ほかのエンジニアが実装を確認できる形にはしたいと考えています。アプリを配布する代わりに、ソースコードをGPLv3で公開する予定です。公開後は、ほかの人が読んだり、自分でビルドしたりでき、派生したコードもオープンなままにする形です。</p>]]></content>
   </entry>
   <entry>
     <title>Sandbox内でCore MLの一時pathを修正</title>

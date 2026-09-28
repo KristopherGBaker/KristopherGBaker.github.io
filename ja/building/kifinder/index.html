@@ -110,8 +110,8 @@
 
   <div class="building-detail-head is-active">
     <span class="status-line"><span class="status-dot"></span>active</span>
-    <span class="building-detail-updated">updated 2mo ago</span>
-    
+    <span class="building-detail-updated">updated today</span>
+    <a href="https://github.com/KristopherGBaker/KiFinder" class="read-link building-detail-repo">Repository <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
   <h1 class="h1 building-detail-title">KiFinder</h1>
@@ -131,14 +131,32 @@
 <p>レビュー画面では、説明のない最終フォルダだけを出すのではなく、モデルの判断を確認できます。App Sandboxを有効にしたときの重要な不具合も、実際のエンジンを動かして見つけました。Core MLがモデルをコンパイルする場所を<code>/private/tmp</code>以下に固定していましたが、サンドボックスからは書き込めませんでした。エラーを<code>try?</code>で無視した結果、すべての埋め込みが<code>nil</code>になり、顔が0件のままスキャンが完了していました。一時ディレクトリをアプリのコンテナ内へ移し、保存済みの写真で実際のエンジンを使うテストを行うと、壊れたビルドでは0件だった埋め込みが5件と6件になりました。</p>
 <p><img src="/assets/building/kifinder/library.png" alt="KiFinderのライブラリ。保存した写真が人物と月ごとにまとまっています。" />
 <em>保存した写真は、Photosへ書き出す前に人物と月ごとにまとまります。</em></p>
-<h2 id="section-3">現在</h2>
-<p>KiFinderは今も自分で使っているプロジェクトですが、署名済みのアプリは配布しないことにしました。ソースはGPLv3で公開し、ほかの人が確認してビルドでき、派生物も公開される形にしています。利用環境の分からないMacや写真ライブラリまでサポートせず、技術面に集中するための判断です。次はモデルの準備とサンドボックス権限について、実機で繰り返せるテストを増やします。</p></article>
+<h2 id="section-3">ソースのみで公開する理由</h2>
+<p>KiFinderは無料、有料を問わず、アプリとして配布しないことにしました。一番大きな理由は、人々のプライバシーを尊重するためです。KiFinderが扱う写真には、ほかの家庭の子どもが大勢写っています。自分の娘を探すために、自分のMac上で顔照合を行うのと、誰でもどのアルバムにも同じ処理を使える署名済みアプリを渡すのは、同じではありません。</p>
+<p>モデルの学習データにも問題があります。使っているArcFaceの重みは、本人の同意なく集めた顔画像から作られ、その後取り下げられたデータセット、MS-Celeb-1Mで学習されています。個人用のツールでは使えますが、このモデルを配布したくはありません。アプリとして公開するなら、同意を得たデータで学習したモデルを探すか、自分で学習する必要があります。アプリに伴うサポートや審査対応も必要です。</p>
+<p>その代わり、ソースコードをGPLv3で<a href="https://github.com/KristopherGBaker/KiFinder">GitHubに公開</a>しています。誰でも読んだり、自分でビルドしたりでき、派生したコードもオープンなままにする形です。</p>
+<h2 id="section-4">現在</h2>
+<p>KiFinderは今も自分で使っているプロジェクトです。次はモデルの準備とサンドボックス権限について、実機で繰り返せるテストを増やします。</p></article>
 
   <section class="building-updates">
     <div class="section-head">
-      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">2</span></h2>
+      <h2 class="h3 building-updates-title">アップデート <span class="building-updates-count">4</span></h2>
     </div>
-    <div class="update-timeline"><a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
+    <div class="update-timeline"><a href="/ja/building/kifinder/kifinder-source-is-public/" class="update-entry is-shipped">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.09.28</span>
+    <span class="update-entry-status">shipped</span>
+  </span>
+  <span class="update-entry-title">KiFinderのソースを公開しました</span>
+</a>
+<a href="/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/" class="update-entry is-decision">
+  <span class="update-entry-meta">
+    <span class="update-entry-date">2026.07.16</span>
+    <span class="update-entry-status">decision</span>
+  </span>
+  <span class="update-entry-title">KiFinderをソースのみで公開する理由</span>
+</a>
+<a href="/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/" class="update-entry is-wip">
   <span class="update-entry-meta">
     <span class="update-entry-date">2026.07.08</span>
     <span class="update-entry-status">wip</span>

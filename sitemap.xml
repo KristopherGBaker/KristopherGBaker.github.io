@@ -331,6 +331,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/macos/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/kifinder/kifinder-source-is-public/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/"/>
@@ -343,6 +355,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/"/>
@@ -353,12 +371,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/about/</loc>
@@ -709,6 +721,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/tags/macos/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/kifinder-source-is-public/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/kifinder-source-is-public/"/>
+  </url>
+  <url>
+    <loc>https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/choosing-gplv3-source-only-for-kifinder/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/kifinder/the-sandbox-quietly-turned-off-the-faces/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/kifinder/the-sandbox-quietly-turned-off-the-faces/"/>
@@ -721,6 +745,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/kifinder/kifinder-becomes-an-app/"/>
   </url>
   <url>
+    <loc>https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
+  </url>
+  <url>
     <loc>https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/aoede/two-kinds-of-wrong-furigana/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/aoede/two-kinds-of-wrong-furigana/"/>
@@ -731,12 +761,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/aoede/switching-kokoro-from-coreml-to-mlx/"/>
-  </url>
-  <url>
-    <loc>https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://krisbaker.com/ja/building/sarukani/settings-titles-at-large-text-sizes/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://krisbaker.com/building/sarukani/settings-titles-at-large-text-sizes/"/>
   </url>
   <url>
     <loc>https://krisbaker.com/ja/about/</loc>
