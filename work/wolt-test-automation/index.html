@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Test automation for weekly iOS regression testing</title>
-    <meta name="description" content="I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, right-to-left layouts, and telemetry as part of feature delivery.">
+    <meta name="description" content="I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, localization including right-to-left layouts, and telemetry as part of feature delivery.">
     <link rel="canonical" href="https://krisbaker.com/work/wolt-test-automation/">
     <meta property="og:title" content="Test automation for weekly iOS regression testing">
-    <meta property="og:description" content="I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, right-to-left layouts, and telemetry as part of feature delivery.">
+    <meta property="og:description" content="I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, localization including right-to-left layouts, and telemetry as part of feature delivery.">
     <meta property="og:url" content="https://krisbaker.com/work/wolt-test-automation/">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" hreflang="en" href="/work/wolt-test-automation/">
@@ -116,10 +116,10 @@
   </div>
 
   <h1 class="h1 case-study-title">Test automation for weekly iOS regression testing</h1>
-  <p class="body-lg case-study-blurb">I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, right-to-left layouts, and telemetry as part of feature delivery.</p>
+  <p class="body-lg case-study-blurb">I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, localization including right-to-left layouts, and telemetry as part of feature delivery.</p>
   <p class="case-study-meta">2 min read</p>
 
-  <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/test-automation/" class="tag-chip">Test Automation</a><a href="/work/tags/maestro/" class="tag-chip">Maestro</a><a href="/work/tags/python/" class="tag-chip">Python</a><a href="/work/tags/accessibility/" class="tag-chip">Accessibility</a></div>
+  <div class="case-study-tags"><a href="/work/tags/ios/" class="tag-chip">iOS</a><a href="/work/tags/test-automation/" class="tag-chip">Test Automation</a><a href="/work/tags/maestro/" class="tag-chip">Maestro</a><a href="/work/tags/python/" class="tag-chip">Python</a><a href="/work/tags/accessibility/" class="tag-chip">Accessibility</a><a href="/work/tags/localization/" class="tag-chip">Localization</a></div>
 
   <section class="case-study-metrics">
     <div class="case-study-metric">
@@ -146,11 +146,11 @@
 <h2 id="manual-test-preparation">Manual-test preparation</h2>
 <p>I wrote Python scripts and agent-assisted workflows to prepare team manual-testing sessions. The workflow drafted test cases for review, then generated the Confluence pages and Google Sheets used to coordinate the session. It removed multiple hours of repetitive setup and coordination each time.</p>
 <!-- TODO(kris): add the cadence of manual-testing sessions and how many people usually participated. -->
-<!-- TODO(kris): replace "multiple hours" with a measured range if one is available. -->
+<!-- TODO(kris): replace "multiple hours" with a measured range if available. -->
 <!-- TODO(kris): explain who reviewed the agent-drafted test cases and what the review checked before a session. -->
 <h2 id="feature-validation">Feature validation</h2>
-<p>For features I owned, I checked accessibility and right-to-left layouts during implementation and regression testing.</p>
-<p>Telemetry Viewer was another part of release validation. The iOS app streamed analytics events over a local WebSocket to a macOS client with search and filtering. I used it to verify what a feature emitted, investigate unexpected events, and check experiment instrumentation without covering the phone with the old full-screen event viewer.</p>
+<p>For features I owned, I checked accessibility and localization during implementation and regression testing, making sure each feature worked across the app's languages and locales, from Japanese to right-to-left Arabic and Hebrew.</p>
+<p>Telemetry Viewer also contributed to release validation. The iOS app streamed analytics events over a local WebSocket to a macOS client with search and filtering. I used it to verify what a feature emitted, investigate unexpected events, and check experiment instrumentation without covering the phone with the old full-screen event viewer.</p>
 <h2 id="what-i-d-do-next">What I'd do next</h2>
 <p>If I returned to this work, I would document which regression checks belonged in Maestro, which required a manual session, and which needed telemetry verification. I would also measure setup time and recurring failures before choosing the next task to automate.</p></article>
 

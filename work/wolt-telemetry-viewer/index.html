@@ -144,7 +144,7 @@
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>At Wolt, engineers could inspect analytics events in a full-screen view inside the iOS app. It worked, but it was slow to use during feature development. The view had no search or filtering, and opening it took over the screen I was trying to test. Finding one event in a busy session meant reading through everything around it. This made ordinary validation work harder for engineers and product teams: checking a new event, debugging unexpected data, and reviewing instrumentation before release. The payloads were visible, but the viewer did not provide a quick way to narrow them to the event or field under investigation.</p>
+<p>At Wolt, engineers could inspect analytics events in a full-screen view inside the iOS app. It worked, but using it during feature development took too long. The view had no search or filtering, and opening it took over the screen where I tested the feature. Finding one event in a busy session meant reading through everything around it. This made ordinary validation work harder for engineers and product teams: checking a new event, debugging unexpected data, and reviewing instrumentation before release. The viewer displayed the payloads but did not provide a quick way to narrow them to the event or field under investigation.</p>
 <p>I initiated and built Telemetry Viewer independently to shorten that loop. I wanted an engineer to keep using the app normally while watching its events on a Mac.</p>
 <h2 id="what-i-built">What I built</h2>
 <video autoplay muted playsinline controls style="display: block; width: 880px; max-width: 100%; margin: 0 auto;">
@@ -156,7 +156,7 @@
 <p>I first shared the tool with a small group of engineers, then demonstrated it more broadly and supported adoption by additional engineers. I developed it from the initial concept through adoption across teams.</p>
 <p>I also worked with an Android engineer who built a similar tool for that client. The same approach supported privacy-related telemetry work where teams needed to inspect exactly which data the app emitted.</p>
 <h2 id="results">Results</h2>
-<p>Telemetry Viewer was used to verify analytics, debug unexpected events, and check instrumentation for experiments. Moving inspection off the phone made those checks faster and let engineers keep the feature under test visible. Teams also used it during release validation, which improved confidence that analytics changes matched the intended behavior before rollout.</p>
+<p>Teams used Telemetry Viewer to verify analytics, debug unexpected events, and check instrumentation for experiments. Moving inspection off the phone made those checks faster and let engineers keep the feature under test visible. Teams also used it during release validation, which improved confidence that analytics changes matched the intended behavior before rollout.</p>
 <h2 id="what-i-d-do-next">What I'd do next</h2>
 <p>If I continued it, I would identify the searches and payload checks people repeat most often, then automate those workflows. I would also document a small compatibility contract for the iOS and Android implementations.</p></article>
 

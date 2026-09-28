@@ -144,8 +144,8 @@
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>SmartNews's 2020 US election work had a deadline that could not move. Teams in Tokyo and San Francisco were building several connected features for the US edition, including ways to compare political coverage, follow candidates, and see election results.</p>
-<p>I worked on the iOS implementation across those surfaces. The UI, API data, visibility windows, language rules, deep links, and telemetry all had to be ready before election day.</p>
+<p>SmartNews's 2020 US election work had a deadline that could not move. Teams in Tokyo and San Francisco worked on several connected features for the US edition, including ways to compare political coverage, follow candidates, and see election results.</p>
+<p>I worked on the iOS implementation across those surfaces. We needed the UI, API data, visibility windows, language rules, deep links, and telemetry ready before election day.</p>
 <h2 id="news-from-all-sides">News From All Sides</h2>
 <p>For News From All Sides, I built a News Event view around a custom <code>UISlider</code>. The control supported either three or five positions depending on the available perspectives.</p>
 <p>I also added onboarding, deep links, action logging, and entry points from multiple parts of the app. The feature dealt with politically sensitive material, so the control had to make the available perspectives clear without assigning meaning beyond the data.</p>
@@ -154,7 +154,7 @@
 <p>Language also depended on the SmartNews edition, not only the device locale. I added edition-aware rules so the Japanese edition displayed Japanese where required even when the system language differed.</p>
 <p>The API integrations included fallback behavior, and client conditions controlled rollout.</p>
 <h2 id="delivery">Delivery</h2>
-<p>The election features shipped by election day across the intended app surfaces. Users could move among different political perspectives, browse candidate information, and see results when the configured time window opened. The implementation also recorded interactions so the teams could understand how the new entry points and controls were used.</p>
+<p>The election features shipped by election day across the intended app surfaces. Users could move among different political perspectives, browse candidate information, and see results when the configured time window opened. The implementation also recorded interactions so the teams could understand how people used the new entry points and controls.</p>
 <h2 id="what-i-d-do-next">What I'd do next</h2>
 <p>Time-based UI is easy to test in the middle of its valid window and easy to get wrong at the boundaries. For a future election release in the same product, I would add a shared clock abstraction and focused tests for the start time, end time, missing timestamps, and edition changes. I would run those cases against both editions and record the expected screen state beside each timestamp. The same test plan would cover an unavailable API response and a disabled client condition, so the team could see which rule controlled the screen without reconstructing the release logic near another fixed deadline. I would also document which fallback should win when API availability, client conditions, and the election schedule disagree.</p></article>
 

@@ -144,7 +144,7 @@
 
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
-<p>SmartView extracted and formatted publisher articles inside the SmartNews app. It was a core reading surface for a product used by millions of people, and the existing pipeline had accumulated publisher-specific behavior over time. Replacing it in one switch would have made every parsing difference a release risk.</p>
+<p>SmartView extracted and formatted publisher articles inside the SmartNews app. Millions of people used this core reading surface, and the existing pipeline had accumulated publisher-specific behavior over time. Replacing it in one switch would have made every parsing difference a release risk.</p>
 <p>I led the iOS implementation of SmartView v2. The work had to improve the extraction code while preserving the existing renderer as a way back when a page or configuration did not behave as expected.</p>
 <h2 id="parallel-implementation">Parallel implementation</h2>
 <p>I built <code>SmartHTMLExtractorV2</code> beside the first extractor instead of changing the old pipeline in place. The two implementations let us compare behavior and move traffic incrementally.</p>
@@ -156,7 +156,7 @@
 <h2 id="results">Results</h2>
 <p>SmartView v2 shipped as a parallel rendering system with feature flags and fallback behavior. The team could validate the new extractor incrementally while the first implementation remained available. The rollout completed without regressions to the existing article-reading experience during the migration. The new Swift module also provided a smaller boundary for future parsing and formatting work inside a mixed Objective-C and Swift codebase.</p>
 <h2 id="what-i-d-do-next">What I'd do next</h2>
-<p>My next step would be to define the evidence needed to retire v1, including representative publisher samples, edition coverage, configuration failures, and supported iOS versions. Once those checks passed, I would remove the old path and the branching that existed only for migration.</p></article>
+<p>I would next define the evidence needed to retire v1, including representative publisher samples, edition coverage, configuration failures, and supported iOS versions. Once those checks passed, I would remove the old path and the branching that existed only for migration.</p></article>
 
   
 

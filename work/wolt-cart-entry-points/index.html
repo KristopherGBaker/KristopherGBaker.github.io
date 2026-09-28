@@ -142,7 +142,7 @@
 
   <article class="prose case-study-prose"><h2 id="context">Context</h2>
 <p>I worked on several Wolt+ membership initiatives during 2024 and 2025. The work covered two related problems: making subscription signup easier during an order, and giving members useful delivery discounts outside the free-delivery radius.</p>
-<p>I was the client DRI across iOS, Android, and web, working with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
+<p>As the client DRI across iOS, Android, and web, I worked with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
 <h2 id="signup-experiments">Signup experiments</h2>
 <video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
   <source src="/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
@@ -150,13 +150,13 @@
 </video>
 <p>The first proposal combined a new cart entry point with an express signup flow. I pushed to run them as independent experiments. Shipping the cart entry point first meant we could learn whether the new placement changed sign-ups without waiting for the more complex signup work.</p>
 <p>Express signup used a multi-step bottom sheet, a pattern the client did not support at the time. I also simplified the transition between express and full signup and coordinated payment and backend edge cases.</p>
-<p>Some early A/B results were misleading. I worked with data science to review the instrumentation and understand what the experiment was measuring before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
+<p>Some early A/B results gave a misleading picture. I worked with data science to review the instrumentation and understand what the experiment measured before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
 <h2 id="long-distance-delivery">Long-distance delivery</h2>
-<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The challenge on the clients was consistency: the price and eligibility needed to agree in discovery lists, on the venue page, and at checkout.</p>
+<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The clients had to keep the price and eligibility consistent in discovery lists, on the venue page, and at checkout.</p>
 <p>I worked with the frontend and backend teams on the API structure and naming because the same concepts had to work across several screens and client implementations.</p>
 <p>I also designed a reusable bottom sheet that explained the delivery price and Wolt+ savings across entry points.</p>
 <h2 id="results">Results</h2>
-<p>Both signup experiments were tested and rolled out, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
+<p>Both signup experiments went through testing and rollout, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
 <h2 id="what-i-d-do-next">What I'd do next</h2>
 <p>The projects depended on several teams and analytics definitions. If I revisited the work, I would write the shared pricing terms and experiment events into the client RFC earlier, with examples for each surface. That would give design, backend, data science, and client engineers one place to review assumptions before implementation and analysis diverged.</p></article>
 

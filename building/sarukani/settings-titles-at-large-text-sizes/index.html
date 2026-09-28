@@ -114,9 +114,9 @@
   <h1 class="h1 post-title update-title">Fixing settings titles at the largest text size</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Sarukani's screenshot tour found four settings titles truncated at the largest Dynamic Type size. The rows measured the explanatory text correctly, but the title labels were free to give their parent a one-line ideal height. When the layout came back at that height, longer titles ended in an ellipsis.</p>
+    <article class="prose"><p>Sarukani's screenshot tour found four settings titles truncated at the largest Dynamic Type size. The rows measured the explanatory text correctly, but the title labels could give their parent a one-line ideal height. When the layout came back at that height, longer titles ended in an ellipsis.</p>
 <p>The shared <code>SettingLabel</code> now fixes its vertical size while still allowing horizontal wrapping. Three standalone rows use the same rule. I added hosted layout tests for the settings page because they render real SwiftUI views in a window and catch the sizing behavior without paying for a full UI launch on every case.</p>
-<p>This fits the verification split I am using in the project. The package suite has 647 tests and runs in about 1.7 seconds. The app unit bundle has 200 tests and takes about 56 seconds because it includes rendered layout cases. The 17 UI tests take about 222 seconds, while the light-and-dark capture tour takes at least four minutes. Captures remain useful, but once one exposes a layout rule, a hosted test is the cheaper regression check.</p></article>
+<p>This matches the verification split I use in the project. The package suite has 647 tests and runs in about 1.7 seconds. The app unit bundle has 200 tests and takes about 56 seconds because it includes rendered layout cases. The 17 UI tests take about 222 seconds, while the light-and-dark capture tour takes at least four minutes. Captures remain useful, but once one exposes a layout rule, a hosted test provides the cheaper regression check.</p></article>
     <nav class="update-nav">
       <span></span>
       <span></span>

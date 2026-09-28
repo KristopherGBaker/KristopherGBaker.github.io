@@ -115,7 +115,7 @@
   
   <div class="post-body">
     <article class="prose"><p>After I enabled the App Sandbox, KiFinder scans completed with zero detected faces. The progress UI still finished, which made the failure look like a valid album with no matches.</p>
-<p>The Core ML setup compiled its model into a hard-coded directory under <code>/private/tmp</code>. A sandboxed app could not write there, the session failed to initialize, and a <code>try?</code> converted that error into <code>nil</code> for every embedding. The fix was to derive the scratch directory from the system temporary directory, which places it inside the app container.</p>
+<p>The Core ML setup compiled its model into a hard-coded directory under <code>/private/tmp</code>. A sandboxed app could not write there, the session failed to initialize, and a <code>try?</code> converted that error into <code>nil</code> for every embedding. I fixed it by deriving the scratch directory from the system temporary directory, which places it inside the app container.</p>
 <p>I checked the change with the real engine over saved photos. The broken build produced zero embeddings; the fixed build produced five and six for the same inputs. I also stopped re-scoring the full album after every keep or skip. Re-scoring now runs from an explicit “Find new matches” action and uses one batched matrix multiplication per album.</p>
 <p>The missing error handling still needs improvement. A model that cannot initialize should stop the scan and explain the failure instead of returning an empty result that looks successful.</p></article>
     <nav class="update-nav">

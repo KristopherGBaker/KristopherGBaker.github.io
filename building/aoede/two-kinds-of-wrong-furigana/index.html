@@ -114,8 +114,8 @@
   <h1 class="h1 post-title update-title">Separating generated and author-provided furigana</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoede's furigana errors came from two different sources, so I built a small harness to separate them before changing the reader. FuriganaQA runs the production pipeline over Aozora books and compares each result with the ruby supplied in the text. A mismatch is either something the generator should have produced or a reading it could not infer.</p>
-<p>The first group exposed fixable problems. Aoede was taking phonetic forms from OpenJTalk, so long vowels were written as they sound instead of the expected spelling. It also grouped mixed kanji runs too broadly. Switching to orthographic readings and using JmdictFurigana for per-kanji placement fixed those cases, with JMdict validating the result.</p>
+    <article class="prose"><p>Aoede's furigana errors came from two different sources, so I built a small harness to separate them before changing the reader. FuriganaQA runs the production pipeline over Aozora books and compares each result with the ruby supplied in the text. Each mismatch comes from something the generator should have produced or a reading it could not infer.</p>
+<p>The first group exposed fixable problems. Aoede took phonetic forms from OpenJTalk, causing long vowels to use phonetic spellings instead of the expected spelling. It also grouped mixed kanji runs too broadly. Switching to orthographic readings and using JmdictFurigana for per-kanji placement fixed those cases, with JMdict validating the result.</p>
 <p>The second group includes readings chosen by an author, such as 本気 read as マジ. No analyzer can recover that choice from the characters. Aoede now preserves ruby from Aozora markup and EPUB <code>&lt;ruby&gt;</code> elements, gives it priority over generated furigana, and uses it for speech as well as display.</p>
 <p>The harness made the boundary testable: published ruby wins when it exists, dictionaries handle known readings, and OpenJTalk fills the remaining gaps.</p></article>
     <nav class="update-nav">

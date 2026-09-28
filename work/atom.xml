@@ -25,7 +25,7 @@
     <summary>I led client work for Wolt+ signup and long-distance delivery across iOS, Android, and web. The cart and checkout experiments contributed to about 30% growth in membership sign-ups.</summary>
     <content type="html"><![CDATA[<h2>Context</h2>
 <p>I worked on several Wolt+ membership initiatives during 2024 and 2025. The work covered two related problems: making subscription signup easier during an order, and giving members useful delivery discounts outside the free-delivery radius.</p>
-<p>I was the client DRI across iOS, Android, and web, working with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
+<p>As the client DRI across iOS, Android, and web, I worked with backend, product, design, QA, and data teams while implementing the iOS side myself. Because the changes appeared in discovery, venue, cart, and checkout screens, decisions about one surface often affected another.</p>
 <h2>Signup experiments</h2>
 <video autoplay muted loop playsinline style="display: block; width: 440px; max-width: 100%; margin: 0 auto;">
   <source src="https://krisbaker.com/work/wolt-cart-entry-points/cart-signup.mp4" type="video/mp4">
@@ -33,13 +33,13 @@
 </video>
 <p>The first proposal combined a new cart entry point with an express signup flow. I pushed to run them as independent experiments. Shipping the cart entry point first meant we could learn whether the new placement changed sign-ups without waiting for the more complex signup work.</p>
 <p>Express signup used a multi-step bottom sheet, a pattern the client did not support at the time. I also simplified the transition between express and full signup and coordinated payment and backend edge cases.</p>
-<p>Some early A/B results were misleading. I worked with data science to review the instrumentation and understand what the experiment was measuring before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
+<p>Some early A/B results gave a misleading picture. I worked with data science to review the instrumentation and understand what the experiment measured before using it to guide another release. The cart and checkout subscription work ultimately contributed to about 30% growth in membership sign-ups.</p>
 <h2>Long-distance delivery</h2>
-<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The challenge on the clients was consistency: the price and eligibility needed to agree in discovery lists, on the venue page, and at checkout.</p>
+<p>Wolt+ offered free delivery within a defined radius. Long-distance delivery extended the membership benefit with discounted delivery pricing outside that radius. The clients had to keep the price and eligibility consistent in discovery lists, on the venue page, and at checkout.</p>
 <p>I worked with the frontend and backend teams on the API structure and naming because the same concepts had to work across several screens and client implementations.</p>
 <p>I also designed a reusable bottom sheet that explained the delivery price and Wolt+ savings across entry points.</p>
 <h2>Results</h2>
-<p>Both signup experiments were tested and rolled out, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
+<p>Both signup experiments went through testing and rollout, and the cart entry point remained a subscription surface. Long-distance delivery also rolled out across multiple app surfaces after positive A/B test results. Together, the projects made Wolt+ visible during the order flow and gave members outside the free radius a clearer benefit.</p>
 <h2>What I'd do next</h2>
 <p>The projects depended on several teams and analytics definitions. If I revisited the work, I would write the shared pricing terms and experiment events into the client RFC earlier, with examples for each surface. That would give design, backend, data science, and client engineers one place to review assumptions before implementation and analysis diverged.</p>]]></content>
   </entry>
@@ -56,7 +56,7 @@
     <category term="WebSocket"/>
     <summary>I built a macOS client that receives iOS telemetry over a local WebSocket, then added search and filtering so engineers could verify events without interrupting their work.</summary>
     <content type="html"><![CDATA[<h2>Context</h2>
-<p>At Wolt, engineers could inspect analytics events in a full-screen view inside the iOS app. It worked, but it was slow to use during feature development. The view had no search or filtering, and opening it took over the screen I was trying to test. Finding one event in a busy session meant reading through everything around it. This made ordinary validation work harder for engineers and product teams: checking a new event, debugging unexpected data, and reviewing instrumentation before release. The payloads were visible, but the viewer did not provide a quick way to narrow them to the event or field under investigation.</p>
+<p>At Wolt, engineers could inspect analytics events in a full-screen view inside the iOS app. It worked, but using it during feature development took too long. The view had no search or filtering, and opening it took over the screen where I tested the feature. Finding one event in a busy session meant reading through everything around it. This made ordinary validation work harder for engineers and product teams: checking a new event, debugging unexpected data, and reviewing instrumentation before release. The viewer displayed the payloads but did not provide a quick way to narrow them to the event or field under investigation.</p>
 <p>I initiated and built Telemetry Viewer independently to shorten that loop. I wanted an engineer to keep using the app normally while watching its events on a Mac.</p>
 <h2>What I built</h2>
 <video autoplay muted playsinline controls style="display: block; width: 880px; max-width: 100%; margin: 0 auto;">
@@ -68,7 +68,7 @@
 <p>I first shared the tool with a small group of engineers, then demonstrated it more broadly and supported adoption by additional engineers. I developed it from the initial concept through adoption across teams.</p>
 <p>I also worked with an Android engineer who built a similar tool for that client. The same approach supported privacy-related telemetry work where teams needed to inspect exactly which data the app emitted.</p>
 <h2>Results</h2>
-<p>Telemetry Viewer was used to verify analytics, debug unexpected events, and check instrumentation for experiments. Moving inspection off the phone made those checks faster and let engineers keep the feature under test visible. Teams also used it during release validation, which improved confidence that analytics changes matched the intended behavior before rollout.</p>
+<p>Teams used Telemetry Viewer to verify analytics, debug unexpected events, and check instrumentation for experiments. Moving inspection off the phone made those checks faster and let engineers keep the feature under test visible. Teams also used it during release validation, which improved confidence that analytics changes matched the intended behavior before rollout.</p>
 <h2>What I'd do next</h2>
 <p>If I continued it, I would identify the searches and payload checks people repeat most often, then automate those workflows. I would also document a small compatibility contract for the iOS and Android implementations.</p>]]></content>
   </entry>
@@ -83,7 +83,8 @@
     <category term="Maestro"/>
     <category term="Python"/>
     <category term="Accessibility"/>
-    <summary>I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, right-to-left layouts, and telemetry as part of feature delivery.</summary>
+    <category term="Localization"/>
+    <summary>I maintained Maestro regression tests and built Python and agent-assisted tools for manual-test preparation, while checking accessibility, localization including right-to-left layouts, and telemetry as part of feature delivery.</summary>
     <content type="html"><![CDATA[<h2>Context</h2>
 <p>My Wolt team ran weekly regression testing alongside feature development. We also held manual-testing sessions, which required test cases, Confluence pages, and Google Sheets for the team.</p>
 <p>I worked on both sides of that process by maintaining UI tests and automating preparation for the manual sessions.</p>
@@ -93,11 +94,11 @@
 <h2>Manual-test preparation</h2>
 <p>I wrote Python scripts and agent-assisted workflows to prepare team manual-testing sessions. The workflow drafted test cases for review, then generated the Confluence pages and Google Sheets used to coordinate the session. It removed multiple hours of repetitive setup and coordination each time.</p>
 <!-- TODO(kris): add the cadence of manual-testing sessions and how many people usually participated. -->
-<!-- TODO(kris): replace "multiple hours" with a measured range if one is available. -->
+<!-- TODO(kris): replace "multiple hours" with a measured range if available. -->
 <!-- TODO(kris): explain who reviewed the agent-drafted test cases and what the review checked before a session. -->
 <h2>Feature validation</h2>
-<p>For features I owned, I checked accessibility and right-to-left layouts during implementation and regression testing.</p>
-<p>Telemetry Viewer was another part of release validation. The iOS app streamed analytics events over a local WebSocket to a macOS client with search and filtering. I used it to verify what a feature emitted, investigate unexpected events, and check experiment instrumentation without covering the phone with the old full-screen event viewer.</p>
+<p>For features I owned, I checked accessibility and localization during implementation and regression testing, making sure each feature worked across the app's languages and locales, from Japanese to right-to-left Arabic and Hebrew.</p>
+<p>Telemetry Viewer also contributed to release validation. The iOS app streamed analytics events over a local WebSocket to a macOS client with search and filtering. I used it to verify what a feature emitted, investigate unexpected events, and check experiment instrumentation without covering the phone with the old full-screen event viewer.</p>
 <h2>What I'd do next</h2>
 <p>If I returned to this work, I would document which regression checks belonged in Maestro, which required a manual session, and which needed telemetry verification. I would also measure setup time and recurring failures before choosing the next task to automate.</p>]]></content>
   </entry>
@@ -114,7 +115,7 @@
     <category term="Rendering"/>
     <summary>I built SmartView&apos;s second article extraction pipeline beside the existing implementation, with client-controlled rollout and fallback behavior for an app used by millions of people.</summary>
     <content type="html"><![CDATA[<h2>Context</h2>
-<p>SmartView extracted and formatted publisher articles inside the SmartNews app. It was a core reading surface for a product used by millions of people, and the existing pipeline had accumulated publisher-specific behavior over time. Replacing it in one switch would have made every parsing difference a release risk.</p>
+<p>SmartView extracted and formatted publisher articles inside the SmartNews app. Millions of people used this core reading surface, and the existing pipeline had accumulated publisher-specific behavior over time. Replacing it in one switch would have made every parsing difference a release risk.</p>
 <p>I led the iOS implementation of SmartView v2. The work had to improve the extraction code while preserving the existing renderer as a way back when a page or configuration did not behave as expected.</p>
 <h2>Parallel implementation</h2>
 <p>I built <code>SmartHTMLExtractorV2</code> beside the first extractor instead of changing the old pipeline in place. The two implementations let us compare behavior and move traffic incrementally.</p>
@@ -126,7 +127,7 @@
 <h2>Results</h2>
 <p>SmartView v2 shipped as a parallel rendering system with feature flags and fallback behavior. The team could validate the new extractor incrementally while the first implementation remained available. The rollout completed without regressions to the existing article-reading experience during the migration. The new Swift module also provided a smaller boundary for future parsing and formatting work inside a mixed Objective-C and Swift codebase.</p>
 <h2>What I'd do next</h2>
-<p>My next step would be to define the evidence needed to retire v1, including representative publisher samples, edition coverage, configuration failures, and supported iOS versions. Once those checks passed, I would remove the old path and the branching that existed only for migration.</p>]]></content>
+<p>I would next define the evidence needed to retire v1, including representative publisher samples, edition coverage, configuration failures, and supported iOS versions. Once those checks passed, I would remove the old path and the branching that existed only for migration.</p>]]></content>
   </entry>
   <entry>
     <title>Building SmartNews&apos;s 2020 election coverage</title>
@@ -140,8 +141,8 @@
     <category term="Localization"/>
     <summary>I built iOS features for SmartNews&apos;s 2020 US election coverage, including perspective controls, candidate and results widgets, and edition-aware behavior under a fixed election-day deadline.</summary>
     <content type="html"><![CDATA[<h2>Context</h2>
-<p>SmartNews's 2020 US election work had a deadline that could not move. Teams in Tokyo and San Francisco were building several connected features for the US edition, including ways to compare political coverage, follow candidates, and see election results.</p>
-<p>I worked on the iOS implementation across those surfaces. The UI, API data, visibility windows, language rules, deep links, and telemetry all had to be ready before election day.</p>
+<p>SmartNews's 2020 US election work had a deadline that could not move. Teams in Tokyo and San Francisco worked on several connected features for the US edition, including ways to compare political coverage, follow candidates, and see election results.</p>
+<p>I worked on the iOS implementation across those surfaces. We needed the UI, API data, visibility windows, language rules, deep links, and telemetry ready before election day.</p>
 <h2>News From All Sides</h2>
 <p>For News From All Sides, I built a News Event view around a custom <code>UISlider</code>. The control supported either three or five positions depending on the available perspectives.</p>
 <p>I also added onboarding, deep links, action logging, and entry points from multiple parts of the app. The feature dealt with politically sensitive material, so the control had to make the available perspectives clear without assigning meaning beyond the data.</p>
@@ -150,7 +151,7 @@
 <p>Language also depended on the SmartNews edition, not only the device locale. I added edition-aware rules so the Japanese edition displayed Japanese where required even when the system language differed.</p>
 <p>The API integrations included fallback behavior, and client conditions controlled rollout.</p>
 <h2>Delivery</h2>
-<p>The election features shipped by election day across the intended app surfaces. Users could move among different political perspectives, browse candidate information, and see results when the configured time window opened. The implementation also recorded interactions so the teams could understand how the new entry points and controls were used.</p>
+<p>The election features shipped by election day across the intended app surfaces. Users could move among different political perspectives, browse candidate information, and see results when the configured time window opened. The implementation also recorded interactions so the teams could understand how people used the new entry points and controls.</p>
 <h2>What I'd do next</h2>
 <p>Time-based UI is easy to test in the middle of its valid window and easy to get wrong at the boundaries. For a future election release in the same product, I would add a shared clock abstraction and focused tests for the start time, end time, missing timestamps, and edition changes. I would run those cases against both editions and record the expected screen state beside each timestamp. The same test plan would cover an unavailable API response and a disabled client condition, so the team could see which rule controlled the screen without reconstructing the release logic near another fixed deadline. I would also document which fallback should win when API availability, client conditions, and the election schedule disagree.</p>]]></content>
   </entry>

@@ -114,9 +114,9 @@
   <h1 class="h1 post-title update-title">Switching Kokoro from Core ML to MLX</h1>
   
   <div class="post-body">
-    <article class="prose"><p>Aoede's first Kokoro integration ran through FluidAudio and Core ML. That was the natural on-device path, but it crashed on my M5 Mac with every compute option I tried. The GPU reported a Metal JIT error, while CPU and the Neural Engine failed lower in BNNS. The same library worked on older Apple silicon, so the model itself was probably not the problem.</p>
+    <article class="prose"><p>Aoede's first Kokoro integration ran through FluidAudio and Core ML. They offered the natural on-device path, but the integration crashed on my M5 Mac with every compute option I tried. The GPU reported a Metal JIT error, while CPU and the Neural Engine failed lower in BNNS. The same library worked on older Apple silicon, so the model itself probably did not cause the problem.</p>
 <p>I replaced that runtime with an MLX port of Kokoro. MLX runs on the M5 and provides a timestamp for each token, which improved the synchronized word highlight at the same time. It does require the Metal toolchain and a real GPU, so the provider belongs in the app target rather than a package built with plain <code>swift build</code>. The iOS Simulator cannot run it and falls back to Apple speech.</p>
-<p>I kept the Core ML work on a branch in case its hardware support changes. For now, MLX is the better fit because it works on the machines I use and gives the reader more precise timing.</p></article>
+<p>I kept the Core ML work on a branch in case its hardware support changes. For now, MLX fits better because it works on the machines I use and gives the reader more precise timing.</p></article>
     <nav class="update-nav">
       <a href="/building/aoede/two-kinds-of-wrong-furigana/" class="update-nav-item update-nav-newer">
         <span class="update-nav-label">Newer</span>
